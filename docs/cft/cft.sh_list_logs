@@ -1,0 +1,33 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:30:27
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTLOG       ID       = 'LOG0',
+              FNAME    = '_CFTLOG',
+              AFNAME   = '_CFTLOGA',
+              EXEC     = '$CFTDIREXEC/switch.cmd',
+              LENGTH   = '160',
+              OPERMSG  = '0',
+              MAXREC   = '0',
+              NOTIFY   = '        ',
+              SWITCH   = '23590000',
+              CONTENT  = 'FULL',
+              NTF      = 'NO',
+              NTFTYP   = 'EF',
+ /*           NTFALERT = ( ) ,*/
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              FORMAT   = 'V24',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=log)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:30:27
+CFTU20I Session active for  0:00:00

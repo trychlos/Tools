@@ -1,0 +1,79 @@
+# @(#) Displays on stdout the comment line(s) of the specified script
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. script full pathname
+#      2. (opt) increment count (defaults to zero)
+#      3. (opt) whether to display the extension
+#               (yes/no, defaults to yes)
+#      4. (opt) whether to display other lines but first
+#               (yes/no, defaults to no)
+#
+# (O): -
+#
+# pwi 1998-10-21 new production architecture definition - creation
+# pwi 2002- 5-15 the second parameter (increment) becomes numeric
+# pwi 2002- 6- 4 use local variables
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 the tools become The Tools Project, released under GPL
+# pwi 2017- 6-21 publish the release at last 
+
+function scriptDetail
+{
+	#set -x
+	typeset _script="${1}"
+	typeset _bname=${_script##*/}
+
+	typeset -i _increment="${2:-0}"
+
+	typeset _with_extension="${3:-yes}"
+	[ "${_with_extension}" != "yes" -a "${_with_extension}" != "no" ] && _with_extension="yes"
+	[ "${_with_extension}" = "no" ] && _bname="${_bname%.*}"
+
+	typeset _full_help="${4:-no}"
+	[ "${_full_help}" != "yes" -a "${_full_help}" != "no" ] && _full_help="no"
+
+	[ -s "${_script}" ] || return 1
+
+	cat "${_script}" | perl -se '{
+		sub print_title( $ ) {
+			my $sufix = shift;
+			$decalage = $increment + ( $count ? 1 : 0 );
+			print "  " x $decalage;
+			if( $count ){
+				print " " x ( length( $title ) );
+			} else {
+				print "$title$sufix";
+			}
+		}
+		$count = 0;
+		while( <STDIN> ) {
+			next if !/^# @\(#\)/;
+			next if $count && $help eq "no";
+			print_title( ": " );
+			s/^# @\(#\)\s?//;
+			print;
+			$count += 1;
+		}
+		print_title( "\n" ) if !$count;
+	}' -- -increment=${_increment} -title=${_bname} -help=${_full_help}
+
+	return 0
+}

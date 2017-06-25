@@ -1,0 +1,106 @@
+# @(#) Execute a command remotely
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   As a general rule, do not hesitate to execRemote to another host
+#   if you need so. The performance penalty should be considered
+#   minimal regarding the comfort of this usage.
+#
+#   Contrarily, changing the login account should only be required
+#   when there is a good reason to do this, as this makes the audit
+#   track a bit less readable.
+#
+# (I): 1. target host
+#      2. command to be executed
+#      3. (opt.) target user
+#                defaults to current user
+#      4. (opt.) 'INPUT' string constant: doesn't use 'ksh -n'
+#      5. (opt.) 'NOMSG' string constant: doesn't display remote message unless -verbose
+#
+# (O): return: the return code of the command
+#
+# pwi 1998-10-21 creation
+# jcl 1999- 2-11 returns the command return code
+# pwi 1999- 3- 9 add target user
+# pwi 1999- 3-15 option 'NOCODE' doesn't create any temporary file
+# jcl 1999- 4- 6 add eval for local execution
+# xle 2001- 1-24 option 'INPUT' doesn't use ksh -n
+# pwi 2001- 4-16 initialize _ret variable
+# pwi 2001-12- 7 port to Citi Exploitation Aix
+# pwi 2002- 5- 6 fix _ret initialization vs. pipe execution
+# pwi 2002- 6- 6 option 'NOMSG' doesn't display remote message
+# gma 2003- 7- 8 demultiplex return code vs. .remote.sh
+# gma 2003- 7-24 use ssh
+# xle 2003- 9-25 fix ssh binary path depending of the target host
+# gma 2003-12-17 test for fallback ssh -> rsh
+# gma 2004-10-19 split to execRemote_ssh and execRemote_ssh
+# xle 2006- 1-20 reinstall shh on target hosts
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2017- 6-21 publish the release at last, removing no more used 'NOCODE'
+
+function execRemote
+{
+	typeset _host="${1}"
+	typeset _command="${2}"
+	typeset -i _ret=0
+
+	# verify that the target host is known by The Tools Project
+	typeset _conf="$(bspFind "${ttp_nodesubdir}/${_host}.ini")"
+	[ -z "${_conf}" ] && { msgerr "${_host}: target host is unknowned or undefined"; return 246; }
+
+	typeset _usermsg=""
+	typeset _user=${LOGNAME}
+	[ $# -ge 3 -a "x${3}" != "x" ] && { _user=${3}; _usermsg="(${3})"; }
+
+	typeset _input="-n"
+	if [ $# -ge 4 -a "x${4}" != "x" ]; then
+		[ "x${4}" = "xINPUT" ] || { msgerr "(execRemote) '$4' found where 'INPUT' (or nothing) was expected."; return 247; }
+		_input="-t"
+	fi
+
+	typeset -i _nomsg=0
+	if [ $# -ge 5 -a "x${5}" != "x" ]; then
+		[ "x${5}" = "xNOMSG" ] || { msgerr "(execRemote) '$5' found where 'NOMSG' (or nothing) was expected"; return 247; }
+		[ "${opt_verbose}" = "no" ] && _nomsg=1
+	fi
+
+	# if both target host and user are ok, then just execute the command
+	if [ "x${_host}" = "x${TTP_NODE}" -a "x${_user}" = "x${LOGNAME}" ];	then
+		msgout "execRemote '${2}' on ${TTP_NODE} (local execution)"
+		eval ${_command}
+		_ret=$?
+		return ${_ret}
+	fi
+
+	# if we have to exec_remote to a DMZ, then search for a bouncing host
+	#  (maybe depending of the environment ?)
+
+	# not on the right host, or not with the right account
+	# we so have to ask for a remote execution
+	# if 'NOCODE' was specified, do not create the temp file which would
+	# host the return code
+	[ ${_nomsg} -eq 0 ] && msgout "execRemote ssh '${_command}' on ${_host} ${_usermsg}"
+	#execRemote_ssh "${_host}" "$_input" "${_user}" "${_command}"
+	typeset _profile="$(userGetProfile ${_user})"
+	ssh ${_host} -q ${_input} -l ${_user} "{ . ./${_profile}; . ttp.sh switch -node ${_host}; }; eval ${_command}"
+	_ret=$?
+
+	return ${_ret}
+}

@@ -1,0 +1,47 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTNET   - Network ressources command
+                    -------------------------------------
+ 
+  NET0                            
+          Ressource type              TYPE     = TCP
+          Max. sessions               MAXCNX   = 128  
+          Ressource class             CLASS    = 1  
+          Call direction              CALL     = INOUT
+          Network reference           HOST     = 
+          *INADDR_ANY                                                      
+          Network outgoing calls      SRCHOST  = 
+          *                                                                
+          Range of ports
+          --------------
+          Lower port value            LOWPORT  =      
+          Higher port value           HIGHPORT =      
+          Outgoing ports ranges       SRCPORTS = 
+          *5000-65535                                                     
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372559
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571214
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=net)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

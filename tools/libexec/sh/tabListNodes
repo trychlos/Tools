@@ -1,0 +1,49 @@
+# @(#) List the machines for the specified environment
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. (opt) environment mnemonic
+#               default to current environment
+#
+# (O): - values are displayed on stdout
+#
+# pwi 1998-10-21 creation
+# pwi 2002- 2-28 tools are moved to the physical machine
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2017- 6-21 publish the release at last 
+
+function tabListNodes
+{
+	#set -x
+	typeset _environ="${1:-"${ttp_node_environment}"}"
+	typeset _dir
+	typeset _conf
+	typeset _env
+	typeset _host
+	bspRootEnum | while read _dir; do
+		find "${_dir}/${ttp_nodesdir}" -type f -name '*.ini' 2>/dev/null | while read _conf; do
+			_env="$(nodeGetEnvironment "${_conf}")"
+			if [ "${_env}" = "${_environ}" ]; then
+				nodeFromConf "${_conf}"
+			fi
+		done
+	done | sort -u
+}

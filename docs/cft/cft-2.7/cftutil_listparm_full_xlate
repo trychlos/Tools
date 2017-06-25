@@ -1,0 +1,283 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTXLATE - Translation table command
+                    ------------------------------------
+ 
+  IDFDEF                           (SEND ASCII -> EBCDIC)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          00010203372d2e2f1605250b0c0d0e0f  00...0F
+          101112133c3d322618193f271c1d1e1f  10...1F
+          405a7f7b5b6c507d4d5d5c4e6b604b61  20...2F
+          f0f1f2f3f4f5f6f7f8f97a5e4c7e6e6f  30...3F
+          7cc1c2c3c4c5c6c7c8c9d1d2d3d4d5d6  40...4F
+          d7d8d9e2e3e4e5e6e7e8e9ade0bd5f6d  50...5F
+          79818283848586878889919293949596  60...6F
+          979899a2a3a4a5a6a7a8a9c06ad0a107  70...7F
+          80dc08421504171a52530a57568d8e8f  80...8F
+          901b20cb2122db092324284a9c9d9e9f  90...9F
+          a0292a2b2c3031333435aa363839aeaf  A0...AF
+          b0b1b2fab4b5b6b7b8b9ba3a3b3ebebc  B0...BF
+          ab414344bf4546474849ca4fcccdcecf  C0...CF
+          515455585906626364bbac6566dddedf  D0...DF
+          67e16869707172737475eaebecedeeef  E0...EF
+          767778148a8b8c9a9bb3dafbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372557
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16372557
+          Record last modify origin   ORIGIN   =           
+ 
+  IDFDEF                           (SEND EBCDIC -> ASCII)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          000102038509d57f82978a0b0c0d0e0f  00...0F
+          10111213f3840886181987911c1d1e1f  10...1F
+          92949598990a171b9aa1a2a3a4050607  20...2F
+          a5a616a7a8a9ab04acadbbbc1415bd1a  30...3F
+          20c183c2c3c5c6c7c8c99b2e3c282bcb  40...4F
+          26d08889d1d28c8bd3d421242a293b5e  50...5F
+          2d2fd6d7d8dbdce0e2e37c2c255f3e3f  60...6F
+          e4e5e6e7e8e9f0f1f2603a2340273d22  70...7F
+          80616263646566676869f4f5f68d8e8f  80...8F
+          906a6b6c6d6e6f707172f7f89c9d9e9f  90...9F
+          a07e737475767778797aaac0da5baeaf  A0...AF
+          b0b1b2f9b4b5b6b7b8b9bad9bf5dbec4  B0...BF
+          7b414243444546474849ca93cccdcecf  C0...CF
+          7d4a4b4c4d4e4f505152fa9681dddedf  D0...DF
+          5ce1535455565758595aeaebecedeeef  E0...EF
+          30313233343536373839b3fbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372557
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16372557
+          Record last modify origin   ORIGIN   =           
+ 
+  ODY                              (SEND ASCII -> EBCDIC)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          00010203372d2e2f1605250b0c0d0e0f  00...0F
+          101112133c3d322618193f271c1d1e1f  10...1F
+          405a7f7b5b6c507d4d5d5c4e6b604b61  20...2F
+          f0f1f2f3f4f5f6f7f8f97a5e4c7e6e6f  30...3F
+          7cc1c2c3c4c5c6c7c8c9d1d2d3d4d5d6  40...4F
+          d7d8d9e2e3e4e5e6e7e8e9ade0bd5f6d  50...5F
+          79818283848586878889919293949596  60...6F
+          979899a2a3a4a5a6a7a8a9c06ad0a107  70...7F
+          80dc08421504171a52530a57568d8e8f  80...8F
+          901b20cb2122db092324284a9c9d9e9f  90...9F
+          a0292a2b2c3031333435aa363839aeaf  A0...AF
+          b0b1b2fab4b5b6b7b8b9ba3a3b3ebebc  B0...BF
+          ab414344bf4546474849ca4fcccdcecf  C0...CF
+          515455585906626364bbac6566dddedf  D0...DF
+          67e16869707172737475eaebecedeeef  E0...EF
+          767778148a8b8c9a9bb3dafbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16393460
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16393460
+          Record last modify origin   ORIGIN   =           
+ 
+  ODY                              (SEND EBCDIC -> ASCII)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          000102038509d57f82978a0b0c0d0e0f  00...0F
+          10111213f3840886181987911c1d1e1f  10...1F
+          92949598990a171b9aa1a2a3a4050607  20...2F
+          a5a616a7a8a9ab04acadbbbc1415bd1a  30...3F
+          20c183c2c3c5c6c7c8c99b2e3c282bcb  40...4F
+          26d08889d1d28c8bd3d421242a293b5e  50...5F
+          2d2fd6d7d8dbdce0e2e37c2c255f3e3f  60...6F
+          e4e5e6e7e8e9f0f1f2603a2340273d22  70...7F
+          80616263646566676869f4f5f68d8e8f  80...8F
+          906a6b6c6d6e6f707172f7f89c9d9e9f  90...9F
+          a07e737475767778797aaac0da5baeaf  A0...AF
+          b0b1b2f9b4b5b6b7b8b9bad9bf5dbec4  B0...BF
+          7b414243444546474849ca93cccdcecf  C0...CF
+          7d4a4b4c4d4e4f505152fa9681dddedf  D0...DF
+          5ce1535455565758595aeaebecedeeef  E0...EF
+          30313233343536373839b3fbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16393460
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16393460
+          Record last modify origin   ORIGIN   =           
+ 
+  IDFDEF                           (RECV ASCII <- EBCDIC)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          000102038509d57f82978a0b0c0d0e0f  00...0F
+          10111213f3840886181987911c1d1e1f  10...1F
+          92949598990a171b9aa1a2a3a4050607  20...2F
+          a5a616a7a8a9ab04acadbbbc1415bd1a  30...3F
+          20c183c2c3c5c6c7c8c99b2e3c282bcb  40...4F
+          26d08889d1d28c8bd3d421242a293b5e  50...5F
+          2d2fd6d7d8dbdce0e2e37c2c255f3e3f  60...6F
+          e4e5e6e7e8e9f0f1f2603a2340273d22  70...7F
+          80616263646566676869f4f5f68d8e8f  80...8F
+          906a6b6c6d6e6f707172f7f89c9d9e9f  90...9F
+          a07e737475767778797aaac0da5baeaf  A0...AF
+          b0b1b2f9b4b5b6b7b8b9bad9bf5dbec4  B0...BF
+          7b414243444546474849ca93cccdcecf  C0...CF
+          7d4a4b4c4d4e4f505152fa9681dddedf  D0...DF
+          5ce1535455565758595aeaebecedeeef  E0...EF
+          30313233343536373839b3fbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372557
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16372557
+          Record last modify origin   ORIGIN   =           
+ 
+  IDFDEF                           (RECV EBCDIC <- ASCII)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          00010203372d2e2f1605250b0c0d0e0f  00...0F
+          101112133c3d322618193f271c1d1e1f  10...1F
+          405a7f7b5b6c507d4d5d5c4e6b604b61  20...2F
+          f0f1f2f3f4f5f6f7f8f97a5e4c7e6e6f  30...3F
+          7cc1c2c3c4c5c6c7c8c9d1d2d3d4d5d6  40...4F
+          d7d8d9e2e3e4e5e6e7e8e9ade0bd5f6d  50...5F
+          79818283848586878889919293949596  60...6F
+          979899a2a3a4a5a6a7a8a9c06ad0a107  70...7F
+          80dc08421504171a52530a57568d8e8f  80...8F
+          901b20cb2122db092324284a9c9d9e9f  90...9F
+          a0292a2b2c3031333435aa363839aeaf  A0...AF
+          b0b1b2fab4b5b6b7b8b9ba3a3b3ebebc  B0...BF
+          ab414344bf4546474849ca4fcccdcecf  C0...CF
+          515455585906626364bbac6566dddedf  D0...DF
+          67e16869707172737475eaebecedeeef  E0...EF
+          767778148a8b8c9a9bb3dafbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372557
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16372557
+          Record last modify origin   ORIGIN   =           
+ 
+  ODY                              (RECV ASCII <- EBCDIC)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          000102038509d57f82978a0b0c0d0e0f  00...0F
+          10111213f3840886181987911c1d1e1f  10...1F
+          92949598990a171b9aa1a2a3a4050607  20...2F
+          a5a616a7a8a9ab04acadbbbc1415bd1a  30...3F
+          20c183c2c3c5c6c7c8c99b2e3c282bcb  40...4F
+          26d08889d1d28c8bd3d421242a293b5e  50...5F
+          2d2fd6d7d8dbdce0e2e37c2c255f3e3f  60...6F
+          e4e5e6e7e8e9f0f1f2603a2340273d22  70...7F
+          80616263646566676869f4f5f68d8e8f  80...8F
+          906a6b6c6d6e6f707172f7f89c9d9e9f  90...9F
+          a07e737475767778797aaac0da5baeaf  A0...AF
+          b0b1b2f9b4b5b6b7b8b9bad9bf5dbec4  B0...BF
+          7b414243444546474849ca93cccdcecf  C0...CF
+          7d4a4b4c4d4e4f505152fa9681dddedf  D0...DF
+          5ce1535455565758595aeaebecedeeef  E0...EF
+          30313233343536373839b3fbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16393460
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16393460
+          Record last modify origin   ORIGIN   =           
+ 
+  ODY                              (RECV EBCDIC <- ASCII)
+ 
+          0 1 2 3 4 5 6 7 8 9 A B C D E F
+ 
+          00010203372d2e2f1605250b0c0d0e0f  00...0F
+          101112133c3d322618193f271c1d1e1f  10...1F
+          405a7f7b5b6c507d4d5d5c4e6b604b61  20...2F
+          f0f1f2f3f4f5f6f7f8f97a5e4c7e6e6f  30...3F
+          7cc1c2c3c4c5c6c7c8c9d1d2d3d4d5d6  40...4F
+          d7d8d9e2e3e4e5e6e7e8e9ade0bd5f6d  50...5F
+          79818283848586878889919293949596  60...6F
+          979899a2a3a4a5a6a7a8a9c06ad0a107  70...7F
+          80dc08421504171a52530a57568d8e8f  80...8F
+          901b20cb2122db092324284a9c9d9e9f  90...9F
+          a0292a2b2c3031333435aa363839aeaf  A0...AF
+          b0b1b2fab4b5b6b7b8b9ba3a3b3ebebc  B0...BF
+          ab414344bf4546474849ca4fcccdcecf  C0...CF
+          515455585906626364bbac6566dddedf  D0...DF
+          67e16869707172737475eaebecedeeef  E0...EF
+          767778148a8b8c9a9bb3dafbfcfdfeff  F0...FF
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16393460
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16393460
+          Record last modify origin   ORIGIN   =           
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=xlate)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

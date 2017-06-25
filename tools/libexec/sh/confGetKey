@@ -1,0 +1,93 @@
+# @(#) Select required lines from an in-memory_keys array
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. name of the root indexed keys array
+#      2. (opt.) keyword of the line, usually the service mnemonic
+#                If empty, then list existing services; other arguments
+#                are ignored
+#      3. (opt.) comma-separated list of selection fields, of the form
+#                index=value, where index is counted from zero.
+#                If empty, then returns desired fields for all found
+#                lines
+#      4. (opt.) index of the (only one) desired field in the array
+#                (i.e. where zero-indexed field in the array is the
+#                second one in the configuration file)
+#                Default to zero.
+#
+# (O): - values are displayed on stdout
+#
+# pwi 1998-10-21 creation
+# pwi 2001-12- 6 add field separator argument
+# pwi 2002- 3-22 accept "3,-" notation for field 3 and next
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2013- 7- 4 forked from tabExtractFields for keys arrays
+# pwi 2017- 6-21 publish the release at last 
+
+function confGetKey
+{
+	#set -x
+	typeset _name="${1}"
+	typeset _keyword="${2}"
+	typeset _fields_list="${3}"
+	typeset _desired="${4}"
+	typeset _sep=":"
+
+	if [ -z "${_keyword}" ]; then
+		typeset _service
+		typeset -n _vname="${_name}"
+		for _service in "${_vname[@]}"; do
+			echo "${_service}"
+		done
+	else
+		typeset -n _vname="${_name}_${_keyword}"
+		#typeset -i _count="$(echo $(eval echo '${'${_name}'_'${_keyword}'}'))"
+		typeset -i _count="${_vname}"
+		typeset -i _i=0
+		while [ ${_i} -lt ${_count} ]; do
+			typeset -n _vname="${_name}_${_keyword}_${_i}"
+			typeset _value="$(echo "${_vname}" | \
+				awk -v myfields="${_fields_list}" -v desired="${_desired}" -F"${_sep}" '
+					BEGIN {
+						count = split( myfields, flist, "," );
+						for( key in flist ){
+							split( flist[key], felt, "=" );
+							fsel[felt[1]] = felt[2];
+							#printf( "fsel[%s]=%s\n", felt[1], felt[2] );
+							#fsel[0]=environment
+						}
+					}{
+						ok = 0;
+						for( i=1 ; i<=NF ; ++i ){
+							if( count == 0 || ( length( fsel[i-1] ) && $i == fsel[i-1] )){
+								ok += 1;
+							}
+						}
+						if( !count || ok == count ){
+							desired += 1;
+							print $desired;
+						}
+					}')"
+			[ -z "${_value}" ] || echo "${_value}"
+			let _i+=1
+		done
+	fi
+}

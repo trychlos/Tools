@@ -1,0 +1,116 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/9-FunctionDefinition
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   From ksh manual
+   Manual synthese
+   Tests synthese
+     Fedora 17
+
+-----------------------------------------------------------------------
+ From ksh manual
+ ===============
+
+ For historical reasons, there are two ways to define functions, the
+ name() syntax and the function name syntax.  Shell functions are read
+ in and stored internally. Alias names are resolved when the function is
+ read. Functions are executed like commands with the arguments passed as
+ positional parameters.
+
+ Functions  defined by the function name syntax and called by name
+ execute in the same process as the caller and share all files and
+ present working directory with the caller. Traps caught by the caller
+ are reset to their default action inside the function. A trap condition
+ that is not caught or ignored by the function causes the function to
+ terminate and  the condition  to be passed on to the caller. A trap on
+ EXIT set inside a function is executed in the environment of the caller
+ after the function completes. Ordinarily, variables are shared between
+ the calling program and the function. However, the typeset special
+ built-in command used within a function defines local variables whose
+ scope includes the current function. They can be passed to functions
+ that they call in the variable assignment list that precedes the call
+ or as arguments passed as name references.  Errors within functions
+ return control to the caller.
+
+ Functions defined with the name() syntax and functions defined with the
+ function name syntax that are invoked with the .  special built-in are
+ executed in the  caller's  environment and share all variables and
+ traps with the caller. Errors within these function executions cause
+ the script that contains them to abort.
+
+-----------------------------------------------------------------------
+ Manual synthese
+ ===============
+
+                                     function name           name()
+                                                       or function name
+                                                          invoked by .
+
+ Execute in the same process              Yes                 Yes
+ as the caller
+
+ Share all files with the caller          Yes
+
+ Share all variables with the caller                          Yes
+
+ Share current working directory          Yes
+  with the caller
+
+ Traps caught by the caller        are reset to default  traps are shared
+                                      in the function     with the caller
+
+ Trap condition uncaught or        function terminates
+ ignored by the function          and the condition is
+                                  passed to the caller
+
+ Trap on EXIT set inside the      is executed in the
+ function                         environment of the
+                                  caller after the
+                                  function completes
+
+ Error within function             returns control to    causes the script
+                                       the caller           to abort
+
+-----------------------------------------------------------------------
+ Tests synthese
+ ==============
+
+   Fedora 17
+
+                                       function name           name()
+                                                         or function name
+                                                            invoked by .
+
+ Is a variable defined by the caller        Yes                 Yes
+ available in the function ?
+
+ Is a variable defined by the caller        Yes                 Yes
+ updatable in the function ?
+
+ Is the update made in a function           Yes                 Yes
+ available in the caller after the
+ function returns ?
+
+ Is a variable defined in the function      Yes                 Yes
+ available in the caller after the
+ function returns ?
+
+ '$0' content                            name of the         name of the
+                                           function            caller
+
+ syntax error in the function         the caller aborts    segmentation fault
+                                        with an error        (core dumped)
+                                          message
+
+ runtime error in the function        an error message     segmentation fault
+                                      is sent, and the       (core dumped)
+                                     control returns to
+                                         the caller
+                                       (with code zero)
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

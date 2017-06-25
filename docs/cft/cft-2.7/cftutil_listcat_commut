@@ -1,0 +1,128 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:43:13
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+  Date = 24/06/2013   Time = 11:43:13
+ 
+  Partner  DTSA Network                      Transfert Transfert Diag
+  Inter.        File Id.                     Id.Remote Id.U.     CFT
+  -------- ---- ---------------------------- --------  --------  ---
+  LEFCFT1  RFT  OPPAYCAS                     6808020   A000019E    0
+  LEFCFT1  RFT  OPRECRRL                     6808130   A000019F    0
+  LEFCFT1  RFT  OPPAICB                      6814120   A000019G    0
+  LEFCFT1  RFT  OPRECRRL                     6815431   A000019H    0
+  LEFCFT1  RFT  OPPAYTIP                     6816120   A000019I    0
+  LEFCFT1  SFT  YOED24                       6822134   A000019J    0
+  LEFCFT1  SFT  ODYEST1                      6822164   A000019K    0
+  LEFCFT1  SFT  ODYREL1                      6822204   A000019L    0
+  LEFCFT1  SFT  ODYREL1                      6822224   A000019M    0
+  LEFCFT1  SFT  ODYBQE1                      6822321   A000019N    0
+  LEFCFT1  SFT  ODYLOP1                      6822333   A000019O    0
+  LEFCFT1  SFT  YOED02                       6822360   A000019P    0
+  LEFCFT1  SFT  ODYIDX1                      6822583   A000019Q    0
+  LEFCFT1  SFT  ODYBQE1                      6822590   A000019R    0
+  LEFCFT1  SFT  ODYLOV1                      6823010   A000019S    0
+  LEFCFT1  SFT  YOED24                       6823051   A000019T    0
+  LEFCFT1  SFT  FIGL102                      6823120   A000019U    0
+  LEFCFT1  SFT  YOED01                       6823135   A000019V    0
+  LEFCFT1  RFT  OPRECRRL                     6908530   A000019W    0
+  LEFCFT1  RFT  OPPAYCAS                     6909120   A000019X    0
+  LEFCFT1  RFT  OPPAICB                      6914144   A000019Y    0
+  LEFCFT1  RFT  OPPAYTIP                     6916120   A000019Z    0
+  LEFCFT1  RFT  OPRECRRL                     6916330   A00001A0    0
+  LEFCFT1  SFT  YOED24                       6920103   A00001A1    0
+  LEFCFT1  SFT  ODYEST1                      6920133   A00001A2    0
+           SFK                                         A00001A3  408
+  LEFCFT1  SFT  ODYBQE1                      6920332   A00001A4    0
+  LEFCFT1  SFT  ODYLOP1                      6920362   A00001A5    0
+  LEFCFT1  SFT  ODYBQE1                      6921261   A00001A6    0
+  LEFCFT1  SFT  ODYIDX1                      6921265   A00001A7    0
+  LEFCFT1  SFT  ODYLOV1                      6921275   A00001A8    0
+  LEFCFT1  SFT  YOED24                       6921321   A00001A9    0
+  LEFCFT1  SFT  YOED01                       6921444   A00001AA    0
+  LEFCFT1  SFT  FIGL102                      6921485   A00001AB    0
+  LEFCFT1  RFT  OPPAYCAS                     7008020   A00001AC    0
+  LEFCFT1  RFT  OPRECRRL                     7010030   A00001AD    0
+  LEFCFT1  SFT  FIGL102                      7011401   A00001AE    0
+  LEFCFT1  RFT  OPPAICB                      7014120   A00001AF    0
+  LEFCFT1  RFT  OPPAYTIP                     7016120   A00001AG    0
+  LEFCFT1  RFT  OPREJET                      7017110   A00001AH    0
+  LEFCFT1  RFT  OPREJET                      7017112   A00001AI    0
+  LEFCFT1  RFT  OPREJET                      7017111   A00001AJ    0
+  LEFCFT1  RFT  OPREJET                      7017113   A00001AK    0
+  LEFCFT1  SFT  YOED24                       7021035   A00001AL    0
+  LEFCFT1  SFT  ODYEST1                      7021075   A00001AM    0
+  LEFCFT1  SFT  YOED24                       7021084   A00001AN    0
+  LEFCFT1  SFT  ODYBQE1                      7021234   A00001AO    0
+  LEFCFT1  SFT  ODYLOP1                      7021252   A00001AP    0
+  LEFCFT1  SFT  ODYIDX1                      7022073   A00001AQ    0
+  LEFCFT1  SFT  ODYBQE1                      7022074   A00001AR    0
+  LEFCFT1  SFT  ODYLOV1                      7022093   A00001AS    0
+  LEFCFT1  SFT  YOED24                       7022134   A00001AT    0
+  LEFCFT1  SFT  YOED01                       7022230   A00001AU    0
+  LEFCFT1  SFT  FIGL102                      7022253   A00001AV    0
+  LEFCFT1  RFT  OPPAYCAS                     7108020   A00001AW    0
+  LEFCFT1  RFT  OPFACTRV                     7109000   A00001AX    0
+  LEFCFT1  RFT  OPREJET                      7110210   A00001AY    0
+  LEFCFT1  RFT  OPPAICB                      7114120   A00001AZ    0
+  LEFCFT1  RFT  OPRECRRL                     7114230   A00001B0    0
+  LEFCFT1  RFT  OPRECRRL                     7114351   A00001B1    0
+  LEFCFT1  RFT  OPPAYTIP                     7116120   A00001B2    0
+  LEFCFT1  RFT  OPRECRRL                     7117130   A00001B3    0
+  LEFCFT1  SFT  YOED24                       7120222   A00001B4    0
+  LEFCFT1  SFT  ODYEST1                      7120253   A00001B5    0
+  LEFCFT1  SFT  YOED24                       7120265   A00001B6    0
+  LEFCFT1  SFT  ODYBQE1                      7120411   A00001B7    0
+  LEFCFT1  SFT  ODYLOP1                      7120430   A00001B8    0
+  LEFCFT1  SFT  YOED02                       7120510   A00001B9    0
+  LEFCFT1  SFT  ODYBQE1                      7122101   A00001BA    0
+  LEFCFT1  SFT  ODYIDX1                      7122103   A00001BB    0
+  LEFCFT1  SFT  ODYLOV1                      7122123   A00001BC    0
+  LEFCFT1  SFT  YOED24                       7122170   A00001BD    0
+  LEFCFT1  SFT  YOED01                       7122464   A00001BE    0
+  LEFCFT1  SFT  FIGL102                      7123092   A00001BF    0
+  LEFCFT1  RFT  OPPAYCAS                     7208020   A00001BG    0
+  LEFCFT1  RFT  OPFACTRV                     7209000   A00001BH    0
+  LEFCFT1  RFT  OPREJET                      7210210   A00001BI    0
+  LEFCFT1  RFT  OPPAICB                      7214120   A00001BJ    0
+  LEFCFT1  RFT  OPPAYTIP                     7216120   A00001BK    0
+  LEFCFT1  SFT  YOED24                       7220242   A00001BL    0
+  LEFCFT1  SFT  ODYEST1                      7220273   A00001BM    0
+           SFK                                         A00001BN  408
+           SFK                                         A00001BO  408
+           SFK                                         A00001BP  408
+           SFK                                         A00001BQ  408
+           SFK                                         A00001BR  408
+           SFK                                         A00001BS  408
+           SFK                                         A00001BT  408
+           SFK                                         A00001BU  408
+           SFK                                         A00001BV  408
+  LEFCFT1  SFT  ODYBQE1                      7220481   A00001BW    0
+           SFK                                         A00001BX  408
+           SFK                                         A00001BY  408
+  LEFCFT1  SFT  ODYLOP1                      7220503   A00001BZ    0
+  LEFCFT1  SFT  ODYIDX1                      7222020   A00001C0    0
+  LEFCFT1  SFT  ODYBQE1                      7222021   A00001C1    0
+  LEFCFT1  SFT  ODYLOV1                      7222043   A00001C2    0
+  LEFCFT1  SFT  YOED24                       7222093   A00001C3    0
+  LEFCFT1  SFT  YOED01                       7222370   A00001C4    0
+  LEFCFT1  SFT  FIGL102                      7223012   A00001C5    0
+  LEFCFT1  RFT  OPPAYCAS                     7508020   A00001C6    0
+  LEFCFT1  RFT  OPRECRRL                     7510430   A00001C7    0
+  LEFCFT1  RFT  OPRECRRL                     7510530   A00001C8    0
+ 
+       103 record(s) selected
+     10000 record(s) in Catalog file
+      9897 record(s) free (98%)
+ 
+CFTU00I LISTCAT  _ Correct (content=commut)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:43:13
+CFTU20I Session active for  0:00:00

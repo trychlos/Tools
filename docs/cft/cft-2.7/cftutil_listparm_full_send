@@ -1,0 +1,2089 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTSEND  - Send file command
+                    ----------------------------
+ 
+  ID_EXITL                        
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     = CFTEXLST                        
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = YES
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = DELETE
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    =            NTYPE    =  
+          Character codification      FCODE    =            NCODE    =       
+          Record format               FRECFM   =            NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          *                                                                
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372561
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571217
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  BIN                             
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = B          NTYPE    =  
+          Character codification      FCODE    = BINARY     NCODE    =       
+          Record format               FRECFM   =            NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          *pub/FTEST                                                       
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372560
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571215
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  FIC1                            
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     = ID_EXIT                         
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    =            NTYPE    =  
+          Character codification      FCODE    =            NCODE    =       
+          Record format               FRECFM   =            NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          *pub/FTEST                                                       
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372560
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571216
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  FIGL10                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *SIMPAC EXPOPT DES PIËCES COMPTABLES AGRÈ
+          *GÈES
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493397
+          Record last modify date     RECDATEM = 20130102
+          Record last modify time     RECTIMEM = 15163753
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  FIGL102                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *SIMPAC EXPOPT DES PIËCES COMPTABLES AGRÈ
+          *GÈES
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20130115
+          Record creation time        RECTIMEC = 14230949
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571223
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  IDFDEF                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = B          NTYPE    =  
+          Character codification      FCODE    = BINARY     NCODE    =       
+          Record format               FRECFM   =            NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          *pub/FTEST                                                       
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372559
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571215
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYBCO1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *BILAN CONSO FLUX REPOPTING EXPORT CLIENT
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493400
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571230
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYBQE1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *COMM+GROUP OPDRES DE PRÈLËVEMENT (AUTRES
+          * BANQUES)
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493397
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571221
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYEST1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EMC DEMANDE DE RELËVE POUR ESTIMATION
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493399
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571227
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYIDX1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EMC ENVOI DES INDEX FACTURÈS
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 1800       NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493399
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571229
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYLOP1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *COMM+GROUP(VALIDATION) LISTE DES ORDRES 
+          *DE PRÈLEVEMENT DU JOUR (POUR VALIDATION 
+          *DANS COMM+GROUP)
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493400
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571230
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYLOV1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *COMM+GROUP(VALIDATION) LISTE DES ORDRES 
+          *DE VIREMENT DU JOUR (POUR VALIDATION DAN
+          *S COMM+GROUP)
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493400
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571230
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYOCE1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *OCE EXPOPT DE LA BASE CLIENT
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493399
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571229
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYPRL1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *BANQUES DE FRANCE ORDRES DE PRÈLËVEMENT 
+          *(BANQUE DE FRANCE)
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493397
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571221
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYREF1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *FURPAC SYNCHRONISATION DU PATRIMOINE TEC
+          *HNIQUE AVEC CC&B
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493399
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571228
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODYREL1                         
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *MICROPEL CAMPAGNE DE RELËVE TERRAIN
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 1800       NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493399
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571229
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  TXT                             
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *
+          *
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   =            NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          *pub/FTEST                                                       
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372560
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571216
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED01                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT POUR ÈDITION DES FACTURE
+          *S (PROD + SPÈCIMENS)
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493398
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571224
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED02                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT POUR ÈDITION DES COURRIE
+          *RS DE RELANCE EN RECOMMANDÈ
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493398
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571225
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED03                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT POUR ÈDITION DES FACTURE
+          *S DE MAJOPATION ASSAINISSEMENT
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493398
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571224
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED04                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT POUR ÈDITION DES COURRIE
+          *RS DE RELANCE EN RECOMMANDÈ
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20121205
+          Record creation time        RECTIMEC = 10080871
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571226
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED05                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT DES BOPDEREAU DE REGROUP
+          *EMENT DE FACTURES
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493398
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571223
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  YOED24                          
+          ............... Transfer attributes ....................
+ 
+          Transfer state              STATE    = DISP
+          Translation table           XLATE    =                                 
+          Exit identifier             EXIT     =                                 
+          Priority                    PRI      = 128
+          Outgoing port range TCP     NETBAND  = 1 
+          Implicit send               IMPL     = NO 
+ 
+          Transfer validity              Activation time
+          -----------------              ---------------
+          After  MINDATE  = 01/01/1000   CYCDATE  = 00/00/0000
+                 MINTIME  = 00:00:00.00  CYCTIME  = 00:00:00.00
+          Before MAXDATE  = 31/12/9999   CYCLE    = 0    
+                 MAXTIME  = 23:59:59.99  TCYCLE   = DAY  
+ 
+          Send identifier             SPART    =                                 
+          Sending user                SUSER    =                                 
+                  password            SPASSWD  =                                 
+                  application         SAPPL    =                                                 
+          Receiving user              RUSER    =                                 
+                    password          RPASSWD  =                                 
+                    application       RAPPL    =                                                 
+          User identifier             USERID   =                                 
+          Group identifier            GROUPID  =                                 
+          Associated parameters       PARM     =
+          *
+          Local user comment          COMMENT  =
+          *EDITIQUE EXPOPT POUR ÈDITION DES COURRIE
+          *RS
+          *
+          *
+ 
+          ............... File attributes ........................
+ 
+                                      Local file            Network file
+                                      ----------            ------------
+          Override attributes         FORCE    = NO 
+          Disponibility               FDISP    = SHR  
+          Action after transfer       FACTION  = NONE  
+          Organization                FORG     =           
+          Access                      FACC     =  
+          File or record type         FTYPE    = T          NTYPE    =  
+          Character codification      FCODE    = ASCII      NCODE    =       
+          Record format               FRECFM   = V          NRECFM   =  
+          Record length               FLRECL   = 0          NLRECL   = 0    
+          Record block size           FBLKSIZE = 0          NBLKSIZE = 0    
+          File space                  FSPACE   = 0          NSPACE   = 0       
+          Key length                  FKEYLEN  = 0          NKEYLEN  = 0     
+          Key position                FKEYPOS  = 0          NKEYPOS  = 0     
+          On line compression                               NCOMP    = 15
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          User to notify              NOTIFY   =                                 
+          Data base local file        FDB      =
+          *                                                                
+          Local file name             FNAME    =
+          */tmp/cft_test/                                                  
+          Remote file name            NFNAME   =
+          *                                                                
+          Temporary local file name   WFNAME   =
+          *                                                                
+          Local select list           SELFNAME =
+          *                                                                
+          Signature file name         SIGFNAME =
+          *                                                                
+          Procedure to execute        EXEC     =
+          *                                                                
+          On generic transfers        EXECSUB  = LIST
+          On generic transfers        EXECSUBA = SUBF
+          Delete transfer after send  DELETE   = NO 
+          Delete file for xfer state  FDELETE  =       
+          XFB Sentinel filter         TRK      = UNDEFINED
+          Duplicate detection         DUPLICAT =
+          *
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16493398
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571223
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=send)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

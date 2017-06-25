@@ -1,0 +1,1126 @@
+SQL> select * from v$sgastat;
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+	     fixed_sga			   2213936
+	     buffer_cache		  67108864
+	     log_buffer 		   4288512
+shared pool  kgqbt_alloc_block		      3072
+shared pool  dpslut_kfdsg		       512
+shared pool  hot latch diagnostics	       160
+shared pool  kkj jobq  wor		      4128
+shared pool  vips_package_file		      1320
+shared pool  ENQUEUE STATS		     20952
+shared pool  vem_user_actlog		       664
+shared pool  transaction		    257664
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Wait History Array 		 8
+shared pool  vproblem_bucket		       848
+shared pool  vnot_exist_incident	      3200
+shared pool  KCB buffer wait statistic	      3352
+shared pool  invalid low rba queue	       512
+shared pool  KQF optimizer stats table	      1832
+shared pool  KCB tablespace encryption	       680
+shared pool  bt_qentry			     28512
+shared pool  kzctxgjsi ksuseclid memor	       720
+shared pool  ksunfy: system-global sta	      4840
+shared pool  Alert log			       520
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  vips_file_metadata 	       944
+shared pool  vips_file_copy_log 	      1696
+shared pool  DISPATCHERS INFO		      2496
+shared pool  CCUR			   9034232
+shared pool  PLDIA			   1441432
+shared pool  v_ipsprbcnt		       664
+shared pool  vproblem_int		      2448
+shared pool  vtest_exists		      1040
+shared pool  SQLA			  21768088
+shared pool  PRTDS			    315152
+shared pool  execution ID memory	      1832
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  plwpil:wa			      4264
+shared pool  kzekm heap descriptor	       304
+shared pool  kelt translation table	       336
+shared pool  VM OSD context			96
+shared pool  DDE_USER_ACTION_DEF	      1320
+shared pool  IPS_PACKAGE_UNPACK_HISTOR	      1040
+shared pool  kglsim recovery area	      3168
+shared pool  ksdhng: blkers cache	      3104
+shared pool  procs_kfgbsg		      1936
+shared pool  service names array		16
+shared pool  trace buf hdr xtend	       208
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Role related heap		       160
+shared pool  qtree_kwqbspse			40
+shared pool  SHARED SERVERS INFO	      3672
+shared pool  ASH buffers		   2097152
+shared pool  ADR_CONTROL		      1504
+shared pool  PMON blockers		       776
+shared pool  sga listelement		      2048
+shared pool  vproblem			      2728
+shared pool  object queue hash table d	      3968
+shared pool  peshm.c:latch		       160
+shared pool  PX subheap desc		       256
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  latches for protecting ls	       480
+shared pool  dir_ext			      1320
+shared pool  cp srv array		      3024
+shared pool  PX msg pool struct 	      1088
+shared pool  obj stats hash table	       672
+shared pool  Managed Standby Proc Arra	     28672
+shared pool  KQR M SO			    371488
+shared pool  KSIR SGA			       144
+shared pool  BRANCH TABLE SEGMENTED AR	     91640
+shared pool  KGKP sga				40
+shared pool  KTRSGA				 8
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SAGE commit cache node Al	      2048
+shared pool  SGA Obsolete Param Source		24
+shared pool  osp pool handles			 8
+shared pool  pesom.c:subheap ds array	       184
+shared pool  SGA structure for AWR (KE	       240
+shared pool  SGA - SWRF Time Model Bas	       112
+shared pool  KSK SGA			    150408
+shared pool  sys event stats for Other	     35776
+shared pool  Service-level trace setti	       536
+shared pool  LRMPD SGA Table		    268688
+shared pool  HM_RUN			      1976
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  namhsh_kfgsg		       288
+shared pool  msg Q child latches	       224
+shared pool  plwda:PLW_STR_NEW_LEN_VEC		 8
+shared pool  Prefetch history buffer a	       320
+shared pool  Prefetch client count per		32
+shared pool  ptr to sessions under idl		 8
+shared pool  xslongops			     14776
+shared pool  qesmmaInitialize: ta_qesm	       264
+shared pool  kglsim pin list arr	      1224
+shared pool  kqlpWrntoStr:string	       208
+shared pool  ktg hash buckets		     13576
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  DISPATCHER CONFIG ENTRY		88
+shared pool  kebm test replies		     30720
+shared pool  INCIDENT_FILE		       848
+shared pool  vips_package_incident_det	      4992
+shared pool  kscdnfyinithead			16
+shared pool  writes stopped lock conte		24
+shared pool  Detached dump directory	       520
+shared pool  X$KSVIS table		       128
+shared pool  KUPP subheap desc		       232
+shared pool  DBWR array of pointers to		 8
+shared pool  dbwr actual working sets		16
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  dbwriter coalesce struct		48
+shared pool  trace buffer header array	       208
+shared pool  KTUR HIST INFO		      4840
+shared pool  kodosgi kodos			32
+shared pool  UNDO INFO SEGMENTED ARRAY	     22040
+shared pool  jsksncb: 9 		      4816
+shared pool  dbgdInitEventGrp: eventGr	       216
+shared pool  KTA latches		      2024
+shared pool  file # translation table	     40064
+shared pool  kfklsodtab 		     64792
+shared pool  kfkid hash 		      4104
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  IPS_PACKAGE_FILE		       848
+shared pool  v_inc_meter_info_problem	       664
+shared pool  kglsim heap		    927360
+shared pool  KFG SO child		      7800
+shared pool  SWEEPERR			       944
+shared pool  Wait event pointers	       384
+shared pool  keswx:plan en		     14112
+shared pool  dbkea msg body		     51200
+shared pool  KTCN: Obj Invalidation Se	     24392
+shared pool  kcbbl2df L2 disabling fla		 8
+shared pool  KTCN global clauses  ht	       128
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  1:kngisga			     32104
+shared pool  KEWS statistic metadata	     16320
+shared pool  alert_ext			      3480
+shared pool  dbgefgHtAddSK-1		    482048
+shared pool  vshowincb_i		       752
+shared pool  kgsk subheap descriptor	       136
+shared pool  PLMCD			   6109632
+shared pool  PRTMV			    149936
+shared pool  threshold ale		     12192
+shared pool  PICKLEERR			      1128
+shared pool  kglsim main lru size	    192000
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kso req alloc heapds	       280
+shared pool  PQ/ResSched		      1040
+shared pool  SERVICE NAME ENTRY 	       128
+shared pool  vhm_run			      2072
+shared pool  subbtree_kwqspqctx 	       128
+shared pool  sim lru segments		      1280
+shared pool  vshowincb			       752
+shared pool  object queue hash buckets	    147456
+shared pool  LGWR-network Server info	     34032
+shared pool  logout storm management	       400
+shared pool  ASM map operations 	      2904
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ArchLog Dest Array 	     22784
+shared pool  sim trace buf		      5144
+shared pool  analytic workspace 	      2904
+shared pool  Sort Segment		     12352
+shared pool  enqueue			    275920
+shared pool  buffer handles		    108008
+shared pool  bt_subentry_nm			48
+shared pool  sga node map			16
+shared pool  message pool context area	     21840
+shared pool  qtree_kwqspqctx			40
+shared pool  cinfo_kfnsg		      4104
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kks stats				40
+shared pool  KSFV SGA			       832
+shared pool  ASM rollback operations	      2648
+shared pool  krvxlctx			       248
+shared pool  parallel_max_servers	      1280
+shared pool  resize request state obje	    489600
+shared pool  rules engine aggregate st	      1416
+shared pool  krvxdka			       840
+shared pool  KGLHD			   4598336
+shared pool  network connections	     66440
+shared pool  SGA - SWRF Metrics ksuTim	      2064
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  skgxp ANT slave netstat m	      4184
+shared pool  simulator latch/bucket st	      7424
+shared pool  MS alert log		     72704
+shared pool  change notification obj m	     16416
+shared pool  knlsg			       136
+shared pool  KKTDF			      2016
+shared pool  Space Background Task Des	     72000
+shared pool  kfdsga			       128
+shared pool  KKTSR			      1064
+shared pool  kfmdsg			       216
+shared pool  buffer_pool_desc_array	      3456
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SGA structure for ADR lay		 8
+shared pool  INCIDENT			      3008
+shared pool  parallel kcbibr dbwr bitv		 8
+shared pool  object queue		    124800
+shared pool  peshm.c: Global_Sub_Heap	       232
+shared pool  sim trace buf context	       200
+shared pool  character set memory	     59608
+shared pool  character set object	    577424
+shared pool  sess Q child latches	       224
+shared pool  qesmmaInitialize: oa_qesm	       112
+shared pool  file iostats dynamic seg	     21144
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KEWS statistic maps	      3168
+shared pool  KEWS sysstat values	       256
+shared pool  KWQDL child latches	      2880
+shared pool  xsoqmehift 		      2904
+shared pool  ksfm state object			88
+shared pool  ksdhng: cache ctx		       208
+shared pool  krsv_notifier_cb		     33760
+shared pool  iosts_kfmdsg		      1200
+shared pool  kdlwl_sga_subheap		       232
+shared pool  KTCNQROW colnames		      1296
+shared pool  writes stopped lock state		24
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KTC txn rsrc cnt			88
+shared pool  KQFUTTAB COLS		       472
+shared pool  DDE_USER_INCIDENT_ACTION_	       664
+shared pool  IPS_REMOTE_PACKAGE 	       944
+shared pool  kwqmncini-slv		     18400
+shared pool  database NCHAR language h	       568
+shared pool  dbwr working sets kcbdbws		16
+shared pool  temp lob duration state o	      3928
+shared pool  KEWS fixed SGA		      5704
+shared pool  ksleid alloc		       144
+shared pool  KSFD SGA I/O b		   3977064
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  koh dur heap		       352
+shared pool  KSN WaitID 		      1560
+shared pool  kfkrec_kfdsg			24
+shared pool  ksbxic obj 		     12216
+shared pool  kwrsnfy: kwrs		      1624
+shared pool  vproblem_lastinc		      2352
+shared pool  file state object		    110352
+shared pool  resumable			      3672
+shared pool  KTCN: Row Change Segmente	     34552
+shared pool  KTCN: query inv Segmented	      3928
+shared pool  relmd_ext			      1224
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  EM_DIAG_JOB		      1320
+shared pool  PCUR			   5438712
+shared pool  ksunfy : array of SSO fre	       176
+shared pool  ksuloi: long op free list		16
+shared pool  ksbtnfy: infrequent actio	      2600
+shared pool  call			    101520
+shared pool  ktfa dynamic SGA allocati	       640
+shared pool  kelr other metrics table		48
+shared pool  v_incfcount		       664
+shared pool  fencing reid		     17976
+shared pool  KYWM RPLY CROSS INSTANCE	     53248
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  grplut_kfgsg		       512
+shared pool  kglsim hash table bkts	   4194304
+shared pool  incr ckpt write count arr	       168
+shared pool  trace events array 	     72000
+shared pool  event-class map		      4472
+shared pool  pubentry			       112
+shared pool  Core dump directory	       520
+shared pool  vips_pkg_file		      1600
+shared pool  locator state object	     20808
+shared pool  memory transfer history	     19208
+shared pool  plwshs:temphdl			48
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  pesom.c:Global		     37416
+shared pool  peshm.c:Global		      4136
+shared pool  ASM KFFD SO		      2648
+shared pool  vproblem2			      2632
+shared pool  sim cache nbufs		       640
+shared pool  ams_xaction		       568
+shared pool  Parameter Handle		      2592
+shared pool  parameter blocks		     19192
+shared pool  SWRF Alerted		      4160
+shared pool  param hash values		      9600
+shared pool  pesldT03_Instance		     36920
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  PX QC deq stats		      1696
+shared pool  archive_lag_target 	      9624
+shared pool  latches for protecting fs	       960
+shared pool  obj hash table pointers	       168
+shared pool  Saved job ids		      8000
+shared pool  Banner Storage		      2048
+shared pool  qmps connections		     65280
+shared pool  TBS STAT			     16000
+shared pool  broker globals		       232
+shared pool  ADR_INVALIDATION		       664
+shared pool  parameter table block	    729424
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KSVR SGA			      2384
+shared pool  kccsgehtt			       360
+shared pool  KGSK sga			      6120
+shared pool  krvxmctx				40
+shared pool  parameter text value	      6696
+shared pool  redo allocation latch(es)	      1760
+shared pool  replication session stats	       776
+shared pool  kga sga				 8
+shared pool  SGA - SWRF Metrics WCTime	      2064
+shared pool  KFK SGA			      4208
+shared pool  kfmsg			      3608
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  latch classes		       352
+shared pool  Storage for kcrr state ob	       104
+shared pool  kfgsga			       104
+shared pool  kfgbsg				40
+shared pool  Closed Thread SCN Bitvec	     33792
+shared pool  sio pool granule list	      1024
+shared pool  simulator hash buckets	     33024
+shared pool  State object subpools	      6336
+shared pool  Rec Ping Per Thread Info	     21128
+shared pool  AWR Table Info (KEW layer	      1160
+shared pool  MinActScn Array		       320
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  qesmmaInitialize: pa_qesm	     11088
+shared pool  kglsim object batch	   1495368
+shared pool  ktcnc child latches	      5888
+shared pool  ksws service events	     51328
+shared pool  kebm slave message 	       288
+shared pool  X$KSFQP ANCHOR			80
+shared pool  event descriptor table	     53872
+shared pool  dbwriter coalesce buffer	    872448
+shared pool  kglsim hash table		      8208
+shared pool  kcbl statistics		      6144
+shared pool  Global Context Heap descr	       400
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  generic process shared st	       456
+shared pool  ksv slave class		    184192
+shared pool  X$KSVII table		       512
+shared pool  kcrrorlerr.alo			48
+shared pool  DDE_USER_ACTION_PARAMETER	      2080
+shared pool  vproblem_bucket_count	       944
+shared pool  KKJ SHRD WRQS		       240
+shared pool  vips_package_history	      1416
+shared pool  database creation languag	       568
+shared pool  KGNFS scontext		    524456
+shared pool  tablespace encryption key	       192
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kks stats mem			64
+shared pool  Temporary Tables State Ob	     31520
+shared pool  jsksncb: 7 		      3840
+shared pool  kglsim sga 		     30472
+shared pool  enqueue_hash_chain_latche	       160
+shared pool  IPS_FILE_COPY_LOG		      1040
+shared pool  kjxgrvr SGA			40
+shared pool  INC_METER_SUMMARY		      1416
+shared pool  kpscad: kpscscon		       840
+shared pool  trace_knlasg		       504
+shared pool  KSPD key heap		      4136
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  sga blobs			     32768
+shared pool  SEQ S.O.			     20952
+shared pool  dlo fib struct		     12832
+shared pool  diag fixed SGA		       136
+shared pool  KXFR Psuedo Hash Array fo	      3072
+shared pool  KSZ sga subheap descripto	       136
+shared pool  KSXP test table columns d	      1320
+shared pool  kolfsgi: KOLF's SGA initi		 8
+shared pool  kea advisor definition ca	       480
+shared pool  kelr system metrics table	       296
+shared pool  ksb ci process list (each	       872
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksunfy : array of session	       776
+shared pool  ksuloi: long op statistic	     71392
+shared pool  KTCN global operands ht	       128
+shared pool  dbktb: trace pool		      4400
+shared pool  DDE_USER_ACTION		      1128
+shared pool  vshowcatview		       848
+shared pool  User dump directory	       520
+shared pool  groups_kfgbsg		     10752
+shared pool  ktsj_init_sga task stat		24
+shared pool  KSRPC I/O Stat array ptr		16
+shared pool  ksfv subheap descriptor	       184
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  diag descriptor			16
+shared pool  dispatcher rate		      1312
+shared pool  SQLP			    847648
+shared pool  KEWS sesstat seg tbl		 8
+shared pool  enqueue resources		     90880
+shared pool  kxfpSO qref freelists	       368
+shared pool  instance cnxn information	      4656
+shared pool  keswxNotify:tabPlans	      1024
+shared pool  KTCN global operators		64
+shared pool  qmtb_init_data		      1728
+shared pool  latchnum to latch map	      4280
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Security Class heap	       136
+shared pool  post stats 		      1496
+shared pool  Checkpoint queue		    205312
+shared pool  pesom.c:Object		      4136
+shared pool  message pool freequeue	   1237888
+shared pool  prirec_kfmdsg			24
+shared pool  MTTR advisory context	      1648
+shared pool  log_simultaneous_copies	       400
+shared pool  copy latch aux			16
+shared pool  PARAMETER ENTRY			96
+shared pool  parallel kcbibr			32
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  state objects		     10360
+shared pool  object level stat table	      1008
+shared pool  PRESENTATION TABLE 	      2048
+shared pool  KQR L SO			    212040
+shared pool  KYWM SGA			       296
+shared pool  RTA Boundary Info thread	     71808
+shared pool  RTA read control file ind	      4224
+shared pool  buffers waiting for write		24
+shared pool  krvxdta			      1520
+shared pool  KGLH0			   4026808
+shared pool  joxs heap			      4272
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SGA structure for KWQDL s		24
+shared pool  SQL Memory Manager Base W	     13400
+shared pool  change tracking state cha	      2584
+shared pool  pso child tracebuf ptrs	       400
+shared pool  kponfy			       816
+shared pool  name-service table 	     16144
+shared pool  cross-platform compliance	      2232
+shared pool  xssinfo			      6008
+shared pool  SGA - AWR Metric RBSM str	       392
+shared pool  namrec_kfdsg			24
+shared pool  Client ID trace settings	      3928
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  plwda:PLW_STR_NEW_VAL_VEC		 8
+shared pool  plwppwp:PLW_STR_NEW_VAL_V		32
+shared pool  KOKTD			    775448
+shared pool  pesom.c: Pesom_Global_Hea	       232
+shared pool  process count for each CI	       448
+shared pool  Processor group descripto	       256
+shared pool  SGA - SWRF Metric Eidbuf	    101176
+shared pool  channel context areas	     81528
+shared pool  heap_kfsg			       136
+shared pool  sio pool list element	      3072
+shared pool  reservation state object	      3056
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Result Cache: State Objs	      2896
+shared pool  NETWORK BUFFER		     32808
+shared pool  array 2 for shared redo b		24
+shared pool  SGA - SWRF Metric CHBs	    821400
+shared pool  HM_FINDING 		      2632
+shared pool  HM_MESSAGE 		      1416
+shared pool  ktud-usd hash table	       264
+shared pool  ksdhng: blkrs cache	      1552
+shared pool  krp_sabmr_reqarr_2 		64
+shared pool  KTI latch structure	      1600
+shared pool  KTCNC inv hashtable	       128
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kcrfa structures		      3432
+shared pool  kebm slave reply		       856
+shared pool  KCB undo bitvec		      4096
+shared pool  kpssnfy: kpsssgct			72
+shared pool  ksmd unit test 1		      5296
+shared pool  ksim client list		       168
+shared pool  kglsim latch area		      2720
+shared pool  DDE_USER_INCIDENT_TYPE	       664
+shared pool  kks stats latch		       640
+shared pool  KTCTSNL subheaps		      1496
+shared pool  dia* process descriptor		16
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KEWS External IDs		      1536
+shared pool  kglsim latches		       136
+shared pool  kqlpaac:value-1		       320
+shared pool  vips_pkg_incident_candida	      3296
+shared pool  ksdhng: cbufs			64
+shared pool  KGSKI schedule		    103976
+shared pool  KCB Table Scan			40
+shared pool  messages			     11200
+shared pool  HTTP fixed headers 		72
+shared pool  KTU latches		       120
+shared pool  KSK OSS PLAN		      3360
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksz parent 		      9656
+shared pool  ksuseplsrctx memory		16
+shared pool  Undo Meta Data			80
+shared pool  File Space Usage		     11344
+shared pool  jsksncb: 4 		      4080
+shared pool  kkj jobq slav		      1280
+shared pool  KWQDL deq log		      9216
+shared pool  dgtab_kfmdsg		     25144
+shared pool  event classes		       128
+shared pool  txncallback		     38984
+shared pool  diagv_incident		      3296
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KCB where statistics arra	     34144
+shared pool  KCB incremental ckpt entr	       720
+shared pool  KXFR Hash Array latches a	      2944
+shared pool  KQF runtime defined table	      8640
+shared pool  IPS_PACKAGE_INCIDENT	       944
+shared pool  ksfd: components i/o stat	    177408
+shared pool  KTCN queries hash table	       128
+shared pool  ksws listener service nam		24
+shared pool  kpummst global in the SGA	      2520
+shared pool  ksdhng: els blkrs cache	    139680
+shared pool  ksacm service obj array	       768
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  qmn tasks			      4160
+shared pool  ksunfy : SSO free list	   1153136
+shared pool  KCB Table Scan Bitmap	       248
+shared pool  KCB Table Scan Buffer	   3981120
+shared pool  dskm rac entity id 		96
+shared pool  PLS chunk			       352
+shared pool  EM_USER_ACTIVITY		      1224
+shared pool  KESTB existence bitvec	    262144
+shared pool  ksb cic process list	       888
+shared pool  ksdhng: fblkrs cache	      4656
+shared pool  FileOpenBlock		   3860872
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  sort segment handle	      8664
+shared pool  latch wait-event table	      2144
+shared pool  qtree_kwqbsgn			40
+shared pool  active checkp		      2160
+shared pool  segmented arrays		     12824
+shared pool  stat hash values		      2416
+shared pool  v_actinc			       752
+shared pool  Online Datafile Move sess	      2392
+shared pool  channel handle		     42496
+shared pool  Auto tune undo info		96
+shared pool  cp pool array		      2608
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  UNDO INFO				16
+shared pool  poisoned memory		     32768
+shared pool  name-service request	      2392
+shared pool  latch recovery structures	      3232
+shared pool  Label Cache Heap descrptr	       160
+shared pool  qm_init_sga:qmdpsg 	      1064
+shared pool  recov_kgqbtctx		     11712
+shared pool  dbkea sga				24
+shared pool  pesom.c:latch array	       320
+shared pool  Cursor Stats		    720648
+shared pool  quiescing session		      3928
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SHRINK STAT		      3000
+shared pool  DML lock			    296952
+shared pool  Monitor Modification Hash	       512
+shared pool  max allowable # log files	    506400
+shared pool  PX server deq stats	      1696
+shared pool  kks stbkt			   1572864
+shared pool  JSX SGA			      3776
+shared pool  Background process state		48
+shared pool  KKSSP			    961808
+shared pool  quiesce system context	       440
+shared pool  SGA structure for KPON kp	      3192
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SGA struct - SWRF Metrics	      2960
+shared pool  ASM kfk state object	      2776
+shared pool  client/application info l	       160
+shared pool  change notification regis	     16416
+shared pool  kohsg				 8
+shared pool  kfasga			      1048
+shared pool  L2 file map array		      4896
+shared pool  row cache child latch	      8000
+shared pool  L2 enabled array			16
+shared pool  osp allocation		     28104
+shared pool  KGLA			    232792
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Pre-Warm Initialized Seti	       128
+shared pool  rules engine context	       200
+shared pool  ASM generic network state	      2392
+shared pool  set_descriptor_array		64
+shared pool  INCCKEY			       848
+shared pool  SGA Param Source Table	       304
+shared pool  SGA structure for kelr	      2360
+shared pool  listener addresses 		 8
+shared pool  dbke_incid_cache_init	      4000
+shared pool  KSI resource types 	      2704
+shared pool  ktlbk state objects	    114480
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksacm service root 		80
+shared pool  x$rule_set 		     17608
+shared pool  KYWM CROSS INSTANCE	       384
+shared pool  DBWR event stats array	       216
+shared pool  ket (AutoTask) SGA 	       824
+shared pool  ktcnqrow columns		      4328
+shared pool  kghx free lists		     43792
+shared pool  KTSL reco struct		     24576
+shared pool  X$KSVIT table		       512
+shared pool  KTI freelists			88
+shared pool  kodosgi kopfdo		       416
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  TXN TABLE SEGMENTED ARRAY	    104632
+shared pool  FileIdentificatonBlock	    745536
+shared pool  KFM state obj		      2904
+shared pool  kwqmncini-stat		       120
+shared pool  vips_package_main_problem	       752
+shared pool  kso req alloc		      4136
+shared pool  kwqmncini-tbl		      4136
+shared pool  Temporary storage for RTA		72
+shared pool  KTU lat struct		       160
+shared pool  kks stats hds		      1024
+shared pool  joxs struct		       160
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KSK VT POOL		    112464
+shared pool  KTC latch subh		     95080
+shared pool  kfklsod list		      2912
+shared pool  KKKI consumer		      4136
+shared pool  IPS_CONFIGURATION		      1320
+shared pool  IO_SHARES_KGSKCAP			 8
+shared pool  ksbxic sga 			40
+shared pool  eventlist to post commits		64
+shared pool  jsksncb: 3 		      4000
+shared pool  dev2node map		      4096
+shared pool  write state object 	    183360
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  VIRTUAL CIRCUITS		    325184
+shared pool  KWQDL ht cco		      7216
+shared pool  ufgtab_kfmdsg		     25144
+shared pool  dbktb: sga ctx			48
+shared pool  enqueue_hash		     10992
+shared pool  KTCN: Hash Table Segmente	      5240
+shared pool  kmgsb circular statistics	    162304
+shared pool  temporary tabl		      8272
+shared pool  kglsim count of pinned he	     10336
+shared pool  ksunfy: is parent statist	      7264
+shared pool  ksunfy: nodes of hierarch	       480
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksgm sga instance configu	      8584
+shared pool  kqf runtime defined table	      8632
+shared pool  ktsj_init_sga proc desc	       176
+shared pool  kglsim alloc latch area	      2720
+shared pool  work area tab		    264248
+shared pool  AW SGA				40
+shared pool  dbktb: trace buffer	   1327104
+shared pool  v_swperrcount		       664
+shared pool  kspd run-time context		24
+shared pool  KSQ event description	      8352
+shared pool  KTCNQROW colname ptrs	       344
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KFD extent enqueue obj	     42816
+shared pool  ksdhng: el wtr cache	     17072
+shared pool  block_sizes_array			48
+shared pool  PQ/BizCard 		      1536
+shared pool  standby event stats	      1216
+shared pool  channel sga anchor 	       384
+shared pool  sim state object			96
+shared pool  sht bkt arr allo		     11264
+shared pool  SYSTEM PARAMETERS		    456656
+shared pool  sched job queue		      5752
+shared pool  sim cache sizes		       640
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  LGWR debug module memory	      8192
+shared pool  name-service recovery	      3032
+shared pool  PARAMETER TABLE		      2048
+shared pool  bloom filter		      2776
+shared pool  Log Archive Config Contex	      1096
+shared pool  log file size history arr	       168
+shared pool  latches for protecting ws	       960
+shared pool  cp connection		      2640
+shared pool  sched job slv		     14008
+shared pool  process group array	     67984
+shared pool  sga dev dict			56
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  sim_knlasg 		      1280
+shared pool  db_files			    449800
+shared pool  KTI-UNDO			    704320
+shared pool  plwda:PLW_STR_NEW_RVAL		24
+shared pool  plwppwp:garbage handle		32
+shared pool  block media rcv state obj	      2520
+shared pool  monitoring co		     29120
+shared pool  KGLOB			    397576
+shared pool  Prefetch history buffer	     11328
+shared pool  knstsg				48
+shared pool  kkzias			       144
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KKJ SGA			       720
+shared pool  Client ID trace setting h	       536
+shared pool  Service-level ID trace se	      3800
+shared pool  policy hash table descrpt	       280
+shared pool  plwppwp:PLW_STR_NEW_LEN_V		16
+shared pool  KKBTD			      5816
+shared pool  SCHEDULING POLICY VECTOR	       104
+shared pool  Result Cache: Memory Mgr	       200
+shared pool  Active Session History -	      1528
+shared pool  OS file lock		      8632
+shared pool  db_block_hash_buckets	    733184
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  java static objs		     35352
+shared pool  temporary foreign ref	      3416
+shared pool  downed inst bit vector		40
+shared pool  error message file name		64
+shared pool  kscdnfyglobalflags 		 8
+shared pool  temporary table lock	      2584
+shared pool  KEWS sesstat values	     61304
+shared pool  kcbl state objects 	     25600
+shared pool  xsoqojhift 		      4184
+shared pool  list			      4096
+shared pool  kgnfs htab array		       840
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kgnfs ctab array		       440
+shared pool  ksir State Object		      2904
+shared pool  dbwriter coalesce bitmap		56
+shared pool  DISPATCHER CONFIG TABLE	      2048
+shared pool  KFK idtab_kfksga		     64832
+shared pool  IPS_PACKAGE		      1880
+shared pool  INC_METER_INFO		      1320
+shared pool  KTU latch cleanup		       208
+shared pool  KTC variable sga			16
+shared pool  kscdnfyinitnext			40
+shared pool  kscdnfyinitprev			40
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksvr msg cache		      2392
+shared pool  ksfv instance		      9984
+shared pool  dbwr outstanding ios per		72
+shared pool  dbwr suspend/resume ptr a		16
+shared pool  ts encryption key afn rev	      3208
+shared pool  Transportable DB Converte	      4720
+shared pool  KRBMROS ANCHOR			96
+shared pool  ksfv subheap		     16616
+shared pool  where to latch num map	     10584
+shared pool  kfkid hrec 			24
+shared pool  KTPR HIST TB		      2808
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kjxgrrr SGA			56
+shared pool  ksv reaper 		     12984
+shared pool  free memory		  24073944
+shared pool  kwqicaqe2kc1		     11216
+shared pool  dispatcher service names		24
+shared pool  vem_user_actlog1		       664
+shared pool  dsktab_kfgsg		     52544
+shared pool  vproblem_bucket1		       848
+shared pool  vips_package_size		       664
+shared pool  jsksncb: 6 		      4176
+shared pool  UNDO INFO HASH		      3392
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  EM_TARGET_INFO		      1224
+shared pool  dbkea msgs 		      1200
+shared pool  dbkea msgq 			32
+shared pool  keswx:batch o		     80408
+shared pool  vinc_meter_info		      1696
+shared pool  KTSJ subheap		      4136
+shared pool  KGSKI scheduler heap 1 de	       232
+shared pool  KESTB existence bitvec se	      2048
+shared pool  KGSKI scheduler heap 2 de	       232
+shared pool  branch so			       360
+shared pool  KSFD Cache Hints for IO R		72
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kolbsgi: KOLB's SGA initi		 8
+shared pool  kglsim size of pinned mem	     20400
+shared pool  kewr MMON Remote Flush Re	     30720
+shared pool  ksfd: consumer group i/o	     13824
+shared pool  PROBLEM			      1600
+shared pool  v_ipsprbcnt1		       664
+shared pool  kwqmncal: allocate buffer	      7968
+shared pool  kglsim main lru count	     97280
+shared pool  kebm run-once actions		64
+shared pool  grptab_kfgsg		      3032
+shared pool  ksdhng: cache history	       320
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  kebm slave descriptors	      5504
+shared pool  kcbl seq io throughput	     12000
+shared pool  qksbgsg				88
+shared pool  kglsim free obj list	       408
+shared pool  KEWS aggregation objs	      4032
+shared pool  LISTEN ADDRESS TABLE	      2048
+shared pool  sim kghx free lists		 8
+shared pool  lock state hash table	    647680
+shared pool  State object pools 	      4480
+shared pool  plis struct		       136
+shared pool  statement queuing		      2904
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  latch recovery alignment		72
+shared pool  v_nfcinc			       848
+shared pool  vproblem1			      2544
+shared pool  primem_kfmdsg		      1032
+shared pool  obj stats allocation chun	   2580480
+shared pool  v_actprob			       664
+shared pool  sys event stats		    536640
+shared pool  parameter handle		     98544
+shared pool  LGWR post requested array		 8
+shared pool  post/wait queues		      6144
+shared pool  cp cmon array		      3632
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  Parameter Table		     57576
+shared pool  latch nowait fails or sle	    169344
+shared pool  Nettimeout Histogram	    151280
+shared pool  pso tbs: ksunfy		     26000
+shared pool  dummy			     16664
+shared pool  private strands		   1361920
+shared pool  property service SO	      4056
+shared pool  prmtzdini tz region	    801416
+shared pool  VIEW			      1040
+shared pool  ASM scan context		      3416
+shared pool  KRSF SGA				40
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  KQR M PO			   1570464
+shared pool  KQR L PO			   1142528
+shared pool  KQR S SO			     31784
+shared pool  plugin datafile array	      3616
+shared pool  plwspv:PLW_STR_NEW_VAL		32
+shared pool  RVWR post requested array		 8
+shared pool  PARALLEL T RECO LATCH	      1600
+shared pool  multiblock re		     21552
+shared pool  KGSKI sga				88
+shared pool  modification		    131168
+shared pool  SAGE commit cache Allocat		16
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  SGA structure for KWQDL o		48
+shared pool  SGA - SWRF RawMet Runtime	      4576
+shared pool  KTU SGA				 8
+shared pool  kdlwss			     14032
+shared pool  system default language h	       568
+shared pool  kfiosg				 8
+shared pool  KGX			    128104
+shared pool  CGS system incarn array	     24864
+shared pool  SCHEDULING POLICY TABLE	       224
+shared pool  namhsh_kfdsg		      4104
+shared pool  per_pg_set_descriptor_arr	     13952
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  pesom.c: Global_Sub_Heap	       232
+shared pool  xscalc			      4056
+shared pool  HM_INFO			       944
+shared pool  AQ Propagation Scheduling	     16000
+shared pool  sim segment num bufs	       640
+shared pool  alter system errs: kspnfy	    116736
+shared pool  L2 file global fob 		72
+shared pool  session idle latches	       160
+shared pool  SQL Workarea Histogram	      1056
+shared pool  qesmmaInitialize: ia_qesm	       264
+shared pool  qesmmaInitialize:		       112
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  array 1 for shared redo b		24
+shared pool  ksbsa pointer array	      2600
+shared pool  ksb process so list	       888
+shared pool  ksws service object	      3008
+shared pool  fixed allocation callback	       304
+shared pool  ksb action records 	      3888
+shared pool  done Q child latches	       224
+shared pool  KCB private handles	       600
+shared pool  kxfpSO q freelists 	       368
+shared pool  xsoqsehift 		      3160
+shared pool  xsoqophift 		      2904
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  ksdhng: wtr cache		      1552
+shared pool  KTSL lat struct		     40960
+shared pool  KTI pool states			16
+shared pool  kgnfs stats array		      5240
+shared pool  KTC latch cleanup		       480
+shared pool  KSFQ buffer pool		      3032
+shared pool  kspload:comment			64
+shared pool  x$ksmfs table			32
+shared pool  dbwr message active flag		 8
+shared pool  tablespace encryption mas		16
+shared pool  dbwr suspend/resume array		16
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  jsksncb: 2 		      7832
+shared pool  KSI Indexes		       288
+shared pool  KTC latches		      1760
+shared pool  KGX rowlist		      6080
+shared pool  IPS_PACKAGE_HISTORY	      1320
+shared pool  kzxslnfy: 0		       304
+shared pool  KTPR SUBHEAP		       168
+shared pool  KTF MAPPINGS		     12288
+shared pool  kgnfs authp		      8232
+shared pool  event statistics per sess	   1244704
+shared pool  UNDO STAT INFO		     59904
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  branch			     43776
+shared pool  row cache			   7584808
+shared pool  dbgefgHtInit-1		       528
+shared pool  dbgefgHtInit-2			40
+shared pool  ksuloi: long op used list		16
+shared pool  ksuloi: child latches for	       160
+shared pool  ksuloi: garbage collectio		 8
+shared pool  ksb rolling migration sta		 8
+shared pool  ksfd shared pool recovery		24
+shared pool  ksfd: file i/o stats poin	      3464
+shared pool  hash bucket array allocat	     49152
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  v_inccount 		       664
+shared pool  SQLK			     36432
+shared pool  kkae edition name cache	       408
+shared pool  kglsim free heap list	       408
+shared pool  vincident_file		      1040
+shared pool  processes			       400
+shared pool  KSRPC I/O Stat array	       144
+shared pool  knlu_init_btree:init		80
+shared pool  kglsim alloc latches	       136
+shared pool  LISTEN ADDRESS ENTRY	       152
+shared pool  PLS SGA hp 		     46320
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  qesbl old rows		      1120
+shared pool  alert threshol		      4136
+shared pool  log_checkpoint_timeout	     12360
+shared pool  PX subheap 		     32696
+shared pool  latch hash-value table	      2144
+shared pool  Role graph heap		       160
+shared pool  SERVICE NAMES TABLE	      2048
+shared pool  pspool_kfsg			80
+shared pool  VIEWCOL			       752
+shared pool  vincident			      3296
+shared pool  sim segment hits		      1280
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  procs: ksunfy		    208000
+shared pool  PG latch table		       640
+shared pool  PLS cca hp desc		       352
+shared pool  PX QC msg stats		      2816
+shared pool  bt_subentry		       832
+shared pool  OS proc request holder	     13816
+shared pool  media recovery state obje	     10288
+shared pool  constraints		     33024
+shared pool  PX server msg stats	      2816
+shared pool  ksv slave			     13560
+shared pool  parameter value memory	       944
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  reserved entries for all	      5760
+shared pool  KGLSG			   5264904
+shared pool  SGA structure for KPON ks	       400
+shared pool  SGA structure for KWQDL h	       216
+shared pool  SGA - SWRF DrvMet Runtime	      6288
+shared pool  kks sga				48
+shared pool  change tracking recovery	    262144
+shared pool  KKTIN			     17312
+shared pool  name-service entry 	      3544
+shared pool  Array of cached attr	       400
+shared pool  spfile cleanup structure	     16760
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  os statistics			48
+shared pool  Policy Cache Heap descrpt	       160
+shared pool  KGLS			   5863968
+shared pool  KGLNA			     83832
+shared pool  SGA structure for ktslgt	     47200
+shared pool  Cleanup state objects	      1760
+shared pool  slave class sga anchor	       352
+shared pool  resize operation history	     28808
+shared pool  Result Cache: Bloom Fltr	      2048
+shared pool  Result Cache: Cache Mgr	      5552
+shared pool  HM_FDG_SET 		       848
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  time manager context		40
+shared pool  file # to first dba, exte	      2416
+shared pool  KEWS statistic name	      2248
+shared pool  ksfd I/O slave ctx 	       256
+shared pool  flashback_marker_cache_si	      9200
+shared pool  kscdnfyinitflags			 8
+shared pool  KTCTSNL freelists			88
+shared pool  KGI Session State		      1560
+shared pool  kxfpdp pointers		     28800
+shared pool  KFG state obj		      6904
+shared pool  kzsrs filename		       536
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  INC_METER_IMPT_DEF 	      1040
+shared pool  INC_METER_PK_IMPTS 	      1040
+shared pool  vips_package_main_int	       664
+shared pool  distributed_transactions-	      9976
+shared pool  ksdhng: cbuf		     32768
+shared pool  KTI latches		       320
+shared pool  KGSK scheduler		     20208
+shared pool  KKJ WRK LAT		       480
+shared pool  HM_RECOMMENDATION		      2072
+shared pool  kfkhsh_kfdsg		      4104
+shared pool  Wait History Segment	    100880
+
+POOL	     NAME			     BYTES
+------------ -------------------------- ----------
+shared pool  IPS_FILE_METADATA		       944
+shared pool  INC_METER_CONFIG		      1224
+shared pool  event statistics ptr arra	       776
+shared pool  KGKP randnum		     40000
+large pool   PX msg pool		    491520
+large pool   free memory		   3702784
+java pool    free memory		   4194304
+streams pool free memory		   2867344
+streams pool fixed allocation callback	       448
+streams pool KWQDL hash ta		      6080
+streams pool KTG hash buckets		   1320432
+
+880 rows selected.
+
+SQL> 
+

@@ -1,0 +1,73 @@
+# @(#) Returns the name of the current execution node
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   If the TTP_LOGICAL environment variable is set, then it is the
+#   preferred candidate. If not found, then fall back to the usual
+#   search, which eventually may or may not fall back to the standard
+#   host.
+#
+#   TTP_LOGICAL only applies when using the logical machine paradigm,
+#   because there is no sense in trying to designate in advance a
+#   preferred logical when only working with standard hosts.
+#
+#   This function may return an empty value, when the logical machines
+#   paradigm is in use (regular expression is not empty), and no
+#   logical is found in the physical server.
+#
+# (I): -
+#
+# (O): - stdout: best logical name candidate
+#
+# pwi 2013- 2-16 creation
+# pwi 2013- 7- 4 TTP_NODE is named back TTP_LOGICAL
+# pwi 2013- 7-10 do not try to track the regular expression here
+# pwi 2013- 7-30 fix #31: rename osEnumFSMountPoints to bspOSEnumMountPoints
+# pwi 2017- 6-21 publish the release at last 
+
+function nodeGetName
+{
+	#set -x
+	typeset _host="${TTP_NODE}"
+
+	if [ -z "${_host}" ]; then
+
+		# if a candidate host is specified, then check that a mount point
+		#  with this same name exists
+		if [ ! -z "${TTP_LOGICAL}" ]; then
+			_host="$(bspOSEnumMountPoints | grep -w "${TTP_LOGICAL}")"
+		fi
+
+		# if the candidate mount point is not found, or was not specified,
+		#  then just search for the default
+		if [ -z "${_host}" ]; then
+			_host="$(bspNodeEnum | LANG=C sort | head -1)"
+		fi
+
+		# if the regular expression is empty or not defined, or no
+		#  valid candidate is found, then there is no other fallback
+		#  than relying on physical host
+		if [ -z "${_host}" ]; then
+			_host="$(nodeFromHost)"
+		fi
+	fi
+
+	echo "${_host}"
+}

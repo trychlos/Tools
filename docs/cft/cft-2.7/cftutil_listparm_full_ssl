@@ -1,0 +1,15 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W LISTPARM _ Warning ( Parameters no record selected / file empty)
+CFTU00I                    (content=full,type=ssl)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

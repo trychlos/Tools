@@ -1,0 +1,47 @@
+# @(#) Substitute known macros in the input stream
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Input stream is supposed to be the content of a configuration file;
+#   we are replacing here known macros with their values.
+#
+#   Known macros are:
+#   - @N: execution node name
+#   - @S: service mnemonic read from field #1 of the input line
+#
+# (I): 1. (opt) character used as field separator (':')
+#
+# (O): stdout: piped stdin stream, macros being replaced
+#
+# pwi 1998-10-21 creation
+# pwi 1999- 1-19 add macro @S as service name
+# pwi 2001-12- 6 add field separator argument
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2017- 6-21 publish the release at last 
+
+function tabSubstitute
+{
+	typeset _sep="${1}"
+	[ -z "${_sep}" ] && _sep=":"
+
+	tabSubstituteMacro "${_sep}" "@N" ""  "${TTP_NODE}" | \
+	tabSubstituteMacro "${_sep}" "@S" "1" ""
+}

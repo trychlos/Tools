@@ -1,0 +1,60 @@
+# @(#) node configuration file
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# pwi 2013- 2-15 creation
+# pwi 2017- 6-21 publish the release at last 
+
+# The node configuration file defines configuration for the execution
+# node. This means that services which run on this node must also be
+# described here.
+#
+# In order to make the writing more easy, some macros are recognized
+# here:
+#
+# - @N: the name of this execution node
+#       scope: all the node configuration file
+#
+# - @S: the mnemonic of the service
+#       scope: the service definition 
+
+## Node configuration
+
+# environment:
+#   This key defines the execution environment of this node
+#   (see docs/0-Concepts for a recall of what is an execution
+#    environment though each site may have its own definition).
+#   The environment identifier may be any string, though only the first
+#   word is considered.
+#   There is no default: if not specified, then the node will get an
+#   empty environment identifier, and will be considered in the same
+#   environment that other nodes which have this same empty environment.
+
+# <node> : environment : <environment_identifier>
+# @N : environment : <environment_identifier>
+
+# logsroot:
+#   This key defines the root of the TTP logs directory for this
+#   execution node, and overrides the site-wide defaults defined in
+#   TTPROOT/etc/ttp/defaults.ini.
+#   The value must be an absolute path, or a function name.
+
+# <node> : logsroot : /an/absolute/path
+# <node> : logsroot : a_function_name [<maybe> [<with> [<args>]]]
+# @N : logsroot : /an/absolute/path
+# @N : logsroot : a_function_name [<maybe> [<with> [<args>]]]

@@ -1,0 +1,188 @@
+SQL> select pid,username,program,pga_alloc_mem,pga_used_mem from v$process;
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	 1		   PSEUDO
+	    0		 0
+
+	 2 ora11gr2	   oracle@vcentos6.virtuals.pwi (PMON)
+       778384	    694480
+
+	 3 ora11gr2	   oracle@vcentos6.virtuals.pwi (VKTM)
+       778384	    689784
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	 4 ora11gr2	   oracle@vcentos6.virtuals.pwi (GEN0)
+       778384	    697048
+
+	 5 ora11gr2	   oracle@vcentos6.virtuals.pwi (DIAG)
+       778384	    689872
+
+	 6 ora11gr2	   oracle@vcentos6.virtuals.pwi (DBRM)
+      1040528	    768928
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	 7 ora11gr2	   oracle@vcentos6.virtuals.pwi (PSP0)
+       778384	    693024
+
+	 8 ora11gr2	   oracle@vcentos6.virtuals.pwi (DIA0)
+      1089008	    895104
+
+	 9 ora11gr2	   oracle@vcentos6.virtuals.pwi (MMAN)
+       778384	    693024
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	10 ora11gr2	   oracle@vcentos6.virtuals.pwi (DBW0)
+      6897440	   6648408
+
+	11 ora11gr2	   oracle@vcentos6.virtuals.pwi (LGWR)
+     12033520	  11321472
+
+	12 ora11gr2	   oracle@vcentos6.virtuals.pwi (CKPT)
+      1054272	    764320
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	13 ora11gr2	   oracle@vcentos6.virtuals.pwi (SMON)
+      6676624	   1210168
+
+	14 ora11gr2	   oracle@vcentos6.virtuals.pwi (RECO)
+      1499280	    768672
+
+	15 ora11gr2	   oracle@vcentos6.virtuals.pwi (MMON)
+      4636320	   1899640
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	16 ora11gr2	   oracle@vcentos6.virtuals.pwi (MMNL)
+       974992	    713760
+
+	17 ora11gr2	   oracle@vcentos6.virtuals.pwi (D000)
+      1368208	   1076380
+
+	18 ora11gr2	   oracle@vcentos6.virtuals.pwi (S000)
+       647312	    409220
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	19 ora11gr2	   oracle@vcentos6.virtuals.pwi (W000)
+       909456	    805528
+
+	20 ora11gr2	   oracle@vcentos6.virtuals.pwi (ARC0)
+     30924944	  28942504
+
+	21 ora11gr2	   oracle@vcentos6.virtuals.pwi (ARC1)
+     12050576	  11297648
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	22 ora11gr2	   oracle@vcentos6.virtuals.pwi (ARC2)
+     12050576	  11270680
+
+	23 ora11gr2	   oracle@vcentos6.virtuals.pwi (ARC3)
+     30924944	  28942504
+
+	24 ora11gr2	   oracle@vcentos6.virtuals.pwi (QMNC)
+       778384	    694176
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	25 ora11gr2	   oracle@vcentos6.virtuals.pwi
+     11133072	   8591548
+
+	26 ora11gr2	   oracle@vcentos6.virtuals.pwi
+     10346640	   8249964
+
+	27 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      4693488	   3222560
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	28 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      1875440	   1715544
+
+	29 ora11gr2	   oracle@vcentos6.virtuals.pwi (Q002)
+      6135280	   4659936
+
+	30 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      4120720	   2414524
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	32 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      3513840	   2172392
+
+	34 ora11gr2	   oracle@vcentos6.virtuals.pwi (SMCO)
+       778384	    689784
+
+	35 ora11gr2	   oracle@vcentos6.virtuals.pwi (TNS V1-V3)
+       917824	    710960
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	36 ora11gr2	   oracle@vcentos6.virtuals.pwi (CJQ0)
+      6095168	   1297528
+
+	37 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      3858576	   3097580
+
+	38 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      3465360	   2489300
+
+
+       PID USERNAME	   PROGRAM
+---------- --------------- ------------------------------------------------
+PGA_ALLOC_MEM PGA_USED_MEM
+------------- ------------
+	39 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      6414480	   4699380
+
+	43 ora11gr2	   oracle@vcentos6.virtuals.pwi
+      4496880	   3119792
+
+	44 ora11gr2	   oracle@vcentos6.virtuals.pwi (Q000)
+      1761424	    917272
+
+
+39 rows selected.
+
+SQL> 
+

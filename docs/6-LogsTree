@@ -1,0 +1,70 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/6-LogsTree
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   The logs tree
+   Configuring
+
+-----------------------------------------------------------------------
+ The logs tree
+ =============
+
+ The Tools Project by itself logs all run commands and their arguments,
+ along with all error messages, in a log file.
+
+ All verbs which need a temporary file should use the 'pathGetTempFile'
+ function: this function just allocates a command-dedicated directory
+ and create the required tempfile in it, ensuring that it will be
+ unique.
+
+ Log and temporary files are created under a root log directory. This
+ root log directory is addressed on a per machine basis. A site-wide
+ default can also be set.
+
+ It was one of the main first required feature of The Tools Project to
+ keep all its log and temporary files: this is the safest way to be
+ sure to have an available audit track when needed, and is so just a
+ must-have in any industrialization process.
+
+ More, TTP design let you choose a dynamic directory path, just by
+ writing only one shell function (see 'pathGetDailyLogsdir' for an
+ example of such a function).
+
+ This function may perfectly be installed in a site-dedicated tree (the
+ same that you are probably using to store your configuration files),
+ and so be used without modifying the TTP code by itself.
+
+ If no root log directory is defined neither in the machine
+ configuration file nor in the site wide configuration file (but this
+ would be bad!), then temporary files are created in /tmp.
+
+-----------------------------------------------------------------------
+ Configuring
+ ===========
+
+ The Tools Project takes advantage of the constant availability of a
+ persistent log tree. The root path of this directory is dynamically
+ computed from the .ini configuration files:
+
+ - first, from TTPROOT/etc/nodes/<node>.ini, key=logsdir in the node
+   configuration;
+
+ - falling back to TTPROOT/etc/defaults.ini, key=logsdir
+
+ - falling back to /tmp.
+
+ The 'logsdir' property may be set:
+
+ - either to a full path, beginning with a '/'
+   e.g. '/mynode/var'
+
+ - either to the name of a ksh function which is expected to display
+   the root log directory on its standard output;
+   e.g. 'pathGetDailyLogsDir' wuld display '/mynode/var/20130706'
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

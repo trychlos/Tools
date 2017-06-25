@@ -1,0 +1,102 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/svn/svn.service
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Concepts
+   Subversion server configuration
+     id
+     mode
+     <mode>_conf
+     dumpdir
+   Specific macros
+
+-----------------------------------------------------------------------
+ Concepts
+ ========
+
+ Subversion is a source manager.
+
+ In theory, Subversion can use an infinite number of network
+ implementations. In practice, there are only three Subversion servers
+ in widespread use today:
+
+ - Apache + mod_dav_svn
+ - svnserve
+ - svnserve over SSH
+
+ As of The Tools Project v2.1.x, a 'svn' service only addresses:
+
+ - A Subversion server using Apache + mod_dav_svn configuration.
+
+-----------------------------------------------------------------------
+ Subversion server service configuration
+ =======================================
+
+ A Subversion service must be configured for each Subversion server we
+ want to be managed.
+
+ The service is defined as:
+
+   <service>	: service		: Subversion server
+   <service>	: mode			: <server_mode>
+   <service>	: <mode>_conf	: /path/to/configuration/file
+   <service>	: dumpdir		: /path/to/dump/dir
+
+ The first keyword defines the service mnemonic.
+
+ As a recall: this same service mnemonic identifies this Subversion
+ server through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
+
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
+
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   The label in third position is simply used as a label and is free
+   (but should not be left empty).
+
+   mode
+   ----
+   'mode' defines the Subversion server running mode (see Concepts above),
+   and may take the following values:
+
+     mode   Subversion server running mode
+     -----  ------------------------------
+     httpd  Apache + mod_dav_svn
+
+   As of The Tools Project v 2.1.x, a Subversion service only addresses
+   the 'httpd' (aka Apache+mod_dav_svn) running mode
+
+   <mode>_conf
+   -----------
+   Addresses the configuration file for the running mode (if any).
+
+   dumpdir
+   -------
+   Used by svn.sh dump verb, this addresses the default dump directory.
+   The svn.sh dump verb defaults to dump commits occured since last
+   dump, and found them by scanning the dump directory.
+   Specifying another dump directory may be lead the verb do dump more
+   (and maybe a lot more) revisions that actually needed.
+   The user should be conscious of this behavior and takes care of it. 
+
+-----------------------------------------------------------------------
+ Specific macros
+ ===============
+
+ svn.sh verbs recognize some specific macros in this configuration
+ file:
+
+ - '@R' is substituted at runtime with the name of the current
+   repository if any.
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

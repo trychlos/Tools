@@ -1,0 +1,63 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ NEWS
+
+ Summary
+ =======
+ 
+   Version 2.2
+   Version 2.1.1
+   Version 1.1
+
+-----------------------------------------------------------------------
+ Version 2.2
+ ===========
+
+ Released on 
+
+ New features and improvements:
+
+   - 
+
+ Bug fixes:
+
+   - 
+
+ Other changes:
+
+   - 
+
+-----------------------------------------------------------------------
+ Version 2.1.1
+ =============
+
+	Release date: 2013-06-30
+
+-----------------------------------------------------------------------
+ Version 1.1
+ ===========
+
+	Release date: 2006-10-27
+
+	v 1.0 was already a mature version, which use to be daily used in
+	some IT sites. It has been successfully ran under AIX and SunOS 
+	environments.
+
+	v 1.1-beta1 is this same version, released under GPL.
+	Some modifications have been made :
+
+	- all code is now under SVN
+	- standard GNU files are created
+	- the target tree is defined
+	- port and test under GNU/Linux 2.4
+	- move tools initialization code from site specific profile to a
+	dedicated bootstrap file
+	- move functions to a dedicated sh/ subdirectory
+	- accept sh and bash users
+	- logicals accept more default values, so that a minimal work can
+	be made with an empty logical.ini configuration file
+	- a logical machine is no more needed to obtain a minimal set of
+	functions (ex. gec.sh list)
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

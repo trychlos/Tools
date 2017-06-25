@@ -1,0 +1,132 @@
+# @(#) Load the specified configuration file into the specified in-
+# @(#) memory array.
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   As of ksh-93 v20120821 on Fedora 17, we are unable to declare an
+#   associative array with typeset -A, whose we could pass the name as
+#   an argument to a function, this function updating the array with
+#   key=value pairs.
+#   The update of pseudo-globals array only works with indexed arrays
+#   (which may even be yet undeclared when entering in the function).
+#
+#   The specified variable name is an indexed array which keeps trace
+#   of the found keywords (services) in the order of their apparition
+#   in the configuration file:
+#
+#     <varname> = (
+#         [0] = <logical>
+#         [1] = <cft>
+#         [2] = <oracle>
+#         )
+#
+#   For each keyword, a variable <varname>_<keyword> keeps trace of
+#   the count of found lines for this keyword:
+#
+#     <varname>_<keyword> = 3
+#
+#   The <varname>_<keyword>_<i> keeps the original line with the
+#   character separator:
+#
+#     <varname>_<keyword>_<i> = environment:@tryclos.org
+#
+#   The original line is kept as easyer to interpret when searching for
+#   a value with a field selection list (cf. confGetKey).
+#
+###      Dynamic <varname>_<logical>_<i> indexed arrays hold the keywords
+###      which appear on each line.
+###
+###          <varname>_<logical>_0 = (
+###             [0] = 'environment'
+###             [1] = <trychlos.org>
+###             )
+###
+###          <varname>_<logical>_1 = (
+###             [0] = 'oracle'
+###             [1] = 'oratab'
+###             [2] = </etc/oratab>
+###             )
+#
+# (I): 1. name of the in-memory array variable
+#      2. path to the configuration file to be loaded in memory
+#      3. (opt.) character used as field separator
+#         defaults to ':'
+#
+# (O): -
+#
+# pwi 2013- 7- 4 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function confLoadKeys
+{
+	#set -x
+	typeset _name="${1}"
+	typeset _conf="${2}"
+	typeset _sep="${3:-${ttp_sep:-:}}"
+
+	typeset -i _corder=0
+	typeset _line
+
+	cat "${_conf}" | \
+		bspTabStripComments "${_sep}" | \
+		tabSubstitute "${_sep}" | \
+		while read _line; do
+			typeset _key="$(echo "${_line}" | cut -d"${_sep}" -f1)"
+
+			# is this key already registered ?
+			# updating an associative array only works if the array is
+			# declared in *this* function...
+			#typeset -i _ckey="$(echo $(eval echo '${'${_name}['${_key}']'}'))"
+			#typeset -i _ckey="$(echo $(eval echo '${'${_name}_${_key}'}'))"
+			typeset -n _vname="${_name}_${_key}"
+			typeset -i _ckey="${_vname}"
+
+			# key is not found in the auxiliary variable
+			#  add it to the root indexed array
+			if [ ${_ckey} -eq 0 ]; then
+				#eval $(echo "${_name}[${_corder}]=${_key}")
+				typeset -n _vname="${_name}"
+				_vname[${_corder}]="${_key}"
+				let _corder+=1
+			fi
+
+			# split the rest of lines and set a special indexed array
+			#  for this line
+			#typeset _value
+			#typeset -i _cvalue=0
+			#echo "${_line}" | awk -F"${_sep}" '{ for( i=2; i<=NF ; ++i ) print $i }' | \
+			#	while read _value; do
+			#		eval $(echo ${_name}_${_key}_${_ckey}[${_cvalue}]='${_value}')
+			#		let _cvalue+=1
+			#done
+			#echo "\${#"${_name}_${_key}_${_ckey}"}="$(echo $(eval echo '${#'${_name}_${_key}_${_ckey}'}')) 1>&2
+			#echo "last cvalue was ${_cvalue}" 1>&2
+			typeset -n _vname="${_name}_${_key}_${_ckey}"
+			_vname="$(echo "${_line}" | cut -d"${_sep}" -f2-)"
+
+			# last increment the count of lines for this keyword
+			let _ckey+=1
+			#eval $(echo "${_name}_${_key}=${_ckey}")
+			typeset -n _vname="${_name}_${_key}"
+			_vname=${_ckey}
+	done
+	#set | grep ${_name}
+	
+}

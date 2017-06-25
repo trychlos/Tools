@@ -1,0 +1,586 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=auth)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTCAT       ID       = 'CAT0',
+              FNAME    = '_CFTCATA',
+              WSCAN    = '1',
+              TIMEP    = '23595999',
+              UPDAT    = '1',
+              SH       = '10',
+              ST       = '10',
+              SX       = '10',
+              RH       = '10',
+              RT       = '10',
+              RX       = '10',
+              CACHE    = '512',
+              RKERROR  = 'KEEP',
+              NTF      = 'NO',
+              NTFSTATE = 'CDHKTX',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+ /*           TLVCEXEC = '',*/
+              TLVCLEAR = '70',
+              TLVWARN  = '80',
+ /*           TLVWEXEC = '',*/
+              TLVWRATE = '60',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=cat)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTCOM       ID       = 'COM0',
+              NAME     = '_CFTCOM',
+              TYPE     = 'FILE',
+              WSCAN    = '1',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTCOM       ID       = 'COMS',
+              TYPE     = 'TCPIP',
+              PROTOCOL = 'XHTTP',
+              HOST     = '127.0.0.1',
+              PORT     = '6536',
+              DISCTS   = '60',
+ /*           ADDRLIST = '',*/
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=com)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=etb)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTNET       ID       = 'NET0',
+              TYPE     = 'TCP',
+              CALL     = 'INOUT',
+ /*           COMMENT  = '',*/
+              MAXCNX   = '128',
+              ORIGIN   = 'CFTUTIL',
+              CLASS    = '1',
+              HOST     = 'INADDR_ANY',
+ /*           SRCHOST  = '',*/
+              SRCPORTS = ( '5000-65535'),
+ /*           LOWPORT  = '',*/
+ /*           HIGHPORT = '',*/
+              PORT     = '0',
+ /*           INET     = '',*/
+ /*           PROTOCOL = '',*/
+ /*           USER     = '',*/
+ /*           PARM     = '',*/
+ /*           PASSWORD = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTNET       ID       = 'TCPIP',
+              TYPE     = 'TCP',
+              CALL     = 'INOUT',
+ /*           COMMENT  = '',*/
+              MAXCNX   = '128',
+              ORIGIN   = 'CFTUTIL',
+              CLASS    = '1',
+              HOST     = 'LDEINF',
+ /*           SRCHOST  = '',*/
+              SRCPORTS = ( '5000-65535'),
+ /*           LOWPORT  = '',*/
+ /*           HIGHPORT = '',*/
+              PORT     = '0',
+ /*           INET     = '',*/
+ /*           PROTOCOL = '',*/
+ /*           USER     = '',*/
+ /*           PARM     = '',*/
+ /*           PASSWORD = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=net)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:55
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTPARM      ID       = 'IDPARM0',
+ /*           ACCNT    = '',*/
+              BUFSIZE  = '4096',
+              CAT      = 'CAT0',
+ /*           COMMENT  = '',*/
+              DEFAULT  = 'IDFDEF',
+              EXECRE   = '$CFTDIREXEC/erecv.cmd',
+              EXECRF   = '$CFTDIREXEC/&idf_re.cmd',
+              EXECRM   = '$CFTDIREXEC/recvm.cmd',
+              EXECSE   = '$CFTDIREXEC/er&idf.cmd',
+ /*           EXECSF   = '',*/
+ /*           EXECSFA  = '',*/
+ /*           EXECSM   = '',*/
+ /*           EXECSMA  = '',*/
+ /*           EXITEOT  = '',*/
+              FBUFSIZE = '0',
+              KEY      = 'JI6FAUZQMH4UDHTVT9P9I1SOTLN97JI6FAGW1S2E7',
+              LOG      = 'LOG0',
+              MAXTASK  = '16',
+              MAXTRANS = '64',
+              NPART    = 'FP1ODYR5',
+              ORIGIN   = 'CFTUTIL',
+              PART     = 'FP1ODYR5',
+              PARTFNAM = '$CFTPART',
+ /*           SECFNAME = '',*/
+              STRACE   = '0',
+              TRANTASK = '3',
+              USERCTRL = 'NO',
+              WAITRESP = '100',
+              WAITTASK = '1441',
+              COM      = ( 'COM0'),
+              NET      = ( 'NET0'),
+              PROT     = ( 'PESITANY'),
+              LENAPPL  = '32',
+              RCVALLER = 'STOP',
+              SSLMTASK = '16',
+              SSLTTASK = '16',
+              SSLWTASK = '1441',
+              SSLWRESP = '100',
+              PKIFNAME = '$CFTPKU',
+              PKIPASSW = 'CFT',
+              TRKPART  = 'UNDEFINED',
+              TRKSEND  = 'UNDEFINED',
+              TRKRECV  = 'UNDEFINED',
+              CRONTABS = ( 'CRONTAB1'),
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPARM      ID       = 'ODY_R',
+ /*           ACCNT    = '',*/
+              BUFSIZE  = '4096',
+              CAT      = 'CAT0',
+ /*           COMMENT  = '',*/
+              DEFAULT  = 'ODY_R',
+              EXECRE   = '$CFTDIREXEC/erecv.cmd',
+              EXECRF   = '$CFTDIREXEC/&idf_re.cmd',
+              EXECRM   = '$CFTDIREXEC/recvm.cmd',
+              EXECSE   = '$CFTDIREXEC/er&idf.cmd',
+ /*           EXECSF   = '',*/
+ /*           EXECSFA  = '',*/
+ /*           EXECSM   = '',*/
+ /*           EXECSMA  = '',*/
+ /*           EXITEOT  = '',*/
+              FBUFSIZE = '0',
+              KEY      = 'JI6FAUZQMH4UDHTVT9P9I1SOTLN97JI6FAGW1S2E7',
+              LOG      = 'LOG0',
+              MAXTASK  = '16',
+              MAXTRANS = '64',
+              NPART    = 'FP1ODYR5',
+              ORIGIN   = 'CFTUTIL',
+              PART     = 'FP1ODYR5',
+              PARTFNAM = '$CFTPART',
+ /*           SECFNAME = '',*/
+              STRACE   = '0',
+              TRANTASK = '3',
+              USERCTRL = 'NO',
+              WAITRESP = '100',
+              WAITTASK = '1441',
+              COM      = ( 'COM0'),
+              NET      = ( 'NET0'),
+              PROT     = ( 'PESITANY'),
+              LENAPPL  = '32',
+              RCVALLER = 'STOP',
+              SSLMTASK = '16',
+              SSLTTASK = '16',
+              SSLWTASK = '1441',
+              SSLWRESP = '100',
+              PKIFNAME = '$CFTPKU',
+              PKIPASSW = 'CFT',
+              TRKPART  = 'UNDEFINED',
+              TRKSEND  = 'UNDEFINED',
+              TRKRECV  = 'UNDEFINED',
+              CRONTABS = ( 'CRONTAB1'),
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=parm)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:55
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTPROT      ID       = 'PESITANY',
+ /*           IDF      = '',*/
+              NET      = 'NET0',
+              SAP      = '1761',
+              SRIN     = 'BOTH',
+              SROUT    = 'BOTH',
+              TYPE     = 'PESIT',
+ /*           EXITA    = '',*/
+ /*           SSL      = '',*/
+ /*           DYNAM    = '',*/
+ /*           COMMENT  = '',*/
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              ORIGIN   = 'CFTUTIL',
+              PROF     = 'ANY',
+              CONCAT   = 'YES',
+              MULTART  = 'YES',
+              PAD      = 'NO',
+              RCHKW    = '3',
+              RESTART  = '5',
+              RESYNC   = 'NO',
+              REVERSE  = 'NO',
+              RPACING  = '10240',
+              RRUSIZE  = '32750',
+ /*           RSERV    = '',*/
+              RTO      = '260',
+              SCHKW    = '3',
+              SEGMENT  = 'YES',
+              SPACING  = '10240',
+              SRUSIZE  = '32750',
+              DISCTC   = '90',
+              DISCTD   = '120',
+              DISCTR   = '45',
+              DISCTS   = '165',
+              RCOMP    = '0',
+              SCOMP    = '0',
+              SSERV    = 'PESIT',
+              LOGON    = 'YES',
+              HIDE99   = 'NO',
+              NACK     = 'NO',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPROT      ID       = 'PESITSSL',
+ /*           IDF      = '',*/
+              NET      = 'NET0',
+              SAP      = '1762',
+              SRIN     = 'BOTH',
+              SROUT    = 'BOTH',
+              TYPE     = 'PESIT',
+ /*           EXITA    = '',*/
+              SSL      = 'SSLPESIT',
+ /*           DYNAM    = '',*/
+ /*           COMMENT  = '',*/
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              ORIGIN   = 'CFTUTIL',
+              PROF     = 'ANY',
+              CONCAT   = 'YES',
+              MULTART  = 'YES',
+              PAD      = 'NO',
+              RCHKW    = '3',
+              RESTART  = '5',
+              RESYNC   = 'NO',
+              REVERSE  = 'NO',
+              RPACING  = '10240',
+              RRUSIZE  = '32750',
+ /*           RSERV    = '',*/
+              RTO      = '260',
+              SCHKW    = '3',
+              SEGMENT  = 'YES',
+              SPACING  = '10240',
+              SRUSIZE  = '32750',
+              DISCTC   = '90',
+              DISCTD   = '120',
+              DISCTR   = '45',
+              DISCTS   = '165',
+              RCOMP    = '0',
+              SCOMP    = '0',
+              SSERV    = 'PESIT',
+              LOGON    = 'YES',
+              HIDE99   = 'NO',
+              NACK     = 'NO',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=prot)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU00I CFTEXT   _ Correct (type=xlate)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU18E CFTEXT   _ Failed  invalid value for keyword TYPE(=ASY) 
+CFTU00I                    (type=asy)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=dna)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=dsa)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=lu62)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=sna)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTTCP       ID       = 'LEFCFT1',
+              RETRYW   = '2',
+              RETRYM   = '3',
+              RETRYN   = '1',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '2',
+              CNXIN    = '2',
+              CNXINOUT = '3',
+              CLASS    = '1',
+              HOST     = ( '10.16.28.87'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'LOOP',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'LOOPSSL0',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'NEWYORK',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'PARIS',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=tcp)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:56
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=x25)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:56
+CFTU20I Session active for  0:00:00
+[cft.sh list] 36 errors have been detected
+[cft.sh list] try 'cft.sh list --help' for usage
+[cft.sh list] exiting with code 1

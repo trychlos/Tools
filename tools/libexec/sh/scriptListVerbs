@@ -1,0 +1,78 @@
+# @(#) Displays on stdout the list of available verbs
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. command full pathname
+#      2. (opt.) increment count (defaults to zero)
+#      3. (opt.) the name of a variable which will hold the verbs count
+#      4. (opt.) whether to consider 'no verb' error
+#                defaults to 'yes'
+#
+# (O): -
+#
+# pwi 1998-10-21 new production architecture definition - creation
+# pwi 2002- 2-28 tools are moved to the physical machine
+# pwi 2002- 5-15 remove parameters which can be computed
+# pwi 2002- 6- 4 use local variables
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 the tools become The Tools Project, released under GPL
+# pwi 2013- 6-27 take care of not listing a verb twice
+# pwi 2013- 7-30 fix #40: ttp.sh list -verbs also displays count of verbs
+# pwi 2017- 6-21 publish the release at last 
+
+function scriptListVerbs
+{
+	#set -x
+	typeset _script="${1}"
+	typeset -i _increment="${2:-0}"
+	typeset _name="${3}"
+	typeset _has_error="${4:-yes}"
+
+	typeset _dir
+	typeset _verbs=""
+	let _increment+=1
+	typeset -i _count=0
+
+	for _dir in $(scriptEnumDirs "${_script}"); do
+		typeset _file
+		for _file in $(LANG=C \ls -1 "${_dir}"); do
+			case ":${_verbs}:" in
+				*:${_file}:*)
+					;;
+				*)
+					let _count+=1
+					_verbs="${_verbs}:${_file}"
+					scriptDetail "${_dir}/${_file}" "${_increment}" "no"
+					[ $? -gt 0 ] && let _count-=1
+					;;
+			esac
+		done
+	done
+
+	varSet ${_name} ${_count}
+
+	if [ ${_count} -eq 0 -a "${_has_error}" = "yes" ]; then
+		typeset _bname="${_script##*/}"
+		msgerr "no verb found for '${_bname}' command"
+		return 1
+	fi
+
+	return 0
+}

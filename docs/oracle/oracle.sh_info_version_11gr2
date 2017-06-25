@@ -1,0 +1,9 @@
+[pierre@vcentos6 ~]$ oracle.sh info -service SMA -version
+[oracle.sh info] components version:
+VR: NLSRTL: 11.2.0.1.0: Production
+VR: Oracle Database 11g Enterprise Edition: 11.2.0.1.0: 64bit Production
+VR: PL/SQL: 11.2.0.1.0: Production
+VR: TNS for Linux: 11.2.0.1.0: Production
+[oracle.sh info] 4 found components
+[pierre@vcentos6 ~]$ 
+

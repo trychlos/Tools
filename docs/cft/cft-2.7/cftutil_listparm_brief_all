@@ -1,0 +1,76 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:50:40
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+  Date = 24/06/2013   Time = 11:50:40
+ 
+  Type     ID                   Information                            
+  -------- -------------------- ---------------------------------------
+  XLATE    IDFDEF                                                 
+  XLATE    IDFDEF                                                 
+  XLATE    ODY                                                    
+  XLATE    ODY                                                    
+  XLATE    IDFDEF                                                 
+  XLATE    IDFDEF                                                 
+  XLATE    ODY                                                    
+  XLATE    ODY                                                    
+  CAT      CAT0                 _CFTCATA                          
+  COM      COM0                 _CFTCOM                           
+  COM      COMS                                                   
+  PARM     IDPARM0                                                
+  PARM     ODY                                                    
+  APPL     IDFDEF                                                 
+  ACCNT    ACCNT0               _CFTACNT                          
+  LOG      LOG0                 _CFTLOG                           
+  NET      NET0                 TCP                               
+  PROT     PESITANY             PESIT    ANY      1761     NET0    
+  SEND     ID_EXITL                                               
+  RECV     BIN                  pub/&IDT.&IDTU.RCV                
+  RECV     IDFDEF               pub/&IDT.&IDTU.RCV                
+  RECV     OPESEMRT             /odyssee/prod/echanges/IN/EMC/FLX-EMC-ESTI-RETOUR/&parm
+  RECV     OPFACTRV             /odyssee/prod/echanges/IN/ALFA/FLX-TRAV-FACTRAV/&parm
+  RECV     OPPAICB              /odyssee/prod/echanges/IN/PAYLINE/FLX-BQ-PAICB/&parm
+  RECV     OPPAYCAS             /odyssee/prod/echanges/IN/COMMGROUP/FLX-BQ-PAYCASH/&parm
+  RECV     OPPAYTIP             /odyssee/prod/echanges/IN/EXTELIA/FLX-BQ-PAYTIP/&parm
+  RECV     OPRECRRL             /odyssee/prod/echanges/IN/MICROREL/FLX-REL-CRREL/&parm
+  RECV     OPREJET              /odyssee/prod/echanges/IN/COMMGROUP/FLX-BQ-REJETS/&parm
+  RECV     TXT                  pub/&IDT.&IDTU.RCV                
+  SEND     BIN                  pub/FTEST                         
+  SEND     FIC1                 pub/FTEST                         
+  SEND     FIGL10               /tmp/cft_test/                    
+  SEND     FIGL102              /tmp/cft_test/                    
+  SEND     IDFDEF               pub/FTEST                         
+  SEND     ODYBCO1              /tmp/cft_test/                    
+  SEND     ODYBQE1              /tmp/cft_test/                    
+  SEND     ODYEST1              /tmp/cft_test/                    
+  SEND     ODYIDX1              /tmp/cft_test/                    
+  SEND     ODYLOP1              /tmp/cft_test/                    
+  SEND     ODYLOV1              /tmp/cft_test/                    
+  SEND     ODYOCE1              /tmp/cft_test/                    
+  SEND     ODYPRL1              /tmp/cft_test/                    
+  SEND     ODYREF1              /tmp/cft_test/                    
+  SEND     ODYREL1              /tmp/cft_test/                    
+  SEND     TXT                  pub/FTEST                         
+  SEND     YOED01               /tmp/cft_test/                    
+  SEND     YOED02               /tmp/cft_test/                    
+  SEND     YOED03               /tmp/cft_test/                    
+  SEND     YOED04               /tmp/cft_test/                    
+  SEND     YOED05               /tmp/cft_test/                    
+  SEND     YOED24               /tmp/cft_test/                    
+  CRON     CRON1                /odyssee/prod/logiciels/cft/Transfer_CFT/runtime/exec/cron-wlog.cmd
+  EXIT     CFTEXLST             CFTEXL                            
+  EXIT     ID_EXIT              CFTEXITF                          
+ 
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=brief,type=all)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:50:40
+CFTU20I Session active for  0:00:00

@@ -1,0 +1,49 @@
+ Commands and verbs
+ ==================
+
+   Commands
+   --------
+   As all *nix-like commands, 'command.sh' commands are searched for in
+   directories specified in PATH variable. Tough they can also be run
+   by specifying their full path, this is not the easier way (but you
+   are free to choose this way).
+
+   Commands are supposed to be stored in and addressed from a TTPROOT/bin
+   directory, which is so the directory that should be referred to in
+   the PATH variable.
+
+   The Tools Project reserves some subdirectories for its own usage:
+
+   - bin/ which should be addressed by the PATH variable
+   - etc/ where are searched the configuration files
+   - libexec/ which must be addressed by the FPATH variable via its sh/
+     subdirectory (this is mandatory)
+   - plus a subdirectory per command
+
+   so we cannot have any command with these same names.
+
+   When only the command is entered, then the library displays the list
+   of available verbs.
+
+   Verbs
+   -----
+   Verbs implement actions relative to the command.
+
+   Verbs are searched for in directories derived from those specified in
+   the FPATH environment variable, where each directory specified is
+   considered as a TTPROOT/libexec/sh one, and verbs are searched for in
+   a TTPROOT/<command> directory. The first one found, whichever be its
+   extension, is considered.
+
+   All verbs must implement 'help' boolean option for displaying online
+   help.
+
+   When only the verb in entered after the command, then the library
+   displays the full help relative to this verb.
+
+   Functions
+   ---------
+   The Tools Project library is mainly written in Korn Shell (ksh), and
+   makes an heavy use of shell functions. These functions are supposed
+   to be stored in and addressed from a TTPROOT/libexec/sh directory,
+   which must be referred to by the FPATH variable.

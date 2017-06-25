@@ -1,0 +1,61 @@
+How to check the count of CFT parameters
+========================================
+1. get the full content
+   $ cftutil listcat content=full > full
+
+2. extract from the full content a single transfer unit
+   creating a 'full_unit' file
+   note first and last line of the group
+   first line is: Transfer id.                      IDT      = F1008020
+   last line is:  Network message size           RUSIZE   = 4056  
+
+3. as of CFT 2.7, each parameter is preceded by an equal '=' sign
+   count the parameters by counting the equal '=' signs
+   $ sed -e 's?\(= \S*\)?\1\
+?' full_unit | grep '=' > full_equal
+   $ wc -l full_equal
+   101
+
+4. some data are just date and time parts of a parameter
+   as we are going to deal with full 'date time' parameters, we have to
+   isolate them
+   $ grep -E 'TIME|NEXTIM' full_equal
+       Time     TIMED    = 08:00:27.22
+       MINTIME  = 00:00:00.00
+       Time     CYCTIME  = 00:00:00.00
+       MAXTIME  = 23:59:59.99
+       Next retry hour                NEXTTIM  = 00:00:00.00
+       Begin time   TIMEB    = 08:00:27.22
+       End time TIMEE    = 08:00:27.35
+   + nullify datetime when date is not set or equal to 01/01/1000
+
+5. Total is 94 parameters
+
+6. Dealing with parameters:
+   Most of the parameters can be extracted from a simple regexp as:
+       printf( "%s|%s|%s\n", $1,$2,$3 ) if m?^\s*(.*)\s+([A-Z]+)\s+=(.*)?;
+   But we have to deal specially:
+
+   6a) Allowed (YES/NO) = NO
+   6b) Current          = 0
+   6c) multi-lines parameters, those whose data is on the next line, or
+       on the two next-lines (16 parameters identified by an asterisk '*'
+	   in the first column)
+
+   Choice is made to read one line in advance from the stdin stream, in
+   order to banalize the asterisk '*' lines: when we find an asterisk,
+   then just add to current value.
+
+7. Eventually, f_parse function output LISTCAT content as stream of lines
+   of the form 'label|key|value', where at least key is always set.
+   We are able to check that f_parse output is 101 lines per transfer.
+
+   Check that keys are unique:
+   $ sort -t'|' -k2,2
+   + replace Protocol type TYPE with PTYPE
+
+8. f_datetime function concatenates separate dates and times into one
+   datetime parameter; output of this function is so 94 lines per transfer.
+
+9. last f_buildrows builds and displays a SQL-like output.
+

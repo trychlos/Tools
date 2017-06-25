@@ -1,0 +1,146 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ README
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Introduction
+   What is it ?
+   Description
+   See also
+
+-----------------------------------------------------------------------
+ Introduction
+ ============
+
+ I've first created these tools for one of my clients in 1997, when he
+ ask to me to create his central production site.
+
+ Since this date, these tools have been greatly developed and extended -
+ thanks to the numerous authors. A database repository and a web
+ interface have been added.
+
+ I decide recently to publish these tools under GPL, creating so what
+ is now to be called The Tools Project (TTP) :)
+
+-----------------------------------------------------------------------
+ What is it ?
+ ============
+
+ The Tools Project (TTP) targets targets IT teams who work in a *nix-
+ like (1) environment.
+
+ It materializes a work paradigm where all environments managed by our
+ IT team use the exact same version of scripts and configuration files.
+
+ No more install scripts where we must slightly update scripts or
+ configuration files when moving from an environment to another and
+ this implies a much better quality of these moves. Instead of this
+ painful work, just one configuration file which contains all parameters
+ required for all managed environments.
+
+ No more scripts which must be modified for targeting one SGBD or
+ another depending of the current environment. Instead of that, just
+ one configuration file which contains all parameters required for all
+ managed environments.
+
+ As a plus, The Tools Project brings to the daily usage in a *nix-like
+ platform some comfortable enhancements:
+
+ - usage of the system environment is minimized as this is a limited
+   resource; instead of having accounts whose system environments
+   happen to be polluted by the environment variables set by each and
+   every application component (file transfer, sgbd monitor, and so on),
+   needed variables are internally set by the TTP scripts themselves;
+
+ - commands and their verbs are well identified, and safe to be
+   discovered; they are self-explanatory; this let the IT team safely
+   play with and learn every command;
+
+ - executions are logged, temporary files are kept; I repeat: all
+   execution of any TTP command are logged, all temporary files are
+   kept; this is at last the dream of the Security Officer!
+
+ - commands and verbs build a standardized API for the developers, thus
+   easying the transfert to the production.
+
+ As an executive summary, we can claim TTP tools as the next step to
+ an ideal industrialization process of the IT production team.
+
+ Do you aim to be ITIL compliant ? You need it.
+ Do you aim to to make your devops happpy ? You cannot miss it.
+
+-----------------------------------------------------------------------
+ Description
+ ===========
+
+ TTP tools are a set of shell (and sometimes perl, awk and so on)
+ scripts and text configuration files who are to be considered as a
+ complete (*nix-like) production library. This library is to be used by
+ business developers and engineers in order to safely and completely
+ access to the production services.
+
+ In a typical production site, you have many applications who all share
+ some sgbd engines, maybe one or more schedulers and file transfer
+ monitors. The infrastructure can implement some middleware, and the
+ business interfaces can be implemented under Tomcat or another
+ application server.
+
+ Thus these tools should address all of these products, or can be
+ easily extended to another new product.
+
+ But business developer who writes a script for his application doesn't
+ want to know anything about all the gory details of the infrastructure.
+ Nothing about the detailed interface to the file transfer monitor, or
+ to the used middleware. And more, he doesn't want to be impacted when
+ it staff decides to migrate to another middleware product.
+
+ So these tools are also an abstraction layer between the actual
+ products and their commands, and the business application.
+
+ The production site is typically built with more than one machine, and
+ often with many. All these machines execute different services, but
+ its staff (usually) wants that the start/stop/use scripts of these
+ services be maintained coherent and consistent beetween these machines.
+
+ So these tools are completely banalized. On each machine, you deploy
+ the same set of scripts. This set includes the needed parameters for
+ all machines, including of course the current one. And when a engineer
+ creates a script, or fixes a bug in an existing one, the new script can
+ and should be safely deployed in all the machines.
+
+ Usually, the developers write and test their scripts in a test
+ environment before deploying them in production environment. And they
+ do not want modify any line of code for this deploiement. The tools
+ define the same command for a given service in all knwown environments,
+ making so easier to go to production, with much less errors due to the
+ deploiement.
+
+ Last but not least, when the production site has many machines, its
+ engineers use their times ssh-ing from one machine to another, to test
+ or act on a given service.
+
+ These tools know about the exact localization of each service, in each
+ known environment. They ssh themselves - transparently to the current
+ user - to the needed machines for a given service... And, yes, these
+ tools know ssh also when the used account need to be changed for a
+ particular service...
+
+ And, as these scripts are primarly production tools, they all log what
+ they do, and all the errors they detect, and eventually automatically
+ work-around.
+
+-----------------------------------------------------------------------
+ See also
+ ========
+
+ See doc/0-Concepts to know more about The Tools Project concepts
+ See doc/1-Install to learn how to install TTP
+
+-----------------------------------------------------------------------
+ (1) The Windows (R) port is left as an exercise for the reader :)
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

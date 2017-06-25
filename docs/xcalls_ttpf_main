@@ -1,0 +1,67 @@
+ttpf_main
+
+	ttpf_trap_int
+		msgout
+			msgoutPrefix						use if set opt_stamp, ttp_command, ttp_verb
+	ttpf_trap_exit
+		msgout
+
+	commandGetPath								set ttp_command, ttp_command_path
+
+	ttpComputeRoots								set ttp_roots, making sure the command path is inside
+		pathMungeByVal
+
+	nodeGetName									try to set a suitable ttp_node
+		osEnumMountPoints
+			msgerr
+				msgout
+					msgoutPrefix
+				msglog
+					pathGetLogsdir
+						pathGetDailyLogsdir
+					msglogPrefix
+		tabListCurrents
+			confFindFile
+				ttpEnumRoots
+			tabRemoveComments
+			tabOneLine
+		nodeFromHost
+			strLower
+	msgerr
+	verbIncrCode
+	confFindFile
+	confLoadKeys
+		tabSubstitute
+			tabSubstituteMacro
+	nodeGetEnvironment
+		tabExtract
+			tabExtractLine
+			tabExtractFields
+		confGetKey
+	msglog
+	scriptDetail
+	scriptListVerbs
+		scriptEnumDirs
+	scriptFindVerb
+	msgout
+	commandMunge
+		pathMunge
+	optLoadArgDefinitions
+		verb_arg_define_pos
+		verb_arg_define_opt
+		strTrim
+	optInitDefaults
+	verb_arg_set_defaults
+	scriptUsage
+		scriptDetailEnd
+	optReadHelp
+		optGetOption
+	optSaveArgs
+	optReadVerbose
+		msgVerbose
+	optReadOptArgs
+	optReadPosArgs
+	optCheckMandatory
+	verb_arg_check
+	verbExitOnErr
+	verb_main

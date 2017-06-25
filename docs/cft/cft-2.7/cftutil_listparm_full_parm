@@ -1,0 +1,239 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTPARM  - General purpose command
+                    ----------------------------------
+ 
+  IDPARM0                         
+          Local partner identifier    PART     = LEFP01ODYP05_LDECFT             
+          Network partner name        NPART    = LEFP01ODYP05_LDECFT             
+          Partners file name          PARTFNAM =
+          *$CFTPART                                                        
+ 
+          Send/Receive file id.       DEFAULT  = IDFDEF                          
+          CFT master key              KEY      = 
+          *JI6FAUZQMH4UDHY9TQI9H1SOTLN97JI6FAGW1S2E7                       
+          USERID control              USERCTRL = NO 
+          Internal buffer size        BUFSIZE  = 4096 
+ 
+          Max. transfers              MAXTRANS = 64   
+          Max. transfer tasks         MAXTASK  = 16   
+          Nb. transfers for one task  TRANTASK = 3  
+          File task timer             WAITTASK = 1441 
+          Response timer              WAITRESP = 100  
+          TFIL semaphore buffer size  FBUFSIZE = 0    
+          Comment                     COMMENT  =
+          *
+ 
+          ............... Trace command ..........................
+          System trace                STRACE   = 0       
+ 
+          ............... Security command .......................
+ 
+          Security file name          SECFNAME =
+          *                                                                
+ 
+          ............... Command reference ......................
+ 
+          Catalog command             CAT      =
+          *CAT0                            
+          Communications with CFT     COM      =
+          *COM0                                                             
+          Network ressources          NET      =
+          *NET0                                                             
+          Applicative protocols       PROT     =
+          *PESITANY                                                         
+          Log file command            LOG      =
+          *LOG0                            
+          Accounting command          ACCNT    =
+          *                                
+ 
+          ............... Submission files name ..................
+ 
+          On Send error               EXECSE   =
+          *$CFTDIREXEC/er&idf.cmd                                          
+ 
+          On Receive error            EXECRE   =
+          *$CFTDIREXEC/erecv.cmd                                           
+ 
+          After Send file             EXECSF   =
+          *                                                                
+ 
+          After Receive file          EXECRF   =
+          *$CFTDIREXEC/&idf_re.cmd                                         
+ 
+          After Send message          EXECSM   =
+          *                                                                
+ 
+          After Receive message       EXECRM   =
+          *$CFTDIREXEC/recvm.cmd                                           
+ 
+          After Send file ack.        EXECSFA  =
+          *                                                                
+ 
+          After Send message ack.     EXECSMA  =
+          *                                                                
+ 
+          End of transfert exit       EXITEOT  =                                 
+ 
+          Length for search CFTAPPL   LENAPPL  = 32                              
+ 
+          Action on error  RECV ALL   RCVALLER = STOP    
+ 
+          ............... SSL Environment ........................
+ 
+          Max. transfer SSL tasks     SSLMTASK  = 16   
+          Nb.transfers for 1 SSL task SSLTTASK  = 16 
+          SSL task timer              SSLWTASK  = 1441 
+          SSL Response timer          SSLWRESP  = 100  
+ 
+          PKI Database file name      PKIFNAME  =
+          *$CFTPKU                                                         
+          PKI Database file password  PKIPASSW  =
+          *********                                                        
+          ............... Sentinel Parameters.....................
+ 
+          TRK Default value for CFTPART Cmd TRKPART = UNDEFINED
+          TRK Default value for CFTSEND Cmd TRKSEND = UNDEFINED
+          TRK Default value for CFTRECV Cmd TRKPART = UNDEFINED
+ 
+          ............... Submission Cron Jobs  ..................
+ 
+          Cron Job Groups             CRONTABS  =
+          *CRONTAB1                                                         
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372557
+          Record last modify date     RECDATEM = 20120620
+          Record last modify time     RECTIMEM = 16372557
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  ODY                             
+          Local partner identifier    PART     = FP1ODYP5                        
+          Network partner name        NPART    = FP1ODYP5                        
+          Partners file name          PARTFNAM =
+          *$CFTPART                                                        
+ 
+          Send/Receive file id.       DEFAULT  = ODY                             
+          CFT master key              KEY      = 
+          *JI6FAUZQMHP7D8YWBQ2MH1SOTLN97JI6FAGW1S2E7                       
+          USERID control              USERCTRL = NO 
+          Internal buffer size        BUFSIZE  = 4096 
+ 
+          Max. transfers              MAXTRANS = 64   
+          Max. transfer tasks         MAXTASK  = 16   
+          Nb. transfers for one task  TRANTASK = 3  
+          File task timer             WAITTASK = 1441 
+          Response timer              WAITRESP = 100  
+          TFIL semaphore buffer size  FBUFSIZE = 0    
+          Comment                     COMMENT  =
+          *
+ 
+          ............... Trace command ..........................
+          System trace                STRACE   = 0       
+ 
+          ............... Security command .......................
+ 
+          Security file name          SECFNAME =
+          *                                                                
+ 
+          ............... Command reference ......................
+ 
+          Catalog command             CAT      =
+          *CAT0                            
+          Communications with CFT     COM      =
+          *COM0                                                             
+          Network ressources          NET      =
+          *NET0                                                             
+          Applicative protocols       PROT     =
+          *PESITANY                                                         
+          Log file command            LOG      =
+          *LOG0                            
+          Accounting command          ACCNT    =
+          *                                
+ 
+          ............... Submission files name ..................
+ 
+          On Send error               EXECSE   =
+          *$CFTDIREXEC/er&idf.cmd                                          
+ 
+          On Receive error            EXECRE   =
+          *$CFTDIREXEC/erecv.cmd                                           
+ 
+          After Send file             EXECSF   =
+          *                                                                
+ 
+          After Receive file          EXECRF   =
+          *$CFTDIREXEC/&idf_re.cmd                                         
+ 
+          After Send message          EXECSM   =
+          *                                                                
+ 
+          After Receive message       EXECRM   =
+          *$CFTDIREXEC/recvm.cmd                                           
+ 
+          After Send file ack.        EXECSFA  =
+          *                                                                
+ 
+          After Send message ack.     EXECSMA  =
+          *                                                                
+ 
+          End of transfert exit       EXITEOT  =                                 
+ 
+          Length for search CFTAPPL   LENAPPL  = 32                              
+ 
+          Action on error  RECV ALL   RCVALLER = STOP    
+ 
+          ............... SSL Environment ........................
+ 
+          Max. transfer SSL tasks     SSLMTASK  = 16   
+          Nb.transfers for 1 SSL task SSLTTASK  = 16 
+          SSL task timer              SSLWTASK  = 1441 
+          SSL Response timer          SSLWRESP  = 100  
+ 
+          PKI Database file name      PKIFNAME  =
+          *$CFTPKU                                                         
+          PKI Database file password  PKIPASSW  =
+          *********                                                        
+          ............... Sentinel Parameters.....................
+ 
+          TRK Default value for CFTPART Cmd TRKPART = UNDEFINED
+          TRK Default value for CFTSEND Cmd TRKSEND = UNDEFINED
+          TRK Default value for CFTRECV Cmd TRKPART = UNDEFINED
+ 
+          ............... Submission Cron Jobs  ..................
+ 
+          Cron Job Groups             CRONTABS  =
+          *CRONTAB1                                                         
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16393459
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571208
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=parm)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

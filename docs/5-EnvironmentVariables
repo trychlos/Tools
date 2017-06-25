@@ -1,0 +1,29 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/5-EnvironmentVariables
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Environment variables
+
+-----------------------------------------------------------------------
+ Environment variables
+ =====================
+
+ TTP_NODE           Identifies the current execution node.
+                    A default execution node is identified (if exists)
+                    at login time (see libexec/bootstrap/xx_node scripts).
+                    This is a required variable of The Tools Project,
+                    which cannot run without this.
+
+ TTP_SHDIR          The path to the main functions directory.
+                    This path is needed when running the
+                        ". ttp.sh switch --node <name>"
+                    command.
+                    This is a required variable of The Tools Project,
+                    which cannot run without this.
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

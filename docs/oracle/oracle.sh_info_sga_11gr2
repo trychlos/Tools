@@ -1,0 +1,885 @@
+[oracle.sh info] instance SGA informations:
+..|Pool           |Name                      |     Bytes
+--|---------------|--------------------------|----------
+SG|(fixed pool)   |fixed_sga                 |   2213936
+SG|(database pool)|buffer_cache              |  67108864
+SG|(redo pool)    |log_buffer                |   4288512
+SG|shared pool    |kgqbt_alloc_block         |      3072
+SG|shared pool    |dpslut_kfdsg              |       512
+SG|shared pool    |hot latch diagnostics     |       160
+SG|shared pool    |kkj jobq  wor             |      4128
+SG|shared pool    |vips_package_file         |      1320
+SG|shared pool    |ENQUEUE STATS             |     20952
+SG|shared pool    |vem_user_actlog           |       664
+SG|shared pool    |transaction               |    257664
+SG|shared pool    |Wait History Array        |         8
+SG|shared pool    |vproblem_bucket           |       848
+SG|shared pool    |vnot_exist_incident       |      3200
+SG|shared pool    |KCB buffer wait statistic |      3352
+SG|shared pool    |invalid low rba queue     |       512
+SG|shared pool    |KQF optimizer stats table |      1832
+SG|shared pool    |KCB tablespace encryption |       680
+SG|shared pool    |bt_qentry                 |     28512
+SG|shared pool    |kzctxgjsi ksuseclid memor |       720
+SG|shared pool    |ksunfy: system-global sta |      4840
+SG|shared pool    |Alert log                 |       520
+SG|shared pool    |vips_file_metadata        |       944
+SG|shared pool    |vips_file_copy_log        |      1696
+SG|shared pool    |DISPATCHERS INFO          |      2496
+SG|shared pool    |CCUR                      |   8875568
+SG|shared pool    |PLDIA                     |   1603944
+SG|shared pool    |v_ipsprbcnt               |       664
+SG|shared pool    |vproblem_int              |      2448
+SG|shared pool    |vtest_exists              |      1040
+SG|shared pool    |SQLA                      |  21299424
+SG|shared pool    |PRTDS                     |    283720
+SG|shared pool    |execution ID memory       |      1832
+SG|shared pool    |plwpil:wa                 |      4264
+SG|shared pool    |kzekm heap descriptor     |       304
+SG|shared pool    |kelt translation table    |       336
+SG|shared pool    |VM OSD context            |        96
+SG|shared pool    |DDE_USER_ACTION_DEF       |      1320
+SG|shared pool    |IPS_PACKAGE_UNPACK_HISTOR |      1040
+SG|shared pool    |kglsim recovery area      |      3168
+SG|shared pool    |ksdhng: blkers cache      |      3104
+SG|shared pool    |procs_kfgbsg              |      1936
+SG|shared pool    |service names array       |        16
+SG|shared pool    |trace buf hdr xtend       |       208
+SG|shared pool    |Role related heap         |       160
+SG|shared pool    |qtree_kwqbspse            |        40
+SG|shared pool    |SHARED SERVERS INFO       |      3672
+SG|shared pool    |ASH buffers               |   2097152
+SG|shared pool    |ADR_CONTROL               |      1504
+SG|shared pool    |PMON blockers             |       776
+SG|shared pool    |sga listelement           |      2048
+SG|shared pool    |vproblem                  |      2728
+SG|shared pool    |object queue hash table d |      3968
+SG|shared pool    |peshm.c:latch             |       160
+SG|shared pool    |PX subheap desc           |       256
+SG|shared pool    |latches for protecting ls |       480
+SG|shared pool    |dir_ext                   |      1320
+SG|shared pool    |cp srv array              |      3024
+SG|shared pool    |PX msg pool struct        |      1088
+SG|shared pool    |obj stats hash table      |       672
+SG|shared pool    |Managed Standby Proc Arra |     28672
+SG|shared pool    |KQR M SO                  |    381728
+SG|shared pool    |KSIR SGA                  |       144
+SG|shared pool    |BRANCH TABLE SEGMENTED AR |     91640
+SG|shared pool    |KGKP sga                  |        40
+SG|shared pool    |KTRSGA                    |         8
+SG|shared pool    |SAGE commit cache node Al |      2048
+SG|shared pool    |SGA Obsolete Param Source |        24
+SG|shared pool    |osp pool handles          |         8
+SG|shared pool    |pesom.c:subheap ds array  |       184
+SG|shared pool    |SGA structure for AWR (KE |       240
+SG|shared pool    |SGA - SWRF Time Model Bas |       112
+SG|shared pool    |KSK SGA                   |    150408
+SG|shared pool    |sys event stats for Other |     35776
+SG|shared pool    |Service-level trace setti |       536
+SG|shared pool    |LRMPD SGA Table           |    268688
+SG|shared pool    |HM_RUN                    |      1976
+SG|shared pool    |namhsh_kfgsg              |       288
+SG|shared pool    |msg Q child latches       |       224
+SG|shared pool    |plwda:PLW_STR_NEW_LEN_VEC |         8
+SG|shared pool    |Prefetch history buffer a |       320
+SG|shared pool    |Prefetch client count per |        32
+SG|shared pool    |ptr to sessions under idl |         8
+SG|shared pool    |xslongops                 |     14776
+SG|shared pool    |qesmmaInitialize: ta_qesm |       264
+SG|shared pool    |kglsim pin list arr       |      1224
+SG|shared pool    |kqlpWrntoStr:string       |       208
+SG|shared pool    |ktg hash buckets          |     13576
+SG|shared pool    |DISPATCHER CONFIG ENTRY   |        88
+SG|shared pool    |kebm test replies         |     30720
+SG|shared pool    |INCIDENT_FILE             |       848
+SG|shared pool    |vips_package_incident_det |      4992
+SG|shared pool    |kscdnfyinithead           |        16
+SG|shared pool    |writes stopped lock conte |        24
+SG|shared pool    |Detached dump directory   |       520
+SG|shared pool    |X$KSVIS table             |       128
+SG|shared pool    |KUPP subheap desc         |       232
+SG|shared pool    |DBWR array of pointers to |         8
+SG|shared pool    |dbwr actual working sets  |        16
+SG|shared pool    |dbwriter coalesce struct  |        48
+SG|shared pool    |trace buffer header array |       208
+SG|shared pool    |KTUR HIST INFO            |      4840
+SG|shared pool    |kodosgi kodos             |        32
+SG|shared pool    |UNDO INFO SEGMENTED ARRAY |     22040
+SG|shared pool    |jsksncb: 9                |      4816
+SG|shared pool    |dbgdInitEventGrp: eventGr |       216
+SG|shared pool    |KTA latches               |      2024
+SG|shared pool    |file # translation table  |     40064
+SG|shared pool    |kfklsodtab                |     64792
+SG|shared pool    |kfkid hash                |      4104
+SG|shared pool    |IPS_PACKAGE_FILE          |       848
+SG|shared pool    |v_inc_meter_info_problem  |       664
+SG|shared pool    |kglsim heap               |    927360
+SG|shared pool    |KFG SO child              |      7800
+SG|shared pool    |SWEEPERR                  |       944
+SG|shared pool    |Wait event pointers       |       384
+SG|shared pool    |keswx:plan en             |     14112
+SG|shared pool    |dbkea msg body            |     51200
+SG|shared pool    |KTCN: Obj Invalidation Se |     24392
+SG|shared pool    |kcbbl2df L2 disabling fla |         8
+SG|shared pool    |KTCN global clauses  ht   |       128
+SG|shared pool    |1:kngisga                 |     32104
+SG|shared pool    |KEWS statistic metadata   |     16320
+SG|shared pool    |alert_ext                 |      3480
+SG|shared pool    |dbgefgHtAddSK-1           |    482048
+SG|shared pool    |vshowincb_i               |       752
+SG|shared pool    |kgsk subheap descriptor   |       136
+SG|shared pool    |PLMCD                     |   6630112
+SG|shared pool    |PRTMV                     |    149936
+SG|shared pool    |threshold ale             |     12192
+SG|shared pool    |PICKLEERR                 |      1128
+SG|shared pool    |kglsim main lru size      |    192000
+SG|shared pool    |kso req alloc heapds      |       280
+SG|shared pool    |PQ/ResSched               |      1040
+SG|shared pool    |SERVICE NAME ENTRY        |       128
+SG|shared pool    |vhm_run                   |      2072
+SG|shared pool    |subbtree_kwqspqctx        |       128
+SG|shared pool    |sim lru segments          |      1280
+SG|shared pool    |vshowincb                 |       752
+SG|shared pool    |object queue hash buckets |    147456
+SG|shared pool    |LGWR-network Server info  |     34032
+SG|shared pool    |logout storm management   |       400
+SG|shared pool    |ASM map operations        |      2904
+SG|shared pool    |ArchLog Dest Array        |     22784
+SG|shared pool    |sim trace buf             |      5144
+SG|shared pool    |analytic workspace        |      2904
+SG|shared pool    |Sort Segment              |     12352
+SG|shared pool    |enqueue                   |    275920
+SG|shared pool    |buffer handles            |    108008
+SG|shared pool    |bt_subentry_nm            |        48
+SG|shared pool    |sga node map              |        16
+SG|shared pool    |message pool context area |     21840
+SG|shared pool    |qtree_kwqspqctx           |        40
+SG|shared pool    |cinfo_kfnsg               |      4104
+SG|shared pool    |kks stats                 |        40
+SG|shared pool    |KSFV SGA                  |       832
+SG|shared pool    |ASM rollback operations   |      2648
+SG|shared pool    |krvxlctx                  |       248
+SG|shared pool    |parallel_max_servers      |      1280
+SG|shared pool    |resize request state obje |    489600
+SG|shared pool    |rules engine aggregate st |      1416
+SG|shared pool    |krvxdka                   |       840
+SG|shared pool    |KGLHD                     |   4619256
+SG|shared pool    |network connections       |     66440
+SG|shared pool    |SGA - SWRF Metrics ksuTim |      2064
+SG|shared pool    |skgxp ANT slave netstat m |      4184
+SG|shared pool    |simulator latch/bucket st |      7424
+SG|shared pool    |MS alert log              |     72704
+SG|shared pool    |change notification obj m |     16416
+SG|shared pool    |knlsg                     |       136
+SG|shared pool    |KKTDF                     |      1064
+SG|shared pool    |Space Background Task Des |     72000
+SG|shared pool    |kfdsga                    |       128
+SG|shared pool    |KKTSR                     |      1064
+SG|shared pool    |kfmdsg                    |       216
+SG|shared pool    |buffer_pool_desc_array    |      3456
+SG|shared pool    |SGA structure for ADR lay |         8
+SG|shared pool    |INCIDENT                  |      3008
+SG|shared pool    |parallel kcbibr dbwr bitv |         8
+SG|shared pool    |object queue              |    124800
+SG|shared pool    |peshm.c: Global_Sub_Heap  |       232
+SG|shared pool    |sim trace buf context     |       200
+SG|shared pool    |character set memory      |     59608
+SG|shared pool    |character set object      |    577424
+SG|shared pool    |sess Q child latches      |       224
+SG|shared pool    |qesmmaInitialize: oa_qesm |       112
+SG|shared pool    |file iostats dynamic seg  |     21144
+SG|shared pool    |KEWS statistic maps       |      3168
+SG|shared pool    |KEWS sysstat values       |       256
+SG|shared pool    |KWQDL child latches       |      2880
+SG|shared pool    |xsoqmehift                |      2904
+SG|shared pool    |ksfm state object         |        88
+SG|shared pool    |ksdhng: cache ctx         |       208
+SG|shared pool    |krsv_notifier_cb          |     33760
+SG|shared pool    |iosts_kfmdsg              |      1200
+SG|shared pool    |kdlwl_sga_subheap         |       232
+SG|shared pool    |KTCNQROW colnames         |      1296
+SG|shared pool    |writes stopped lock state |        24
+SG|shared pool    |KTC txn rsrc cnt          |        88
+SG|shared pool    |KQFUTTAB COLS             |       472
+SG|shared pool    |DDE_USER_INCIDENT_ACTION_ |       664
+SG|shared pool    |IPS_REMOTE_PACKAGE        |       944
+SG|shared pool    |kwqmncini-slv             |     18400
+SG|shared pool    |database NCHAR language h |       568
+SG|shared pool    |dbwr working sets kcbdbws |        16
+SG|shared pool    |temp lob duration state o |      3928
+SG|shared pool    |KEWS fixed SGA            |      5704
+SG|shared pool    |ksleid alloc              |       144
+SG|shared pool    |KSFD SGA I/O b            |   3977064
+SG|shared pool    |koh dur heap              |       352
+SG|shared pool    |KSN WaitID                |      1560
+SG|shared pool    |kfkrec_kfdsg              |        24
+SG|shared pool    |ksbxic obj                |     12216
+SG|shared pool    |kwrsnfy: kwrs             |      1624
+SG|shared pool    |vproblem_lastinc          |      2352
+SG|shared pool    |file state object         |    110352
+SG|shared pool    |resumable                 |      3672
+SG|shared pool    |KTCN: Row Change Segmente |     34552
+SG|shared pool    |KTCN: query inv Segmented |      3928
+SG|shared pool    |relmd_ext                 |      1224
+SG|shared pool    |EM_DIAG_JOB               |      1320
+SG|shared pool    |PCUR                      |   5483288
+SG|shared pool    |ksunfy : array of SSO fre |       176
+SG|shared pool    |ksuloi: long op free list |        16
+SG|shared pool    |ksbtnfy: infrequent actio |      2600
+SG|shared pool    |call                      |    101520
+SG|shared pool    |ktfa dynamic SGA allocati |       640
+SG|shared pool    |kelr other metrics table  |        48
+SG|shared pool    |v_incfcount               |       664
+SG|shared pool    |fencing reid              |     17976
+SG|shared pool    |KYWM RPLY CROSS INSTANCE  |     53248
+SG|shared pool    |grplut_kfgsg              |       512
+SG|shared pool    |kglsim hash table bkts    |   4194304
+SG|shared pool    |incr ckpt write count arr |       168
+SG|shared pool    |trace events array        |     72000
+SG|shared pool    |event-class map           |      4472
+SG|shared pool    |pubentry                  |       112
+SG|shared pool    |Core dump directory       |       520
+SG|shared pool    |vips_pkg_file             |      1600
+SG|shared pool    |locator state object      |     20808
+SG|shared pool    |memory transfer history   |     19208
+SG|shared pool    |plwshs:temphdl            |        48
+SG|shared pool    |pesom.c:Global            |     37416
+SG|shared pool    |peshm.c:Global            |      4136
+SG|shared pool    |ASM KFFD SO               |      2648
+SG|shared pool    |vproblem2                 |      2632
+SG|shared pool    |sim cache nbufs           |       640
+SG|shared pool    |ams_xaction               |       568
+SG|shared pool    |Parameter Handle          |      2592
+SG|shared pool    |parameter blocks          |     19192
+SG|shared pool    |SWRF Alerted              |      4160
+SG|shared pool    |param hash values         |      9600
+SG|shared pool    |pesldT03_Instance         |     36920
+SG|shared pool    |PX QC deq stats           |      1696
+SG|shared pool    |archive_lag_target        |      9624
+SG|shared pool    |latches for protecting fs |       960
+SG|shared pool    |obj hash table pointers   |       168
+SG|shared pool    |Saved job ids             |      8000
+SG|shared pool    |Banner Storage            |      2048
+SG|shared pool    |qmps connections          |     65280
+SG|shared pool    |TBS STAT                  |     16000
+SG|shared pool    |broker globals            |       232
+SG|shared pool    |ADR_INVALIDATION          |       664
+SG|shared pool    |parameter table block     |    748616
+SG|shared pool    |KSVR SGA                  |      2384
+SG|shared pool    |kccsgehtt                 |       360
+SG|shared pool    |KGSK sga                  |      6120
+SG|shared pool    |krvxmctx                  |        40
+SG|shared pool    |parameter text value      |      6696
+SG|shared pool    |redo allocation latch(es) |      1760
+SG|shared pool    |replication session stats |       776
+SG|shared pool    |kga sga                   |         8
+SG|shared pool    |SGA - SWRF Metrics WCTime |      2064
+SG|shared pool    |KFK SGA                   |      4208
+SG|shared pool    |kfmsg                     |      3608
+SG|shared pool    |latch classes             |       352
+SG|shared pool    |Storage for kcrr state ob |       104
+SG|shared pool    |kfgsga                    |       104
+SG|shared pool    |kfgbsg                    |        40
+SG|shared pool    |Closed Thread SCN Bitvec  |     33792
+SG|shared pool    |sio pool granule list     |      1024
+SG|shared pool    |simulator hash buckets    |     33024
+SG|shared pool    |State object subpools     |      6336
+SG|shared pool    |Rec Ping Per Thread Info  |     21128
+SG|shared pool    |AWR Table Info (KEW layer |      1160
+SG|shared pool    |MinActScn Array           |       320
+SG|shared pool    |qesmmaInitialize: pa_qesm |     11088
+SG|shared pool    |kglsim object batch       |   1495368
+SG|shared pool    |ktcnc child latches       |      5888
+SG|shared pool    |ksws service events       |     51328
+SG|shared pool    |kebm slave message        |       288
+SG|shared pool    |X$KSFQP ANCHOR            |        80
+SG|shared pool    |event descriptor table    |     53872
+SG|shared pool    |dbwriter coalesce buffer  |    872448
+SG|shared pool    |kglsim hash table         |      8208
+SG|shared pool    |kcbl statistics           |      6144
+SG|shared pool    |Global Context Heap descr |       400
+SG|shared pool    |generic process shared st |       456
+SG|shared pool    |ksv slave class           |    184192
+SG|shared pool    |X$KSVII table             |       512
+SG|shared pool    |kcrrorlerr.alo            |        48
+SG|shared pool    |DDE_USER_ACTION_PARAMETER |      2080
+SG|shared pool    |vproblem_bucket_count     |       944
+SG|shared pool    |KKJ SHRD WRQS             |       240
+SG|shared pool    |vips_package_history      |      1416
+SG|shared pool    |database creation languag |       568
+SG|shared pool    |KGNFS scontext            |    524456
+SG|shared pool    |tablespace encryption key |       192
+SG|shared pool    |kks stats mem             |        64
+SG|shared pool    |Temporary Tables State Ob |     31520
+SG|shared pool    |jsksncb: 7                |      3840
+SG|shared pool    |kglsim sga                |     30472
+SG|shared pool    |enqueue_hash_chain_latche |       160
+SG|shared pool    |IPS_FILE_COPY_LOG         |      1040
+SG|shared pool    |kjxgrvr SGA               |        40
+SG|shared pool    |INC_METER_SUMMARY         |      1416
+SG|shared pool    |kpscad: kpscscon          |       840
+SG|shared pool    |trace_knlasg              |       504
+SG|shared pool    |KSPD key heap             |      4136
+SG|shared pool    |sga blobs                 |     32768
+SG|shared pool    |SEQ S.O.                  |     20952
+SG|shared pool    |dlo fib struct            |     12832
+SG|shared pool    |diag fixed SGA            |       136
+SG|shared pool    |KXFR Psuedo Hash Array fo |      3072
+SG|shared pool    |KSZ sga subheap descripto |       136
+SG|shared pool    |KSXP test table columns d |      1320
+SG|shared pool    |kolfsgi: KOLF's SGA initi |         8
+SG|shared pool    |kea advisor definition ca |       480
+SG|shared pool    |kelr system metrics table |       296
+SG|shared pool    |ksb ci process list (each |       872
+SG|shared pool    |ksunfy : array of session |       776
+SG|shared pool    |ksuloi: long op statistic |     71392
+SG|shared pool    |KTCN global operands ht   |       128
+SG|shared pool    |dbktb: trace pool         |      4400
+SG|shared pool    |DDE_USER_ACTION           |      1128
+SG|shared pool    |vshowcatview              |       848
+SG|shared pool    |User dump directory       |       520
+SG|shared pool    |groups_kfgbsg             |     10752
+SG|shared pool    |ktsj_init_sga task stat   |        24
+SG|shared pool    |KSRPC I/O Stat array ptr  |        16
+SG|shared pool    |ksfv subheap descriptor   |       184
+SG|shared pool    |diag descriptor           |        16
+SG|shared pool    |dispatcher rate           |      1312
+SG|shared pool    |SQLP                      |    843576
+SG|shared pool    |KEWS sesstat seg tbl      |         8
+SG|shared pool    |enqueue resources         |     90880
+SG|shared pool    |kxfpSO qref freelists     |       368
+SG|shared pool    |instance cnxn information |      4656
+SG|shared pool    |keswxNotify:tabPlans      |      1024
+SG|shared pool    |KTCN global operators     |        64
+SG|shared pool    |qmtb_init_data            |      1728
+SG|shared pool    |latchnum to latch map     |      4280
+SG|shared pool    |Security Class heap       |       136
+SG|shared pool    |post stats                |      1496
+SG|shared pool    |Checkpoint queue          |    205312
+SG|shared pool    |pesom.c:Object            |      4136
+SG|shared pool    |message pool freequeue    |   1237888
+SG|shared pool    |prirec_kfmdsg             |        24
+SG|shared pool    |MTTR advisory context     |      1648
+SG|shared pool    |log_simultaneous_copies   |       400
+SG|shared pool    |copy latch aux            |        16
+SG|shared pool    |PARAMETER ENTRY           |        96
+SG|shared pool    |parallel kcbibr           |        32
+SG|shared pool    |state objects             |     10360
+SG|shared pool    |object level stat table   |      1008
+SG|shared pool    |PRESENTATION TABLE        |      2048
+SG|shared pool    |KQR L SO                  |    212040
+SG|shared pool    |KYWM SGA                  |       296
+SG|shared pool    |RTA Boundary Info thread  |     71808
+SG|shared pool    |RTA read control file ind |      4224
+SG|shared pool    |buffers waiting for write |        24
+SG|shared pool    |krvxdta                   |      1520
+SG|shared pool    |KGLH0                     |   4200992
+SG|shared pool    |joxs heap                 |      4272
+SG|shared pool    |SGA structure for KWQDL s |        24
+SG|shared pool    |SQL Memory Manager Base W |     13400
+SG|shared pool    |change tracking state cha |      2584
+SG|shared pool    |pso child tracebuf ptrs   |       400
+SG|shared pool    |kponfy                    |       816
+SG|shared pool    |name-service table        |     16144
+SG|shared pool    |cross-platform compliance |      2232
+SG|shared pool    |xssinfo                   |      6008
+SG|shared pool    |SGA - AWR Metric RBSM str |       392
+SG|shared pool    |namrec_kfdsg              |        24
+SG|shared pool    |Client ID trace settings  |      3928
+SG|shared pool    |plwda:PLW_STR_NEW_VAL_VEC |         8
+SG|shared pool    |plwppwp:PLW_STR_NEW_VAL_V |        32
+SG|shared pool    |KOKTD                     |    872008
+SG|shared pool    |pesom.c: Pesom_Global_Hea |       232
+SG|shared pool    |process count for each CI |       448
+SG|shared pool    |Processor group descripto |       256
+SG|shared pool    |SGA - SWRF Metric Eidbuf  |    101176
+SG|shared pool    |channel context areas     |     81528
+SG|shared pool    |heap_kfsg                 |       136
+SG|shared pool    |sio pool list element     |      3072
+SG|shared pool    |reservation state object  |      3056
+SG|shared pool    |Result Cache: State Objs  |      2896
+SG|shared pool    |NETWORK BUFFER            |     32808
+SG|shared pool    |array 2 for shared redo b |        24
+SG|shared pool    |SGA - SWRF Metric CHBs    |    821400
+SG|shared pool    |HM_FINDING                |      2632
+SG|shared pool    |HM_MESSAGE                |      1416
+SG|shared pool    |ktud-usd hash table       |       264
+SG|shared pool    |ksdhng: blkrs cache       |      1552
+SG|shared pool    |krp_sabmr_reqarr_2        |        64
+SG|shared pool    |KTI latch structure       |      1600
+SG|shared pool    |KTCNC inv hashtable       |       128
+SG|shared pool    |kcrfa structures          |      3432
+SG|shared pool    |kebm slave reply          |       856
+SG|shared pool    |KCB undo bitvec           |      4096
+SG|shared pool    |kpssnfy: kpsssgct         |        72
+SG|shared pool    |ksmd unit test 1          |      5296
+SG|shared pool    |ksim client list          |       168
+SG|shared pool    |kglsim latch area         |      2720
+SG|shared pool    |DDE_USER_INCIDENT_TYPE    |       664
+SG|shared pool    |kks stats latch           |       640
+SG|shared pool    |KTCTSNL subheaps          |      1496
+SG|shared pool    |dia* process descriptor   |        16
+SG|shared pool    |KEWS External IDs         |      1536
+SG|shared pool    |kglsim latches            |       136
+SG|shared pool    |kqlpaac:value-1           |       320
+SG|shared pool    |vips_pkg_incident_candida |      3296
+SG|shared pool    |ksdhng: cbufs             |        64
+SG|shared pool    |KGSKI schedule            |    103976
+SG|shared pool    |KCB Table Scan            |        40
+SG|shared pool    |messages                  |     11200
+SG|shared pool    |HTTP fixed headers        |        72
+SG|shared pool    |KTU latches               |       120
+SG|shared pool    |KSK OSS PLAN              |      3360
+SG|shared pool    |ksuseplsrctx memory       |        16
+SG|shared pool    |ksz parent                |      9656
+SG|shared pool    |Undo Meta Data            |        80
+SG|shared pool    |File Space Usage          |     11344
+SG|shared pool    |jsksncb: 4                |      4080
+SG|shared pool    |kkj jobq slav             |      1280
+SG|shared pool    |KWQDL deq log             |      9216
+SG|shared pool    |dgtab_kfmdsg              |     25144
+SG|shared pool    |event classes             |       128
+SG|shared pool    |txncallback               |     38984
+SG|shared pool    |diagv_incident            |      3296
+SG|shared pool    |KCB where statistics arra |     34144
+SG|shared pool    |KCB incremental ckpt entr |       720
+SG|shared pool    |KXFR Hash Array latches a |      2944
+SG|shared pool    |KQF runtime defined table |      8640
+SG|shared pool    |IPS_PACKAGE_INCIDENT      |       944
+SG|shared pool    |ksfd: components i/o stat |    177408
+SG|shared pool    |KTCN queries hash table   |       128
+SG|shared pool    |ksws listener service nam |        24
+SG|shared pool    |kpummst global in the SGA |      2520
+SG|shared pool    |ksdhng: els blkrs cache   |    139680
+SG|shared pool    |ksacm service obj array   |       768
+SG|shared pool    |qmn tasks                 |      4160
+SG|shared pool    |ksunfy : SSO free list    |   1153136
+SG|shared pool    |KCB Table Scan Bitmap     |       248
+SG|shared pool    |KCB Table Scan Buffer     |   3981120
+SG|shared pool    |dskm rac entity id        |        96
+SG|shared pool    |PLS chunk                 |       352
+SG|shared pool    |EM_USER_ACTIVITY          |      1224
+SG|shared pool    |KESTB existence bitvec    |    262144
+SG|shared pool    |ksb cic process list      |       888
+SG|shared pool    |ksdhng: fblkrs cache      |      4656
+SG|shared pool    |FileOpenBlock             |   3860872
+SG|shared pool    |sort segment handle       |      8664
+SG|shared pool    |latch wait-event table    |      2144
+SG|shared pool    |qtree_kwqbsgn             |        40
+SG|shared pool    |active checkp             |      2160
+SG|shared pool    |segmented arrays          |     12824
+SG|shared pool    |stat hash values          |      2416
+SG|shared pool    |v_actinc                  |       752
+SG|shared pool    |Online Datafile Move sess |      2392
+SG|shared pool    |channel handle            |     42496
+SG|shared pool    |Auto tune undo info       |        96
+SG|shared pool    |cp pool array             |      2608
+SG|shared pool    |UNDO INFO                 |        16
+SG|shared pool    |poisoned memory           |     32768
+SG|shared pool    |name-service request      |      2392
+SG|shared pool    |latch recovery structures |      3232
+SG|shared pool    |Label Cache Heap descrptr |       160
+SG|shared pool    |qm_init_sga:qmdpsg        |      1064
+SG|shared pool    |recov_kgqbtctx            |     11712
+SG|shared pool    |dbkea sga                 |        24
+SG|shared pool    |pesom.c:latch array       |       320
+SG|shared pool    |Cursor Stats              |    720648
+SG|shared pool    |quiescing session         |      3928
+SG|shared pool    |SHRINK STAT               |      3000
+SG|shared pool    |DML lock                  |    296952
+SG|shared pool    |Monitor Modification Hash |       512
+SG|shared pool    |max allowable # log files |    506400
+SG|shared pool    |PX server deq stats       |      1696
+SG|shared pool    |kks stbkt                 |   1572864
+SG|shared pool    |JSX SGA                   |      3776
+SG|shared pool    |Background process state  |        48
+SG|shared pool    |KKSSP                     |    972896
+SG|shared pool    |quiesce system context    |       440
+SG|shared pool    |SGA structure for KPON kp |      3192
+SG|shared pool    |SGA struct - SWRF Metrics |      2960
+SG|shared pool    |ASM kfk state object      |      2776
+SG|shared pool    |client/application info l |       160
+SG|shared pool    |change notification regis |     16416
+SG|shared pool    |kohsg                     |         8
+SG|shared pool    |kfasga                    |      1048
+SG|shared pool    |L2 file map array         |      4896
+SG|shared pool    |row cache child latch     |      8000
+SG|shared pool    |L2 enabled array          |        16
+SG|shared pool    |osp allocation            |     28104
+SG|shared pool    |KGLA                      |    307256
+SG|shared pool    |Pre-Warm Initialized Seti |       128
+SG|shared pool    |rules engine context      |       200
+SG|shared pool    |ASM generic network state |      2392
+SG|shared pool    |set_descriptor_array      |        64
+SG|shared pool    |INCCKEY                   |       848
+SG|shared pool    |SGA Param Source Table    |       304
+SG|shared pool    |SGA structure for kelr    |      2360
+SG|shared pool    |listener addresses        |         8
+SG|shared pool    |dbke_incid_cache_init     |      4000
+SG|shared pool    |KSI resource types        |      2704
+SG|shared pool    |ktlbk state objects       |    114480
+SG|shared pool    |ksacm service root        |        80
+SG|shared pool    |x$rule_set                |     17608
+SG|shared pool    |KYWM CROSS INSTANCE       |       384
+SG|shared pool    |DBWR event stats array    |       216
+SG|shared pool    |ket (AutoTask) SGA        |       824
+SG|shared pool    |ktcnqrow columns          |      4328
+SG|shared pool    |kghx free lists           |     43792
+SG|shared pool    |KTSL reco struct          |     24576
+SG|shared pool    |X$KSVIT table             |       512
+SG|shared pool    |KTI freelists             |        88
+SG|shared pool    |kodosgi kopfdo            |       416
+SG|shared pool    |TXN TABLE SEGMENTED ARRAY |    104632
+SG|shared pool    |FileIdentificatonBlock    |    745536
+SG|shared pool    |KFM state obj             |      2904
+SG|shared pool    |kwqmncini-stat            |       120
+SG|shared pool    |vips_package_main_problem |       752
+SG|shared pool    |kso req alloc             |      4136
+SG|shared pool    |kwqmncini-tbl             |      4136
+SG|shared pool    |Temporary storage for RTA |        72
+SG|shared pool    |KTU lat struct            |       160
+SG|shared pool    |kks stats hds             |      1024
+SG|shared pool    |joxs struct               |       160
+SG|shared pool    |KSK VT POOL               |    112464
+SG|shared pool    |KTC latch subh            |     95080
+SG|shared pool    |kfklsod list              |      2912
+SG|shared pool    |KKKI consumer             |      4136
+SG|shared pool    |IPS_CONFIGURATION         |      1320
+SG|shared pool    |IO_SHARES_KGSKCAP         |         8
+SG|shared pool    |ksbxic sga                |        40
+SG|shared pool    |eventlist to post commits |        64
+SG|shared pool    |jsksncb: 3                |      4000
+SG|shared pool    |dev2node map              |      4096
+SG|shared pool    |write state object        |    183360
+SG|shared pool    |VIRTUAL CIRCUITS          |    325184
+SG|shared pool    |KWQDL ht cco              |      7216
+SG|shared pool    |ufgtab_kfmdsg             |     25144
+SG|shared pool    |dbktb: sga ctx            |        48
+SG|shared pool    |enqueue_hash              |     10992
+SG|shared pool    |KTCN: Hash Table Segmente |      5240
+SG|shared pool    |kmgsb circular statistics |    162304
+SG|shared pool    |temporary tabl            |      8272
+SG|shared pool    |kglsim count of pinned he |     10336
+SG|shared pool    |ksunfy: is parent statist |      7264
+SG|shared pool    |ksunfy: nodes of hierarch |       480
+SG|shared pool    |ksgm sga instance configu |      8584
+SG|shared pool    |kqf runtime defined table |      8632
+SG|shared pool    |ktsj_init_sga proc desc   |       176
+SG|shared pool    |kglsim alloc latch area   |      2720
+SG|shared pool    |work area tab             |    264248
+SG|shared pool    |AW SGA                    |        40
+SG|shared pool    |dbktb: trace buffer       |   1327104
+SG|shared pool    |v_swperrcount             |       664
+SG|shared pool    |kspd run-time context     |        24
+SG|shared pool    |KSQ event description     |      8352
+SG|shared pool    |KTCNQROW colname ptrs     |       344
+SG|shared pool    |KFD extent enqueue obj    |     42816
+SG|shared pool    |ksdhng: el wtr cache      |     17072
+SG|shared pool    |block_sizes_array         |        48
+SG|shared pool    |PQ/BizCard                |      1536
+SG|shared pool    |standby event stats       |      1216
+SG|shared pool    |channel sga anchor        |       384
+SG|shared pool    |sim state object          |        96
+SG|shared pool    |sht bkt arr allo          |     11264
+SG|shared pool    |SYSTEM PARAMETERS         |    456656
+SG|shared pool    |sched job queue           |      5752
+SG|shared pool    |sim cache sizes           |       640
+SG|shared pool    |LGWR debug module memory  |      8192
+SG|shared pool    |name-service recovery     |      3032
+SG|shared pool    |PARAMETER TABLE           |      2048
+SG|shared pool    |bloom filter              |      2776
+SG|shared pool    |Log Archive Config Contex |      1096
+SG|shared pool    |log file size history arr |       168
+SG|shared pool    |latches for protecting ws |       960
+SG|shared pool    |cp connection             |      2640
+SG|shared pool    |sched job slv             |     14008
+SG|shared pool    |process group array       |     67984
+SG|shared pool    |sga dev dict              |        56
+SG|shared pool    |sim_knlasg                |      1280
+SG|shared pool    |db_files                  |    449800
+SG|shared pool    |KTI-UNDO                  |    704320
+SG|shared pool    |plwda:PLW_STR_NEW_RVAL    |        24
+SG|shared pool    |plwppwp:garbage handle    |        32
+SG|shared pool    |block media rcv state obj |      2520
+SG|shared pool    |monitoring co             |     29120
+SG|shared pool    |KGLOB                     |    403168
+SG|shared pool    |Prefetch history buffer   |     11328
+SG|shared pool    |knstsg                    |        48
+SG|shared pool    |kkzias                    |       144
+SG|shared pool    |KKJ SGA                   |       720
+SG|shared pool    |Client ID trace setting h |       536
+SG|shared pool    |Service-level ID trace se |      3800
+SG|shared pool    |policy hash table descrpt |       280
+SG|shared pool    |plwppwp:PLW_STR_NEW_LEN_V |        16
+SG|shared pool    |SCHEDULING POLICY VECTOR  |       104
+SG|shared pool    |Result Cache: Memory Mgr  |       200
+SG|shared pool    |Active Session History -  |      1528
+SG|shared pool    |OS file lock              |      8632
+SG|shared pool    |db_block_hash_buckets     |    733184
+SG|shared pool    |java static objs          |     35352
+SG|shared pool    |temporary foreign ref     |      3416
+SG|shared pool    |downed inst bit vector    |        40
+SG|shared pool    |error message file name   |        64
+SG|shared pool    |kscdnfyglobalflags        |         8
+SG|shared pool    |temporary table lock      |      2584
+SG|shared pool    |KEWS sesstat values       |     61304
+SG|shared pool    |kcbl state objects        |     25600
+SG|shared pool    |xsoqojhift                |      4184
+SG|shared pool    |list                      |      4096
+SG|shared pool    |kgnfs htab array          |       840
+SG|shared pool    |kgnfs ctab array          |       440
+SG|shared pool    |ksir State Object         |      2904
+SG|shared pool    |dbwriter coalesce bitmap  |        56
+SG|shared pool    |DISPATCHER CONFIG TABLE   |      2048
+SG|shared pool    |KFK idtab_kfksga          |     64832
+SG|shared pool    |IPS_PACKAGE               |      1880
+SG|shared pool    |INC_METER_INFO            |      1320
+SG|shared pool    |KTU latch cleanup         |       208
+SG|shared pool    |KTC variable sga          |        16
+SG|shared pool    |kscdnfyinitnext           |        40
+SG|shared pool    |kscdnfyinitprev           |        40
+SG|shared pool    |ksvr msg cache            |      2392
+SG|shared pool    |ksfv instance             |      9984
+SG|shared pool    |dbwr outstanding ios per  |        72
+SG|shared pool    |dbwr suspend/resume ptr a |        16
+SG|shared pool    |ts encryption key afn rev |      3208
+SG|shared pool    |Transportable DB Converte |      4720
+SG|shared pool    |KRBMROS ANCHOR            |        96
+SG|shared pool    |ksfv subheap              |     16616
+SG|shared pool    |where to latch num map    |     10584
+SG|shared pool    |kfkid hrec                |        24
+SG|shared pool    |KTPR HIST TB              |      2808
+SG|shared pool    |kjxgrrr SGA               |        56
+SG|shared pool    |ksv reaper                |     12984
+SG|shared pool    |free memory               |  24089200
+SG|shared pool    |kwqicaqe2kc1              |     11216
+SG|shared pool    |dispatcher service names  |        24
+SG|shared pool    |vem_user_actlog1          |       664
+SG|shared pool    |dsktab_kfgsg              |     52544
+SG|shared pool    |vproblem_bucket1          |       848
+SG|shared pool    |vips_package_size         |       664
+SG|shared pool    |jsksncb: 6                |      4176
+SG|shared pool    |UNDO INFO HASH            |      3392
+SG|shared pool    |EM_TARGET_INFO            |      1224
+SG|shared pool    |dbkea msgs                |      1200
+SG|shared pool    |dbkea msgq                |        32
+SG|shared pool    |keswx:batch o             |     80408
+SG|shared pool    |vinc_meter_info           |      1696
+SG|shared pool    |KTSJ subheap              |      4136
+SG|shared pool    |KGSKI scheduler heap 1 de |       232
+SG|shared pool    |KESTB existence bitvec se |      2048
+SG|shared pool    |KGSKI scheduler heap 2 de |       232
+SG|shared pool    |branch so                 |       360
+SG|shared pool    |KSFD Cache Hints for IO R |        72
+SG|shared pool    |kolbsgi: KOLB's SGA initi |         8
+SG|shared pool    |kglsim size of pinned mem |     20400
+SG|shared pool    |kewr MMON Remote Flush Re |     30720
+SG|shared pool    |ksfd: consumer group i/o  |     13824
+SG|shared pool    |PROBLEM                   |      1600
+SG|shared pool    |v_ipsprbcnt1              |       664
+SG|shared pool    |kwqmncal: allocate buffer |      7968
+SG|shared pool    |kglsim main lru count     |     97280
+SG|shared pool    |kebm run-once actions     |        64
+SG|shared pool    |grptab_kfgsg              |      3032
+SG|shared pool    |ksdhng: cache history     |       320
+SG|shared pool    |kebm slave descriptors    |      5504
+SG|shared pool    |kcbl seq io throughput    |     12000
+SG|shared pool    |qksbgsg                   |        88
+SG|shared pool    |kglsim free obj list      |       408
+SG|shared pool    |KEWS aggregation objs     |      4032
+SG|shared pool    |LISTEN ADDRESS TABLE      |      2048
+SG|shared pool    |sim kghx free lists       |         8
+SG|shared pool    |lock state hash table     |    647680
+SG|shared pool    |State object pools        |      4480
+SG|shared pool    |plis struct               |       136
+SG|shared pool    |statement queuing         |      2904
+SG|shared pool    |latch recovery alignment  |        72
+SG|shared pool    |v_nfcinc                  |       848
+SG|shared pool    |vproblem1                 |      2544
+SG|shared pool    |primem_kfmdsg             |      1032
+SG|shared pool    |obj stats allocation chun |   2580480
+SG|shared pool    |v_actprob                 |       664
+SG|shared pool    |sys event stats           |    536640
+SG|shared pool    |parameter handle          |    101136
+SG|shared pool    |LGWR post requested array |         8
+SG|shared pool    |post/wait queues          |      6144
+SG|shared pool    |cp cmon array             |      3632
+SG|shared pool    |Parameter Table           |     57576
+SG|shared pool    |latch nowait fails or sle |    169344
+SG|shared pool    |Nettimeout Histogram      |    151280
+SG|shared pool    |pso tbs: ksunfy           |     26000
+SG|shared pool    |dummy                     |     16664
+SG|shared pool    |private strands           |   1361920
+SG|shared pool    |property service SO       |      4056
+SG|shared pool    |prmtzdini tz region       |    801416
+SG|shared pool    |VIEW                      |      1040
+SG|shared pool    |ASM scan context          |      3416
+SG|shared pool    |KRSF SGA                  |        40
+SG|shared pool    |KQR M PO                  |   1477752
+SG|shared pool    |KQR L PO                  |   1126144
+SG|shared pool    |KQR S SO                  |     31784
+SG|shared pool    |plugin datafile array     |      3616
+SG|shared pool    |plwspv:PLW_STR_NEW_VAL    |        32
+SG|shared pool    |RVWR post requested array |         8
+SG|shared pool    |PARALLEL T RECO LATCH     |      1600
+SG|shared pool    |multiblock re             |     21552
+SG|shared pool    |KGSKI sga                 |        88
+SG|shared pool    |modification              |    131168
+SG|shared pool    |SAGE commit cache Allocat |        16
+SG|shared pool    |SGA structure for KWQDL o |        48
+SG|shared pool    |SGA - SWRF RawMet Runtime |      4576
+SG|shared pool    |KTU SGA                   |         8
+SG|shared pool    |kdlwss                    |     14400
+SG|shared pool    |system default language h |       568
+SG|shared pool    |kfiosg                    |         8
+SG|shared pool    |KGX                       |    128104
+SG|shared pool    |CGS system incarn array   |     24864
+SG|shared pool    |SCHEDULING POLICY TABLE   |       224
+SG|shared pool    |namhsh_kfdsg              |      4104
+SG|shared pool    |per_pg_set_descriptor_arr |     13952
+SG|shared pool    |pesom.c: Global_Sub_Heap  |       232
+SG|shared pool    |xscalc                    |      4056
+SG|shared pool    |HM_INFO                   |       944
+SG|shared pool    |AQ Propagation Scheduling |     16000
+SG|shared pool    |sim segment num bufs      |       640
+SG|shared pool    |alter system errs: kspnfy |    116736
+SG|shared pool    |L2 file global fob        |        72
+SG|shared pool    |session idle latches      |       160
+SG|shared pool    |SQL Workarea Histogram    |      1056
+SG|shared pool    |qesmmaInitialize: ia_qesm |       264
+SG|shared pool    |qesmmaInitialize:         |       112
+SG|shared pool    |array 1 for shared redo b |        24
+SG|shared pool    |ksbsa pointer array       |      2600
+SG|shared pool    |ksb process so list       |       888
+SG|shared pool    |ksws service object       |      3008
+SG|shared pool    |fixed allocation callback |       304
+SG|shared pool    |ksb action records        |      3888
+SG|shared pool    |done Q child latches      |       224
+SG|shared pool    |KCB private handles       |       600
+SG|shared pool    |kxfpSO q freelists        |       368
+SG|shared pool    |xsoqsehift                |      3160
+SG|shared pool    |xsoqophift                |      2904
+SG|shared pool    |ksdhng: wtr cache         |      1552
+SG|shared pool    |KTSL lat struct           |     40960
+SG|shared pool    |KTI pool states           |        16
+SG|shared pool    |kgnfs stats array         |      5240
+SG|shared pool    |KTC latch cleanup         |       480
+SG|shared pool    |KSFQ buffer pool          |      3032
+SG|shared pool    |kspload:comment           |        64
+SG|shared pool    |x$ksmfs table             |        32
+SG|shared pool    |dbwr message active flag  |         8
+SG|shared pool    |tablespace encryption mas |        16
+SG|shared pool    |dbwr suspend/resume array |        16
+SG|shared pool    |jsksncb: 2                |      7832
+SG|shared pool    |KSI Indexes               |       288
+SG|shared pool    |KTC latches               |      1760
+SG|shared pool    |KGX rowlist               |      6080
+SG|shared pool    |IPS_PACKAGE_HISTORY       |      1320
+SG|shared pool    |kzxslnfy: 0               |       304
+SG|shared pool    |KTPR SUBHEAP              |       168
+SG|shared pool    |KTF MAPPINGS              |     12288
+SG|shared pool    |kgnfs authp               |      8232
+SG|shared pool    |event statistics per sess |   1244704
+SG|shared pool    |UNDO STAT INFO            |     59904
+SG|shared pool    |branch                    |     43776
+SG|shared pool    |row cache                 |   7584808
+SG|shared pool    |dbgefgHtInit-1            |       528
+SG|shared pool    |dbgefgHtInit-2            |        40
+SG|shared pool    |ksuloi: long op used list |        16
+SG|shared pool    |ksuloi: child latches for |       160
+SG|shared pool    |ksuloi: garbage collectio |         8
+SG|shared pool    |ksb rolling migration sta |         8
+SG|shared pool    |ksfd shared pool recovery |        24
+SG|shared pool    |ksfd: file i/o stats poin |      3464
+SG|shared pool    |hash bucket array allocat |     49152
+SG|shared pool    |v_inccount                |       664
+SG|shared pool    |SQLK                      |     20240
+SG|shared pool    |kkae edition name cache   |       408
+SG|shared pool    |kglsim free heap list     |       408
+SG|shared pool    |vincident_file            |      1040
+SG|shared pool    |processes                 |       400
+SG|shared pool    |KSRPC I/O Stat array      |       144
+SG|shared pool    |knlu_init_btree:init      |        80
+SG|shared pool    |kglsim alloc latches      |       136
+SG|shared pool    |LISTEN ADDRESS ENTRY      |       152
+SG|shared pool    |PLS SGA hp                |     46320
+SG|shared pool    |qesbl old rows            |      1120
+SG|shared pool    |alert threshol            |      4136
+SG|shared pool    |log_checkpoint_timeout    |     12360
+SG|shared pool    |PX subheap                |     32696
+SG|shared pool    |latch hash-value table    |      2144
+SG|shared pool    |Role graph heap           |       160
+SG|shared pool    |SERVICE NAMES TABLE       |      2048
+SG|shared pool    |pspool_kfsg               |        80
+SG|shared pool    |VIEWCOL                   |       752
+SG|shared pool    |vincident                 |      3296
+SG|shared pool    |sim segment hits          |      1280
+SG|shared pool    |procs: ksunfy             |    208000
+SG|shared pool    |PG latch table            |       640
+SG|shared pool    |PLS cca hp desc           |       352
+SG|shared pool    |PX QC msg stats           |      2816
+SG|shared pool    |bt_subentry               |       832
+SG|shared pool    |OS proc request holder    |     13816
+SG|shared pool    |media recovery state obje |     10288
+SG|shared pool    |constraints               |     33024
+SG|shared pool    |PX server msg stats       |      2816
+SG|shared pool    |ksv slave                 |     13560
+SG|shared pool    |parameter value memory    |       944
+SG|shared pool    |reserved entries for all  |      5760
+SG|shared pool    |KGLSG                     |   5264904
+SG|shared pool    |SGA structure for KPON ks |       400
+SG|shared pool    |SGA structure for KWQDL h |       216
+SG|shared pool    |SGA - SWRF DrvMet Runtime |      6288
+SG|shared pool    |kks sga                   |        48
+SG|shared pool    |change tracking recovery  |    262144
+SG|shared pool    |KKTIN                     |     17312
+SG|shared pool    |name-service entry        |      3544
+SG|shared pool    |Array of cached attr      |       400
+SG|shared pool    |spfile cleanup structure  |     16760
+SG|shared pool    |os statistics             |        48
+SG|shared pool    |Policy Cache Heap descrpt |       160
+SG|shared pool    |KGLS                      |   5500408
+SG|shared pool    |KGLNA                     |     84216
+SG|shared pool    |SGA structure for ktslgt  |     47200
+SG|shared pool    |Cleanup state objects     |      1760
+SG|shared pool    |slave class sga anchor    |       352
+SG|shared pool    |resize operation history  |     28808
+SG|shared pool    |Result Cache: Bloom Fltr  |      2048
+SG|shared pool    |Result Cache: Cache Mgr   |      5552
+SG|shared pool    |HM_FDG_SET                |       848
+SG|shared pool    |time manager context      |        40
+SG|shared pool    |file # to first dba, exte |      2416
+SG|shared pool    |KEWS statistic name       |      2248
+SG|shared pool    |ksfd I/O slave ctx        |       256
+SG|shared pool    |flashback_marker_cache_si |      9200
+SG|shared pool    |kscdnfyinitflags          |         8
+SG|shared pool    |KTCTSNL freelists         |        88
+SG|shared pool    |KGI Session State         |      1600
+SG|shared pool    |kxfpdp pointers           |     28800
+SG|shared pool    |KFG state obj             |      6904
+SG|shared pool    |kzsrs filename            |       536
+SG|shared pool    |INC_METER_IMPT_DEF        |      1040
+SG|shared pool    |INC_METER_PK_IMPTS        |      1040
+SG|shared pool    |vips_package_main_int     |       664
+SG|shared pool    |distributed_transactions- |      9976
+SG|shared pool    |ksdhng: cbuf              |     32768
+SG|shared pool    |KTI latches               |       320
+SG|shared pool    |KGSK scheduler            |     20208
+SG|shared pool    |KKJ WRK LAT               |       480
+SG|shared pool    |HM_RECOMMENDATION         |      2072
+SG|shared pool    |kfkhsh_kfdsg              |      4104
+SG|shared pool    |Wait History Segment      |    100880
+SG|shared pool    |IPS_FILE_METADATA         |       944
+SG|shared pool    |INC_METER_CONFIG          |      1224
+SG|shared pool    |event statistics ptr arra |       776
+SG|shared pool    |KGKP randnum              |     40000
+SG|large pool     |PX msg pool               |    491520
+SG|large pool     |free memory               |   3702784
+SG|java pool      |free memory               |   4194304
+SG|streams pool   |free memory               |   2867344
+SG|streams pool   |fixed allocation callback |       448
+SG|streams pool   |KWQDL hash ta             |      6080
+SG|streams pool   |KTG hash buckets          |   1320432
+[oracle.sh info] 881 selected rows
+[pierre@vcentos6 ~]$ 
+

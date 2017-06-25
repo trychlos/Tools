@@ -1,0 +1,67 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:43
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTCAT   - Catalog file command
+                    -------------------------------
+ 
+  CAT0                            
+          Catalog file name           FNAME    =
+          *_CFTCATA                                                        
+ 
+          Scan file frequency         WSCAN    = 1     mn
+          Update file frequency       UPDAT    = 1    
+          Cache memory size           CACHE    = 512  
+          Purge time                  TIMEP    = 23595999
+          Action on error             RKERROR  = KEEP  
+ 
+          Command retention period in catalog (in days)
+          ---------------------------------------------
+ 
+          State                            Send        Receive
+          -----                            ----        -------
+          (D)isp,(C)urrent,(H)old,(K)eep   SH = 10     RH = 10   
+          (T)erminated                     ST = 10     RT = 10   
+          e(X)ecuted                       SX = 10     RX = 10   
+ 
+          Notification of log events to NTF           
+          --------------------------------------------
+          Notification to NTF         NTF      = NO 
+          Notify State transitions    NTFSTATE = CDHKTX  
+ 
+          Management of critical fill thresold alerts 
+          --------------------------------------------
+          Level before issuing alert  TLVWARN  = 80 %
+          Batch alert to execute      TLVWEXEC =
+          *                                                                
+ 
+          Time between 2 alerts       TLVWRATE = 60    s
+          Level end of alert          TLVCLEAR = 70 %
+          Batch when alert ceases     TLVCEXEC =
+          *                                                                
+ 
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372558
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571213
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=cat)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:43
+CFTU20I Session active for  0:00:00

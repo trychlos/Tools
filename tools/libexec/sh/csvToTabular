@@ -1,0 +1,74 @@
+# @(#) Reformat a csv output to a tabular one
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I). 1. whether a headers line is displayed
+#         yes|no
+#         defaults to "yes"
+#
+# (O). -
+#
+# pwi 2013- 7-25 creation
+# pwi 2017- 6-21 publish the release at last
+
+function csvToTabular
+{
+	typeset _headers="${1:-yes}"
+	typeset _csvsep="${ttp_csvsep:-;}"
+	typeset _tabsep="${ttp_tabularsep:-|}"
+
+	perl -se '{
+		sub display_line {
+			$il = shift;
+			print ${tabsep};
+			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
+				printf( " %-*s %s", $column[$j], $lines[$il][$j], $tabsep );
+			}
+			print "\n";
+			if( $il == 0 && $headers eq "yes" ){
+				print "+";
+				for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
+					$len = 2+$column[$j];
+					print "-" x $len;
+					print "+";
+				}
+				print "\n";
+			}
+		}
+		$nl = 0;
+		@column = ();
+		@lines = ();
+		while( <STDIN> ){
+			#print;
+			chomp;
+			$lines[$nl] = [split /${csvsep}/];
+			$icol = 0;
+			foreach $col ( @{$lines[$nl]} ){
+				$len = length( $col );
+				$column[$icol] = $len if !defined( $column[$icol] ) || $len > $column[$icol];
+				$icol += 1;
+			}
+			$nl += 1;
+		}
+		for( $i=0 ; $i<$nl ; ++$i ){
+			display_line( $i );
+		}
+	}' -- -headers="${_headers}" -csvsep="${_csvsep}" -tabsep="${_tabsep}"
+}

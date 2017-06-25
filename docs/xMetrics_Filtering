@@ -1,0 +1,62 @@
+$ find -type f  | grep -v .svn | while read f; do grep -il metrics $f; done
+grep: ./v2/doc/Metrics: No such file or directory
+grep: &: No such file or directory
+grep: Filtering: No such file or directory
+./v2/doc/oracle/oracle.sh_info_sga_11gr2_0
+./v2/doc/oracle/oracle.sh_info_sga_11gr2
+./v2/tools/oracle/test.ksh						x
+./v2/tools/oracle/info.ksh						x
+./v2/tools/libexec/sh/sqloutMetrics				x
+./v2/tools/libexec/sh/strMetrics				x
+./v2/tools/libexec/cft/cftCatalogMetrics		x
+./v2/tools/cft/list.ksh							x
+============================================================================
+
+./v2/tools/cft/list.ksh
+	used for catalog full
+
+./v2/tools/libexec/cft/cftCatalogMetrics
+	a function which extract some informations from the CFT catalog
+	outputting them as csv data
+	(with a hostname, and a header line)
+
+	this is a limited version of new cft.sh list --catalog=full
+	which outputs
+	> either the raw catalog list
+	> or a SQL-like display (94 columns)
+
+./v2/tools/oracle/test.ksh
+	use oracle.sh info --version --metrics
+	in order to test the database connection (getting the database version)
+
+./v2/tools/oracle/info.ksh
+	sqloutMetrics function is used by all info options
+	All the outputs are of the same form:
+		[oracle.sh info] <the content of the display (e.g. list of tablespaces)>:
+		<sql-like display> header|header
+		<sql-like display> ------|------
+		<sql-like display> data  |data
+		[oracle.sh info] <count> displayed rows
+
+./v2/tools/libexec/sh/sqloutMetrics
+	test opt_metrics command-line option
+		piping through strMetrics (outputting as csv data)
+		or displaying to stdout with first message and last count lines
+
+./v2/tools/libexec/sh/strMetrics
+	pipe ad trim aaaa|bbbb to aaaa;bbbb 
+	note that strMetrics is specifically adapted to tabular formats
+	where the first column is two chars width ('--|------')
+
+TODO:
+	1. Standard for data output is the tabular format (aka SQL-like)
+
+	2. Other simple transformations are made by "ttp.sh filter" verb
+
+	cft.sh list --catalog=full
+		replacing --sql and --metrics option
+		with --mode={raw|sql}
+			where raw is raw CFTUTIL display
+			and sql is the new full sql-like display mode (94 columns)
+
+	cftCatalogMetrics is to be obsoleted

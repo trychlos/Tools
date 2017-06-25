@@ -1,0 +1,437 @@
+SQL> select TOTAL_WAITS,TOTAL_TIMEOUTS,TIME_WAITED,AVERAGE_WAIT,EVENT from v$system_event order by TIME_WAITED;
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  1		 0	     0		 .1
+latch: messages
+
+	  3		 0	     0		.04
+cursor: pin S
+
+	  1		 0	     0		.07
+instance state change
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  2		 0	     0		.03
+enq: TX - row lock contention
+
+	  9		 0	     0		  0
+ARCH wait for archivelog lock
+
+	  1		 0	     0		.15
+latch: object queue header operation
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  4		 0	     0		.04
+latch: call allocation
+
+	 16		 0	     1		.06
+latch: cache buffers lru chain
+
+	324		 0	     2		.01
+direct path read temp
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	152		 0	     4		.03
+ADR file lock
+
+	  1		 0	     4	       3.81
+library cache lock
+
+	  9		 0	     5		.56
+library cache: mutex X
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	194		 0	     7		.03
+SQL*Net more data to client
+
+	 11		 0	     9		 .8
+LGWR wait for redo copy
+
+	  6		 0	     9	       1.57
+latch: cache buffers chains
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  1		 1	    10	      10.11
+JS kgl get object wait
+
+	 53		 0	    10		.19
+latch: row cache objects
+
+       1131		 0	    15		.01
+SQL*Net more data from client
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+      24806	     24806	    15		  0
+asynch descriptor resize
+
+	  3		 0	    15	       4.86
+enq: JS - queue lock
+
+	  5		 0	    19	       3.87
+utl_file I/O
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 14		 0	    21	       1.47
+latch: enqueue hash chains
+
+	  5		 0	    25	       5.02
+buffer busy waits
+
+	126		 0	    40		.32
+Log archive I/O
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+     118871		 0	    40		  0
+SQL*Net message to client
+
+	  1		 0	    45	      45.43
+Disk file Mirror/Media Repair Write
+
+	  6		 6	    60	      10.06
+resmgr:internal state change
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  5		 0	    74	      14.81
+recovery read
+
+	100		 0	    91		.91
+direct path write
+
+	 89		89	    98		1.1
+buffer exterminate
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  4		 0	    99	      24.65
+latch: session allocation
+
+	  2		 1	   100	      50.05
+JS coord start wait
+
+	  1		 1	   100	     100.03
+PL/SQL lock timer
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  1		 0	   142	     142.39
+library cache pin
+
+	 11		 0	   154	      13.95
+row cache lock
+
+	  2		 2	   200	      100.1
+ARCH wait for process start 3
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	118		 0	   203	       1.72
+latch free
+
+       3696		 0	   205		.06
+Disk file operations I/O
+
+	 18		 1	   256	      14.22
+reliable message
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 22		 0	   304	       13.8
+log file single write
+
+	  4		 0	   307	      76.73
+Streams AQ: qmn coordinator waiting for slave to start
+
+	  1		 1	   400	     400.11
+control file heartbeat
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 41		40	   405	       9.88
+SGA: sga_target resize
+
+	 22		 0	   409	       18.6
+db file single write
+
+	169		 0	   477	       2.82
+latch: shared pool
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  2		 0	   594	     297.03
+log file switch (private strand flush incomplete)
+
+	 72		 0	   600	       8.33
+read by other session
+
+	 21		 0	   641	      30.53
+direct path sync
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+      17193		 0	   732		.04
+SQL*Net break/reset to client
+
+	  2		 1	   795	     397.73
+checkpoint completed
+
+       6918		 0	   839		.12
+direct path read
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  2		 0	   880	     440.11
+job scheduler coordinator slave wait
+
+	 24		 0	   886	       36.9
+Data file init write
+
+	  2		 0	   889	     444.52
+enq: PR - contention
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	  4		 0	   903	     225.67
+enq: KO - fast object checkpoint
+
+      90321		 0	  1055		.01
+control file sequential read
+
+       1224	      1213	  1334	       1.09
+SGA: MMAN sleep for component shrink
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	683		 0	  1358	       1.99
+ADR block file read
+
+	126		 0	  1375	      10.91
+ADR block file write
+
+	102		 0	  1429	      14.01
+log file sequential read
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 29		 7	  1878	      64.75
+rdbms ipc reply
+
+	 76		 0	  1926	      25.34
+db file parallel read
+
+	 12		 0	  2052	     171.01
+enq: CF - contention
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 54		 0	  2313	      42.83
+cursor: pin S wait on X
+
+	 60		 0	  2607	      43.45
+library cache load lock
+
+	385	       378	  3857	      10.02
+SGA: allocation forcing component growth
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	520		 0	  4664	       8.97
+Parameter File I/O
+
+	463		 0	  6557	      14.16
+direct path write temp
+
+       1818		 0	  7326	       4.03
+os thread startup
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+       2464		 0	 10608	       4.31
+db file scattered read
+
+	737		 0	 12454	       16.9
+resmgr:cpu quantum
+
+	254		 0	 59420	     233.94
+class slave wait
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+       5525		 0	205879	      37.26
+log file sync
+
+      12332		 0	945491	      76.67
+db file async I/O submit
+
+      20566		 0     1039585	      50.55
+log file parallel write
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+      15221		 0     1118421	      73.48
+control file parallel write
+
+	  1		 0     1439992	  1439991.8
+VKRM Idle
+
+     241750		 0     1586551	       6.56
+db file sequential read
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	 54		29     2221572	   41140.23
+Streams AQ: waiting for time management or cleanup tasks
+
+	184	       149     4564505	   24807.09
+smon timer
+
+      41470	     40701     4815587	     116.12
+wait for unread message on broadcast channel
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+       8180	      8169     4815975	     588.75
+Streams AQ: waiting for messages in the queue
+
+       9198	      9071     5280156	     574.05
+Space Manager: slave idle wait
+
+       3275	      1638     5313309	    1622.38
+Streams AQ: qmn coordinator idle wait
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+	765	       765     5316230	    6949.32
+dispatcher timer
+
+       1676		 2     5317697	    3172.85
+Streams AQ: qmn slave idle wait
+
+      17513	     15284     5318662	      303.7
+pmon timer
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+       1531	      1530     5319594	    3474.59
+shared server idle wait
+
+      95988	     95787     6262157	      65.24
+jobq slave wait
+
+      91720	     91720    10639216		116
+DIAG idle wait
+
+
+TOTAL_WAITS TOTAL_TIMEOUTS TIME_WAITED AVERAGE_WAIT
+----------- -------------- ----------- ------------
+EVENT
+----------------------------------------------------------------
+     119860		 0    42446374	     354.13
+SQL*Net message from client
+
+     205078	    191487    81754730	     398.65
+rdbms ipc message
+
+
+92 rows selected.
+
+SQL> 
+

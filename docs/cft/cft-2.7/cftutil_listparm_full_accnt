@@ -1,0 +1,49 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:47:12
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTACCNT - Account file command
+                    -------------------------------
+ 
+  ACCNT0                          
+          Programming language        LANGUAGE = C     
+          Type                        TYPE     = FILE 
+ 
+          Account file name           FNAME    =
+          *_CFTACNT                                                        
+          Alternate account file name AFNAME   =
+          *_CFTACNTA                                                       
+ 
+          Account Version             FORMAT   =
+          *V24                                                             
+          Switching from current to alternate account
+          -------------------------------------------
+          Switch time                 SWITCH   = 23:59:00
+          Switch nb records           MAXREC   = 500   
+          Execute procedure           EXEC     =
+          *$CFTDIREXEC/switchacnt.cmd                                      
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372559
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571213
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=accnt)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:47:12
+CFTU20I Session active for  0:00:00

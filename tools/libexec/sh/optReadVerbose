@@ -1,0 +1,85 @@
+# @(#) Loop over command-line options, searching for '--[no]verbose' mode
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): -
+#
+# (O): return: count of errors
+#
+# pwi 2013- 2-18 creation
+# pwi 2013- 6- 3 use the dynamic command-line interpretation
+# pwi 2017- 6-21 publish the release at last 
+#
+# $Id: optReadVerbose 3264 2013-07-23 20:25:30Z  $
+
+function optReadVerbose
+{
+	#set -x
+	opt_verbose_set="no"
+	opt_verbose_def="no"
+
+	typeset -i _ret=0
+	typeset -i _ia=1
+	while [ ${_ia} -le $# ]; do
+		typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+		[ "${_arg}" = "--" ] && break
+
+		# make options have two hyphens
+		case ${_arg} in
+			--*)
+				;;
+			-*)
+				_arg="-${_arg}"
+				;;
+		esac
+
+		# now try to process the '--[no]verbose' option
+		case "${_arg}" in
+			--*=*)
+				;;
+			--*)
+				optGetOption ${_arg:2} "yes"
+				typeset -i _idx=$?
+				if [ ${_idx} -eq 0 ]; then
+					let _ret+=1
+				else
+					let _idx-=1
+					typeset _optarg="${ttp_optargs_key[${_idx}]}"
+					if [ "${_optarg}" = "verbose" ]; then
+						opt_verbose_set="yes"
+						typeset _prefix="${_arg:2:2}"
+						if [ "${_prefix}" = "no" ]; then
+							opt_verbose="no"
+						else
+							opt_verbose="yes"
+						fi
+						ttp_usedargs[${_ia}]="yes"
+					fi
+				fi
+				;;
+		esac
+		let _ia+=1
+	done
+
+	opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
+	msgVerbose "setting opt_verbose to 'yes'"
+
+	return ${_ret}
+}

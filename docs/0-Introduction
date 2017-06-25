@@ -1,0 +1,109 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/0-Introduction
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   What is it
+   Features
+   Maintenability and versions concurrency
+
+-----------------------------------------------------------------------
+ What is it
+ ==========
+
+ The Tools Project is a script library targeting applicative production.
+ It may also be seen as a Production Scripting Interface (PSI).
+
+ The Tools Project targets IT teams:
+
+ - application developers,
+ - integrators,
+ - production operators.
+
+ The Tools Project provides to IT teams a common library which offers
+ many benefits:
+ 
+ - first, offer to the IT teams an unified command-line interface to
+   the managed tools and services
+  
+   . encapsulates all the gory details of managed products
+   . keeps a common, homogeneous, consistent interface
+   . provides full execution logs
+   . provides a securized behavior, including an online help.
+
+ - second, offer to the applications an unified access to all
+   production services, without regarding of the running environment
+
+ - third, ensure that scripts are exactly the same between the
+   environments, by forcing all parameters to be isolated in
+   well-known configuration files
+
+ - last, offer an integrated audit track of all executed commands.
+
+ The Tools Project targets both:
+ - developers who are now able to take advantage of these resources
+ - integrators who no more have to deal with products themselves more
+   than once
+ - exploitation teams which take benefit of consistency, audit trace,
+   online help, and more.
+
+ The investment required to design, develop and test these tools is
+ largely convered by:
+
+ - a shorter integration delay of new guys in the IT team as the
+   commands are unified and self-explanatory
+
+ - a better share of competencies inside of the team: because all the
+   written code only used interpreted languages, anybody is able to
+   look at it and understand how it works;
+
+ - the separation between configuration and code is a major step in
+   system industrialization, thus bringing more efficiency,
+   reliability and stability to the applications;
+
+ - the total removing of all incidents due to a script which must be
+   modified when being moved from an environment to another.
+
+ The whole thing finally builds a production library where most of
+ configuration and code is shared, reusable, well tested.
+
+-----------------------------------------------------------------------
+ Features
+ ========
+
+   Unified, self-explained, command-line interface
+   Full execution logs
+   Full audit track
+   Identity among environments
+   Command agnosticity between environments
+   Common code vs. site properties separation
+   Version concurrency
+
+-----------------------------------------------------------------------
+ Maintenability and versions concurrency
+ =======================================
+
+ Starting with v2, several versions of The Tools Project can be made
+ available simultaneously.
+
+ This has two main benefits:
+
+ - we are now able to store the site configuration files apart from the
+   TTP code; TTP updates are simpler as a new version can just fully
+   replace the previous one, being sure that nothing of the site
+   configuration files will be modified
+
+ - we can have a production-state TTP code, besides of a development
+   tree on a coder home directory, without having to duplicate all the
+   unchanged stuff.
+
+ Each time The Tools Project searches for a file, it searches it in the
+ ordered list of TTPROOT's trees, the first being found winning.
+ The order is determined when populating the FPATH variable, most often
+ at bootstrap time.
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

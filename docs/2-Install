@@ -1,0 +1,159 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/2-Install
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Prerequisites
+   Installation
+     Structure of the TTP tree
+   Addressing The Tools Project
+     User environment
+     Remote execution
+
+     Mandatory: address the shell functions
+     Optional: address the commands
+     Define TTP_SHDIR variable
+     Setup a default node
+     Bootstrap from the login profile
+   Initial configuration
+
+-----------------------------------------------------------------------
+ Prerequisites
+ =============
+
+ The Tools Project has following minimal requirements:
+
+   > ksh-93 (or newer) available as /bin/ksh
+   > perl 5 (or newer) available as /usr/bin/perl
+
+-----------------------------------------------------------------------
+ Installation
+ ============
+
+ The Tools Project tree can be installed in any directory you want,
+ either in a local or in a nfs-shared one. The only requirement is that
+ the filesystem must support the executable bit.
+
+ In the rest of this document, the directory where you have chosen to
+ install the Tools Project tree will be called TTPROOT.
+
+ If your site implements the 'logical machine' notion,
+ see docs/3-LogicalMachine for why it is not a good idea to install The
+ Tools Project in the logical tree.
+
+   Structure of the TTP tree
+   -------------------------
+   The Tools Project tree has the following structure:
+
+     TTPROOT/
+       |
+       +- bin/                 Hosts the commands
+       |                       Is adressed via the PATH variable
+       |
+       +- etc/                 Configuration files
+       |   |
+       |   +- nodes/           The nodes configuration files
+       |   |
+       |   +- private/         Password files
+       |   |
+       |   +- ttp/             Global TTP configuration
+       |
+       +- libexec/             Functions and subroutines
+       |   |
+       |   +- sh/              Hosts shell functions
+       |   |                   Is adressed via the FPATH variable
+       |   |
+       |   +- perl/            Perl modules
+       |   |
+       |   +- <command1>/      Functions specific to <command1> command
+       |                       (if any)
+       |
+       +- <command1>/          Hosts the verbs for the <command1>
+       |                       command
+       |
+       +- <command2>/          Hosts the verbs for the <command2>
+                               command
+
+   The above structure explains the reason for why a command name must
+   be chosen to not be in 'bin', 'etc' or 'libexec': one could not
+   create the corresponding verb directory.
+
+ Obviously, all users of The Tools Project must have read and execute
+ permissions of all of each TTP trees.
+
+ It would may be a good idea to define a group and an account which
+ would be the owner of each TTP trees, and to make sure all users of
+ The Tools Project be a member of this group.
+
+-----------------------------------------------------------------------
+ Addressing The Tools Project
+ ============================
+
+   User environment
+   ----------------
+   In order to use The Tools Project, each user must initialize his/her
+   user environment.
+ 
+   1. Mandatory: address the shell functions
+
+      The Tools Project is not self-addressable. You have to preset at
+      least the FPATH variable in the execution environment of your
+      running shell:
+
+        FPATH=$FPATH:TTPROOT/libexec/sh
+
+      If you are working with several versions of TTP, then each one
+      must be adressed in a consistant manner, the formers being
+      precedence on the laters.
+
+   2. Optional: address the commands
+
+      Though this is not strictly required in order the TTP be
+      runnable, and it would be perfectly acceptable to address the
+      commands by their full filename, we strongly suggest to update
+      your PATH:
+
+        PATH=PATH:TTPROOT/bin
+
+   3. Mandatory: define TTP_SHDIR variable
+
+      Because The Tools Project supports the 'logical machine' paradigm,
+      there is some situations where it cannot rely on the FPATH
+      variable.
+      A TTP_SHDIR must be defined to address (one of) the main shell
+      functions directory.
+
+   4. Mandatory: define the initial execution node
+
+      This is done by calling the ". ttp.sh switch --node <name>"
+      command.
+
+   As a convenience, The Tools Project provides in the
+   libexec/bootstrap/ subdirectory some scripts which may be called
+   from a user profile to make this initialization easyer:
+
+     TTP=<dir>; . ${TTP}/libexec/bootstrap/sh_profile
+     TTP=<dir>; . ${TTP}/libexec/bootstrap/sh_node
+
+   or:
+
+     TTP=<dir>; source ${TTP}/libexec/bootstrap/csh_profile
+     TTP=<dir>; source ${TTP}/libexec/bootstrap/csh_node
+
+   Remote execution
+   ----------------
+   When a command targets a service which is available on another node,
+   The Tools Project automatically ssh to the target node and
+   re-executes itself.
+
+   You have to install the required ssh public keys in all possible
+   target accounts/hosts in order these ssh's may be password-less.
+
+   We suggest defining a single ssh key, shared among all users/hosts,
+   dedicated to this usage.
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

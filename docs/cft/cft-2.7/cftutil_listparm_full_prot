@@ -1,0 +1,76 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:44
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTPROT  - Applicative transfer protocol command
+                    ------------------------------------------------
+ 
+  PESITANY                        
+          Protocol                    TYPE     = PESIT     
+          Ressource                   NET      = NET0                            
+          Services Access Point       SAP      = 1761                            
+          Requester way               SROUT    = BOTH      
+          Server way                  SRIN     = BOTH      
+          Max. restarts               RESTART  = 5    
+          Partners exit id.           EXITA    =                                 
+          Dynamic partner id.         DYNAM    =                                 
+          Etebac3 exit id.            EXITE    =                                 
+          Conversion NIDF in          IDF      =
+          *                                                                
+          SSL id.                     SSL      =                                 
+          Extended transcoding        FCHARSET =                                 
+                                      NCHARSET =                                 
+ 
+          Profile                     PROF     = ANY       
+          Dynamic restart             RESYNC   = NO 
+          Multi-records               MULTART  = YES
+          Concatenation               CONCAT   = YES
+          CRC used                    PAD      = NO 
+          Segmentation                SEGMENT  = YES
+          LOGON sending               LOGON    = YES
+          HIDE part of PI99           HIDE99   = NO 
+          Negative acknowledgment     NACK     = NO 
+ 
+                                      Send                 Receive
+                                      ----                 -------
+          Data compression type       SCOMP    = 0         RCOMP   = 0  
+          Synch. point interval       SPACING  = 10240     RPACING = 10240
+          Record unit size            SRUSIZE  = 32750     RRUSIZE = 32750
+          Checkpoint window size      SCHKW    = 3         RCHKW   = 3    
+          Wanted service              SSERV    = PESIT     RSERV   =         
+ 
+          Time out :
+          Read                        RTO      = 260   
+          Disconnect on Connect FPDU  DISCTC   = 90    
+          On Abort FPDU               DISCTR   = 45    
+ 
+          Time between :
+          Requester transfers         DISCTD   = 120   
+          Server transfers            DISCTS   = 165   
+ 
+          Reverse direct. on session  REVERSE  =    
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372559
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571214
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=prot)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:44
+CFTU20I Session active for  0:00:00

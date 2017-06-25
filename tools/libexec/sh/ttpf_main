@@ -1,0 +1,261 @@
+# @(#) Core (main) function
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Logs the call in the main.log file of the logs directory.
+#   Set the following variables, available in all other functions
+#   and verbs:
+#
+##   ttp_args             a copy of original command-line arguments as a
+#                         string where values are quoted;
+#                         e.g. "-mnemo TRYSMA -command 'show parameters' 'un file.csv'"
+#
+#   ttp_binsubdir         TTPROOT subdirectory where commands are expected
+#                         to be found;
+#                         defaults to 'bin'
+#
+#   ttp_code              exit code;
+#                         defaults to count of functions which have
+#                         detected an error
+#
+#   ttp_command           command name
+#                         e.g. 'tools.sh'
+#
+#   ttp_command_path      command full pathname
+#                         e.g. '/net/tools/bin/tools.sh'
+#
+#   ttp_errs              errors count
+#
+#   ttp_etcsubdir         TTPROOT subdirectory where configuration files
+#                         are expected to be found;
+#                         defaults to 'etc'
+#
+#   ttp_execsubdir        TTPROOT subdirectory where auxiliary functions
+#                         are stored; 
+#                         defaults to 'libexec'
+#
+#   ttp_logicals_re       the end of the pathname to the configuration file
+#                         which defines the regular expression which identifies
+#                         the logical machines;
+#                         defaults to 'etc/ttp/logicals.re'
+#
+#   ttp_logsroot          the absolute path of the root of the TTP logs
+#                         directory;
+#                         e.g. '/host/prod/var/dayly'
+#
+#   ttp_main_log          basename of the main log file;
+#                         defaults to 'main.log'
+#
+#   ttp_node_conf         .ini configuration full pathname (mandatory);
+#                         e.g. 'TTPROOT/etc/nodes/mstintin.ini'
+#
+#   ttp_node_environment  environment string of the current execution node
+#                         read from node configuration file
+#
+#   ttp_nodesubdir        TTPROOT subdirectory where nodes configuration
+#                         files are expected to be found;
+#                         defaults to '<ttp_etcdir>/nodes'
+#
+#   ttp_roots             colon-separated list of TTPROOT trees in a
+#                         decreasing order of precedence
+#                         e.g. '<HOME>/TTPDev:<TTPROOT_PROD>'
+#
+#   ttp_stamp             count of seconds since 1970-01-01 (epoch time)
+#                         at start of the execution;
+#                         used e.g. in pathGetTempFile to ensure the unicity
+#                         of the 'verb-pid-stamp-mnemo' sequence
+#
+#   ttp_toolslogsubdir    TTPROOT subdirectory where commands logs are to
+#                         be written;
+#                         defaults to 'tools'
+#
+#   ttp_ttpsubdir         TTPROOT subdirectory where global configuration
+#                         files are expected to be found;
+#                         defaults to '<ttp_etcdir>/ttp'
+#
+#   ttp_verb              verb name
+#                         e.g. 'list'
+#
+#   ttp_verb_path         the full pathname of the verb script
+#                         e.g. '/net/tools/cft/list.sh'
+#
+# First argument is supposed to be the pathname of the calling script
+# (the command). If the calling script is addressed via the PATH
+# variable, the pathanme is a full pathname:
+#  - Linux ksh 2008 (CentOS 5): ok
+#  - Linux ksh 2012 (Fedora 18): ok
+#  - Aix 6.1 ksh-88: ok
+#
+# pwi 1998-10-21 creation
+# pwi 1999- 4- 2 always set GEDLOGJ
+# pwi 2001-10-17 remove GEDTOOL variable
+# xle 2001-12-18 temporarily set _EXIT variable
+# pwi 2002- 2-28 tools are now installed on the physical host
+# pwi 2002- 5-17 set _GEC_VERBOSE and _GEC_DATE variables
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2012- 7-12 tools target a virtual boxes environment
+# pwi 2013- 5- 1 Aix 6.1 port
+# pwi 2013- 6-27 logicals .ini file are found in ttp_nodesdir
+# pwi 2013- 7- 5 configuration file is loaded in an in-memory array
+# pwi 2013- 7-29 review errors count and exit code management
+# pwi 2017- 6-21 publish the release at last 
+
+function ttpf_main
+{
+	#set -x
+	#echo "0=$0 #=$# *=$*" >&2
+
+	typeset -i _inproc=0
+	[ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] && _inproc=1
+	if [ ${_inproc} -eq 1 ]; then
+		[ "${1##*/}" != "ttp.sh" -o "${2}" != "switch" ] \
+			&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; return 1; }
+	fi
+
+	trap 'trap_int'  INT
+	trap 'trap_exit' EXIT
+
+	[ -z "${TTP_NODE}" -a ${_inproc} -eq 0 ] \
+		&& { echo "[TTP] no current execution node, aborting" >&2; return 1; }
+
+	# setup some global constants which are used in the Tools
+	ttp_errs=0
+	ttp_code=0
+	ttp_main_log="main.log"
+	#ttp_passwords="${ttp_etcdir}/private/passwords"
+	bspInitVars
+
+	# compute the ordered list of candidate TTPROOT trees from FPATH
+	ttp_roots="$(bspRootCompute)"
+	#echo "ttp_roots='${ttp_roots}'"
+	#ttp_roots='/home/pierre/data/eclipse/Tools/v2/tools'
+
+	# loads the site-wide default configuration file into an array
+	typeset _req="${ttp_ttpsubdir}/defaults.ini"
+	typeset _file="$(bspFind "${_req}")"
+	[ -z "${_file}" ] \
+		|| confLoadKeys "ttp_default_keys" "${_file}"
+
+	# load the machine configuration file into an in-memory array
+	#typeset -A ttp_node_keys
+	_req="${ttp_nodesubdir}/${TTP_NODE}.ini"
+	_file="$(bspFind "${_req}")"
+	[ -z "${_file}" ] \
+		&& { echo "[TTP] ${_req}: file not found or not readable" >&2; return 1; } \
+		|| { ttp_node_conf="${_file}"; confLoadKeys "ttp_node_keys" "${ttp_node_conf}"; }
+
+	ttp_node_environment="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=environment" 1)"
+	ttp_logsroot="$(pathGetLogsRoot)"
+
+	#
+	# end of global initialization
+	# end of node initialization
+	# beginning with the command
+	#
+	
+	ttp_stamp="$(date '+%s')"
+	msglog "$*"
+
+	ttp_command_path="$(commandGetPath "${1}")"
+	ttp_command="${ttp_command_path##*/}"
+	shift
+	#echo "ttp_command='${ttp_command}'"
+	#ttp_command='tools.sh'
+
+	# no verb nor option, then just display the list of available verbs
+	#  for this command
+	if [ $# -eq 0 ]; then
+		scriptDetail "${ttp_command_path}" &&
+		scriptListVerbs "${ttp_command_path}"
+		verbExitOnErr $?
+		return
+	fi
+
+	# the first word should be the verb
+	ttp_verb="${1}"
+	shift
+	ttp_verb_path="$(scriptFindVerb "${ttp_verb}")"
+	if [ -z "${ttp_verb_path}" ]; then
+		msgerr "no '${ttp_verb}' verb found for '${ttp_command}' command" &&
+		msgout "try '${ttp_command}' command to get the list of available verbs"
+		verbExitOnErr 1 "no"
+	fi
+
+	# append the local FPATH variable to add libexec/<command>
+	commandMunge "${ttp_command%.*}"
+
+	# source the verb script so that functions defined in it are
+	#  available here
+	. "${ttp_verb_path}"
+
+	# load positional and optional arg definitions
+	#  call 'verb_arg_define_opt' and 'verb_arg_define_pos' functions
+	#  if they are defined by the verb
+	#typeset -A ttp_optargs_key
+	#typeset -A ttp_optargs_hlp
+	#typeset -A ttp_optargs_dsc
+	#typeset -A ttp_optargs_mdt
+	#typeset -i ttp_optargs_count=0
+	#typeset -A ttp_posargs_key
+	#typeset -A ttp_posargs_hlp
+	#typeset -A ttp_posargs_mdt
+	#typeset -i ttp_posargs_count=0
+	optLoadArgDefinitions
+
+	# initialize the default values of both standard and verb options,
+	#  so that they can be displayed in the help message
+	#  TTP is able to provide a 'no' default value for boolean options
+	#  all other relevant defaults must be provided by the
+	#  'verb_arg_set_defaults' function
+	optInitDefaults
+	type verb_arg_set_defaults >/dev/null 2>&1 && verb_arg_set_defaults
+
+	# no argument, then just display the script usage
+	if [ $# -eq 0 ]; then
+		scriptUsage
+		verbExitOnErr $?
+		return
+	fi
+	optReadHelp "$@"
+
+	# check for --verbose option
+	# it is always checked first, even if not advertised by the
+	#  'verb_arg_define_opt' verb function
+	#  this first loop in command-line args array also builds the
+	#  array of used arguments
+	typeset -A ttp_usedargs
+	ttp_args="$(optSaveArgs "$@")"
+	#echo "tt_args=\"${ttp_args}\""
+	optReadVerbose "$@"	; let ttp_errs+=$?
+
+	# check for provided optional and positional arguments
+	optReadOptArgs "$@"; let ttp_errs+=$?
+	optReadPosArgs "$@"; let ttp_errs+=$?
+	optCheckMandatory  ; let ttp_errs+=$?
+
+	# let the verb check itself its arguments
+	#  as we are not able to provide any suitable or relevant default
+	#set | grep -e '^opt_'
+	type verb_arg_check >/dev/null 2>&1 && { verb_arg_check; verbExitOnErr $?; }
+	
+	# execute the verb at last
+	type verb_main >/dev/null 2>&1 && { verb_main "$@"; verbExitOnErr $?; }
+}

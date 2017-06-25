@@ -1,0 +1,48 @@
+# @(#) TTP bootstrapping - Bash/Ksh PATH and FPATH initialization
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   This script is supposed to be sourced from inside a bash- or a
+#   korn-derived login shell profile:
+#
+#     # Initialize The Tools Project
+#     TTP=/opt/trychlos.pwi/Tools; . ${TTP}/libexec/bootstrap/sh_profile
+#
+#   Initializing PATH and FPATH variables requires an in-process
+#   execution. The needed functions have to be explicitely preloaded.
+#   They have been grouped together in a single file to make this
+#   preload easyer.
+#
+# pwi 2013- 6-11 creation
+# pwi 2015- 7- 2 update to trychlos.pwi
+# pwi 2017- 6-21 publish the release at last 
+
+[ "${TTP}" = "" ] && { echo "[sh_profile] TTP is not set" 1>&2; exit 1; }
+[ -r "${TTP}/libexec/sh/bspPathAppendByName" ] || { echo "[sh_profile] TTP/libexec/sh/bspPathAppendByName: not found or not readable" 1>&2; exit 1; }
+[ -r "${TTP}/libexec/sh/bspPathAppendByValue" ] || { echo "[sh_profile] TTP/libexec/sh/bspPathAppendByValue: not found or not readable" 1>&2; exit 1; }
+
+. "${TTP}/libexec/sh/bspPathAppendByName"
+. "${TTP}/libexec/sh/bspPathAppendByValue"
+
+bspPathAppendByName  PATH "${TTP}/bin"
+bspPathAppendByName FPATH "${TTP}/libexec/sh"
+
+unset bspPathAppendByName
+unset bspPathAppendByValue

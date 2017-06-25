@@ -1,0 +1,137 @@
+# @(#) Loop over command-line optional arguments
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Only option arguments (those who begin with '--') are
+#   interpreted here. The search for option arguments terminates
+#   when finding the '--' which marks the beginning of positional
+#   arguments.
+#
+# (I): 1. array of command-line args
+#
+# (O): return: count of errors
+#
+# pwi 2013- 6- 3 creation
+# pwi 2013- 6-25 fix arguments quoting
+# pwi 2013- 7-15 review options dynamic computing
+# pwi 2017- 6-21 publish the release at last 
+
+function optReadOptArgs
+{
+	#set -x
+	typeset -i _ret=0
+
+	type verb_arg_read_opt >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		verb_arg_read_opt "$@"
+
+	else
+		typeset -i _ia=1
+		while [ ${_ia} -le $# ]; do
+			typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+			typeset _val=""
+
+			# after the '--' word, we are supposed to find only positional
+			#  args
+			if [ "${_arg}" = "--" ]; then
+				ttp_usedargs[${_ia}]="yes"
+				break
+			fi
+
+			# make options have two hyphens
+			case ${_arg} in
+				--*)
+					;;
+				-*)
+					_arg="-${_arg}"
+					;;
+			esac
+
+			# split and extract argument for options that take one
+			case ${_arg} in
+				--*=*)
+					_val="$(echo ${_arg} | sed -e 's/^[^=]*=//')"
+					_arg="$(echo ${_arg} | sed 's/=.*//')"
+					;;
+			esac
+
+			# now try to process the option and maybe its value
+			#  optGetOption errors have already been counted in optReadVerbose
+			case "${_arg}" in
+				--*)
+					if [ "${ttp_usedargs[${_ia}]}" != "yes" ]; then
+						ttp_usedargs[${_ia}]="yes"
+						optGetOption ${_arg:2}
+						typeset -i _idx=$?
+						if [ ${_idx} -gt 0 ]; then
+							let _idx-=1
+							typeset _name="${ttp_optargs_key[${_idx}]}"
+							eval $(echo "opt_"${_name}"_set=yes")
+							msgVerbose "setting opt_${_name}_set to 'yes'"
+							typeset _desc="${ttp_optargs_dsc[${_idx}]}"
+
+							# this is a boolean option, so set its value to yes or no
+							if [ -z "${_desc}" ]; then
+								typeset _prefix="${_arg:2:2}"
+								[ "${_prefix}" = "no" ] && _val="no" || _val="yes"
+								eval $(echo "opt_${_name}=\"${_val}\"")
+								msgVerbose "setting opt_${_name} to '${_val}'"
+
+							# the option accepts/wants an argument
+							#  which is optional if enclosed between square brackets []
+							else
+								if [ "${ttp_optargs_mdt[${_idx}]}" = "no" ]; then
+									# this option accepts an optional value
+									# if it has an argument, it must has been provided here
+									# with an explicite '=' sign
+									if [ ! -z "${_val}" ]; then
+										eval $(echo "opt_${_name}=\"${_val}\"")
+										msgVerbose "setting opt_${_name} to '${_val}'"
+									fi
+								else
+									# must have an argument, with equal sign or not
+									if [ -z "${_val}" ]; then
+										typeset -i _ib=${_ia}+1
+										typeset _barg="$(echo $(eval echo '${'${_ib}'}'))"
+										if [ "${_barg:0:2}" != "--" ]; then
+											_val="${_barg}"
+											let _ia+=1
+											ttp_usedargs[${_ia}]="yes"
+										else
+											msgerr "'--${_arg}' option expects a mandatory argument, which has not been found"
+											let _ret+=1
+										fi
+									fi
+									if [ ! -z "${_val}" ]; then
+										eval $(echo "opt_${_name}=\"${_val}\"")
+										msgVerbose "setting opt_${_name} to '${_val}'"
+									fi
+								fi
+							fi
+						fi
+					fi
+					;;
+			esac
+			let _ia+=1
+		done
+	fi
+
+	return ${_ret}
+}

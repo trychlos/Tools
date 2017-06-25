@@ -1,0 +1,47 @@
+[pierre@vcentos6 ~]$ oracle.sh info -service SMA -processes
+[oracle.sh info] currently running processes:
+..|       Pid|User           |Program                                         |PgaAllocMem|PgaUsedMem
+--|----------|---------------|------------------------------------------------|-----------|----------
+PR|         1|               |PSEUDO                                          |          0|         0
+PR|         2|ora11gr2       |oracle@vcentos6.virtuals.pwi (PMON)             |     778384|    694480
+PR|         3|ora11gr2       |oracle@vcentos6.virtuals.pwi (VKTM)             |     778384|    689784
+PR|         4|ora11gr2       |oracle@vcentos6.virtuals.pwi (GEN0)             |     778384|    697048
+PR|         5|ora11gr2       |oracle@vcentos6.virtuals.pwi (DIAG)             |     778384|    689872
+PR|         6|ora11gr2       |oracle@vcentos6.virtuals.pwi (DBRM)             |    1040528|    768928
+PR|         7|ora11gr2       |oracle@vcentos6.virtuals.pwi (PSP0)             |     778384|    693024
+PR|         8|ora11gr2       |oracle@vcentos6.virtuals.pwi (DIA0)             |    1089008|    895104
+PR|         9|ora11gr2       |oracle@vcentos6.virtuals.pwi (MMAN)             |     778384|    693024
+PR|        10|ora11gr2       |oracle@vcentos6.virtuals.pwi (DBW0)             |    6897440|   6648408
+PR|        11|ora11gr2       |oracle@vcentos6.virtuals.pwi (LGWR)             |   12033520|  11321472
+PR|        12|ora11gr2       |oracle@vcentos6.virtuals.pwi (CKPT)             |    1054272|    764320
+PR|        13|ora11gr2       |oracle@vcentos6.virtuals.pwi (SMON)             |    6676624|   1210168
+PR|        14|ora11gr2       |oracle@vcentos6.virtuals.pwi (RECO)             |    1499280|    768672
+PR|        15|ora11gr2       |oracle@vcentos6.virtuals.pwi (MMON)             |    4636320|   1899640
+PR|        16|ora11gr2       |oracle@vcentos6.virtuals.pwi (MMNL)             |     974992|    713760
+PR|        17|ora11gr2       |oracle@vcentos6.virtuals.pwi (D000)             |    1368208|   1076380
+PR|        18|ora11gr2       |oracle@vcentos6.virtuals.pwi (S000)             |     647312|    409220
+PR|        19|ora11gr2       |oracle@vcentos6.virtuals.pwi (W000)             |     909456|    805528
+PR|        20|ora11gr2       |oracle@vcentos6.virtuals.pwi (ARC0)             |   30924944|  28942504
+PR|        21|ora11gr2       |oracle@vcentos6.virtuals.pwi (ARC1)             |   12050576|  11297648
+PR|        22|ora11gr2       |oracle@vcentos6.virtuals.pwi (ARC2)             |   12050576|  11270680
+PR|        23|ora11gr2       |oracle@vcentos6.virtuals.pwi (ARC3)             |   30924944|  28942504
+PR|        24|ora11gr2       |oracle@vcentos6.virtuals.pwi (QMNC)             |     778384|    694176
+PR|        25|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |   10608784|   8588524
+PR|        26|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |   10346640|   8249964
+PR|        27|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    4693488|   3222560
+PR|        28|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    1875440|   1715544
+PR|        29|ora11gr2       |oracle@vcentos6.virtuals.pwi (Q002)             |    6135280|   4659936
+PR|        30|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    4120720|   2414524
+PR|        31|pierre         |oracle@vcentos6.virtuals.pwi (TNS V1-V3)        |     917824|    796016
+PR|        32|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    3513840|   2172392
+PR|        34|ora11gr2       |oracle@vcentos6.virtuals.pwi (SMCO)             |     778384|    689784
+PR|        36|ora11gr2       |oracle@vcentos6.virtuals.pwi (CJQ0)             |    6095168|   1297528
+PR|        37|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    3858576|   3032076
+PR|        38|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    3465360|   2489300
+PR|        39|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    6414480|   4699380
+PR|        43|ora11gr2       |oracle@vcentos6.virtuals.pwi                    |    4496880|   3119792
+PR|        44|ora11gr2       |oracle@vcentos6.virtuals.pwi (Q000)             |    1761424|    917272
+PR|        45|ora11gr2       |oracle@vcentos6.virtuals.pwi (TNS V1-V3)        |    2425152|    796852
+[oracle.sh info] 42 selected rows
+[pierre@vcentos6 ~]$ 
+

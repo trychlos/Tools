@@ -1,0 +1,57 @@
+# @(#) Returns the specified value from the configuration read on stdin
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   If more than one value is found, then the configuration file is
+#   malformed: a warning is issued in the logs and only the first value
+#   is returned. 
+#
+#   Selection fields are to be passed as a comma-separated string:
+#   "<num_field>=<searched_value>[,<num_field>=<searched_value[,...]]
+#   where 'num_field' is counted from 1
+#
+# (I): 1. (opt) character used as field separator (':')
+#      2. (opt) comma-separated string of the list of selection fields
+#               (empty means all)
+#      3. (opt) comma-separated list of desired fields
+#               (empty means all)
+#
+# (O): stdout: found value is echoed
+#
+# pwi 2001-12- 6 creation
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2013- 6-12 selection criteria are passed as a comma-separated string
+# pwi 2017- 6-21 publish the release at last 
+
+function tabExtract
+{
+	#set -x
+	#echo "$0" 1>&2
+	typeset _sep="${1}"
+	[ -z "${_sep}" ] && _sep=":"
+	typeset _searched="${2}"
+	typeset _desired="${3}"
+
+	bspTabStripComments "${_sep}" | \
+		tabSubstitute "${_sep}" | \
+		tabExtractLine "${_sep}" "${_searched}" | \
+		tabOneLine | \
+		tabExtractFields "${_sep}" "${_desired}"
+}

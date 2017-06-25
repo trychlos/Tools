@@ -1,0 +1,84 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/4-ConfigurationFiles
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Introduction
+   General syntax
+   Search order
+   defaults.ini
+   <node>.ini
+
+-----------------------------------------------------------------------
+ Introduction
+ ============
+
+ The Tools Project is meant to be highly and safely, configurable, in
+ such a manner that:
+
+ - configuration files are either global (configuring the whole TTP
+   system), or dedicated to a particular execution node; they are
+   stored together in the <TTPROOT>/etc/ directory;
+
+ - configuration files may (and actually should) be released in all
+   machines/hosts/nodes, and so on.
+
+ Only .ini.sample configuration files are released with The Tools
+ Project. A parallel TTP tree should be created for hosting the site-
+ specific configuration files.
+
+-----------------------------------------------------------------------
+ General syntax
+ ==============
+
+ Configuration files are standard text files.
+
+ Though number of them are named with a '.ini' suffix, they are NOT
+ like Windows .ini files as they do not manage groups. They are more
+ like CSV files: a list of lines, each line being itself a list of
+ colon ':' separated values.
+
+ Spaces around the ':' value separator are not signifiant.
+
+ Comments are identified by the '#' character, and continue until the
+ end of line.
+
+-----------------------------------------------------------------------
+ Search order
+ ============
+
+ All the whole configuration is not loaded at once each time a command
+ is executed. Instead of that, each command searches for and interprets
+ its own configuration files.
+
+ Each configuration file is searched for in the list of TTP trees as
+ adressed by the FPATH variable, and in this same order.
+
+ The first file found wins, even if it is empty. Other files with the
+ same name, which may be adressed later in the list of TTP trees, are
+ ignored.
+
+-----------------------------------------------------------------------
+ defaults.ini
+ ============
+
+ Role: define some site-wide defaults
+ Searched for in: TTPROOT/etc/ttp/
+
+ See tools/etc/ttp/defaults.ini.sample for a full description.
+
+-----------------------------------------------------------------------
+ <node>.ini
+ ==========
+
+ Role: define the configuration of the execution node and of the
+       services that this node hosts
+ Searched for in: TTPROOT/etc/nodes/
+
+ See tools/etc/nodes/node.ini.sample for a full description.
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

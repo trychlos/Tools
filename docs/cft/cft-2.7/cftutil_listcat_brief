@@ -1,0 +1,128 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:41:46
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+  Date = 24/06/2013   Time = 11:41:46
+ 
+  Partner  DTSA File     Transfer         Records       Diags        Appli.
+                Id.      Id.       Transmit     Total   CFT Protocol Id.
+  -------- ---- -------- -------- ---------- ---------- --- -------- --------
+  LEFCFT1  RFT  OPPAYCAS F1708020         82         82   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F1708130         95         95   0 CP NONE          
+  LEFCFT1  RFT  OPPAICB  F1714120         20         20   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F1715431         95         95   0 CP NONE          
+  LEFCFT1  RFT  OPPAYTIP F1716120         86         86   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1722134       9664       9664   0 CP NONE          
+  LEFCFT1  SFT  ODYEST1  F1722164        501        501   0 CP NONE          
+  LEFCFT1  SFT  ODYREL1  F1722204       1004       1004   0 CP NONE          
+  LEFCFT1  SFT  ODYREL1  F1722224        805        805   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F1722321         29         29   0 CP NONE          
+  LEFCFT1  SFT  ODYLOP1  F1722333         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED02   F1722360        865        865   0 CP NONE          
+  LEFCFT1  SFT  ODYIDX1  F1722583        235        235   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F1722590          4          4   0 CP NONE          
+  LEFCFT1  SFT  ODYLOV1  F1723010         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1723051       2488       2488   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F1723120        395        395   0 CP NONE          
+  LEFCFT1  SFT  YOED01   F1723135      10664      10664   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F1808530        717        717   0 CP NONE          
+  LEFCFT1  RFT  OPPAYCAS F1809120         52         52   0 CP NONE          
+  LEFCFT1  RFT  OPPAICB  F1814144          6          6   0 CP NONE          
+  LEFCFT1  RFT  OPPAYTIP F1816120        140        140   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F1816330         96         96   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1820103      10768      10768   0 CP NONE          
+  LEFCFT1  SFT  ODYEST1  F1820133       1012       1012   0 CP NONE          
+  LEFCFT2  SFK  ODYREL1  F1820142          0          0 408 NO PART          
+  LEFCFT1  SFT  ODYBQE1  F1820332        495        495   0 CP NONE          
+  LEFCFT1  SFT  ODYLOP1  F1820362         13         13   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F1821261         48         48   0 CP NONE          
+  LEFCFT1  SFT  ODYIDX1  F1821265       6766       6766   0 CP NONE          
+  LEFCFT1  SFT  ODYLOV1  F1821275         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1821321        832        832   0 CP NONE          
+  LEFCFT1  SFT  YOED01   F1821444     210467     210467   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F1821485        337        337   0 CP NONE          
+  LEFCFT1  RFT  OPPAYCAS F1908020         52         52   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F1910030          1          1   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F1911401        298        298   0 CP NONE          
+  LEFCFT1  RFT  OPPAICB  F1914120         10         10   0 CP NONE          
+  LEFCFT1  RFT  OPPAYTIP F1916120         50         50   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F1917110         81         81   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F1917112         30         30   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F1917111         49         49   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F1917113         16         16   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1921035       7456       7456   0 CP NONE          
+  LEFCFT1  SFT  ODYEST1  F1921075        117        117   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1921084        832        832   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F1921234        122        122   0 CP NONE          
+  LEFCFT1  SFT  ODYLOP1  F1921252         13         13   0 CP NONE          
+  LEFCFT1  SFT  ODYIDX1  F1922073       4708       4708   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F1922074          7          7   0 CP NONE          
+  LEFCFT1  SFT  ODYLOV1  F1922093         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F1922134       1936       1936   0 CP NONE          
+  LEFCFT1  SFT  YOED01   F1922230      40704      40704   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F1922253        157        157   0 CP NONE          
+  LEFCFT1  RFT  OPPAYCAS F2008020         31         31   0 CP NONE          
+  LEFCFT1  RFT  OPFACTRV F2009000          4          4   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F2010210         22         22   0 CP NONE          
+  LEFCFT1  RFT  OPPAICB  F2014120          8          8   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F2014230        265        265   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F2014351        799        799   0 CP NONE          
+  LEFCFT1  RFT  OPPAYTIP F2016120         34         34   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F2017130        104        104   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F2020222      15736      15736   0 CP NONE          
+  LEFCFT1  SFT  ODYEST1  F2020253        117        117   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F2020265       2488       2488   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F2020411         35         35   0 CP NONE          
+  LEFCFT1  SFT  ODYLOP1  F2020430         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED02   F2020510        211        211   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F2022101         64         64   0 CP NONE          
+  LEFCFT1  SFT  ODYIDX1  F2022103      31399      31399   0 CP NONE          
+  LEFCFT1  SFT  ODYLOV1  F2022123         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F2022170       1384       1384   0 CP NONE          
+  LEFCFT1  SFT  YOED01   F2022464     885576     885576   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F2023092        175        175   0 CP NONE          
+  LEFCFT1  RFT  OPPAYCAS F2108020         12         12   0 CP NONE          
+  LEFCFT1  RFT  OPFACTRV F2109000          8          8   0 CP NONE          
+  LEFCFT1  RFT  OPREJET  F2110210         71         71   0 CP NONE          
+  LEFCFT1  RFT  OPPAICB  F2114120          9          9   0 CP NONE          
+  LEFCFT1  RFT  OPPAYTIP F2116120         73         73   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F2120242       6628       6628   0 CP NONE          
+  LEFCFT1  SFT  ODYEST1  F2120273        117        117   0 CP NONE          
+  LEFCFT2  SFK  ODYREL1  F2120282          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120305          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120332          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120352          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120365          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120392          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120412          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120432          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120455          0          0 408 NO PART          
+  LEFCFT1  SFT  ODYBQE1  F2120481        615        615   0 CP NONE          
+  LEFCFT2  SFK  ODYREL1  F2120482          0          0 408 NO PART          
+  LEFCFT2  SFK  ODYREL1  F2120502          0          0 408 NO PART          
+  LEFCFT1  SFT  ODYLOP1  F2120503         13         13   0 CP NONE          
+  LEFCFT1  SFT  ODYIDX1  F2122020      29929      29929   0 CP NONE          
+  LEFCFT1  SFT  ODYBQE1  F2122021         33         33   0 CP NONE          
+  LEFCFT1  SFT  ODYLOV1  F2122043         13         13   0 CP NONE          
+  LEFCFT1  SFT  YOED24   F2122093       1108       1108   0 CP NONE          
+  LEFCFT1  SFT  YOED01   F2122370     717213     717213   0 CP NONE          
+  LEFCFT1  SFT  FIGL102  F2123012        122        122   0 CP NONE          
+  LEFCFT1  RFT  OPPAYCAS F2408020         22         22   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F2410430        206        206   0 CP NONE          
+  LEFCFT1  RFT  OPRECRRL F2410530         13         13   0 CP NONE          
+ 
+       103 record(s) selected
+     10000 record(s) in Catalog file
+      9897 record(s) free (98%)
+ 
+CFTU00I LISTCAT  _ Correct (content=brief)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:41:46
+CFTU20I Session active for  0:00:00

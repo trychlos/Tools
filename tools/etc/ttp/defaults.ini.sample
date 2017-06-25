@@ -1,0 +1,44 @@
+# @(#) site-wide defaults.ini configuration file
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#    The Tools Project gets some site-wide defaults from a
+#    'defaults.ini' configuration file.
+#
+#    The 'defaults.ini' configuration is successively searched for in
+#    each TTPROOT/etc/ttp directory, in the order they have been defined
+#    from the login shell profile of the currently running account.
+#
+#    The first found wins.
+#
+# pwi 2013- 2-15 creation
+# pwi 2017- 6-21 publish the release at last 
+
+# logsroot:
+#   This key defines the root of the TTP logs directory.
+#   The value must be an absolute path, or a function name.
+#   If a function name, it must provides an absolute path on stdout;
+#   optional arguments to the function may be provided after the
+#   function name.
+#   Hardcoded default value is /tmp.
+#   This value may be overriden on a per-node basis.
+
+#logsroot : /an/absolute/path
+#logsroot : a_function_name [<maybe> [<with> [<args>]]]

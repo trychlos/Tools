@@ -1,0 +1,14 @@
+The service is defined as:
+
+MYX	: id		: MySQL instance
+MYX	: rootdir	: /opt/mysql-5.1
+
+- 'MYX' is the service mnemonic
+  the same service mnemonic must be used in all environments, even if some
+  implementation details are different - this is why these configuration
+  files are designed for
+
+- 'id' is mandatory in order to identify the ligne as a service
+
+- 'rootdir' is the root installation directory for this server
+  we expect to find binaries in <rootdir>/bin

@@ -1,0 +1,113 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:30:51
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+  Date = 13/06/2013   Time = 10:30:51
+ 
+  Partner  DTSA File     Transfer         Records       Diags        Appli.
+                Id.      Id.       Transmit     Total   CFT Protocol Id.
+  -------- ---- -------- -------- ---------- ---------- --- -------- --------
+  LEFCFT1  RFT  ORFTPMIG F0410000         30         30   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0420150      10330      10330   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0420224          6          6   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0420385        116        116   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0420434          4          4   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421042       9586       9586   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421262       9586       9586   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421272          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421384          3          3   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421413         16         16   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421435         16         16   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0421463          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0515372        312        312   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0520221       9586       9586   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0606125          3          3   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0606181          3          3   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0606222          2          2   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607483          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607490          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607491          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607492          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607494          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0607495          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0608055          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609484          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609491          2          2   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609492       2096       2096   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609493          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609494          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0609515     154556     154556   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610050         14         14   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610063    2144213    2144213   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610420          6          6   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610421          9          9   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610422          5          5   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610423         10         10   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610424          4          4   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610425          4          4   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610430          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610431          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610432          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610433          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0610434          6          6   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0611001        132        132   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0611000         16         16   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614181         39         39   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614184         37         37   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614191        127        127   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614221         58         58   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614274        131        131   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614361         77         77   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614362        650        650   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614363         69         69   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614364       3358       3358   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614380       1841       1841   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F0614410       4986       4986   0 CP NONE          
+  LEFCFT1  RFT  ORFACTRV F0718201      24123      24123   0 CP NONE          
+  LEFCFT1  RFT  ORFACTRV F0718200      45435      45435   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1021520      16260      16260   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1021533         14         14   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1021563        140        140   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022040          7          7   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022221      14075      14075   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022252      14075      14075   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022542          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022543          3          3   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022544         34         34   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022545         34         34   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1022591          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1121442      16662      16662   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1121452         14         14   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1121493        139        139   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1121494          7          7   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1121570      14563      14563   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122083      14563      14563   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122465          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122485          3          3   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122490         28         28   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122491         28         28   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1122580          1          1   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1212000        127        127   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1212445    1679130    1679130   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310201         18         18   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310230         21         21   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310240         80         80   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310260         30         30   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310283         44         44   0 CP NONE          
+  LEFCFT1  RFT  ORFTPMIG F1310313         88         88   0 CP NONE          
+ 
+        88 record(s) selected
+     10000 record(s) in Catalog file
+      9912 record(s) free (99%)
+ 
+CFTU00I LISTCAT  _ Correct (CONTENT=brief)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:30:51
+CFTU20I Session active for  0:00:00

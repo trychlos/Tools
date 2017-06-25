@@ -1,0 +1,98 @@
+# @(#) Run a command as a subshell in the background, with a timeout
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. the timeout (0 is unlimited, default to 10)
+#      2. interval at which a dot will be echoed during waiting for the
+#         command; 0 means no display (default to 2)
+#      3. the function name which holds the command
+#      4+. the arguments to be passed to the function
+#
+# (O): return: the return code of the command
+#              or 127: timeout
+#
+# See http://www.dartmouth.edu/~rc/classes/ksh/run-with-timeout.html
+#
+# pwi 2013- 6-15 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function ttpf_timeout
+{
+	#set -x
+	typeset -i _timeout="${1:-10}"
+	shift
+	typeset -i _interval="${1:-2}"
+	shift
+	typeset _fn="${1}"
+	shift
+
+	typeset _result=""
+	typeset -i _ret=0
+
+	# timeout signal handler
+	trap '
+		_ret=127
+		_result="timeout"
+		#print -ru2 "trap ${_result}"
+	' USR2
+
+	if [ ${_timeout} -gt 0 ]; then
+		typeset -i _ppid=$$
+		(sleep ${_timeout}; kill -s USR2 ${_ppid}) &
+		typeset -i _timeoutpid=$!
+	fi
+
+	typeset _ftmpfn="$(pathGetTempFile "${_fn}")"
+	rm -f "${_ftmpfn}"
+	("${_fn}" "$@" 1>>${_ftmpfn} 2>&1) &
+	typeset -i _fnpid=$!
+
+	typeset -i _count=0
+	while [ true ]; do
+		sleep 1
+		if [ ${_interval} -gt 0 ]; then
+			let _count+=1
+			if [ ${_count} -ge ${_interval} ]; then
+				printf "."
+				_count=0
+			fi
+		fi
+		# if the command has terminated, then set return code
+		typeset _line="$(tail -1 ${_ftmpfn})"
+		#print -ru2 "${_line}"
+		if [ "$(echo ${_line} | grep done)" != "" ]; then
+			_ret=${_line:5}
+			_result="done"
+		fi
+		# whether the command has terminated, or the timeout has
+		# occurred first, then kill all subprocesses and break
+		[ -z "${_result}" ] || break
+	done
+
+	if [ ${_timeout} -gt 0 ]; then
+		typeset -i _pid
+		for _pid in ${_fnpid} ${_timeoutpid}; do
+			killProcesses ${_pid} 1>/dev/null 2>&1
+			wait ${_pid} 1>/dev/null 2>&1
+		done
+	fi
+
+	return ${_ret}
+}

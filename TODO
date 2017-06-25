@@ -1,0 +1,276 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ TODO
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   TODO
+   DONE
+
+-----------------------------------------------------------------------
+ TODO
+ ====
+
+   4 2013- 6-10 write a test script to check 'ttp.sh option' verb
+                e.g. test values as sentence (-command "show parameters")
+
+   5 2013- 6-10 write a test script to check the ksh features we need
+                typically: ${a:i:j} string extraction
+                   (doesn't work in Aix ksh-88)
+                uni- & multi- dimensional arrays
+                   (multi in not present in Aix ksh-88 nor ksh-93)
+                variable increment inside of for/while loops
+                   (while loop doesn't work in cygwin mbsd-ksh)
+                 the first ttpf_main argument is a full path
+                 test for "ps -e -o cmd"
+
+   7 2013- 6-17 multi-lines help
+
+   8 2013- 6-24 v2/tools/libexec/cft/cftCatalogMetrics is obsolete and
+                to be deleted
+                $ find v2/tools/ -type f -exec grep cftCatalogMetrics {} \; -print
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function cftCatalogMetrics
+                v2/tools/libexec/cft/cftCatalogMetrics
+                $
+
+   9 2013- 6-24 v2/tools/libexec/sh/strMetrics is to be obsoleted
+                (only used by sqloutMetrics which is also to be obsoleted)
+                $ find v2/tools/ -type f -exec grep strMetrics {} \; -print
+                			strMetrics | \
+                v2/tools/libexec/sh/sqloutMetrics
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function strMetrics
+                v2/tools/libexec/sh/strMetrics
+                $
+
+  10 2013- 6-24 v2/tools/libexec/sh/sqloutMetrics is to be obsoleted
+                (only used by cft.sh list -catalog=full and this is bad)
+                $ find v2/tools/ -type f -exec grep sqloutMetrics {} \; -print
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function sqloutMetrics
+                v2/tools/libexec/sh/sqloutMetrics
+                            sqloutMetrics cftCatalogFullSQL "full content of CFT catalog:"
+                v2/tools/cft/list.ksh
+                $
+
+  12 2013- 6-24 filter cft.sh list --catalog=full to provide the same
+                output that old cftCatalogMetrics (currently in use at
+                LDE)
+
+  13 2013- 6-27 tabGetMachine should search only in the same environment
+                (unless another parameter is provided)
+
+  18 2013- 6-27 Improve oracle.sh to start/stop/test the Enterprise
+                Manager
+
+  19 2013- 6-29 linux_scripts/svn-dump-repo.sh is obsoleted by
+                svn.sh dump <repo>
+
+  20 2013- 6-29 oracle.sh sqlldr: '--show' option display error log
+                twice (but once if execution is ok)
+
+  21 2013- 6-29 oracle.sh sqlldr: '--show' option display log after the
+                end of execution, but should rather display log
+                progressively (on a rolling basis)
+
+  22 2013- 6-29 oracle.sh sqlldr returns zero even if errors occur 
+
+  23 2013- 7- 1 check which environment variable(s) holds the username
+                Fedora-Gnome: LOGNAME, USER, USERNAME
+                CentOS 5:
+                CentOS 6:
+                Cygwin:
+                Aix 6:
+
+  24 2013- 7- 1 analyze whether it would be more pertinent to have
+                a hierarchy like dbpuits/oracle11/ddl rather than
+                dbpuits/ddl/oracle11 ?
+
+  25 2013- 7- 1 do not embed Oracle SQL*Loader control files into ddl
+                directory (but rather isolate them)
+
+  26 2013- 7- 4 check with ttp.sh list -vars that it is not required to
+                declare indexed arrays with typeset -A in ttpf_main
+                (ttp_pos_xxx and ttp_opt_xxx)
+                -> this is ok on linux ksh-93 20120801
+
+  29 2013- 7-10 verbClearTempFiles: have a function which allocates a
+                temp file name according to the same standard
+
+  32 2013- 7-10 ttpf_main: have 'ttp_logical_keys' in a variable
+
+  33 2013- 7-10 ttpf_main: have 'ttp_default_keys' in a variable
+
+  35 2013- 7-15 have --with|without-option_s
+     2013- 7-30 find a use case where the standard boolean option
+                doesn't fit well enough
+
+  37 2013- 7-25 move trychlos.org/ code to v2/tools
+
+  38 2013- 7-25 ttp.sh option should also display the status of internal
+                array variables
+
+  43 2013- 7-25 ttp.sh filter: is not finished so should be moved to a
+                development tree, and removed from v2/tools
+
+  44 2013- 7-25 the 'logsdir' key (along with the pathGetDailyLogsDir
+                function) should only address the root log directory;
+                another function should manage the subtree inside it;
+                review all the process starting from msglog
+
+  45 2013- 7-25 cache the result of tabGetMachine
+
+  51 2013- 7-30 an entered command appears in the log file as:
+                [ttp.sh] list -verbs -commands
+                but there is no reason to treat differently the command
+                and the verb, so choose between:
+                [] ttp.sh list -verbs -commands
+                and:
+                [ttp.sh list] -verbs -commands
+                though the first version seams better
+
+  52 2013- 7-30 ttp.sh list -verbs should it really requires -command ?
+
+  53 2013- 7-30 review catTo comment
+
+  54 2013- 8- 1 oracle.sh: rename sqlldr verb to load
+
+  55 2013- 8- 1 when creating a log subdirectory, takes care that the
+                umask let the group be authorized to write
+     2013- 8- 2 review use of mkdir:
+                 libexec/sh/pathGetDailyLogsdir
+                 libexec/sh/pathGetTempFile
+                 libexec/sh/pathGetLogsdir
+                 svn/dump.ksh
+
+  56 2013- 8- 1 confGetKey/confHasKey: do not distinguish between the
+                keyword at pos #0 and the other keywords (so just remove
+                the parameter 'keyword of the line') + count from 1
+
+  57 2013- 8- 1 review usage of tabxxx functions in order to obsolete
+                those which are no more needed
+
+  58 2013- 8- 3 ttp.sh fn confDumpKeys ttp_logical_keys doesn't display
+                anything
+
+  59 2013- 8- 3 ttp.sh fn confGetKey ttp_logical_keys doesn't display
+                anything
+
+  60 2013- 8- 3 review check of host and user based on oracle.sh start
+
+  61
+
+-----------------------------------------------------------------------
+ DONE
+ ====
+
+   1 2013- 6-10 integrate path_munge function from profile in kermit
+     2013- 6-10 [rev. 2937] done: pathMunge
+
+   2 2013- 6-10 have ttpf_main automatically munge into FPATH the path
+                to libexec/<command>
+     2013- 6-10 [rev. 2939] done: commandMunge
+
+   3 2013- 6-10 replace commandExecFn and commandPipeFn
+     2013- 6-10 [rev. 2941] done: functions are removed
+
+   6 2013- 6-14 oracle.sh info -parameters
+                column headings are not funny capitalized
+     2013- 6-24 [rev. 3121] done
+
+  11 2013- 6-24 ttp.sh list --commands no more works
+     2013- 6-25 [rev. 3124] done (removing IFS stuff)
+
+  14 2013- 6-27 Improve svn.sh list to new standard tabular output format
+                updating svn.sh dump accordingly
+     2013- 7-26 svn.sh list: done
+     2013- 7-27 [rev. 3283] done
+
+  15 2013- 6-27 Improve svn.sh list to accept a comma-separated list of
+                desired columns as argument (defaulting to ALL)
+     2013- 7-25 [rev. 3272] done
+
+  16 2013- 6-27 Improve svn.sh dump configuration to have a full
+                directory path (instead or just a 'svn' prefix today)
+     2013- 7-27 [rev. 3283] done
+
+  17 2013- 6-27 Improve svn.sh list to display the URL
+     2013- 7-25 [rev. 3272] done
+
+  27 2013- 7-10 ttpf_trap_int: add a flag whether to display the message
+                on keyboard interrupt
+     2013- 7-30 [rev. 3292] won't fix
+
+  28 2013- 7-10 ttpf_trap_exit: add a flag whether to display the message
+                if ttp_code non zero
+     2013- 7-30 [rev. 3292] won't fix
+
+  30 2013- 7-10 make use of msgVerbose
+     2013- 7-10 [rev. 3254] done
+
+  31 2013- 7-10 rename osEnumFSMountPoints to osEnumMountPoints
+     2013- 7-30 [rev. 3293] done
+
+  34 2013- 7-15 review options dynamic computing, calling opt_ the
+                optional arguments, and pos_ the positional ones
+     2013- 7-18 done: functions, svn.sh, cft.sh mysql.sh, ttp.sh
+                todo: oracle.sh
+     2013- 7-23 [rev. 3264] done
+
+  36 2013- 7-18 review verbIncrCode vs verbExitOnErr vs use of ttp_errs
+                or ttp_code in the functions and in the verbs
+     2013- 7-29 verbIncrCode: add _ret to ttp_errs, increment ttp_code
+                verbExitOnErr: exit on ttp_errs, making sure ttp_code
+                is at least 1
+     2013- 7-29 ttp_code: the exit code, should be 1 if error(s)
+                ttp_errs: error(s) count
+     2013- 7-29 [rev. 3289] done
+
+  39 2013- 7-25 option with mandatory argument: no error message if the
+                argument is empty
+     2013- 7-30 checking that a mandatory argument is not empty is
+                delegated to verb_arg_check function
+     2013- 7-30 [rev. 3295] won't fix
+
+  40 2013- 7-25 ttp.sh list -verbs should also display count of verbs
+     2013- 7-30 [rev. 3294] done
+
+  41 2013- 7-25 ttp.sh fn: help message should exhibit that first
+                positional argument is a function name and other are
+                passed to this function
+     2013- 7-30 [rev. 3296] done
+
+  42 2013- 7-25 execute a command with a non-existant verb displays an
+                error message (good) but exits with code 0, thus not
+                exhibiting a non-nul exit code (maybe related with #36)
+     2013- 7-29 [rev. 3289] done
+
+  46 2013- 7-26 svn.sh list: add with/out headers option
+     2013- 7-26 [rev. 3281] done
+
+  47 2013- 7-26 svn.sh list: add csv/tabular option
+     2013- 7-27 [rev. 3282] done
+
+  48 2013- 7-29 in the current configuration (with first try to migrate
+                kickstart project, ttp.sh list -commands only displays
+                Tools/ commands, but counts 22 commands.
+     2013- 7-29 [rev. 3288] done
+
+  49 2013- 7-29 it appears that ttp.sh list -commands rely on the bin/
+                directory to address the commands - it shouldn't or the
+                documentation should be reviewed or the bin/ should be
+                specifically addressed
+     2013- 7-29 actually, the doc/0-Concepts states that the bin/
+                subdirectory is an intrinsic component of the Tools
+                tree. This is so an architecture error to try to have
+                Tools-enabled scripts in kickstart/bin2.
+     2013- 7-29 [rev. 3287] won't fix
+
+  50 2013- 7-29 logsdir should be eval-ed
+     2013- 7-29 [rev. 3286] done
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

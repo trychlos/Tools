@@ -1,0 +1,162 @@
+The Tools Project: a Tools Environment for IT Production - README
+
+-----------------------------------------------------------------------
+ Summary
+
+   What is it ?
+   Principles
+     1. The commands are safe to be discovered
+     2. The verbs are safe to be discovered
+     3. All is logged
+     4. Environment usage is minimal
+     5. Several TTP versions can be run
+   Architecture
+
+-----------------------------------------------------------------------
+ What is it ?
+
+ The Tools Project is a tools environment for IT teams who work in a
+ production environment. It aims in providing to these teams a safe and
+ consistent script and tools environment.
+
+ All scripts and tools are verbs, which are themselves grouped as
+ commands. Both verbs and commands are thought to be safe and self-
+ explanatory.
+
+-----------------------------------------------------------------------
+ Principles
+
+   1. The commands are safe to be discovered
+
+   Entered without any argument, a command displays the list of its
+   available verbs:
+
+   E,g. the command:
+
+     $ command.sh
+
+   displays on stdout:
+
+     [command.sh] the rule of this group
+       verb1: the rule of this verb
+       verb2: the rule of this verb
+       ...
+
+   2. The verbs are safe to be discovered
+
+   Entered without any argument, a verb displays its online help,
+   which contains the list and description of available options,
+   arguments, parameters.
+
+   E,g. the command:
+
+     $ command.sh verb1
+
+   displays on stdout:
+
+     [command.sh] the rule of this group
+       verb1: the rule of this verb
+         <some lines of online help>
+         <some lines of online help>
+         <command-line syntax>
+         <command-line arguments>
+         ...
+
+   3. All is logged
+
+   The use of any script or tools in an IT production environment must
+   be auditable and reproducible. Thus all entered commands, along with
+   their arguments, options and parameters, are traced. The temporary
+   files are kept in this same logs directory for further audit and
+   debug needs.
+
+   The logs directory is dynamically computed. This let the user to
+   choose to have a unique logs directory to be regularily purged, or a
+   daily logs directory, or even no logs directory at all (but we
+   prevent against that choice).
+
+   4. Environment usage is minimal
+
+   The environment is a limited resource in a *nix-like system. The
+   Tools Project takes so care of requiring the minimal amount of
+   variables in the user environment.
+
+   5. Several TTP versions can be run
+
+   It is a common situation where a user is developing a new set of
+   commands or verbs, while another set of commands and verbs is
+   already available and in a production state.
+
+   As long as they are correctly addressed (see Addressing in INSTALL
+   file), all running TTP versions are seen as a whole single set of
+   commands.
+
+-----------------------------------------------------------------------
+ Architecture
+
+ Scripts constituing The Tools Project are installed in a well-known
+ architecture:
+
+ <TTPROOT>
+   |
+   +- bin/                   the directory which contains the commands
+   |
+   +- functions/             the directory which contains the functions
+   |
+   +- command1/              the directory which contains the command1
+   |                         verbs
+   |
+   +- command2/              the directory which contains the command2
+                             verbs
+
+   Mandatory: addressing the shell functions
+   -----------------------------------------
+
+   The Tools Project is not self-addressable. You have to preset at
+   least the FPATH variable in the execution environment of your
+   running shell:
+
+     FPATH=<TTPROOT>/libexec/sh
+
+   If you are working with several versions of TTP, then each one must
+   be adressed in a consistant manner.
+
+   Example:
+
+     Say you have a production version of The Tools Project, installed
+     in <TTPROOT_PROD>, while you are developing some new command or
+     verb in your home, say in <HOME>/TTP.
+
+     You so should set your FPATH to:
+       FPATH=<HOME>/TTP/functions/sh:<TTPROOT_PROD>/libexec/sh
+
+   Optional: addressing the commands
+   ---------------------------------
+
+   If these scripts are meant to be interactively used, then you will
+   find much more comfortable to adress the commands in your PATH:
+
+     PATH=<TTPROOT>/bin
+
+   Though this is not strictly required in order the TTP be runnable,
+   and it is perfectly acceptable to always address the commands by
+   their full filename:
+
+     $ <TTPROOT>/bin/tools.sh ...
+
+   If you are working with several versions of TTP, and you choose to
+   address the commands in your PATH, then you should take care of
+   addressing each version in a consistant manner.
+
+   Example:
+
+     Say you have a production version of The Tools Project, installed
+     in <TTPROOT_PROD>, while you are developing some new command or
+     verb in your home, say in <HOME>/TTP.
+
+     You so should set your FPATH to:
+       FPATH=<HOME>/TTP/functions/sh:<TTPROOT_PROD>/libexec/sh
+
+     And you should set your PATH consistently to:
+       PATH=<HOME>/TTP/bin:<TTPROOT_PROD>/bin
+                             

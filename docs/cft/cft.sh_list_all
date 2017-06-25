@@ -1,0 +1,3250 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=auth)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTCAT       ID       = 'CAT0',
+              FNAME    = '_CFTCATA',
+              WSCAN    = '1',
+              TIMEP    = '23595999',
+              UPDAT    = '1',
+              SH       = '10',
+              ST       = '10',
+              SX       = '10',
+              RH       = '10',
+              RT       = '10',
+              RX       = '10',
+              CACHE    = '512',
+              RKERROR  = 'KEEP',
+              NTF      = 'NO',
+              NTFSTATE = 'CDHKTX',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+ /*           TLVCEXEC = '',*/
+              TLVCLEAR = '70',
+              TLVWARN  = '80',
+ /*           TLVWEXEC = '',*/
+              TLVWRATE = '60',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=cat)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTCOM       ID       = 'COM0',
+              NAME     = '_CFTCOM',
+              TYPE     = 'FILE',
+              WSCAN    = '1',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTCOM       ID       = 'COMS',
+              TYPE     = 'TCPIP',
+              PROTOCOL = 'XHTTP',
+              HOST     = '127.0.0.1',
+              PORT     = '6536',
+              DISCTS   = '60',
+ /*           ADDRLIST = '',*/
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=com)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=etb)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTNET       ID       = 'NET0',
+              TYPE     = 'TCP',
+              CALL     = 'INOUT',
+ /*           COMMENT  = '',*/
+              MAXCNX   = '128',
+              ORIGIN   = 'CFTUTIL',
+              CLASS    = '1',
+              HOST     = 'INADDR_ANY',
+ /*           SRCHOST  = '',*/
+              SRCPORTS = ( '5000-65535'),
+ /*           LOWPORT  = '',*/
+ /*           HIGHPORT = '',*/
+              PORT     = '0',
+ /*           INET     = '',*/
+ /*           PROTOCOL = '',*/
+ /*           USER     = '',*/
+ /*           PARM     = '',*/
+ /*           PASSWORD = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTNET       ID       = 'TCPIP',
+              TYPE     = 'TCP',
+              CALL     = 'INOUT',
+ /*           COMMENT  = '',*/
+              MAXCNX   = '128',
+              ORIGIN   = 'CFTUTIL',
+              CLASS    = '1',
+              HOST     = 'LDEINF',
+ /*           SRCHOST  = '',*/
+              SRCPORTS = ( '5000-65535'),
+ /*           LOWPORT  = '',*/
+ /*           HIGHPORT = '',*/
+              PORT     = '0',
+ /*           INET     = '',*/
+ /*           PROTOCOL = '',*/
+ /*           USER     = '',*/
+ /*           PARM     = '',*/
+ /*           PASSWORD = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=net)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTPARM      ID       = 'IDPARM0',
+ /*           ACCNT    = '',*/
+              BUFSIZE  = '4096',
+              CAT      = 'CAT0',
+ /*           COMMENT  = '',*/
+              DEFAULT  = 'IDFDEF',
+              EXECRE   = '$CFTDIREXEC/erecv.cmd',
+              EXECRF   = '$CFTDIREXEC/&idf_re.cmd',
+              EXECRM   = '$CFTDIREXEC/recvm.cmd',
+              EXECSE   = '$CFTDIREXEC/er&idf.cmd',
+ /*           EXECSF   = '',*/
+ /*           EXECSFA  = '',*/
+ /*           EXECSM   = '',*/
+ /*           EXECSMA  = '',*/
+ /*           EXITEOT  = '',*/
+              FBUFSIZE = '0',
+              KEY      = 'JI6FAUZQMH4UDHTVT9P9I1SOTLN97JI6FAGW1S2E7',
+              LOG      = 'LOG0',
+              MAXTASK  = '16',
+              MAXTRANS = '64',
+              NPART    = 'FP1ODYR5',
+              ORIGIN   = 'CFTUTIL',
+              PART     = 'FP1ODYR5',
+              PARTFNAM = '$CFTPART',
+ /*           SECFNAME = '',*/
+              STRACE   = '0',
+              TRANTASK = '3',
+              USERCTRL = 'NO',
+              WAITRESP = '100',
+              WAITTASK = '1441',
+              COM      = ( 'COM0'),
+              NET      = ( 'NET0'),
+              PROT     = ( 'PESITANY'),
+              LENAPPL  = '32',
+              RCVALLER = 'STOP',
+              SSLMTASK = '16',
+              SSLTTASK = '16',
+              SSLWTASK = '1441',
+              SSLWRESP = '100',
+              PKIFNAME = '$CFTPKU',
+              PKIPASSW = 'CFT',
+              TRKPART  = 'UNDEFINED',
+              TRKSEND  = 'UNDEFINED',
+              TRKRECV  = 'UNDEFINED',
+              CRONTABS = ( 'CRONTAB1'),
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPARM      ID       = 'ODY_R',
+ /*           ACCNT    = '',*/
+              BUFSIZE  = '4096',
+              CAT      = 'CAT0',
+ /*           COMMENT  = '',*/
+              DEFAULT  = 'ODY_R',
+              EXECRE   = '$CFTDIREXEC/erecv.cmd',
+              EXECRF   = '$CFTDIREXEC/&idf_re.cmd',
+              EXECRM   = '$CFTDIREXEC/recvm.cmd',
+              EXECSE   = '$CFTDIREXEC/er&idf.cmd',
+ /*           EXECSF   = '',*/
+ /*           EXECSFA  = '',*/
+ /*           EXECSM   = '',*/
+ /*           EXECSMA  = '',*/
+ /*           EXITEOT  = '',*/
+              FBUFSIZE = '0',
+              KEY      = 'JI6FAUZQMH4UDHTVT9P9I1SOTLN97JI6FAGW1S2E7',
+              LOG      = 'LOG0',
+              MAXTASK  = '16',
+              MAXTRANS = '64',
+              NPART    = 'FP1ODYR5',
+              ORIGIN   = 'CFTUTIL',
+              PART     = 'FP1ODYR5',
+              PARTFNAM = '$CFTPART',
+ /*           SECFNAME = '',*/
+              STRACE   = '0',
+              TRANTASK = '3',
+              USERCTRL = 'NO',
+              WAITRESP = '100',
+              WAITTASK = '1441',
+              COM      = ( 'COM0'),
+              NET      = ( 'NET0'),
+              PROT     = ( 'PESITANY'),
+              LENAPPL  = '32',
+              RCVALLER = 'STOP',
+              SSLMTASK = '16',
+              SSLTTASK = '16',
+              SSLWTASK = '1441',
+              SSLWRESP = '100',
+              PKIFNAME = '$CFTPKU',
+              PKIPASSW = 'CFT',
+              TRKPART  = 'UNDEFINED',
+              TRKSEND  = 'UNDEFINED',
+              TRKRECV  = 'UNDEFINED',
+              CRONTABS = ( 'CRONTAB1'),
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=parm)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTPROT      ID       = 'PESITANY',
+ /*           IDF      = '',*/
+              NET      = 'NET0',
+              SAP      = '1761',
+              SRIN     = 'BOTH',
+              SROUT    = 'BOTH',
+              TYPE     = 'PESIT',
+ /*           EXITA    = '',*/
+ /*           SSL      = '',*/
+ /*           DYNAM    = '',*/
+ /*           COMMENT  = '',*/
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              ORIGIN   = 'CFTUTIL',
+              PROF     = 'ANY',
+              CONCAT   = 'YES',
+              MULTART  = 'YES',
+              PAD      = 'NO',
+              RCHKW    = '3',
+              RESTART  = '5',
+              RESYNC   = 'NO',
+              REVERSE  = 'NO',
+              RPACING  = '10240',
+              RRUSIZE  = '32750',
+ /*           RSERV    = '',*/
+              RTO      = '260',
+              SCHKW    = '3',
+              SEGMENT  = 'YES',
+              SPACING  = '10240',
+              SRUSIZE  = '32750',
+              DISCTC   = '90',
+              DISCTD   = '120',
+              DISCTR   = '45',
+              DISCTS   = '165',
+              RCOMP    = '0',
+              SCOMP    = '0',
+              SSERV    = 'PESIT',
+              LOGON    = 'YES',
+              HIDE99   = 'NO',
+              NACK     = 'NO',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPROT      ID       = 'PESITSSL',
+ /*           IDF      = '',*/
+              NET      = 'NET0',
+              SAP      = '1762',
+              SRIN     = 'BOTH',
+              SROUT    = 'BOTH',
+              TYPE     = 'PESIT',
+ /*           EXITA    = '',*/
+              SSL      = 'SSLPESIT',
+ /*           DYNAM    = '',*/
+ /*           COMMENT  = '',*/
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              ORIGIN   = 'CFTUTIL',
+              PROF     = 'ANY',
+              CONCAT   = 'YES',
+              MULTART  = 'YES',
+              PAD      = 'NO',
+              RCHKW    = '3',
+              RESTART  = '5',
+              RESYNC   = 'NO',
+              REVERSE  = 'NO',
+              RPACING  = '10240',
+              RRUSIZE  = '32750',
+ /*           RSERV    = '',*/
+              RTO      = '260',
+              SCHKW    = '3',
+              SEGMENT  = 'YES',
+              SPACING  = '10240',
+              SRUSIZE  = '32750',
+              DISCTC   = '90',
+              DISCTD   = '120',
+              DISCTR   = '45',
+              DISCTS   = '165',
+              RCOMP    = '0',
+              SCOMP    = '0',
+              SSERV    = 'PESIT',
+              LOGON    = 'YES',
+              HIDE99   = 'NO',
+              NACK     = 'NO',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=prot)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU00I CFTEXT   _ Correct (type=xlate)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU18E CFTEXT   _ Failed  invalid value for keyword TYPE(=ASY) 
+CFTU00I                    (type=asy)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=dna)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=dsa)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=lu62)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=sna)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTTCP       ID       = 'LEFCFT1',
+              RETRYW   = '2',
+              RETRYM   = '3',
+              RETRYN   = '1',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '2',
+              CNXIN    = '2',
+              CNXINOUT = '3',
+              CLASS    = '1',
+              HOST     = ( '10.16.28.87'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'LOOP',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'LOOPSSL0',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'NEWYORK',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTTCP       ID       = 'PARIS',
+              RETRYW   = '7',
+              RETRYM   = '12',
+              RETRYN   = '6',
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+              CNXOUT   = '8',
+              CNXIN    = '8',
+              CNXINOUT = '8',
+              CLASS    = '1',
+              HOST     = ( '127.0.0.1'),
+              VERIFY   = '0',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=tcp)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:43
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+CFTU24W CFTEXT   _ Warning ( No record found)
+CFTU00I                    (type=x25)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   1
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:43
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:44
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTPART      ID       = 'LEFCFT1',
+              SAUTH    = '*',
+              RAUTH    = '*',
+ /*           XLATE    = '',*/
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+ /*           IPART    = '',*/
+              NRPART   = 'LEFCFT1',
+              NSPART   = 'FP1ODYR5',
+ /*           NRPASSW  = '',*/
+ /*           NSPASSW  = '',*/
+              COMMENT  = 'PFE PLATEFORME ECHANGES CFT',
+              SYST     = 'UNIX',
+              COMMUT   = 'YES',
+ /*           GROUP    = '',*/
+ /*           FPREFIX  = '',*/
+ /*           IDF      = '',*/
+              STATE    = 'ACTIVEBOTH',
+              PROT     = ( 'PESITANY'),
+              SAP      = ( '6535'),
+ /*           SSL      = '',*/
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              CTRLPART = 'IGNORE',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              NACK     = ' ',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPART      ID       = 'LOOP',
+              SAUTH    = '*',
+              RAUTH    = '*',
+ /*           XLATE    = '',*/
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+ /*           IPART    = '',*/
+              NRPART   = 'LOOP',
+              NSPART   = 'LOOP',
+ /*           NRPASSW  = '',*/
+ /*           NSPASSW  = '',*/
+ /*           COMMENT  = '',*/
+              SYST     = 'UNIX',
+              COMMUT   = 'YES',
+ /*           GROUP    = '',*/
+ /*           FPREFIX  = '',*/
+ /*           IDF      = '',*/
+              STATE    = 'ACTIVEBOTH',
+              PROT     = ( 'PESITANY'),
+              SAP      = ( '1761'),
+ /*           SSL      = '',*/
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              CTRLPART = 'IGNORE',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              NACK     = ' ',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPART      ID       = 'LOOPSSL0',
+              SAUTH    = '*',
+              RAUTH    = '*',
+ /*           XLATE    = '',*/
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+ /*           IPART    = '',*/
+              NRPART   = 'LOOPSSL0',
+              NSPART   = 'LOOPSSL0',
+ /*           NRPASSW  = '',*/
+ /*           NSPASSW  = '',*/
+ /*           COMMENT  = '',*/
+              SYST     = 'UNIX',
+              COMMUT   = 'YES',
+ /*           GROUP    = '',*/
+ /*           FPREFIX  = '',*/
+ /*           IDF      = '',*/
+              STATE    = 'ACTIVEBOTH',
+              PROT     = ( 'PESITSSL'),
+              SAP      = ( '1762'),
+              SSL      = 'SSL_LOOP0',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              CTRLPART = 'IGNORE',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              NACK     = ' ',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPART      ID       = 'NEWYORK',
+              SAUTH    = '*',
+              RAUTH    = '*',
+ /*           XLATE    = '',*/
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+ /*           IPART    = '',*/
+              NRPART   = 'NEWYORK',
+              NSPART   = 'PARIS',
+              NRPASSW  = 'LIBERTY',
+              NSPASSW  = 'BASTILLE',
+ /*           COMMENT  = '',*/
+              SYST     = 'UNIX',
+              COMMUT   = 'YES',
+ /*           GROUP    = '',*/
+ /*           FPREFIX  = '',*/
+ /*           IDF      = '',*/
+              STATE    = 'ACTIVEBOTH',
+              PROT     = ( 'PESITANY'),
+              SAP      = ( '1761'),
+ /*           SSL      = '',*/
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              CTRLPART = 'IGNORE',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              NACK     = ' ',
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTPART      ID       = 'PARIS',
+              SAUTH    = '*',
+              RAUTH    = '*',
+ /*           XLATE    = '',*/
+              IMAXTIME = '23595999',
+              IMINTIME = '00000000',
+              OMAXTIME = '23595999',
+              OMINTIME = '00000000',
+ /*           IPART    = '',*/
+              NRPART   = 'PARIS',
+              NSPART   = 'NEWYORK',
+              NRPASSW  = 'BASTILLE',
+              NSPASSW  = 'LIBERTY',
+ /*           COMMENT  = '',*/
+              SYST     = 'UNIX',
+              COMMUT   = 'YES',
+ /*           GROUP    = '',*/
+ /*           FPREFIX  = '',*/
+ /*           IDF      = '',*/
+              STATE    = 'ACTIVEBOTH',
+              PROT     = ( 'PESITANY'),
+              SAP      = ( '1761'),
+ /*           SSL      = '',*/
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              CTRLPART = 'IGNORE',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+              NACK     = ' ',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=part)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:44
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:44
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTSEND      ID       = 'ID_EXITL',
+              IMPL     = 'YES',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+              EXIT     = 'CFTEXLST',
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = ' ',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+ /*           FNAME    = '',*/
+              FORG     = ' ',
+              FRECFM   = ' ',
+              FSPACE   = '0',
+ /*           FTYPE    = '',*/
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'BIN',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'NONE',
+              FBLKSIZE = '0',
+              FCODE    = 'BINARY',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = 'pub/FTEST',
+              FORG     = ' ',
+              FRECFM   = ' ',
+              FSPACE   = '0',
+              FTYPE    = 'B',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'FIC1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+              EXIT     = 'ID_EXIT',
+ /*           FACC     = '',*/
+              FACTION  = 'NONE',
+              FBLKSIZE = '0',
+              FCODE    = ' ',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = 'pub/FTEST',
+              FORG     = ' ',
+              FRECFM   = ' ',
+              FSPACE   = '0',
+ /*           FTYPE    = '',*/
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'IDFDEF',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'NONE',
+              FBLKSIZE = '0',
+              FCODE    = 'BINARY',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = 'pub/FTEST',
+              FORG     = ' ',
+              FRECFM   = ' ',
+              FSPACE   = '0',
+              FTYPE    = 'B',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TFIGL10',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'SIMPAC EXPORT DES PIèCES COMPTABLES AGRéGéES',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYBCO1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'BILAN CONSO FLUX REPORTING EXPORT CLIENT',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYBQE1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+              EXEC     = '/tmp/testpostcft.ksh',
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/test_TODYBQE1',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'COMM+GROUP ORDRES DE PRéLèVEMENT (AUTRES BANQUES)',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYEST1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EMC DEMANDE DE RELèVE POUR ESTIMATION',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYIDX1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '1800',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EMC ENVOI DES INDEX FACTURéS',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYLOP1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'COMM+GROUP(VALIDATION) LISTE DES ORDRES DE PRéLEVEMENT DU JOUR (POUR VALIDATION DANS COMM+GROUP)',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYLOV1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'COMM+GROUP(VALIDATION) LISTE DES ORDRES DE VIREMENT DU JOUR (POUR VALIDATION DANS COMM+GROUP)',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYOCE1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'OCE EXPORT DE LA BASE CLIENT',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYPRL1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'BANQUES DE FRANCE ORDRES DE PRéLèVEMENT (BANQUE DE FRANCE)',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYREF1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'FURPAC SYNCHRONISATION DU PATRIMOINE TECHNIQUE AVEC CC&B',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TODYREL1',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '1800',
+ /*           FNAME    = '',*/
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'MICROREL CAMPAGNE DE RELèVE TERRAIN',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'TXT',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'NONE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = 'pub/FTEST',
+              FORG     = ' ',
+              FRECFM   = ' ',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'YOTD01',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EDITIQUE EXPORT POUR éDITION DES FACTURES (PROD + SPéCIMENS)',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'YOTD02',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EDITIQUE EXPORT POUR éDITION DES COURRIERS DE RELANCE EN RECOMMANDé',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'YOTD03',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EDITIQUE EXPORT POUR éDITION DES FACTURES DE MAJORATION ASSAINISSEMENT',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'YOTD05',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EDITIQUE EXPORT DES BORDEREAU DE REGROUPEMENT DE FACTURES',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTSEND      ID       = 'YOTD24',
+              IMPL     = 'NO',
+              STATE    = 'DISP',
+              CYCLE    = '0',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+              FDISP    = 'SHR',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = ' ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FTYPE    = 'T',
+              NBLKSIZE = '0',
+              NCODE    = ' ',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NFNAME   = '',*/
+              NLRECL   = '0',
+ /*           NOTIFY   = '',*/
+              NRECFM   = ' ',
+              NSPACE   = '0',
+ /*           NTYPE    = '',*/
+ /*           PARM     = '',*/
+              PRI      = '128',
+ /*           RAPPL    = '',*/
+ /*           RUSER    = '',*/
+ /*           SAPPL    = '',*/
+ /*           SUSER    = '',*/
+              TCYCLE   = 'DAY',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           SPART    = '',*/
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              NKEYLEN  = '0',
+              NKEYPOS  = '0',
+              COMMENT  = 'EDITIQUE EXPORT POUR éDITION DES COURRIERS',
+              FORCE    = 'NO',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+ /*           SELFNAME = '',*/
+ /*           SIGFNAME = '',*/
+              EXECSUB  = 'LIST',
+              TRK      = 'UNDEFINED',
+              EXECSUBA = 'SUBF',
+              ORIGIN   = 'CFTUTIL',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=send)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:44
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:44
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTRECV      ID       = 'BIN',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'BINARY',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = 'pub/&IDT.&IDTU.RCV',
+              FORG     = 'SEQ',
+ /*           FRECFM   = '',*/
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'B',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'IDFDEF',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'BINARY',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = 'pub/&IDT.&IDTU.RCV',
+              FORG     = 'SEQ',
+ /*           FRECFM   = '',*/
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'B',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPESEMRT',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'EMC RéCEPTION DES RELèVE EMC',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPFACTRV',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'ALFA DONNéES DE FACTURATION TRAVAUX',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPPAYCAS',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'COMM+GROUP CASH-COMPTE',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPPAYTIP',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'EXTELIA TIP ET TIP CHèQUE',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPRECRRL',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'MICROREL COMPTE RENDU DE RELèVE ET ANOMALIES',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'OPREJET',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = ' ',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/tmp/cft_test/',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'COMM+GROUP AVIS DE REJETS ET DCD',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORESEMRT',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/EMC/FLX-EMC-ESTI-RETOUR/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'EMC RéCEPTION DES RELèVE EMC',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORFACTRV',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/ALFA/FLX-TRAV-FACTRAV/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'ALFA DONNéES DE FACTURATION TRAVAUX',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORFTPMIG',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'BINARY',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/logiciels/tws/cft/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'B',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'FLUX MIGRATION REMPLACANT FTP',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORPAICB',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/PAYLINE/FLX-BQ-PAICB/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'EXTELIA CARTE BANCAIRE',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORPAYCAS',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/COMMGROUP/FLX-BQ-PAYCASH/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'COMM+GROUP CASH-COMPTE',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORPAYTIP',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/EXTELIA/FLX-BQ-PAYTIP/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'EXTELIA TIP ET TIP CHèQUE',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORRECRRL',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/MICROREL/FLX-REL-CRREL/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'MICROREL COMPTE RENDU DE RELèVE ET ANOMALIES',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'ORREJET',
+              EXEC     = '/odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh',
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = '/odyssee/pprd/echanges/IN/COMMGROUP/FLX-BQ-REJETS/&parm',
+              FORG     = 'SEQ',
+              FRECFM   = 'V',
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+              COMMENT  = 'COMM+GROUP AVIS DE REJETS ET DCD',
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+ CFTRECV      ID       = 'TXT',
+ /*           EXEC     = '',*/
+ /*           EXIT     = '',*/
+ /*           RUSER    = '',*/
+ /*           SUSER    = '',*/
+ /*           FACC     = '',*/
+              FACTION  = 'DELETE',
+              FBLKSIZE = '0',
+              FCODE    = 'ASCII',
+ /*           FDB      = '',*/
+ /*           FCOMP    = '',*/
+              FDISP    = 'BOTH',
+              FLRECL   = '0',
+              FNAME    = 'pub/&IDT.&IDTU.RCV',
+              FORG     = 'SEQ',
+ /*           FRECFM   = '',*/
+              FSPACE   = '0',
+              FKEYLEN  = '0',
+              FKEYPOS  = '0',
+              FTYPE    = 'T',
+              NCOMP    = '15',
+              NETBAND  = '1',
+ /*           NOTIFY   = '',*/
+              PRI      = '128',
+              STATE    = 'DISP',
+ /*           USERID   = '',*/
+ /*           GROUPID  = '',*/
+ /*           XLATE    = '',*/
+ /*           WFNAME   = '',*/
+ /*           COMMENT  = '',*/
+              FORCE    = 'NO',
+              DELETE   = 'NO',
+              OPERMSG  = '0',
+              MACTION  = ' ',
+              DIRNB    = '0',
+ /*           RKERROR  = '',*/
+              MINTIME  = '00000000',
+              MAXTIME  = '23595999',
+              MINDATE  = '10000101',
+              MAXDATE  = '99991231',
+              CYCDATE  = '00000000',
+              CYCTIME  = '00000000',
+              TRK      = 'UNDEFINED',
+              ORIGIN   = 'CFTUTIL',
+              FCHECK   = 'NO',
+ /*           FCHARSET = '',*/
+ /*           NCHARSET = '',*/
+ /*           DUPLICAT = '',*/
+ /*           FDELETE  = '',*/
+ /*           SPASSWD  = '',*/
+ /*           RPASSWD  = '',*/
+ /*           RAPPL    = '',*/
+ /*           SAPPL    = '',*/
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=recv)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:44
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:44
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTLOG       ID       = 'LOG0',
+              FNAME    = '_CFTLOG',
+              AFNAME   = '_CFTLOGA',
+              EXEC     = '$CFTDIREXEC/switch.cmd',
+              LENGTH   = '160',
+              OPERMSG  = '0',
+              MAXREC   = '0',
+              NOTIFY   = '        ',
+              SWITCH   = '23590000',
+              CONTENT  = 'FULL',
+              NTF      = 'NO',
+              NTFTYP   = 'EF',
+ /*           NTFALERT = ( ) ,*/
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              FORMAT   = 'V24',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=log)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:44
+CFTU20I Session active for  0:00:00
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 13/06/2013 Time is 10:29:44
+CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ CFTACCNT     ID       = 'ACCNT0',
+              LANGUAGE = 'C',
+              TYPE     = 'FILE',
+              FNAME    = '_CFTACNT',
+              AFNAME   = '_CFTACNTA',
+              EXEC     = '$CFTDIREXEC/switchacnt.cmd',
+              MAXREC   = '500',
+              SWITCH   = '23590000',
+ /*           COMMENT  = '',*/
+              ORIGIN   = 'CFTUTIL',
+              FORMAT   = 'V24',
+              MODE     = 'REPLACE'
+ 
+ 
+CFTU00I CFTEXT   _ Correct (type=accnt)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 13/06/2013 Time is 10:29:44
+CFTU20I Session active for  0:00:00
+[cft.sh list] 36 errors have been detected
+[cft.sh list] try 'cft.sh list --help' for usage
+[cft.sh list] exiting with code 1

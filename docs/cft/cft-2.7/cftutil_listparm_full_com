@@ -1,0 +1,74 @@
+CFTU20I  
+CFTU20I CFT/V2/UAIX 53L
+CFTU20I Version 2.7.1 20120123
+CFTU20I (C) Copyright AXWAY 1989-2011
+CFTU20I ====> Starting Session on 24/06/2013 Time is 11:48:43
+CFTU20I Parameters file    :/odyssee/prod/logiciels/..CFT/runtime/data/cftparm
+CFTU20I Partners file      :$CFTPART                                          
+CFTU20I Catalog file       :/odyssee/prod/logiciels/..CFT/runtime/data/cftcata
+CFTU20I  
+ 
+                    CFTCOM   - Communication with CFT
+                    ---------------------------------
+ 
+  COM0                            
+          Type                        TYPE     = FILE
+          Scan frequency              WSCAN    = 1     s
+          Media name                  NAME     =
+          *_CFTCOM                                                         
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372558
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571212
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+  COMS    
+          Type                        TYPE     = TCPIP
+          Protocol used               PROTOCOL = XHTTP
+          Service Acces Point         PORT     = 6535 
+          Timeout                     TIMEOUT  = 60   s
+          Host name                   HOST     =
+          *127.0.0.1                                                       
+          Authorized Address          ADDRLIST =
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+          *                                                                
+ 
+          ............... General informations  ..................
+ 
+          Record creation user group  RECUSERG = itmgrp                          
+          Record creation user        RECUSER  = ldecft                          
+          Record last modify user grp RECUSERMG= itmgrp                          
+          Record last modify user     RECUSERM = ldecft                          
+          Record creation date        RECDATEC = 20120620
+          Record creation time        RECTIMEC = 16372558
+          Record last modify date     RECDATEM = 20130620
+          Record last modify time     RECTIMEM = 10571212
+          Record last modify origin   ORIGIN   = CFTUTIL   
+ 
+ 
+CFTU00I LISTPARM _ Correct (content=full,type=com)
+CFTU20I Number of Command(s) 1
+CFTU20I Number of error(s)   0
+CFTU20I Ending   Session on 24/06/2013 Time is 11:48:43
+CFTU20I Session active for  0:00:00

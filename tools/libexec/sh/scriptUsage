@@ -1,0 +1,167 @@
+# @(#) Displays on stdout the full online help for the current verb
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   usage: ${ttp_command} ${ttp_verb} [options]"
+#   where <options> are:
+#     --[no]help      display this online help and gracefully exit [${opt_help_def}]
+#     --[no]all       display all commands and verbs [${opt_all_def}]
+#   post-help message (marked as '# @(@)'
+#
+# (I): -
+#
+# (O): -
+#
+# pwi 1998-10-21 new production architecture definition - creation
+# pwi 2001-10-17 remove GEDTOOL variable
+# pwi 2002- 2-28 tools are moved to the physical host
+# pwi 2002- 6-22 remove shebang line
+# pwi 2006-10-27 the tools become The Tools Project, released under GPL
+# pwi 2013- 6- 3 define a dynamic help
+# pwi 2013- 7-15 review options dynamic computing
+# pwi 2017- 6-21 publish the release at last 
+
+function scriptUsage
+{
+	#set -x
+
+	typeset -i _increm=1
+	scriptDetail ${ttp_command_path} &&
+	scriptDetail ${ttp_verb_path} ${_increm} "no" "yes"
+	[ $? -gt 0 ] && return 1
+
+	# first loop over all optional/positional arguments to compute the
+	#  largest size (in order to be able to align the help lines)
+	typeset -i _i=0
+	typeset -i _lmax=0
+	typeset _arg
+	while [ ${_i} -lt ${ttp_optargs_count} ]; do
+		_arg="${ttp_optargs_key[${_i}]}"
+		typeset -i _l=${#_arg}
+		# add the '[no]' label for booleans
+		if [ -z "${ttp_optargs_dsc[${_i}]}" ]; then
+			let _l+=4
+		else
+			# add the '=value' if any
+			typeset _desc="${ttp_optargs_dsc[${_i}]}"
+			let _l+=1+${#_desc}
+			# add the square brackets of an optional value
+			if [ "${ttp_optargs_mdt[${_i}]}" = "no" ]; then
+				let _l+=2
+			fi
+		fi
+		# keep the largest option size
+		[ ${_l} -gt ${_lmax} ] && _lmax=${_l}
+		let _i+=1
+	done
+	_i=0
+	while [ ${_i} -lt ${ttp_posargs_count} ]; do
+		_arg="${ttp_posargs_key[${_i}]}"
+		# display '<name>'
+		typeset -i _l=2+${#_arg}
+		# display '[<name>]'
+		if [ "${ttp_posargs_mdt[${_i}]}" = "no" ]; then
+			let _l+=2
+		fi
+		# keep the largest option size
+		[ ${_l} -gt ${_lmax} ] && _lmax=${_l}
+		let _i+=1
+	done
+	#echo "_lmax=${_lmax}"
+
+	# print the usage line, along with positional arguments
+	printf "    usage: ${ttp_command} ${ttp_verb} [options]"
+	typeset -i _i=0
+	while [ ${_i} -lt ${ttp_posargs_count} ]; do
+		printf " "
+		[ "${ttp_posargs_mdt[${_i}]}" = "no" ] && printf "["
+		printf "<${ttp_posargs_key[${_i}]}>"
+		[ "${ttp_posargs_mdt[${_i}]}" = "no" ] && printf "]"
+		let _i+=1
+	done
+	printf "\n"
+
+	typeset -i _larg=20
+	[ ${_lmax}+2 -gt ${_larg} ] && let _larg=${_lmax}+2
+
+	# print the list of optional arguments and their help lines
+	if [ ${ttp_optargs_count} -gt 0 ]; then
+		printf "    where options are:\n"
+		_i=0
+		while [ ${_i} -lt ${ttp_optargs_count} ]; do
+			printf "      --"
+			_arg="${ttp_optargs_key[${_i}]}"
+			typeset -i _cspaces=${_larg}-${#_arg}
+			typeset _desc="${ttp_optargs_dsc[${_i}]}"
+			if [ -z "${_desc}" ]; then
+				printf "[no]"
+				let _cspaces-=4
+			fi
+			printf "${_arg}"
+			if [ ! -z "${_desc}" ]; then
+				[ "${ttp_optargs_mdt[${_i}]}" = "no" ] && printf "["
+				printf "${_desc}"
+				[ "${ttp_optargs_mdt[${_i}]}" = "no" ] && printf "]"
+				let _cspaces-=${#_desc}
+				[ "${ttp_optargs_mdt[${_i}]}" = "no" ] && let _cspaces-=2
+			fi
+			printf "%*c" ${_cspaces} " " 
+			printf "${ttp_optargs_hlp[${_i}]}"
+			typeset _def="$(eval echo '${opt_'${_arg}'_def_disp}')"
+			if [ ! -z "${_def}" ]; then
+				printf " [${_def}]"
+			else
+				printf " [$(eval echo '${opt_'${_arg}'_def}')]"
+			fi
+			printf "\n"
+			let _i+=1
+		done
+	fi
+
+	# and last print the help lines for positional arguments
+	if [ ${ttp_posargs_count} -gt 0 ]; then
+		printf "    and:\n"
+		_i=0
+		while [ ${_i} -lt ${ttp_posargs_count} ]; do
+			printf "      "
+			_arg="${ttp_posargs_key[${_i}]}"
+			typeset -i _cspaces=${_larg}-${#_arg}
+			if [ "${ttp_posargs_mdt[${_i}]}" = "no" ]; then
+				printf "["
+				let _cspaces-=2
+			fi
+			printf "<${_arg}>"
+			if [ "${ttp_posargs_mdt[${_i}]}" = "no" ]; then
+				printf "]"
+			fi
+			printf "%*c" ${_cspaces} " " 
+			printf "${ttp_posargs_hlp[${_i}]}"
+			printf " [$(eval echo '${pos_'${_arg}'_def}')]"
+			printf "\n"
+			let _i+=1
+		done
+	fi
+
+	# if any, display a post-help message (marked as '# @(@)'
+	let _increm+=1
+	scriptDetailEnd "${ttp_verb_path}" "${_increm}"
+
+	return $?
+}
