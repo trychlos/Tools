@@ -55,8 +55,8 @@
 
 function verb_arg_define_opt {
 	echo "
-help			display this online help and gracefully exit
-node=<name>		target execution node
+help					display this online help and gracefully exit
+node=<name>|DEFAULT		target execution node
 "
 }
 
@@ -100,15 +100,23 @@ function verb_main {
 	typeset -i _ret=0
 
 	# make sure the required target node exists here
-	typeset _node="$(bspNodeEnum | grep -w "${opt_node}" 2>/dev/null)"
-	if [ -z "${_node}" ]; then
-		msgerr "execution node '${opt_node}' not found or not available on this host"
-		return 1
+	typeset _node=""
+	if [ "${opt_node}" = "DEFAULT" ]; then
+		_node="$(bspNodeFindCandidate)"
+		if [ -z "${_node}" ]; then
+			msgerr "no available execution node on this host"
+			return 1
+		fi
+	else
+		_node="$(bspNodeEnum | grep -w "${opt_node}" 2>/dev/null)"
+		if [ -z "${_node}" ]; then
+			msgerr "'${opt_node}': execution node not found or not available on this host"
+			return 1
+		fi
 	fi
-	
-	export TTP_NODE="${_node}"
-	msgout "execution node sucessfully setup to ${_node}"
-	[ -d "/${_node}" ] && cd "/${_node}"
+
+	bspSwitch "${_node}"
+	let _ret=$?
 
 	return ${_ret}
 }

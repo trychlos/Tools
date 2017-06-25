@@ -43,12 +43,13 @@
 
 function verb_arg_define_opt {
 	echo "
-help				display this online help and gracefully exit
-dummy				dummy execution
-verbose				execute verbosely
-service=<mnemo>		service mnemonic
-dumpdir=<path>      dump directory
-since=<first>       the first revision to dump
+help					display this online help and gracefully exit
+dummy					dummy execution
+verbose					verbose execution
+service=<identifier>	service identifier
+repository=<name>		repository name
+dumpdir=<path>      	dump directory
+since=<first>       	the first revision to dump
 "
 }
 
@@ -56,12 +57,12 @@ since=<first>       the first revision to dump
 # echoes the list of positional arguments if any
 #  first word is the name of the argument
 #  rest of line is the help message
-
-function verb_arg_define_pos {
-	echo "
-repo				svn repository name
-"
-}
+#
+#function verb_arg_define_pos {
+#	echo "
+#repo				svn repository name
+#"
+#}
 
 # ---------------------------------------------------------------------
 # initialize specific default values
@@ -80,13 +81,13 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgerr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# a repository name must be specified
-	if [ -z "${pos_repo}" ]; then
-		msgerr "SVN repository name not provided, but is mandatory"
+	if [ -z "${opt_repository}" ]; then
+		msgerr "repository name is mandatory, has not been found"
 		let _ret+=1
 	fi
 
@@ -111,94 +112,70 @@ function verb_main {
 	#set -x
 	typeset -i _ret=0
 
-	# check that the current machine hosts a subversion repository
+	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
-	msgVerbose "service=${opt_service}, target node=${_node}"
-	if [ "${_node}" != "${TTP_NODE}" ]; then
+	if [ -z "${_node}" ]; then
+		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		let _ret+=1
+
+	elif [ "${_node}" != "${TTP_NODE}" ]; then
 		typeset _parms="$@"
 		execRemote "${_node}" "${ttp_command} ${ttp_verb} ${_parms}" 
 		return $?
-	fi
 
-	# this machine host a subversion repository
-	#commandExecFn svnSetEnv
-	#[ $? -eq 0 ] || { let ttp_errs+=1; return; }
+	# we are on the right node
+	else
+		# we do not need a special account here as long as the current one
+		# has permissions to execute the svnadmin binary
+		svnadmin --version 1>/dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			msgerr "'svnadmin': not found or not available"
+			let _ret+=1
 
-	# svn tools must be available
-	svnadmin --version 1>/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		msgerr "svnadmin not found or not available"
-		let _ret+=1
-		return ${_ret}
-	fi
+		else
+			typeset _repodir="$(svnGetRepoPath "${opt_service}" "${opt_repository}")"
+			if [ -z "${_repodir}" ]; then
+				msgerr "'${opt_repository}': unknown repository name"
+				let _ret+=1
 
-	# check the the repository name is known on this node and get
-	#  the corresponding storage directory
-	typeset _name
-	typeset _path
-	typeset _repodir=""
-	svn.sh list -service ${opt_service} -columns name,path -noheaders -format csv | \
-		grep -ve '^\[' | \
-		sed -e 's?;? ?g' | \
-		while read _name _path; do
-			#echo "name='${_name}'"
-			#echo "path='${_path}'"
-			if [ "${_name}" = "${pos_repo}" ]; then
-				_repodir="${_path}"
-				break
+			else
+				typeset _head=$(svnGetRepoHead "${opt_service}" "${opt_repository}")
+
+				# get the default dest dump path if not specified as an option
+				#  making sure that destination directory exists
+				typeset _destdir="${opt_dumpdir}"
+				[ -z "${_destdir}" ] &&
+					_destdir="$(confGetKey "ttp_node_keys" "${opt_service}" "0=dumpdir" 1 | \
+						tabSubstituteMacro "" "@R" "" "${pos_repo}")"
+				execDummy "mkdir -p '${_destdir}'"
+		
+				# get last revision previously saved
+				typeset -i _last=0
+				if [ ! -z "${opt_since}" ]; then
+					_last=${opt_since}-1
+				else
+					typeset _lastf="$(basename \
+										$(\ls -1rt ${_destdir}/svn-*.tar.gz 2>/dev/null | \
+											tail -1 | \
+											sed 's?\.tar\.gz??') 2>/dev/null)"
+					if [ ! -z "${_lastf}" ]; then
+						_last=$(echo "${_lastf}" | cut -d- -f3)
+					fi
+				fi
+		
+				# save from next revision after last
+				typeset -i _first=1+${_last}
+		
+				# save until head
+				#  do not save if there is no new revision
+				if [ ${_first} -le ${_head} ]; then
+					typeset _destfile="${_destdir}/svn-${_first}-${_head}.tar.gz"
+					msgout "dumping new revisions into ${_destfile}"
+					execDummy "svnadmin dump --revision ${_first}:${_head} --incremental ${_repodir} | gzip > '${_destfile}'"
+				else
+					msgout "${pos_repo}: last saved was ${_last}, head is ${_head}: nothing to dump"
+				fi
 			fi
-		done
-	if [ -z "${_repodir}" ]; then
-		msgerr "'${pos_repo}': unknown repository"
-		let _ret+=1
-		return ${_ret}
-	fi
-
-	typeset _mode="$(svnGetMode "${opt_service}")"
-	typeset _conf="$(svnGetConf "${opt_service}" "${_mode}")"
-
-	# get the source repository URL
-	typeset _svnurl="$(svnGetURL "${_mode}" "${_conf}")"
-	typeset _repourl="${_svnurl}/${pos_repo}"
-
-	# get the default dest dump path if not specified as an option
-	#  making sure that destination directory exists
-	typeset _destdir="${opt_dumpdir}"
-	[ -z "${_destdir}" ] &&
-		_destdir="$(confGetKey "ttp_node_keys" "${opt_service}" "0=dumpdir" 1 | \
-			tabSubstituteMacro "" "@R" "" "${pos_repo}")"
-	execDummy "mkdir -p '${_destdir}'"
-
-	# get last revision to be dumped
-	#  defaults to head
-	typeset -i _head="$(\svn info --revision HEAD "${_repourl}" | \
-							grep Revision | \
-							awk '{ print $2 }')"
-
-	# get last revision previously saved
-	typeset -i _last=0
-	if [ ! -z "${opt_since}" ]; then
-		_last=${opt_since}-1
-	else
-		typeset _lastf="$(basename \
-							$(\ls -1rt ${_destdir}/svn-*.tar.gz 2>/dev/null | \
-								tail -1 | \
-								sed 's?\.tar\.gz??') 2>/dev/null)"
-		if [ ! -z "${_lastf}" ]; then
-			_last=$(echo "${_lastf}" | cut -d- -f3)
 		fi
-	fi
-
-	# save from next revision after last
-	typeset -i _first=1+${_last}
-
-	# save until head
-	#  do not save if there is no new revision
-	if [ ${_first} -le ${_head} ]; then
-		typeset _destfile="${_destdir}/svn-${_first}-${_head}.tar.gz"
-		msgout "dumping new revisions into ${_destfile}"
-		execDummy "svnadmin dump --revision ${_first}:${_head} --incremental ${_repodir} | gzip > '${_destfile}'"
-	else
-		msgout "${pos_repo}: last saved was ${_last}, head is ${_head}: nothing to dump"
 	fi
 }

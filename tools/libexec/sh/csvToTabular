@@ -19,9 +19,13 @@
 #
 # Synopsis:
 #
-# (I). 1. whether a headers line is displayed
-#         yes|no
-#         defaults to "yes"
+# (I). 1. (opt.) whether a headers line is displayed
+#                yes|no
+#                defaults to "yes"
+#      2. (opt.) input csv separaror
+#                defaults to ';'
+#      3. (opt.) output tabular separaror
+#                defaults to '|'
 #
 # (O). -
 #
@@ -31,15 +35,15 @@
 function csvToTabular
 {
 	typeset _headers="${1:-yes}"
-	typeset _csvsep="${ttp_csvsep:-;}"
-	typeset _tabsep="${ttp_tabularsep:-|}"
+	typeset _csvsep="${2:-${ttp_csvsep:-;}}"
+	typeset _tabsep="${3:-${ttp_tabularsep:-|}}"
 
 	perl -se '{
 		sub display_line {
 			$il = shift;
-			print ${tabsep};
+			print ${outsep};
 			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
-				printf( " %-*s %s", $column[$j], $lines[$il][$j], $tabsep );
+				printf( " %-*s %s", $column[$j], $lines[$il][$j], $outsep );
 			}
 			print "\n";
 			if( $il == 0 && $headers eq "yes" ){
@@ -58,7 +62,7 @@ function csvToTabular
 		while( <STDIN> ){
 			#print;
 			chomp;
-			$lines[$nl] = [split /${csvsep}/];
+			$lines[$nl] = [split /${insep}/];
 			$icol = 0;
 			foreach $col ( @{$lines[$nl]} ){
 				$len = length( $col );
@@ -70,5 +74,5 @@ function csvToTabular
 		for( $i=0 ; $i<$nl ; ++$i ){
 			display_line( $i );
 		}
-	}' -- -headers="${_headers}" -csvsep="${_csvsep}" -tabsep="${_tabsep}"
+	}' -- -headers="${_headers}" -insep="${_csvsep}" -outsep="${_tabsep}"
 }

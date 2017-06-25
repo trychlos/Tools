@@ -1,0 +1,253 @@
+# @(#) output the full content of the CFT catalog in csv format
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Parse the catalog content (the output of CFTUTIL) as a pipe-
+#   separated list of individual datas (101 individual data per
+#   transfer).
+#
+#   - cftCatalogFullParse will reduce the raw output to lines with
+#     name|key|value triplets (102 data per trasfer);
+#     order of individual datas is directly computed from the raw
+#     output of CFTUTIL LISTCAT command, and left unchanged here
+# 
+#   - cftCatalogFullDatetime will merge individual date and time datas
+#     to datetime (got 95 datas per transfer)
+#
+#   - last, cftCatalogFullRow will transpose our 95 lines to a row of
+#     94 columns, inserting a 96th column at the very beginning as the
+#     service identifier.
+#     NOTE: cftCatalogFullRow really assumes that each transfer has its
+#           95 individual data lines - which implies that there is no
+#           missing data
+#
+#   Output will be in csv format
+#
+#   Cf. Transfer_CFT_2.3_Reference_Manual.pdf
+#       § 2.2.2.4.3 page 51 "Listcat content=full"
+#       for a full description of the content of the raw output
+#
+#   Cf. also v2/doc/cft/cft-2.7/cftutil_listcat_full for an example of
+#       the full raw output
+#
+#   Cf. also cft.sh check when upgrading the CFT version
+#
+# (I): 1. service identifier
+#      stdin: the output of CFTUTIl command
+#
+# (O): stdout: csv format
+#
+##   pwieser@LEFP01ODYR05 ~$ . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
+##   pwieser@LEFP01ODYR05 ~$ CFTUTIL listcat content=full
+##  
+##   CFTU20I
+##   CFTU20I CFT/V2/UAIX 53L
+##   CFTU20I Version 2.7.1 20120123
+##   CFTU20I (C) Copyright AXWAY 1989-2011
+##   CFTU20I ====> Starting Session on 26/02/2013 Time is 10:58:31
+##   CFTU20I Parameters file    :/odyssee/pprd/logiciels/..CFT/runtime/data/cftparm
+##   CFTU20I Partners file      :$CFTPART
+##   CFTU20I Catalog file       :/odyssee/pprd/logiciels/..CFT/runtime/data/cftcata
+##   CFTU20I
+##   
+##     Transfer id.                      IDT      = B1808020
+##     Local transfer id.                IDTU     = A00000P1
+##     Network transfer id.              NIDT     = 4908020
+##     Block number                      BLKNUM   = 722
+##   
+##        Direct                         DIRECT   = RECV
+##        Type                           TYPE     = FILE
+##        Priority                       PRI      = 128
+##   
+##        State                          STATE    = TERM
+##        Local diagnosis                DIAGI    = 0
+##        Protocol diagnosis             DIAGP    = CP NONE
+##   
+##        Item type                      DIFTYP   = SINGLE
+##        For partner list : id.         DEST     =
+##                           In progress LNUM     = 0
+##   
+##        Remote transfer id.            IDTD     =
+##        Remote transfer state          STATED   =
+##   
+##        Logical file id                IDF      = ORPAYCAS
+##        Network file id.               NIDF     = ORPAYCAS
+##   
+##        File data base                 FDBNAME  =
+##        *
+##        File name                      FNAME    =
+##        */odyssee/pprd/echanges/IN/COMMG..E.ODY.CASH.2013021807025200.OUT
+##        Temporary file name            WFNAME   =
+##        *
+##        Local Select list              SELFNAME =
+##        *
+##        Remote file name               NFNAME   =
+##        *
+##        Signature file name            SIGFNAME =
+##        *
+##        File version                   NFVER    = 0
+##   
+##        Private parameter              PARM     =
+##        *LDE.ODY.CASH.2013021807025200.OUT
+##        *
+##   
+##        Application id.                IDA      =
+##        *
+##   
+##        Partner                        PART     = LEFCFT1
+##        Sender                         SPART    = LEFCFT1
+##        Receiver                       RPART    = FP1ODYR5
+##        Intermediate partner           IPART    = LEFCFT1
+##        Connection partner             NPART    = LEFCFT1
+##   
+##        Partner call time                    Command deposure
+##        -----------------                    ----------------
+##        After        TIMMC    = 00:00:00.00  Date     DATED    = 18/02/2013
+##        Before       TIMMAXC  = 23:59:59.99  Time     TIMED    = 08:01:08.37
+##   
+##        Transfer validity                    Activation time
+##        -----------------                    ---------------
+##        After        MINDATE  = 01/01/1000   Before   CYCDATE  =
+##                     MINTIME  = 00:00:00.00  Time     CYCTIME  = 00:00:00.00
+##        Before       MAXDATE  = 31/12/9999   Each     CYCLE    = 0
+##                     MAXTIME  = 23:59:59.99  Unit     TCYCLE   =
+##   
+##        Next retry date                NEXTDAT  = 01/01/1000
+##        Next retry hour                NEXTTIM  = 00:00:00.00
+##   
+##                            Transfer
+##                            --------
+##   
+##        Begin date   DATEB    = 18/02/2013   End date DATEE    = 18/02/2013
+##        Begin time   TIMEB    = 08:01:08.37  End time TIMEE    = 08:01:08.38
+##   
+##        Connection retry                     Connection status
+##        ----------------                     -----------------
+##        Current      RETRY    = 0
+##        Max number   RETRYN   = 0            Restart  :
+##        Max number   RETRYM   = 0             Allowed (YES/NO) = NO
+##        Time between RETRYW   = 0             Current          = 0
+##        Last dial nb DIALNUM  = 0
+##   
+##        Transmitted                                   To transmit
+##        -----------                                   -----------
+##        Records      NRECS    = 37                    Records  NREC     = 37
+##        Bytes        NCARS    = 4440
+##   
+##        Read or Written
+##        ---------------
+##        Records      FRECS    = 37
+##        Bytes        FCARS    = 4440
+##   
+##        Synchronization
+##        ---------------
+##        Nb of checkpoints              NCHKPT   = 1
+##        Nb of resynchro.               NRST     = 0
+##   
+##        User id.                       USERID   =
+##        Group id.                      GROUPID  =
+##        Origin owner transfer          ORIGIN   =
+##        Requester user                 REQUSER  =
+##        APPL identifier used           APPL     =
+##        Translation table              XLATE    =
+##        Exec name                      EXEC     =
+##        */odyssee/pprd/logiciels/ordo/cft/bin/reception_cft.ksh
+##   
+##        Exit id.                       EXIT     =
+##   
+##        Exita id.                      EXITA    =
+##   
+##        Exite id.                      EXITE    =
+##   
+##        Exiteot id.                    EXITEOT  =
+##   
+##        Partner Group                  GROUP    =
+##   
+##        Job name                       JOBNAME  =
+##   
+##        Sender user                    SUSER    = PFE
+##               password                SPASSWD  =
+##        Receiver user                  RUSER    =
+##               password                RPASSWD  =
+##        Sender application             SAPPL    =
+##        *
+##        Receiver application           RAPPL    =
+##        *
+##   
+##        Security informations
+##        ---------------------
+##        SSL Mode                       SSLMODE  =
+##        SSL Auth Policy                SSLAUTH  =
+##        SSL Cipher Type                SSLCIPH  =
+##        SSL Profil Id.                 SSLPROF  =
+##        SSL Remote CA Alias.           SSLRMCA  =
+##        *
+##        SSL Local User Alias.          SSLUSER  =
+##        *
+##        SSL Cert. Filename.            SSLCFNAM =
+##        *
+##        SSL User Parameter             SSLPARM  =
+##        *
+##        Comments                       MSG      =
+##        *COMM+GROUP CASH-COMPTE
+##        *
+##   
+##        Network Partner  informations
+##        -----------------------------
+##        Network sender   partner       NSPART   = LEFCFT1
+##        Network receiver partner       NRPART   = FP1ODYR5
+##   
+##        Protocol Partner  informations
+##        ------------------------------
+##        Protocol Id                    PROT     = PESITANY
+##        Protocol Type                  TYPE     = PESIT
+##        Profil   Type                  PROFIL   = ANY
+##        Synchronization interval       PACING   = 36
+##        Synchronization window         CHKW     = 3
+##        Resynchronization              RESYNC   = NO
+##        Compression negotiated         COMPNEG  = 15
+##        Network message size           RUSIZE   = 4056
+##  
+##        [ ... ]
+##  
+##           17 record(s) selected
+##        10000 record(s) in Catalog file
+##         9983 record(s) free (99%)
+##   
+##   CFTU00I LISTCAT  _ Correct (content=full)
+##   CFTU20I Number of Command(s) 1
+##   CFTU20I Number of error(s)   0
+##   CFTU20I Ending   Session on 26/02/2013 Time is 11:06:22
+##   CFTU20I Session active for  0:00:00
+#
+# pwi 2013- 2- 4 creation
+# pwi 2013- 6- 6 add partner to output
+# pwi 2013- 6-19 output all 94 columns in a SQL-like output
+# pwi 2013- 6-24 add the service column to standard tabular format
+# pwi 2017- 6-21 publish the release at last 
+
+function cftCatalogFullToCsv
+{
+	typeset _service="${1}"
+
+	cftCatalogFullParse | \
+		cftCatalogFullDatetime | \
+		cftCatalogFullRow "${_service}"
+}

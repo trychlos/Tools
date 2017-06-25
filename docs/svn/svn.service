@@ -6,8 +6,8 @@
  =======
 
    Concepts
-   Subversion server configuration
-     id
+   Service configuration
+     service
      mode
      <mode>_conf
      dumpdir
@@ -32,22 +32,22 @@
  - A Subversion server using Apache + mod_dav_svn configuration.
 
 -----------------------------------------------------------------------
- Subversion server service configuration
- =======================================
+ Service configuration
+ =====================
 
  A Subversion service must be configured for each Subversion server we
  want to be managed.
 
  The service is defined as:
 
-   <service>	: service		: Subversion server
+   <service>	: service		: svn	: Subversion server
    <service>	: mode			: <server_mode>
    <service>	: <mode>_conf	: /path/to/configuration/file
    <service>	: dumpdir		: /path/to/dump/dir
 
- The first keyword defines the service mnemonic.
+ The first keyword defines the service identifier.
 
- As a recall: this same service mnemonic identifies this Subversion
+ As a recall: this same service identifier identifies this Subversion
  server through all the environments, and must be used identical in all
  environments, even if some implementation details are different - this
  is why these configuration files are designed for (to document and
@@ -59,8 +59,9 @@
    service
    -------
    'service' identifies the ligne as a service; is mandatory.
-   The label in third position is simply used as a label and is free
-   (but should not be left empty).
+   - the 'svn' word indicates a svn-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
 
    mode
    ----

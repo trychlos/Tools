@@ -44,10 +44,13 @@ function bspFind
 {
 	typeset _pattern="${1}"
 	if [ ! -z "${_pattern}" ]; then
+		#echo "(bspFind) examining pattern=${_pattern}" >&2
 		typeset _dir
 		typeset _file
 		bspRootEnum | while read _dir; do
-			find "${_dir}" -type f | while read _file; do
+			#echo "(bspFind) examining dir=${_dir}" >&2
+			find -L "${_dir}" -type f | while read _file; do
+				#echo "(bspFind) examining file=${_file}" >&2
 				if [ "${_file}" != "${_file%${_pattern}}" -a -r "${_file}" ]; then
 					echo "${_file}"
 					break

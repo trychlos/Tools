@@ -46,6 +46,8 @@
 #     ". ttp.sh ..."
 #   - we have to pre-load the function in a sub-environment.
 
+#set -x
+
 [ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] \
 	&& . ${TTP_SHDIR%/*}/bootstrap/sh_switch "$(which ttp.sh 2>/dev/null)" "${@}" \
 	|| ttpf_main "${0}" "${@}"

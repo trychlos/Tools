@@ -60,8 +60,8 @@ function pathGetLogsRoot
 
 		# if a function, then evaluate
 		typeset _is_path
+		_logsroot="$(eval echo ${_logsroot})"
 		[ "${_logsroot:0:1}" = "/" ] && _is_path="yes" || _is_path="no"
-		#_logsroot="$(eval echo ${_logsroot})"
 		if [ "${_is_path}" = "no" ]; then
 			typeset _fnlogs="${_logsroot}"
 			_logsroot="$("${_fnlogs}" 2>/dev/null)"

@@ -1,0 +1,101 @@
+# @(#) Output the Oracle database tablespaces usage
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. service mnemonic
+#
+# (O): stdout: SQL output
+#
+# This function has been forked from oracle.sh info, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# Other requests of interest:
+#
+# 1.  select distinct(tablespace_name) from dba_tablespaces order by tablespace_name;
+#
+# 2.  select tablespace_name, sum(bytes_used), sum(bytes_used)-sum(bytes_free), sum(bytes_free)
+#       from v$temp_space_header
+#       group by tablespace_name
+#     this request shows a TEMP tablespace 100% used
+#
+# 3.  select tablespace_name, sum(tablespace_size), sum(tablespace_size)-sum(free_space), sum(free_space)
+#       from dba_temp_free_space
+#       group by tablespace_name
+#     this request shows a TEMP tablespace just a bit used in an empty
+#     database, which appears to be more acceptable.
+#
+# pwi 2013- 6-12 creation
+# pwi 2013- 6-14 add TEMP tablespaces
+# pwi 2017- 6-21 publish the release at last 
+
+function oraTablespaces
+{
+	#set -x
+	typeset _service="${1}"
+
+	typeset -i _width=${#_service}
+	[ ${_width} -lt 7 ] && let _width=7 
+
+	cat - <<! | sqlTabular "${_service}"
+
+	set linesize 32767
+	set pagesize 50000
+	set tab off
+	set colsep '|'
+	-- columns headers and formats
+	col SERVICE    heading 'Service'        format a${_width}
+	col tablespace heading 'Tablespace'     format a20
+	col alloc_mb   heading 'Allocated (MB)' format '99990D9'
+	col used_mb    heading 'Used (MB)'      format '99990D9'
+	col used_pct   heading 'Used (%)'       format '990D99'
+	col free_mb    heading 'Free (MB)'      format '99990D9'
+	col free_pct   heading 'Free (%)'       format '990D99'
+
+	select
+		'${_service}' as SERVICE,
+		'TS' as TS,
+		tablespace_name as tablespace,
+		sum(alloc_b)/1024/1024 as alloc_mb,
+		sum(used_b)/1024/1024 as used_mb,
+		sum(used_b)/sum(alloc_b)*100 as used_pct,
+		sum(free_b)/1024/1024 as free_mb,
+		sum(free_b)/sum(alloc_b)*100 as free_pct
+	from (
+	select tablespace_name, sum(bytes) alloc_b, 0 used_b, 0 free_b
+		from dba_data_files
+		group by tablespace_name
+	union
+	select tablespace_name, 0, sum(bytes), 0
+		from dba_extents
+		group by tablespace_name
+	union
+	select tablespace_name, 0, 0, sum(bytes)
+		from dba_free_space
+		group by tablespace_name
+	union
+	select tablespace_name, sum(tablespace_size), sum(tablespace_size)-sum(free_space), sum(free_space)
+		from dba_temp_free_space
+		group by tablespace_name
+	)
+	group by tablespace_name
+	order by tablespace_name
+/
+!
+}

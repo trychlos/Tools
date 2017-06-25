@@ -59,7 +59,9 @@ function bspNodeEnum
 	typeset _host="$(uname -n)"
 	echo ${_host%%.*}
 	) | LANG=C sort | while read _name; do
+		#echo "(bspNodeEnum) name='${_name}'" >&2
 		typeset _conf="${ttp_nodesubdir}/${_name}.ini"
+		#echo "(bspNodeEnum) searched_node_conf_file='${_conf}'" >&2
 		typeset _file="$(bspFind "${_conf}")"
 		[ -z "${_file}" ] || echo "${_name}"
 	done

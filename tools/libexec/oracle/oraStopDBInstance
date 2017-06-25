@@ -1,0 +1,105 @@
+# @(#) Stop the DB instance
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. database service mnemonic
+#      2. (uppercase) shutdown mode = normal|immediate|transactional|abort
+#      3. timeout
+#      4. whether to display the output of the command
+#         (yes|no, default to no)
+#
+# (O): return: 0 if ok
+#
+# This function has been forked from oracle.sh stop, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# See also http://docs.oracle.com/cd/E11882_01/server.112/e17120/start003.htm
+#
+# pwi 2013- 6-14 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraStopDBInstance
+{
+	#set -x
+	typeset _service="${1}"
+	typeset _mode="${2:-NORMAL}"
+	typeset -i _timeout="${3}"
+	typeset _show="${4:-no}"
+
+	typeset -i _ret=0
+	typeset _stopped="no"
+	typeset _fnstop="oraStopDBShutdown"
+
+	typeset -A _modes
+	typeset -i _im=0
+	typeset -i _idx=0
+	typeset _curmode
+	for _curmode in "NORMAL" "IMMEDIATE" "TRANSACTIONAL" "ABORT"; do
+		_modes[${_im}]="${_curmode}"
+		if [ "${_mode}" = "${_curmode}" ]; then
+			_idx=${_im}
+		fi
+		let _im+=1
+	done
+
+	oraSetEnv "${_service}"
+	[ $? -gt 0 ] && return 1
+
+	while [ "${_stopped}" != "yes" -a ${_idx} -lt ${#_modes[@]} ]; do
+		typeset _curmode="${_modes[${_idx}]}"
+		msgout "stopping ${ORACLE_SID} instance in $(echo ${_curmode} | strLower) mode." "" " \b"
+		ttpf_timeout ${_timeout} 2 "${_fnstop}" "${_modes[${_idx}]}"
+		_ret=$?
+
+		# does not return the timeout code as is
+		[ ${_ret} -eq 127 ] && _ret=1
+
+		# ok ? then ensure that there is no remaining ora_ process
+		typeset -i _count=$(ps -u ${USER} -o cmd | grep -e "^ora_.\+_${ORACLE_SID}" | wc -l)
+		[ ${_count} -gt 0 ] && _ret=1
+
+		# last try to display a nice message
+		if [ ${_ret} -eq 0 ]; then
+			msgout "OK" " "
+			_stopped="yes"
+		else
+			msgout "NOT OK" " "
+			let _idx+=1
+		fi
+	done
+
+	# display the output of the startup command
+	#  the temporary file is the one addressed by ttpf_timeout function
+	if [ "${_show}" = "yes" ]; then
+		typeset _ftmp="$(pathGetTempFile ${_fnstop})"
+		perl -ne '{
+			chomp;
+			next if !length;
+			next if /^SQL\*Plus: Release/;
+			next if /^Copyright /;
+			next if /^With the /;
+			next if /^SQL> Disconnected from Oracle Database /;
+			s/^SQL> //;
+			print "log> $_\n";
+		}' "${_ftmp}"
+	fi
+
+	return ${_ret}
+}

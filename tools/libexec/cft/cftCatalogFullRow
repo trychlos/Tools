@@ -1,0 +1,109 @@
+# @(#) Parse the output of CFTUTIL LISTCAT CONTENT=FULL
+# @(#)  transposing the 94 individual datas into one single row
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Build one row per transfer.
+#
+#   Input from f_datetime where we have 94 lines per transfer, each line
+#   representing a particular data column for a transfer.
+#
+#   Assume that each transfer block has its 94 individual data lines.
+#   This implies there is no missing data; so order of the columns is
+#   taken from the first transfer block (which will be the first row)
+#   this also implies that we do not test for the last label in order
+#   to detect the end of each transfer block, but just rely on the lines
+#  count
+#
+#   Cf. comments in cftCatalogFullToCsv
+#
+# (I): 1. service mnemonic
+#      stdin: output of cftCatalogFullDatetime
+#
+# (O): stdout: one row per transfer in a SQL-like table
+#
+# pwi 2013- 2- 4 creation
+# pwi 2013- 6- 6 add partner to output
+# pwi 2013- 6-19 output all 94 columns in a SQL-like output
+# pwi 2017- 6-21 publish the release at last
+
+function cftCatalogFullRow
+{
+	typeset _service="${1}"
+
+	perl -se '{
+		sub funny_cap( $ ){
+			my $instr = shift;
+			my $len = length( $instr );
+			my $outstr = ""
+			if( $len > 0 ){
+				$outstr = uc( substr( $instr, 0, 1 ));
+				if( $len > 1 ){
+					$outstr .= lc( substr( $instr, 1 ));
+				}
+			}
+		}
+		# output the headers
+		# have to wait until the end of the first row to get all the columns
+		sub output_headers( $ ){
+			my $headers = shift;
+			print "Service";
+			foreach $col ( @{$headers} ){
+				print ${csvsep};
+				print funny_cap( $col );
+			}
+			print "\n";
+		}
+		# add a row to the output table
+		#  simultaneously computing the largest width of each column
+		sub addrow( $ ){
+			my $row = shift;
+			foreach $key ( keys %$row ){
+				$value = $row->{$key}[1];
+				#$table{$key}->{"max"} = length( $key ) if ! exists $table{$key};
+				#$table{$key}->{"max"} = length( $value ) if length( $value ) > $table{$key}->{"max"};
+				$table{$key}->{"rows"}->[$nr] = $value;
+			}
+		}
+		$nr = 0;
+		@columns = ();
+		%row = ();
+		while( <STDIN> ){
+			chomp;
+			( $label, $key, $value ) = split /${csvsep}/;
+			push( @columns, $key ) if !$nr;
+			$row{$key} = $value;
+			if( $label eq "Network message size" ){
+				output_headers( \@columns ) if !$nr;
+				print $service;
+				foreach $key ( @columns ){
+					print ${csvsep};
+					print $row{$key};
+				}
+				print "\n";
+				%row = ();
+				$nr += 1;
+			} 
+		}
+	} END {
+		# this string is parsed in cft.sh list
+		printf( "%s%d displayed row(s)\n", $msg, $nr );
+	}' -- -service="${_service}" -csvsep="${ttp_csvsep:-;}" -msg="$(msgoutPrefix)"
+}

@@ -27,42 +27,30 @@
 #   The update of pseudo-globals array only works with indexed arrays
 #   (which may even be yet undeclared when entering in the function).
 #
-#   The specified variable name is an indexed array which keeps trace
-#   of the found keywords (services) in the order of their apparition
-#   in the configuration file:
+#   The specified variable name is defined here as an array set with
+#   the found keywords (service identifier or node name) in the order
+#   of their apparition in the configuration file:
 #
 #     <varname> = (
-#         [0] = <logical>
-#         [1] = <cft>
-#         [2] = <oracle>
+#         <node>
+#         <cft>
+#         <oracle>
+#         ...
 #         )
 #
-#   For each keyword, a variable <varname>_<keyword> keeps trace of
-#   the count of found lines for this keyword:
+#   For each keyword, a variable <varname>_<keyword> keeps track of
+#   the count of lines found for this keyword:
 #
 #     <varname>_<keyword> = 3
 #
-#   The <varname>_<keyword>_<i> keeps the original line with the
-#   character separator:
+#   The <varname>_<keyword>_<i>, where <i>=0..n-1, keeps the original
+#   line with the character separator, after macro substitution and
+#   unrelevant spaces stripping:
 #
 #     <varname>_<keyword>_<i> = environment:@tryclos.org
 #
-#   The original line is kept as easyer to interpret when searching for
-#   a value with a field selection list (cf. confGetKey).
-#
-###      Dynamic <varname>_<logical>_<i> indexed arrays hold the keywords
-###      which appear on each line.
-###
-###          <varname>_<logical>_0 = (
-###             [0] = 'environment'
-###             [1] = <trychlos.org>
-###             )
-###
-###          <varname>_<logical>_1 = (
-###             [0] = 'oracle'
-###             [1] = 'oratab'
-###             [2] = </etc/oratab>
-###             )
+#   The original line is kept as an easier way to interpret it when
+#   searching for a value with a field selection list (cf. confGetKey).
 #
 # (I): 1. name of the in-memory array variable
 #      2. path to the configuration file to be loaded in memory
@@ -128,5 +116,4 @@ function confLoadKeys
 			_vname=${_ckey}
 	done
 	#set | grep ${_name}
-	
 }

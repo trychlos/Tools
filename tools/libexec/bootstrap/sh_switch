@@ -26,12 +26,12 @@
 # pwi 2017- 6-21 publish the release at last 
 
 #_node="$(for _f in ${TTP_SHDIR}/*; do . "${_f}"; done; ttpf_main "$@" | awk '/^found:/ { print $2 }')"
-_node="$(ksh $* | awk '/sucessfully/ { print $NF }')"
+_node="$(NOTTP=1 ksh $* | awk '/sucessfully/ { print $NF }')"
 
 if [ ! -z "${_node}" ]; then
-	export TTP_NODE="${_node}"
-	echo "[ttp.sh switch] execution node sucessfully setup to ${_node}"
-	[ -d "/${_node}" ] && cd "/${_node}"
+	. "${TTP_SHDIR}/bspSwitch"
+	bspSwitch "${_node}"
+	unset bspSwitch
 fi
 
 unset _node

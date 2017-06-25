@@ -66,8 +66,8 @@ function execRemote
 	[ -z "${_conf}" ] && { msgerr "${_host}: target host is unknowned or undefined"; return 246; }
 
 	typeset _usermsg=""
-	typeset _user=${LOGNAME}
-	[ $# -ge 3 -a "x${3}" != "x" ] && { _user=${3}; _usermsg="(${3})"; }
+	typeset _user="${ttp_user}"
+	[ $# -ge 3 -a "x${3}" != "x" ] && { _user="${3}"; _usermsg="(${3})"; }
 
 	typeset _input="-n"
 	if [ $# -ge 4 -a "x${4}" != "x" ]; then

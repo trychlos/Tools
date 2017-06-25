@@ -1,33 +1,42 @@
  The Tools Project: a Tools System and Paradigm for IT Production
- doc/oracle/oracle.service
+ docs/oracle/oracle.service
 
 -----------------------------------------------------------------------
  Summary
  =======
 
-   Server level configuration
+   Concepts
+   Node level configuration
      oratab
    Database service configuration
-     id
+     service
      sid
      owner
    Listener service configuration
-     id
+     service
      listener
      owner
    Enterprise Manager service configuration
-     id
+     service
      manager
      owner
+   Specific macros
 
 -----------------------------------------------------------------------
- Server level configuration
- ==========================
+ Concepts
+ ========
+
+ Oracle DBMS eco-system defines 4 types of services, where each is to
+ be used for a specific need, and has to be individually managed.
+
+-----------------------------------------------------------------------
+ Node level configuration
+ ========================
 
  Due to their installation mode, Oracle softwares must be configured at
- the server level.
+ the execution node level.
 
-   <logical> : oratab : </path/to/oratab>
+   <node> : oratab : </path/to/oratab>
 
    The 'oratab' file specifies the location of the oracle software home
    for each database instance to be run on this server.
@@ -41,11 +50,11 @@
  ==============================
 
  An Oracle Database instance service must be configured for each
- database instance we want to be managed by the Tools.
+ database instance we want to be managed by The Tools Project.
 
  The service is defined as:
 
-   <service>	: id		: Trysma instance 11g R2
+   <service>	: service	: oracle	: Trysma instance 11g R2
    <service>	: sid		: TRYSMA
    <service>	: owner		: ora11gr2
 
@@ -60,25 +69,26 @@
  This service must be started locally on the server, with the right
  'oracle' account.
 
- The first keyword defines the service mnemonic.
+ The first keyword defines the service identifier.
 
- This same service mnemonic identifies this database instance through
- the environments, and must be used identical in all environments, even
- if some implementation details are different - this is why these
- configuration files are designed for (to document and implement
- configuration differences between environments).
+ As a recall: this same service identifier identifies this Oracle
+ service through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
 
- The service mnemonic may be recalled later in the same line by using
- the '@S' macro.
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
 
-   id
-   --
-
-   'id' identifies the ligne as a service; is mandatory.
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   - the 'mysql' word indicates an oracle-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
 
    sid
    ---
-
    'sid' is the database SID that this service addresses.
    The presence of the 'sid' keyword identifies this service as an
    Oracle Database instance service. This SID is then used to search
@@ -87,7 +97,6 @@
 
    owner
    -----
-
    'owner' is the local unix account which owns the Oracle software;
    it is refered to in the Oracle Database documentation as the 'oracle'
    user.
@@ -97,16 +106,16 @@
  ==============================
 
  An Oracle Database listener service must be configured for each
- Oracle listener we want to be managed by the Tools.
+ Oracle listener we want to be managed by The Tools Project.
 
  As specified ealier, it is an architecture decision whether to
  associate one listener with each and every database instance, one
- listener per server, one listener per software version, etc., and this
+ listener per host, one listener per software version, etc., and this
  is the reason why the listener is defined as a separate service.
 
  The service is defined as:
 
-   LSN	: id		: Oracle Database listener 11g R2
+   LSN	: service	: oracle	: Oracle Database listener 11g R2
    LSN	: listener	: TRYLISTEN11
    LSN	: home		: /opt/oracle/ora11gr2/product/11.2.0/dbhome
    LSN	: owner		: ora11gr2
@@ -118,24 +127,26 @@
  by just having both 'sid' and 'listener' lines. Or the listener may
  be defined through its own service.
 
- The first keyword of the line, here 'LSN', is the service mnemonic.
+ The first keyword of the line, here 'LSN', is the service identifier.
 
- This same service mnemonic must be used in all environments, even if
- some implementation details are different - this is why these
- configuration files are designed for (to document and implement
- configuration differences between environments).
+ As a recall: this same service identifier identifies this Oracle
+ service through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
 
- The service mnemonic may be recalled later in the same line by using
- the '@S' macro.
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
 
-   id
-   --
-
-   'id' identifies the ligne as a service; is mandatory.
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   - the 'mysql' word indicates an oracle-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
 
    listener
    --------
-
    'listener' specifies the instance listener name.
    The presence of the 'listener' keyword is mandatory in order the
    service be identified as an Oracle listener.
@@ -144,7 +155,6 @@
 
    home
    ----
-
    'oraSetEnv' does its best to dynamically find the software home for
    the listener in all DB homes listed in /etc/oratab. This works well
    if the listener's name is unique (at least on the server). But if
@@ -163,7 +173,6 @@
 
    owner
    -----
-
    'owner' is the local unix account which owns the Oracle software;
    it is refered to in the Oracle Database documentation as the 'oracle'
    user.
@@ -174,8 +183,7 @@
 
  The service is defined as:
 
-   MNGR	: id		: Oracle Enterprise Manager Database Control
-   MNGR	: manager
+   MNGR	: service	: oracle	: Oracle Enterprise Manager Database Control
    MNGR	: owner		: ora11gr2
 
  Oracle Enterprise Manager is a separated service. It is an
@@ -185,30 +193,41 @@
  This service must be started locally on the server, with the right
  'oracle' account.
 
- The first keyword of the line, here 'MNGR', is the service mnemonic.
+ The first keyword of the line, here 'MNGR', is the service identifier.
 
- This same service mnemonic must be used in all environments, even if
- some implementation details are different - this is why these
- configuration files are designed for (to document and implement
- configuration differences between environments).
+ As a recall: this same service identifier identifies this Oracle
+ service through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
 
- The service mnemonic may be recalled later in the same line by using
- the '@S' macro.
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
 
-   id
-   --
-
-   'id' identifies the ligne as a service; is mandatory.
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   - the 'oracle' word indicates an oracle-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
 
    manager
    -------
-
    'manager' identifies the service as an Oracle Enterprise Manager.
 
    owner
    -----
-
    'owner' is the local unix account which owns the Oracle software;
    it is refered to in the Oracle Database documentation as the 'oracle'
    user
-   
+ 
+-----------------------------------------------------------------------
+ Specific macros
+ ===============
+
+ none
+ 
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st
+ 

@@ -1,0 +1,102 @@
+# @(#) Test for listener status
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   The listener is running as one process
+#   ora11gr2  2990     1  0 Jun13 ?        00:00:15 /opt/oracle/ora11gr2/product/11.2.0/dbhome/bin/tnslsnr TRYLISTEN11 -inherit
+#
+# From Oracle Enterprise Manager:
+#   Listener process' behaviour and identity is defined by not
+#   just the listening end-points (the 'Host' and 'Port'), but also
+#   by the "Listener Parameter File" (listener.ora) which was used
+#   to start the listener process.
+#   The "Listener Parameter File" defines parameters like logging
+#   and tracing levels, log/trace directories etc. in addition to
+#   the listening end-points, and hence, its location is essential
+#   for EM to uniquely identify a "Listener Target".
+#
+#   A "Listener Target" at a specified 'Host' and 'Port', is
+#   considered 'UP' only when a listener is running at that end-point,
+#   and the "Listener Parameter File" in the output of the command:
+#   "lsnrctl status <listener_name>", also matches the "LISTENER.ORA
+#   Location" specified in the target's configuration.
+#
+# (I): 1. database service mnemonic
+#
+# (O): return: 0 if ok
+#
+# This function has been forked from oracle.sh info, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# pwi 2013- 6-14 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraTestListener
+{
+	typeset _service="${1}"
+
+	# do we have at least one 'tnslsnr' process ?
+	#typeset -i _count=$(ps -ef | grep tnslsnr | grep -v grep | wc -l)
+	#if [ ${_count} -eq 0 ]; then
+	#	msgerr "there is no running listener on the machine"
+	#	return 1
+	#fi
+
+	# check that this instance correctly address a listener
+	typeset _name="$(oraGetListener "${_service}")"
+	#msgout "found that this instance is served by ${_name} listener"
+
+	# this 'tnslsnr' process is it running ?
+	typeset -i _count=$(ps -ef | grep tnslsnr | grep ${_name} | grep -v grep | wc -l)
+	if [ ${_count} -eq 0 ]; then
+		msgerr "${_name} listener it not running"
+		return 1
+	fi
+
+	oraSetEnv "${_service}" "listener"
+	[ $? -gt 0 ] && return 1
+
+	# check listener status
+	typeset _fstatus="$(pathGetTempFile status)"
+	msgout "requesting ${_name} listener for its status..." "" " "
+	lsnrctl status "${_name}" 1>"${_fstatus}" 2>&1
+	typeset _start="$(grep -e '^Start Date' "${_fstatus}")"
+	if [ -z "${_start}" ]; then
+		msgout "NOT OK" " \b"
+		cat "${_fstatus}"
+		return 1
+	fi
+	_start="$(echo "${_start}" | sed -e 's/^Start Date\s*//')"
+	msgout "OK, started on ${_start}" " \b"
+
+	# check with tnsping that the listener is actually listening
+	typeset _fping="$(pathGetTempFile ping)"
+	typeset _address="$(awk '/^Connecting to/ { A=$0; sub( "Connecting to ","",A); print A }' "${_fstatus}")"
+	msgout "tnspinging ${_name} listener..." "" " "
+	tnsping "${_address}" 1>"${_fping}" 2>&1
+	typeset _ok="$(grep -e '^OK' "${_fping}")"
+	if [ -z "${_ok}" ]; then
+		msgout "NOT OK" " \b"
+		cat "${_ok}"
+		return 1
+	fi
+	msgout "OK at ${_address}" " \b"
+	return 0
+}

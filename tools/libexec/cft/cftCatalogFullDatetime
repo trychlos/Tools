@@ -1,0 +1,97 @@
+# @(#) Parse the output of CFTUTIL LISTCAT CONTENT=FULL
+# @(#)  merging individual date and time datas
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Parse the catalog content (the output of CFTUTIL) as a semi-colon
+#   separated list of individual datas (101 individual data per
+#   transfer).
+#
+#   Concatenates seven date time parameters.
+#
+#   Output so 94 parameters as label;key;value
+#   Note that this is based on the parameters order in LISTCAT output
+#   (with 'date' data appearing before 'time' one for the same pair)
+#
+#   Cf. comments in cftCatalogFullToCsv
+#
+# (I): stdin: output of cftCatalogFullParse function
+#
+# (O): stdout: 94 actual parameters per transfer
+#
+# (R): 0 if ok
+#
+# pwi 2013- 2- 4 creation
+# pwi 2013- 6- 6 add partner to output
+# pwi 2013- 6-19 output all 94 columns in a SQL-like output
+# pwi 2017- 6-21 publish the release at last
+
+function cftCatalogFullDatetime
+{
+	perl -se '{
+		sub timeset( $$$ ){
+			my ( $label, $date, $time ) = @_;
+			if( !length( $date ) ||
+				$date eq "01/01/1000" ||
+				! ( $date =~ m#^[0-9/]+$# ) ||
+				!length( $time ) ||
+				! ( $time =~ m#^[0-9:\.]+$# )){
+					printf( "%s%s\n", $label, $csvsep );
+			} else {
+					printf( "%s%s%s %s\n", $label, $csvsep, $date, $time );
+			}
+		}
+		while( <STDIN> ){
+			chomp;
+			( $label, $key, $value ) = split /${csvsep}/;
+			if( $key eq "DATED" ){
+				$dated = $value;
+			} elsif( $key eq "TIMED" ){
+				timeset( "Command deposure".${csvsep}."DEPDATETIME", $dated, $value );
+			} elsif( $key eq "CYCDATE" ){
+				$cycdate = $value;
+			} elsif( $key eq "CYCTIME" ){
+				timeset( "Activation time".${csvsep}."CYCDATETIME", $cycdate, $value );
+			} elsif( $key eq "MINDATE" ){
+				$mindate = $value;
+			} elsif( $key eq "MINTIME" ){
+				timeset( "Min Transfer validity".${csvsep}."MINDATETIME", $mindate, $value );
+			} elsif( $key eq "MAXDATE" ){
+				$maxdate = $value;
+			} elsif( $key eq "MAXTIME" ){
+				timeset( "Max Transfer validity".${csvsep}."MAXDATETIME", $maxdate, $value );
+			} elsif( $key eq "NEXTDAT" ){
+				$nextdate = $value;
+			} elsif( $key eq "NEXTTIM" ){
+				timeset( "Next retry".${csvsep}."NEXDATETIME", $nextdate, $value );
+			} elsif( $key eq "DATEB" ){
+				$dateb = $value;
+			} elsif( $key eq "TIMEB" ){
+				timeset( "Transfer Begin".${csvsep}."BEGDATETIME", $dateb, $value );
+			} elsif( $key eq "DATEE" ){
+				$datee = $value;
+			} elsif( $key eq "TIMEE" ){
+				timeset( "Transfer End".${csvsep}."ENDDATETIME", $datee, $value );
+			} else {
+				printf( "%s\n", $_ );
+			}
+		}
+	}' -- -csvsep="${ttp_csvsep:-;}"
+}

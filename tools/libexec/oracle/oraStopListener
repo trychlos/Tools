@@ -1,0 +1,64 @@
+# @(#) Stop the listener
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. service mnemonic
+#      2. listener name
+#
+# (O): return: 0 if ok
+#
+# This function has been forked from oracle.sh stop, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# See also http://docs.oracle.com/cd/E11882_01/server.112/e17120/start001.htm
+#
+# pwi 2013- 6-14 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraStopListener
+{
+	#set -x
+	typeset _service="${1}"
+	typeset _name="${2}"
+
+	typeset -i _ret=0
+
+	oraSetEnv "${_service}" "listener"
+	[ $? -gt 0 ] && return 1
+
+	msgout "stopping ${_name} listener..." "" " "
+	typeset _flsnr="$(pathGetTempFile listener)"
+	lsnrctl stop "${_name}" 1>"${_flsnr}" 2>&1
+	_ret=$?
+
+	if [ ${_ret} -ne 0 ]; then
+		msgout "NOT OK" " \b"
+		msgerr "unable to start ${_name} listener"
+
+	elif [ $(grep -c "completed successfully" ${_flsnr}) -eq 1 ]; then
+		msgout "OK" " \b"
+	else
+		msgout "NOT OK" " \b"
+		cat "${_flsnr}"
+		_ret=1
+	fi
+
+	return ${_ret}
+}

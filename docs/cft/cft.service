@@ -1,22 +1,30 @@
  The Tools Project: a Tools System and Paradigm for IT Production
- doc/cft/cft.service
+ docs/cft/cft.service
 
 -----------------------------------------------------------------------
  Summary
  =======
 
-   Monitor service configuration
-     id
+   Concepts
+   Service configuration
+     service
      setenv
      listcatf
+   Specific macros
 
 -----------------------------------------------------------------------
- Monitor service configuration
- =============================
+ Concepts
+ ========
+
+ Manage a Cross File Transfer (CFT) monitor instance.
+
+-----------------------------------------------------------------------
+ Service configuration
+ =====================
 
  The service is defined as:
 
-   CFT	: id		: CFT Monitor
+   CFT	: service	: cft	: CFT Monitor
    CFT	: setenv	: . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
    CFT	: setenv	: export CFTDOC=/home/pierre/eclipse/Tools/v2/doc/cft/cft-2.7
    CFT	: listcatf	: cat ${CFTDOC}/cftutil_listcat_full
@@ -26,32 +34,30 @@
 
  The first keyword of the line, here 'CFT', is the service mnemonic.
 
- This same service mnemonic must be used in all environments, even if
- some implementation details are different - this is why these
- configuration files are designed for (to document and implement
- configuration differences between environments).
+ As a recall: this same service identifier identifies this CFT service
+ through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
 
- The service mnemonic may be recalled later in the same line by using
- the '@S' macro.
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
 
-   id
-   --
-
-   'id' identifies the ligne as a service; is mandatory.
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   - the 'cft' word indicates a cft-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
 
    setenv
    ------
-
-   'setenv' keyword is used by the cftSetEnv function in order to setup
-   the running environment.
-   More than one 'setenv' lines may be specified, and will be evaluated
-   in order.
-   Tough not strictly mandatory, it should be obvious that no CFT
-   command will be runnable if at least PATH is not set here.
+   'setenv' defines a command to be executed in the current environment
+   of each cft.sh verb.
+   Several 'setenv' lines may be defined.
 
    listcatf
    --------
-
    'listcatf' is used in the development environment where we do not
    have a real running CFT monitor; it substitutes itself to the
    standard 'CFTUTIL LISTCAT CONTENT=FULL' command.
@@ -62,5 +68,11 @@
    command is run instead.
 
 -----------------------------------------------------------------------
- Pierre Wieser - Jan. 2013
- $Id: cft.service 3236 2013-07-03 20:22:28Z  $
+ Specific macros
+ ===============
+
+ none
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

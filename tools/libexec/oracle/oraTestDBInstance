@@ -1,0 +1,100 @@
+# @(#) Test for listener status
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   See also http://docs.oracle.com/cd/E11882_01/server.112/e24448/bgprocesses.htm
+#   for a list of Oracle background processes
+#
+#   Oracle 11g R2:
+#              Startup: nomount  mount  open
+#      Processes:
+#      ora_q001_TRYSMA                    X
+#      ora_q000_TRYSMA                    X
+#      ora_cjq0_TRYSMA                    X
+#      ora_qmnc_TRYSMA                    X
+#      ora_arc3_TRYSMA                    X
+#      ora_arc2_TRYSMA                    X
+#      ora_arc1_TRYSMA                    X
+#      ora_arc0_TRYSMA                    X
+#      ora_s000_TRYSMA     X       X      X
+#      ora_d000_TRYSMA     X       X      X
+#      ora_mmnl_TRYSMA     X       X      X
+#      ora_mmon_TRYSMA     X       X      X
+#      ora_reco_TRYSMA     X       X      X
+#      ora_smon_TRYSMA     X       X      X
+#      ora_ckpt_TRYSMA     X       X      X
+#      ora_lgwr_TRYSMA     X       X      X
+#      ora_dbw0_TRYSMA     X       X      X
+#      ora_mman_TRYSMA     X       X      X
+#      ora_dia0_TRYSMA     X       X      X
+#      ora_psp0_TRYSMA     X       X      X
+#      ora_dbrm_TRYSMA     X       X      X
+#      ora_diag_TRYSMA     X       X      X
+#      ora_gen0_TRYSMA     X       X      X
+#      ora_vktm_TRYSMA     X       X      X
+#      ora_pmon_TRYSMA     X       X      X
+#
+# (I): 1. database service mnemonic
+#
+# (O): return: 0 if ok
+#
+# This function has been forked from oracle.sh info, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# pwi 2013- 6-14 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraTestDBInstance
+{
+	#set -x
+	typeset _service="${1}"
+	typeset -i _ret=0
+
+	typeset _fprocess="$(pathGetTempFile process)"
+	ps -e -o cmd | grep -e "^ora_.\+_${ORACLE_SID}" > "${_fprocess}"
+
+	oraTestDBProcess "dbw" "database writer" "${_fprocess}"
+	let _ret+=$?
+
+	oraTestDBProcess "lgwr" "log writer" "${_fprocess}"
+	let _ret+=$?
+
+	oraTestDBProcess "ckpt" "checkpoint manager" "${_fprocess}"
+	let _ret+=$?
+
+	oraTestDBProcess "smon" "system monitor" "${_fprocess}"
+	let _ret+=$?
+
+	oraTestDBProcess "pmon" "process monitor" "${_fprocess}"
+	let _ret+=$?
+
+	# if the mode archivelog is to be checked, then test for the process
+	if [ "${opt_archiver}" = "yes" ]; then
+		oraTestDBProcess "arc" "archiver" "${_fprocess}" 1 99
+		let _ret+=$?
+	fi
+
+	# this is an optional process used by Oracle in order to manage
+	#  the recovery operations
+	oraTestDBProcess "reco" "recovery" "${_fprocess}" 0 1
+	let _ret+=$?
+
+	return ${_ret}
+}

@@ -34,7 +34,7 @@
 function verb_arg_define_opt {
 	echo "
 help		display this online help and gracefully exit
-verbose		execute verbosely
+verbose		verbose execution
 commands	display list of commands
 vars		display internal TTP variables
 "

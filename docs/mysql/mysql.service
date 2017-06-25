@@ -1,14 +1,101 @@
-The service is defined as:
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/svn/svn.service
 
-MYX	: id		: MySQL instance
-MYX	: rootdir	: /opt/mysql-5.1
+-----------------------------------------------------------------------
+ Summary
+ =======
 
-- 'MYX' is the service mnemonic
-  the same service mnemonic must be used in all environments, even if some
-  implementation details are different - this is why these configuration
-  files are designed for
+   Concepts
+   Service configuration
+     service
+     start
+     stop
+     test
+     setenv
+     rootdir
+   Specific macros
 
-- 'id' is mandatory in order to identify the ligne as a service
+-----------------------------------------------------------------------
+ Concepts
+ ========
 
-- 'rootdir' is the root installation directory for this server
-  we expect to find binaries in <rootdir>/bin
+ Manage a Mysql/MariaDB DBMS instance.
+
+-----------------------------------------------------------------------
+ Service configuration
+ =====================
+
+ A MySQL service must be configured for each MySQL/MariaDB instance we
+ want to be managed.
+
+ The service is defined as:
+
+   <service>	: service		: mysql		: MySQL/MariaDB server
+   <service>	: start			: <account>	: <startup_command_line>
+   <service>	: stop			: <account>	: <stop_command_line>
+   <service>	: test			: <account>	: <test_command_line>
+   <service>	: setenv		: export <name>=<value>
+   <service>	: rootdir		: /opt/mysql-5.1
+
+ The first keyword defines the service identifier.
+
+ As a recall: this same service identifier identifies this MySQL
+ server through all the environments, and must be used identical in all
+ environments, even if some implementation details are different - this
+ is why these configuration files are designed for (to document and
+ implement configuration differences between environments).
+
+ As another recall: the service mnemonic may be recalled later in the
+ same service definition by using the '@S' macro.
+
+   service
+   -------
+   'service' identifies the ligne as a service; is mandatory.
+   - the 'mysql' word indicates a mysql-type service.
+   - the label in fourth position is simply used as a label and is free
+     (but should not be left empty).
+
+   start
+   -----
+   'start' defines a command-list to be executed to start up the
+   service.
+   If an account is specified in the third field, then the command-list
+   must be executed under this <account> credentials.
+
+   stop
+   ----
+   'stop' defines a command-list to be executed to stop the service.
+   If an account is specified in the third field, then the command-list
+   must be executed under this <account> credentials.
+
+   test
+   ----
+   'test' defines a command-list to be executed to test that the
+   service is correctly running.
+   If an account is specified in the third field, then the command-list
+   must be executed under this <account> credentials.
+
+   setenv
+   ------
+   'setenv' defines a command to be executed in the current environment
+   of each mysql.sh verb.
+   Several 'setenv' lines may be defined.
+
+   rootdir
+   -------
+   If defined, then this is the installation root path.
+   Binaries are expected to be found in <rootdir>/bin, and this
+   binaries path will be added to the PATH variable in the verbs
+   environment.
+   If not defined, mysql binaries are expected to be found in the
+   standard PATH.
+
+-----------------------------------------------------------------------
+ Specific macros
+ ===============
+
+ none
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2013, jan. 9th
+             Last updated on 2017, jun. 21st

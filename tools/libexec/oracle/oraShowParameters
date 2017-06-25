@@ -1,0 +1,107 @@
+# @(#) Output the Oracle instance parameters
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. service mnemonic
+#
+# (O): stdout: SQL output
+#
+# This function has been forked from oracle.sh info, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# pwi 2013- 6-12 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraShowParameters
+{
+	typeset _service="${1}"
+
+	cat - <<! | \
+		oracle.sh sql \
+			-service "${_service}" -interactive -quiet | \
+		perl -se '{
+			sub col_service(){
+				if( $nl == 0 ){
+					printf( "%-*s", $len, "Service" );
+				} elsif( $nl == 1 ){
+					printf( "%-*.*s", $len, $len,
+						"--------------------------------------------------------------------------------------------------------------------------------" );
+				} else {
+					printf( "%-*s", $len, $service );
+				}
+				print $csep;
+			}
+			sub col_prefix(){
+				if( $nl == 1 ){
+					print "--";
+				} else {
+					print $prefix;
+				}
+				print $csep;
+			}
+			sub print_prev_line(){
+				if( length( $prev )){
+					col_service();
+					col_prefix();
+					if( $nl == 0 ){
+						@words = split( /$csplit/, $prev );
+						@lcnames = map( lc, @words );
+						@ucnames = map( ucfirst, @lcnames );
+						print join( $csep, @ucnames );
+					} else {
+						print "$prev";
+					}
+					print "\n";
+					$nl += 1;
+				}
+			}
+			$len = length( $service );
+			$len = 7 if $len < 7;
+			$prefix = "PA"; 
+			$csep = "|";
+			$csplit = "\\$csep";
+			while( <STDIN> ){
+				chomp;
+				next if !length;
+				@words = split /\s*$csplit\s*/;
+				#printf( "0='%s' (%s) 1='%s' 2='%s'\n", $words[0], length($words[0]), $words[1], $words[2] );
+				if( length( $words[0] )){
+					print_prev_line();
+					$prev = "$_";
+				} elsif( length( $words[1] )){
+					printf( STDERR "%swarning: unexpected type '%s'\n", $msg, $words[1] ) ;
+				} else {
+					$prev .= $words[2];
+				}
+			}
+			print_prev_line();
+			printf( "%s%d displayed rows\n", $msg, $nl-2 );
+		}' -- -msg="$(msgoutPrefix)" -service="${_service}"
+
+	set linesize 32767
+	set pagesize 50000
+	set tab off
+	set colsep '|'
+	column NAME  heading 'Name'
+	column TYPE  heading 'Type'
+	column VALUE heading 'Value'
+	show parameters
+!
+}

@@ -90,6 +90,8 @@
 #                         files are expected to be found;
 #                         defaults to '<ttp_etcdir>/ttp'
 #
+#   ttp_user              current user, taken from USER or LOGNAME variables
+#
 #   ttp_verb              verb name
 #                         e.g. 'list'
 #
@@ -123,22 +125,28 @@ function ttpf_main
 	#set -x
 	#echo "0=$0 #=$# *=$*" >&2
 
-	typeset -i _inproc=0
-	[ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] && _inproc=1
-	if [ ${_inproc} -eq 1 ]; then
-		[ "${1##*/}" != "ttp.sh" -o "${2}" != "switch" ] \
-			&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; return 1; }
-	fi
+	ttp_errs=0
+	ttp_code=0
+	ttp_command="TTP"
 
 	trap 'trap_int'  INT
 	trap 'trap_exit' EXIT
 
-	[ -z "${TTP_NODE}" -a ${_inproc} -eq 0 ] \
-		&& { echo "[TTP] no current execution node, aborting" >&2; return 1; }
+	typeset -i _inproc=0
+	[ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] && _inproc=1
+	if [ ${_inproc} -eq 1 ]; then
+		[ "${1##*/}" != "ttp.sh" -o "${2}" != "switch" ] \
+			&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; let ttp_errs+=1; return; }
+	fi
+
+	# when setting the initial execution node, there is not yet any TTP_NODE
+	#  in the user environment; the first command to be executed must be
+	#  ". ttp.sh switch -m DEFAULT"
+	#  usually from the user profile
+	[ -z "${NOTTP}" -a -z "${TTP_NODE}" -a ${_inproc} -eq 0 ] \
+		&& { echo "[TTP] no current execution node, aborting" >&2; let ttp_errs+=1; return; }
 
 	# setup some global constants which are used in the Tools
-	ttp_errs=0
-	ttp_code=0
 	ttp_main_log="main.log"
 	#ttp_passwords="${ttp_etcdir}/private/passwords"
 	bspInitVars
@@ -156,21 +164,24 @@ function ttpf_main
 
 	# load the machine configuration file into an in-memory array
 	#typeset -A ttp_node_keys
-	_req="${ttp_nodesubdir}/${TTP_NODE}.ini"
-	_file="$(bspFind "${_req}")"
-	[ -z "${_file}" ] \
-		&& { echo "[TTP] ${_req}: file not found or not readable" >&2; return 1; } \
-		|| { ttp_node_conf="${_file}"; confLoadKeys "ttp_node_keys" "${ttp_node_conf}"; }
+	if [ ! -z "${TTP_NODE}" ]; then
+		_req="${ttp_nodesubdir}/${TTP_NODE}.ini"
+		_file="$(bspFind "${_req}")"
+		[ -z "${_file}" ] \
+			&& { echo "[TTP] ${_req}: file not found or not readable" >&2; return 1; } \
+			|| { ttp_node_conf="${_file}"; confLoadKeys "ttp_node_keys" "${ttp_node_conf}"; }
 
-	ttp_node_environment="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=environment" 1)"
-	ttp_logsroot="$(pathGetLogsRoot)"
+		ttp_node_environment="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=environment" 1)"
+	fi
 
 	#
 	# end of global initialization
 	# end of node initialization
 	# beginning with the command
 	#
-	
+
+	ttp_user="${USER:-${LOGNAME}}"	
+	ttp_logsroot="$(pathGetLogsRoot)"
 	ttp_stamp="$(date '+%s')"
 	msglog "$*"
 

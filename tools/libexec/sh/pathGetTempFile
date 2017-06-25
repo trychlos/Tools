@@ -24,7 +24,7 @@
 #   The allocated temporary files are kept in a command-dedicated
 #   directory, to be later used as an audit track.
 #
-# (I): 1. temporary file mnemonic (should be unique for the verb)
+# (I): 1. (opt.) temporary file mnemonic (should be unique for the verb)
 #
 # (O): stdout: temporary file full pathname
 #

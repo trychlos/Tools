@@ -1,0 +1,115 @@
+# @(#) Setup the environment for an Oracle Database instance
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. service mnemonic
+#      2. oracle service type "instance|listener|manager"
+#         default to "instance"
+#
+# (O): -
+#
+# vdo 1999- 1-11 creation
+# jcl 1999- 6-14 script normalisation
+# pwi 2002- 7- 5 port Citi Exploitation Aix
+# raj 2002- 7-29 Gec adaptation
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2013- 4-21 11g R2 database port
+# pwi 2013- 7- 3 dynamically compute ORACLE_HOME from /etc/oratab
+# pwi 2017- 6-21 publish the release at last 
+
+function oraSetEnv
+{
+	#set -x
+	typeset _mnemo="${1}"
+	typeset _type="${2:-instance}"
+
+	typeset -i _ret=0
+	typeset _oratab="$(oraGetOraTab)"
+
+	# the addressed service is supposed to be a database instance, so
+	#  have a 'sid' line in the logical's configuration file
+
+	if [ "${_type}" = "instance" ]; then
+
+		typeset _sid="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=sid" 1)"
+		if [ -z "${_sid}" ]; then
+			msgerr "${_mnemo}: SID not found in '${ttp_logical_conf}'"
+			return 1
+		fi
+
+		typeset _home="$(oraSidToHome "${_mnemo}" "${_sid}" "${_oratab}")"
+		[ -z "${_home}" ] && return 1
+
+		export ORACLE_SID="${_sid}"
+		export ORACLE_HOME="${_home}"
+		pathMunge PATH "${ORACLE_HOME}/bin"
+		osLibpathMunge "${ORACLE_HOME}/lib"
+	fi
+
+	# listener service is not directly addressed in /etc/oratab
+	#  so try all listed homes until finding the ad-hoc listener.ora
+	#  if no home specified
+
+	if [ "${_type}" = "listener" ]; then
+
+		typeset _listener="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=listener" 0)"
+		if [ "${_listener}" != "listener" ]; then
+			msgerr "${_mnemo} is not identified as an Oracle listener service"
+			return 1
+		fi
+
+		# if a home key exists, then get it
+		typeset _home="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=home" 1)"
+
+		# else search for a sid and get the home from the sid
+		if [ -z "${_home}" ]; then
+			typeset _sid="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=sid" 1)"
+			if [ ! -z "${_sid}" ]; then
+				_home="$(oraSidToHome "${_mnemo}" "${_sid}" "${_oratab}")"
+			fi
+		fi
+
+		# else get the listener name and search for its configuration file
+		if [ -z "${_home}" ]; then
+			typeset _name="$(oraGetListener "${_mnemo}")"
+			typeset _dir
+			for _dir in "$(cat "${_oratab}" | tabRemoveComments | cut -d: -f2)"; do
+				if [ ! -z "${_dir}" -a -d "${_dir}" ]; then
+					typeset _conf="${_dir}/network/admin/listener.ora"
+					if [ $(grep -ce "^${_name}" "${_conf}") -eq 1 ]; then
+						_home="${_dir}"
+						break
+					fi
+				fi
+			done
+		fi
+
+		if [ -z "${_home}" -o ! -d "${_home}" ]; then
+			msgerr "${_home}: listener software home directory empty or not found"
+			return 1
+		fi
+	
+		export ORACLE_HOME="${_home}"
+		pathMunge PATH "${ORACLE_HOME}/bin"
+		osLibpathMunge "${ORACLE_HOME}/lib"
+	fi
+
+	return ${_ret}
+}

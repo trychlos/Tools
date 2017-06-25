@@ -50,7 +50,7 @@ function bspNodeFindCandidate
 
 	# compute the ordered list of candidate TTPROOT trees from FPATH
 	[ -z "${ttp_roots}" ] && ttp_roots="$(bspRootCompute)"
-	#echo "ttp_roots='${ttp_roots}'"
+	#echo "ttp_roots='${ttp_roots}'" >&2
 	#ttp_roots='/home/pierre/data/eclipse/Tools/v2/tools'
 
 	bspNodeEnum | head -1

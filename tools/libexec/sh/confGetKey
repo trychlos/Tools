@@ -20,13 +20,17 @@
 # Synopsis:
 #
 # (I): 1. name of the root indexed keys array
-#      2. (opt.) keyword of the line, usually the service mnemonic
-#                If empty, then list existing services; other arguments
-#                are ignored
+#      2. (opt.) keyword (first field) of the line, usually the node
+#                name or the service identifier;
+#                If empty, then list registered keywords; other arguments
+#                being ignored
 #      3. (opt.) comma-separated list of selection fields, of the form
 #                index=value, where index is counted from zero.
 #                If empty, then returns desired fields for all found
-#                lines
+#                lines;
+#                Because the first field of the lines acts as the keyword,
+#                index are counted from zero starting with the second
+#                field of the line
 #      4. (opt.) index of the (only one) desired field in the array
 #                (i.e. where zero-indexed field in the array is the
 #                second one in the configuration file)
@@ -49,13 +53,13 @@ function confGetKey
 	typeset _keyword="${2}"
 	typeset _fields_list="${3}"
 	typeset _desired="${4}"
-	typeset _sep=":"
+	typeset _sep="${ttp_sep:-:}"
 
 	if [ -z "${_keyword}" ]; then
-		typeset _service
+		typeset _value
 		typeset -n _vname="${_name}"
-		for _service in "${_vname[@]}"; do
-			echo "${_service}"
+		for _value in "${_vname[@]}"; do
+			echo "${_value}"
 		done
 	else
 		typeset -n _vname="${_name}_${_keyword}"

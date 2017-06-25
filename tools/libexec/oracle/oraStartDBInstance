@@ -1,0 +1,94 @@
+# @(#) Start the DB instance
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): 1. database service mnemonic
+#      2. non default pfile path
+#      3. non default spfile path
+#         pfile and spfile paths are mutually exclusive
+#      4. timeout (0 means unlimited)
+#      5. (uppercase) startup mode
+#      6. whether to display the output of the command
+#         (yes|no, default to no)
+#
+# (O): return: 0 if ok
+#
+# This function has been forked from oracle.sh stop, from
+#  tools-v1.0-ixis.is-oct.2006-rev.12730 project
+#
+# See also http://docs.oracle.com/cd/E11882_01/server.112/e17120/start001.htm
+#
+# pwi 2013- 6-14 creation
+# pwi 2017- 6-21 publish the release at last 
+
+function oraStartDBInstance
+{
+	set -x
+	typeset _service="${1}"
+	typeset _pfile="${2}"
+	typeset _spfile="${3}"
+	typeset -i _timeout="${4:-10}"
+	typeset _mode="${5}"
+	typeset _show="${6:-no}"
+
+	typeset -i _ret=0
+	typeset _fnstart="oraStartDBStartup"
+	typeset _clause="${_mode}"
+
+	if [ ! -z "${_spfile}" ]; then
+		_pfile="$(pathGetTempFile pfile)"
+		cat <<! >"${_pfile}"
+SPFILE = ${_spfile}
+!
+	fi
+	if [ ! -z "${_pfile}" ]; then
+		_clause="${_clause} PFILE = ${_pfile}"
+	fi
+
+	oraSetEnv "${_service}"
+	[ $? -gt 0 ] && return 1
+
+	msgout "starting ${ORACLE_SID} instance." "" " \b"
+	ttpf_timeout ${_timeout} 2 "${_fnstart}" "${_clause}"
+	_ret=$?
+	if [ ${_ret} -eq 0 ]; then
+		msgout "OK" " "
+	else
+		let _ret=1
+		msgout "NOT OK" " "
+		msgerr "$0: unable to start ${ORACLE_SID} instance in $(echo ${_mode} | strLower) mode"
+	fi
+
+	# display the output of the startup command
+	#  the temporary file is the one addressed by ttpf_timeout function
+	if [ "${_show}" = "yes" ]; then
+		typeset _ftmp="$(pathGetTempFile ${_fnstart})"
+		perl -ne '{
+			chomp;
+			next if !length;
+			next if /^SQL/;
+			next if /^Copyright /;
+			next if /^With the /;
+			print "log> $_\n";
+		}' "${_ftmp}"
+	fi
+	
+	return ${_ret}
+}

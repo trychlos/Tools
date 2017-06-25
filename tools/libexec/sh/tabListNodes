@@ -39,7 +39,7 @@ function tabListNodes
 	typeset _env
 	typeset _host
 	bspRootEnum | while read _dir; do
-		find "${_dir}/${ttp_nodesdir}" -type f -name '*.ini' 2>/dev/null | while read _conf; do
+		find -L "${_dir}/${ttp_nodesdir}" -type f -name '*.ini' 2>/dev/null | while read _conf; do
 			_env="$(nodeGetEnvironment "${_conf}")"
 			if [ "${_env}" = "${_environ}" ]; then
 				nodeFromConf "${_conf}"

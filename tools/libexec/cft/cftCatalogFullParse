@@ -1,0 +1,136 @@
+# @(#) Parse the output of CFTUTIL LISTCAT CONTENT=FULL to name|key|value
+# @(#)  triplets
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Parse the catalog content (the output of CFTUTIL) as a semi-colon
+#   separated list of individual datas (101 individual data per
+#   transfer).
+#
+#   Input is standard raw output of 'CFTUTIL LISTCAT content=full'
+#   command with 101 lines per transfer (as of CFT 2.7).
+#
+#   Output is a list of 'label;key;value' triplets
+#   - substituting 'Protocol type: TYPE with PTYPE to ensure we have a
+#     unique key.
+#
+#   Note that in order to friendly deal with long strings which expand
+#   on several lines, we have a row in advance when reading the input
+#   stream (so have to output the last line at the end).
+#
+#   Cf. comments in cftCatalogFullToCsv
+#
+# (I): stdin: output of CFTUTIl command
+#
+# (O): stdout: 102 individual datas per transfer
+#
+# (R): 0 if ok
+#
+# pwi 2013- 2- 4 creation
+# pwi 2013- 6- 6 add partner to output
+# PWI 2013- 6-28 add DIAGC complementary diagnosis if not found
+# pwi 2017- 6-21 publish the release at last
+
+function cftCatalogFullParse
+{
+	perl -se '{
+		sub trim( $ ){
+			my $line = shift;
+			chomp $line;
+			$line =~ s/^\s+//;
+			$line =~ s/\s+$//;
+			return( $line );
+		}
+		sub output(){
+			if( length( $key )){
+				# change the key because there is another "TYPE"
+				$key ="PTYPE" if $label eq "Protocol Type";
+				# check that we have found a DIAGC line, adding it else
+				$diagc_found = 0 if $key eq "DIAGP";
+				if( $key eq "DIFTYP" && !$diagc_found ){
+					print "${outsep}DIAGC${outsep}\n";
+				}
+				print "${label}${outsep}${key}${outsep}${value}\n";
+				$label = "";
+				$key = "";
+				$value = "";
+			}
+		}
+		sub checknum( $$ ){
+			my ( $key, $value ) = @_;
+			if( $key =~ m#DAT|TIM# ){
+				if( ! ( $value =~ m#^[0-9:\./]+$# )){
+					$value = "";
+				}
+			}
+			return( $value );
+		}
+		while( <STDIN> ){
+			my $str = trim( $_ );
+			#printf( "%s\n", $str );
+			next if !length( $str );
+			next if $str =~ m#^CFTU#;
+			if( substr( $str,0,1 ) eq "*" ){
+				$value .= substr( $str,1 );
+			} else {
+				output();
+				next if ! m#=#;
+				if( $str =~ m#([A-Z]+)\s+=\s+(\S*).+?([A-Z]+)\s+=(.*)# ){
+					#printf( "match %s\n", $str );
+					$key = trim( $1 );
+					$value = checknum( $key, trim( $2 ));
+					output();
+					$key = trim( $3 );
+					$value = checknum( $key, trim( $4 ));
+				} elsif( $str =~ m#^(.*)\s+([A-Z]+)\s+=\s+(\S*)\s+Allowed \(YES/NO\)\s+=(.*)# ){
+					$label = trim( $1 );
+					$key = trim( $2 );
+					$value = trim( $3 );
+					output();
+					$key = "RALLOWED";
+					$value = trim( $4 );
+				} elsif( $str =~ m#^(.*)\s+([A-Z]+)\s+=\s+(\S*)\s+Current\s+=(.*)# ){
+					$label = trim( $1 );
+					$key = trim( $2 );
+					$value = trim( $3 );
+					output();
+					$key = "RCURRENT";
+					$value = trim( $4 );
+				} elsif( $str =~ m#^(.*)\s+([A-Z]+)\s+=(.*)\s+Restart\s+:$# ){
+					$label = trim( $1 );
+					$key = trim( $2 );
+					$value = trim( $3 );
+				} elsif( $str =~ m#^(.*)\s+([A-Z]+)\s+=(.*)$# ){
+					$label = trim( $1 );
+					$key = trim( $2 );
+					$value = trim( $3 );
+				} elsif( $str =~ m#^([A-Z]+)\s+=(.*)# ){
+					$key = trim( $1 );
+					$value = trim( $2 );
+				} else {
+					printf( "*** %s\n", $str );
+				}
+				$prev = $str;
+			}
+		}
+	} END {
+		output();
+	}' -- -outsep="${ttp_csvsep:-;}"
+}
