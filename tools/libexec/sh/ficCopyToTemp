@@ -1,0 +1,45 @@
+# @(#) Copy a file to a temporary destination
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   We want copy a local file to a remote destination for a temporary
+#   usage.
+#   Ask the remote destination for a valid temporary name
+#   and let copy the file to this name
+#
+# (I): 1. source host
+#      2. source path
+#      3. destination host
+#
+# (O): stdout: the pathname of the destination file
+#
+# pwi 2017- 6-26 creation 
+
+function ficCopyToTemp
+{
+	typeset _srchost="${1}"
+	typeset _srcfname="${2}"
+	typeset _dsthost="${3}"
+	
+	typeset _dstfname="$(execRemote "${_dsthost}" "ttp.sh fn pathGetTempFile ${ttp_command}_${tt_verb}")"
+	[ $? -gt 0 ] && return 1
+
+	scp ${_srchost}:${_srcfname} ${_dsthost}:${_dstfname} && echo "${_dstfname}"
+}
