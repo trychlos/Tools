@@ -47,7 +47,7 @@ system							also dump system databases
 table=<name>[,<name>[,...]]		dump this table (resp. these tables)
 gz								use gzip to compress the dump
 user=<user>						connection account
-dumpto=/path/to/dir				output dump directory
+dumpto=</path/to/dir>			output dump directory
 "
 }
 
