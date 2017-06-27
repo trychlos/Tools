@@ -29,10 +29,10 @@
 
 function execDummy
 {
-	typeset _cmd="${1}"
+	typeset _cmd="$@"
 
 	if [ "${opt_dummy}" = "yes" ]; then
-		echo "[dummy] ${_cmd}"
+		echo "[dummy] ${_cmd}" >&2
 	else
 		eval ${_cmd}
 	fi

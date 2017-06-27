@@ -74,6 +74,7 @@ function optReadVerbose
 
 	if [ ${_ret} -eq 0 ]; then
 		opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
+		msgVerbose "setting opt_verbose_set to 'yes'"
 		msgVerbose "setting opt_verbose to 'yes'"
 	fi
 

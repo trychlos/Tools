@@ -36,7 +36,6 @@
    <service>	: stop			: <account>	: <stop_command_line>
    <service>	: test			: <account>	: <test_command_line>
    <service>	: setenv		: export <name>=<value>
-   <service>	: rootdir		: /opt/mysql-5.1
 
  The first keyword defines the service identifier.
 
@@ -84,15 +83,6 @@
    'setenv' defines a command to be executed in the current environment
    of each mysql.sh verb.
    Several 'setenv' lines may be defined, and will be executed in sequence.
-
-   rootdir
-   -------
-   If defined, then this is the installation root path.
-   Binaries are expected to be found in <rootdir>/bin, and this
-   binaries path will be added to the PATH variable in the verbs
-   environment.
-   If not defined, mysql binaries are expected to be found in the
-   standard PATH.
 
 -----------------------------------------------------------------------
  Specific macros
