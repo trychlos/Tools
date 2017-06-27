@@ -118,12 +118,31 @@ function f_db_filter_system {
 		#grep -vwE 'information_schema|[^\[]mysql|performance_schema|test[^]]'
 		# shouldn't filter "[mysql.sh test] " prefix,
 		#  nor "mysql.sh test " command
-		awk -v headers=${opt_headers} -v prefix="$(msgoutPrefix)" '
-			BEGIN { count=0 }
-			/[[:digit:]] displayed row/ { next }
-			/^\[|^+/ { print; next }
-			!/information_schema|mysql|performance_schema|test/ { print; count+=1; next }
-			END { printf( "%s%d displayed row(s)\n", prefix, match( headers, "yes" ) ? count-1 : count ) }'
+		typeset _counter="${opt_counter}"
+		[ "${opt_format}" = "RAW" ] && _counter="no"
+		awk -v headers=${opt_headers} \
+			-v prefix="$(msgoutPrefix)" \
+			-v counter=${_counter} '
+			BEGIN {
+				count=0
+			}
+			/[[:digit:]] displayed row/ {
+				next;
+			}
+			/^\[|^+/ {
+				print;
+				next;
+			}
+			!/information_schema|mysql|performance_schema|test|^#/ {
+				print;
+				count+=1;
+				next;
+			}
+			END {
+				if( match( counter, "yes" )){
+					printf( "%s%d displayed row(s)\n", prefix, match( headers, "yes" ) ? count-1 : count );
+				}
+			}'
 	fi
 }
 
@@ -201,66 +220,51 @@ function verb_main {
 	#set -x
 	typeset -i _ret=0
 
-	# check which node hosts the required service
-	typeset _node="$(tabGetNode "${opt_service}")"
-	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
-		let _ret+=1
+	# the 'list' commands doesn't have to be executed on the mysql host
+	#  because we do not need *here* any of the mysql binaries;
+	# because we are possibly not on the mysql host, we cannot check for
+	#  the service type
 
-	elif [ "${_node}" != "${TTP_NODE}" ]; then
-		typeset _parms="$@"
-		execRemote "${_node}" "${ttp_command} ${ttp_verb} ${_parms}"
-		let _ret+=$?
-
-	# we are on the right node
-	else
-		# check the service type
-		typeset _type="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
-		if [ "${_type}" != "mysql" ]; then
-			msgerr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
-			let _ret+=1
-
-		# if no value is provided to the --database option,
-		#  then list databases
-		#  taking care of passing right options to the mysql.sh sql command
-		elif [ -z "${opt_database}" ]; then
-			typeset _headers=""
-			typeset _counter=""
-			if [ "${disp_format}" != "RAW" ]; then
-				[ "${opt_headers}" = "yes" ] && _headers="--headers" || _headers="--noheaders"
-				[ "${opt_counter}" = "yes" ] && _counter="--counter" || _counter="--nocounter"
-			fi
-			typeset _ftemp="$(pathGetTempFile db)"
-			mysql.sh sql \
-				-service ${opt_service} \
-				-command "show databases" \
-				-format ${disp_format} \
-				${_headers} ${_counter} >"${_ftemp}"
-			let _ret=$?
-			[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_db_filter_system
-			let _ret=$?
-		
-		# if a database is specified, then list tables
-		# unles RAW format, we ask for as csv output in order to prepend
-		#  the database name
-		else
-			typeset _headers=""
-			typeset _counter=""
-			typeset _format="RAW"
-			if [ "${disp_format}" != "RAW" ]; then
-				_headers="--headers"
-				_counter="--nocounter"
-				_format="csv"
-			fi
-			typeset _ftemp="$(pathGetTempFile tab)"
-			mysql.sh sql \
-				-service ${opt_service} \
-				-command "use ${opt_database}; show tables" \
-				-format ${_format} ${_headers} ${_counter} >"${_ftemp}"
-			let _ret=$?
-			[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_tab_prepend_db_to_csv | f_tab_to_tabular
-			let _ret=$?
+	# if no value is provided to the --database option,
+	#  then list databases
+	#  taking care of passing right options to the mysql.sh sql command
+	if [ -z "${opt_database}" ]; then
+		typeset _headers=""
+		typeset _counter=""
+		if [ "${disp_format}" != "RAW" ]; then
+			[ "${opt_headers}" = "yes" ] && _headers="--headers" || _headers="--noheaders"
+			[ "${opt_counter}" = "yes" ] && _counter="--counter" || _counter="--nocounter"
 		fi
+		typeset _ftemp="$(pathGetTempFile db)"
+		mysql.sh sql \
+			-service ${opt_service} \
+			-command "show databases" \
+			-format ${disp_format} \
+			${_headers} ${_counter} >"${_ftemp}"
+		let _ret=$?
+		[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_db_filter_system
+		let _ret=$?
+	
+	# if a database is specified, then list tables
+	# unles RAW format, we ask for as csv output in order to prepend
+	#  the database name
+	else
+		typeset _headers=""
+		typeset _counter=""
+		typeset _format="RAW"
+		if [ "${disp_format}" != "RAW" ]; then
+			_headers="--headers"
+			_counter="--nocounter"
+			_format="csv"
+		fi
+		typeset _ftemp="$(pathGetTempFile tab)"
+		mysql.sh sql \
+			-service ${opt_service} \
+			-command "use ${opt_database}; show tables" \
+			-format ${_format} ${_headers} ${_counter} >"${_ftemp}"
+		let _ret=$?
+		[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_tab_prepend_db_to_csv | f_tab_to_tabular
+		let _ret=$?
 	fi
 
 	return ${_ret}
