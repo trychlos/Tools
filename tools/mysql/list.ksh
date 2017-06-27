@@ -23,6 +23,8 @@
 # pwi 2013- 7-18 review options dynamic computing
 # pwi 2017- 6-21 publish the release at last 
 
+disp_format=""
+
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
 #  first word is the name of the option
@@ -39,8 +41,8 @@ service=<identifier>		service identifier
 database[=<name>]			list databases or tables
 system						also show system databases
 format={CSV|RAW|TABULAR}	output format (case insensitive)
-headers						whether to display headers
-counter						whether to display rows counter
+headers						whether to display headers (in CSV and TABULAR formats)
+counter						whether to display rows counter (in CSV and TABULAR formats)
 "
 }
 
@@ -87,7 +89,16 @@ function verb_arg_check {
 
 	# the '--system' is only relevant when listing the databases
 	if [ "${opt_database_set}" = "yes" -a ! -z "${opt_database}" -a "${opt_system_set}" = "yes" ]; then
-		msgerr "'--[no]system' is only relevant when listing databases, ignored"
+		msgwarn "'--[no]system' is only relevant when listing databases, ignored"
+	fi
+
+	# '--[no]headers' and '--[no]counter' are only relevant when the
+	#  format is not 'RAW'
+	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]headers' is only relevant with 'CSV' or 'TABULAR' format, ignored"
+	fi
+	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]counter' is only relevant with 'CSV' or 'TABULAR' format, ignored"
 	fi
 
 	# check output format
@@ -100,7 +111,7 @@ function verb_arg_check {
 # ---------------------------------------------------------------------
 # filter system databases if asked for
 
-function f_filter_systemdb {
+function f_db_filter_system {
 	if [ "${opt_system}" = "yes" ]; then
 		cat -
 	else
@@ -113,6 +124,74 @@ function f_filter_systemdb {
 			/^\[|^+/ { print; next }
 			!/information_schema|mysql|performance_schema|test/ { print; count+=1; next }
 			END { printf( "%s%d displayed row(s)\n", prefix, match( headers, "yes" ) ? count-1 : count ) }'
+	fi
+}
+
+# ---------------------------------------------------------------------
+# prepend the database to the list of tables
+# the input is the sql with csv format, with headers, without counters
+# output a csv compatible with verb options
+
+function f_tab_prepend_db_to_csv {
+	if [ "${disp_format}" = "RAW" ]; then
+		cat -
+	else
+		typeset _counter="${opt_counter}"
+		[ "${disp_format}" = "TABULAR" ] && _counter="no"
+		typeset _headers="${opt_headers}"
+		[ "${disp_format}" = "TABULAR" ] && _headers="yes"
+
+		perl -se '{
+			$row = 0;
+			while( <STDIN> ){
+				# does not count TTP lines
+				if ( /^\[/ ){
+					print;
+					next;
+				}
+				# output headers if asked for
+				if( $row > 0 || $with_headers eq "yes" ){
+					chomp;
+					@columns = split /$csvsep/;
+					$ic = 0;
+					foreach $col ( @columns ){
+						if( $ic == 1 ){
+							print $csvsep;
+							print $row == 0 ? "Database" : $database;
+						}
+						print $csvsep if $ic > 0;
+						print $col;
+						$ic += 1;
+					}
+					print "\n";
+				}
+				$row += 1;
+			}
+		} END {
+			printf( "%s%d displayed row(s)\n", $prefix, $row-1 ) if $with_counter eq "yes";
+		}' -- \
+			-database="${opt_database}" \
+			-prefix="$(msgoutPrefix)" \
+			-csvsep="${ttp_csvsep:-;}" \
+			-with_headers="${_headers}" \
+			-with_counter="${_counter}"
+	fi
+}
+
+# ---------------------------------------------------------------------
+# converts the input csv (with headers, without counter) to a tabular
+#  format compatible with command-line options
+
+function f_tab_to_tabular {
+	if [ "${disp_format}" != "TABULAR" ]; then
+		cat -
+	else
+		#cat - | while read l; do
+		#	[ "${l:0:1}" = "[" ] \
+		#		&& echo "${l}" \
+		#		|| csvToTabular "${opt_headers}" "${opt_counter}"
+		#		#|| echo "${l}" | csvToTabular "${opt_headers}" "${opt_counter}"
+		csvToTabular "${opt_headers}" "${opt_counter}"
 	fi
 }
 
@@ -142,28 +221,47 @@ function verb_main {
 			let _ret+=1
 
 		else
-			typeset _headers="--headers"
-			[ "${opt_headers}" = "no" ] && _headers="--noheaders"
-			typeset _counter="--counter"
-			[ "${opt_counter}" = "no" ] && _counter="--nocounter"
-
 			# if no value is provided to the --database option,
 			#  then list databases
+			# take care of passing right options to the mysql.sh sql command
 			if [ -z "${opt_database}" ]; then
+				typeset _headers=""
+				typeset _counter=""
+				if [ "${disp_format}" != "RAW" ]; then
+					[ "${opt_headers}" = "yes" ] && _headers="--headers" || _headers="--noheaders"
+					[ "${opt_counter}" = "yes" ] && _counter="--counter" || _counter="--nocounter"
+				fi
+				typeset _ftemp="$(pathGetTempFile db)"
 				mysql.sh sql \
 					-service ${opt_service} \
 					-command "show databases" \
-					-format ${opt_format} \
-					${_headers} ${_counter} | f_filter_systemdb
-	
+					-format ${disp_format} \
+					${_headers} ${_counter} >"${_ftemp}"
+				let _ret=$?
+				[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_db_filter_system
+				let _ret=$?
+		
 			# if a database is specified, then list tables
+			# unles RAW format, we ask for as csv output in order to prepend
+			#  the database name
 			else
+				typeset _headers=""
+				typeset _counter=""
+				typeset _format="RAW"
+				if [ "${disp_format}" != "RAW" ]; then
+					_headers="--headers"
+					_counter="--nocounter"
+					_format="csv"
+				fi
+				typeset _ftemp="$(pathGetTempFile tab)"
 				mysql.sh sql \
 					-service ${opt_service} \
 					-command "use ${opt_database}; show tables" \
-					-notest \
-					-format ${opt_format} \
-					${_headers} ${_counter}
+					-format ${_format} ${_headers} ${_counter} >"${_ftemp}"
+				let _ret=$?
+				[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_tab_prepend_db_to_csv | f_tab_to_tabular
+				let _ret=$?
+						
 			fi
 		fi
 	fi

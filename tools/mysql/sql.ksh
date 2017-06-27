@@ -45,7 +45,7 @@ timeout=<sec>				timeout
 test						test that the service is up and running before executing
 format={CSV|RAW|TABULAR}	output format (case insensitive)
 headers						whether to display headers (in CSV and TABULAR formats)
-counter						whether to display rows counter
+counter						whether to display rows counter (in CSV and TABULAR formats)
 "
 }
 
@@ -106,6 +106,15 @@ function verb_arg_check {
 			msgerr "${opt_script}: script not found or not readable"
 			let _ret+=1
 		fi
+	fi
+
+	# '--[no]headers' and '--[no]counter' are only relevant when the
+	#  format is not 'RAW'
+	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]headers' is only relevant with 'CSV' or 'TABULAR' format, ignored"
+	fi
+	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]counter' is only relevant with 'CSV' or 'TABULAR' format, ignored"
 	fi
 
 	# check output format
@@ -203,7 +212,8 @@ function verb_main {
 				elif [ "${opt_script_set}" = "yes" ]; then
 					cat "${opt_script}" | mysql -n \
 						-u${opt_user} \
-						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}") >"${_ftemp}"
+						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}") \
+						--table >"${_ftemp}"
 					let _ret+=$?
 					[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_output
 					let _ret+=$?

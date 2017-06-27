@@ -71,7 +71,11 @@ function csvToTabular
 		@column = ();
 		@lines = ();
 		while( <STDIN> ){
-			#print;
+			if( m/^\[/ ){
+				print;
+				next;
+			}
+			#printf STDERR;
 			chomp;
 			$lines[$nl] = [split /${insep}/];
 			$icol = 0;

@@ -53,8 +53,8 @@ logs						display log files definitions
 account						display accounting files definitions
 catalog[=BRIEF|FULL]		display catalog content (case insensitive)
 format={CSV|RAW|TABULAR}	output format (case insensitive)
-headers						whether to display headers
-counter						whether to display rows counter
+headers						whether to display headers (in CSV and TABULAR formats)
+counter						whether to display rows counter (in CSV and TABULAR formats)
 "
 }
 
@@ -130,6 +130,15 @@ function verb_arg_check {
 			msgerr "'--catalog' option value must be 'BRIEF' or 'FULL', '${opt_catalog}' found"
 			let _ret+=1
 	esac
+
+	# '--[no]headers' and '--[no]counter' are only relevant when the
+	#  format is not 'RAW'
+	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]headers' is only relevant with 'CSV' or 'TABULAR' format, ignored"
+	fi
+	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
+		msgwarn "'--[no]counter' is only relevant with 'CSV' or 'TABULAR' format, ignored"
+	fi
 
 	# check output format
 	disp_format="$(formatCheck "${opt_format}")"
