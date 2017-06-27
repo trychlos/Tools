@@ -92,45 +92,34 @@ function optReadOptArgs
 
 							# the option accepts/wants an argument
 							#  which is optional if enclosed between square brackets []
+							# no value is found for this option if:
+							# - no value is provided after an '=' sign
+							# - and there is no next argument on the command-line
+							#    or the next argument is an option (begins with '--')
 							else
 								#echo "optReadOptArgs: arg=$_arg name=$_name desc=$_desc" >&2
-								if [ "${ttp_optargs_mdt[${_idx}]}" = "no" ]; then
-									# this option accepts an optional value
-									# if it has an argument, it may have been provided here
-									# with an explicite '=' sign, or as the next argument
-									if [ -z "${_val}" ]; then
-										typeset -i _ib=${_ia}+1
-										if [ "${ttp_usedargs[${_ib}]}" != "yes" ]; then
-											typeset _barg="${ttp_arga[${_ib}]}"
-											if [ "${_barg:0:2}" != "--" ]; then
-												eval $(echo "opt_${_name}=\"${_barg}\"")
-												msgVerbose "setting opt_${_name} to '${_barg}'"
-												ttp_usedargs[${_ib}]="yes"
-												let _ia+=1
-											fi
+								#let _ia=$(optReadOptArgValue ${_ia} ${_idx} "${_val}")
+								typeset -i _valset=0
+								if [ -z "${_val}" ]; then
+									typeset -i _ib=${_ia}+1
+									if [ ${_ib} -le ${ttp_argc} -a "${ttp_usedargs[${_ib}]}" != "yes" ]; then
+										typeset _barg="${ttp_arga[${_ib}]}"
+										if [ "${_barg:0:2}" != "--" ]; then
+											eval $(echo "opt_${_name}=\"${_barg}\"")
+											msgVerbose "setting opt_${_name} to '${_barg}'"
+											ttp_usedargs[${_ib}]="yes"
+											let _ia=${_ib}
+											let _valset=1
 										fi
-									else
-										eval $(echo "opt_${_name}=\"${_val}\"")
-										msgVerbose "setting opt_${_name} to '${_val}'"
 									fi
 								else
-									# must have an argument, with equal sign or not
-									if [ -z "${_val}" ]; then
-										typeset -i _ib=${_ia}+1
-										if [ "${ttp_usedargs[${_ib}]}" != "yes" ]; then
-										#typeset _barg="$(echo $(eval echo '${'${_ib}'}'))"
-											typeset _barg="${ttp_arga[${_ib}]}"
-											if [ "${_barg:0:2}" != "--" ]; then
-												eval $(echo "opt_${_name}=\"${_barg}\"")
-												msgVerbose "setting opt_${_name} to '${_barg}'"
-												ttp_usedargs[${_ib}]="yes"
-												let _ia+=1
-											else
-												msgerr "'--${_arg}' option expects a mandatory argument, which has not been found"
-												let _ret+=1
-											fi
-										fi
-									fi
+									eval $(echo "opt_${_name}=\"${_val}\"")
+									msgVerbose "setting opt_${_name} to '${_val}'"
+									let _valset=1
+								fi
+								if [ "${ttp_optargs_mdt[${_idx}]}" = "yes" -a ${_valset} -eq 0 ]; then
+									msgerr "'--${_name}' option expects a mandatory argument, which has not been found"
+									let _ret+=1
 								fi
 							fi
 						fi

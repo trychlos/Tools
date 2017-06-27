@@ -33,7 +33,6 @@ function optReadVerbose
 {
 	#set -x
 	opt_verbose_set="no"
-	opt_verbose_def="no"
 
 	typeset -i _ret=0
 	typeset -i _ia=1
@@ -64,6 +63,7 @@ function optReadVerbose
 							opt_verbose="yes"
 						fi
 						ttp_usedargs[${_ia}]="yes"
+						msgVerbose "setting opt_verbose_set to 'yes'"
 						break 2
 					fi
 				fi
@@ -74,8 +74,7 @@ function optReadVerbose
 
 	if [ ${_ret} -eq 0 ]; then
 		opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
-		msgVerbose "setting opt_verbose_set to 'yes'"
-		msgVerbose "setting opt_verbose to 'yes'"
+		msgVerbose "setting opt_verbose to '${opt_verbose}'"
 	fi
 
 	return ${_ret}

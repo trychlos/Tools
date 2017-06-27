@@ -36,7 +36,6 @@ function optReadHelp
 {
 	#set -x
 	opt_help_set="no"
-	opt_help_def="no"
 
 	typeset -i _ret=0
 	typeset -i _ia=1
