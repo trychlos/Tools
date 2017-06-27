@@ -19,29 +19,46 @@
 #
 # Synopsis:
 #
-# (I): 1. array of command-line arguments
+#   Save the command-line arguments under a normalized form,
+#   both as a string 'ttp_args' and as an array 'ttp_arga' where
+#   arguments are indexed from 1.
 #
-# (O): stdout: the string with quoted values
+#   Each option is check against optGetOption to make sure we are
+#   able to uniquely identify it
+#
+# (I): 1. array of command-line arguments, indexed from 1 to $#
+#
+# (O): -
 #
 # pwi 2013- 6-11 creation
 # pwi 2017- 6-21 publish the release at last 
+
+function optSaveArgsAppend
+{
+	typeset -i _idx=${1}
+	typeset _arg="${2}"
+	
+	[ -z "${ttp_args}" ] || ttp_args="${ttp_args} "
+	ttp_args="${ttp_args}${_arg}"
+	ttp_arga[${_idx}]="${_arg}"
+}
 
 function optSaveArgs
 {
 	#set -x
 	typeset _endofopt="no"
 	typeset -i _ia=1
+	typeset -i _ret=0
+	
 	while [ ${_ia} -le $# ]; do
 		typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
 
 		if [ "${_endofopt}" = "yes" ]; then
-			[ ${_ia} -eq 1 ] || printf " "
-			printf "'%s'" "${_arg}"
+			optSaveArgsAppend ${_ia} "${_arg}"
 
 		elif [ "${_arg}" = "--" ]; then
 			_endofopt="yes"
-			[ ${_ia} -eq 1 ] || printf " "
-			printf "%s" "${_arg}"
+			optSaveArgsAppend ${_ia} "${_arg}"
 
 		else
 			# make options have two hyphens
@@ -53,15 +70,18 @@ function optSaveArgs
 					;;
 			esac
 			if [ "${_arg:0:2}" = "--" ]; then
-				[ ${_ia} -eq 1 ] || printf " "
-				printf "%s" "${_arg}"
+				optSaveArgsAppend ${_ia} "${_arg}"
+				optGetOption "${_arg:2}" "yes"
+				[ $? -eq 0 ] && let _ret+=1
 			else
-				[ ${_ia} -eq 1 ] || printf " "
-				printf "'%s'" "${_arg}"
+				optSaveArgsAppend ${_ia} "${_arg}"
 			fi
 		fi
 
 		let _ia+=1
 	done
-	printf "\n"
+
+	ttp_argc=$#
+
+	return ${_ret}
 }

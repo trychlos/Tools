@@ -37,25 +37,18 @@ function optReadVerbose
 
 	typeset -i _ret=0
 	typeset -i _ia=1
-	while [ ${_ia} -le $# ]; do
-		typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+	while [ ${_ia} -le ${ttp_argc} ]; do
+		#typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+		typeset _arg="${ttp_arga[${_ia}]}"
 		[ "${_arg}" = "--" ] && break
 
-		# make options have two hyphens
-		case ${_arg} in
-			--*)
-				;;
-			-*)
-				_arg="-${_arg}"
-				;;
-		esac
-
-		# now try to process the '--[no]verbose' option
+		# try to process the '--[no]verbose' option
 		case "${_arg}" in
 			--*=*)
 				;;
-			--*)
-				optGetOption ${_arg:2} "yes"
+			--nov*|--v*)
+				#echo "optReadVerbose: optGetOption" >&2
+				optGetOption ${_arg:2} "no"
 				typeset -i _idx=$?
 				if [ ${_idx} -eq 0 ]; then
 					let _ret+=1
@@ -71,6 +64,7 @@ function optReadVerbose
 							opt_verbose="yes"
 						fi
 						ttp_usedargs[${_ia}]="yes"
+						break 2
 					fi
 				fi
 				;;
@@ -78,8 +72,10 @@ function optReadVerbose
 		let _ia+=1
 	done
 
-	opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
-	msgVerbose "setting opt_verbose to 'yes'"
+	if [ ${_ret} -eq 0 ]; then
+		opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
+		msgVerbose "setting opt_verbose to 'yes'"
+	fi
 
 	return ${_ret}
 }

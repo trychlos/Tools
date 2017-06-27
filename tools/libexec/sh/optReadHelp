@@ -25,7 +25,7 @@
 #
 # (I): -
 #
-# (O): return: count of errors
+# (O): -
 #
 # pwi 2013- 2-18 creation
 # pwi 2013- 6- 3 use the dynamic command-line interpretation
@@ -40,37 +40,37 @@ function optReadHelp
 
 	typeset -i _ret=0
 	typeset -i _ia=1
-	while [ ${_ia} -le $# ]; do
-		typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+	
+	while [ ${_ia} -le ${ttp_argc} ]; do
+		#typeset _arg="$(echo $(eval echo '${'${_ia}'}'))"
+		typeset _arg="${ttp_arga[${_ia}]}"
 		[ "${_arg}" = "--" ] && break
 
-		# make options have two hyphens
-		case ${_arg} in
-			--*)
-				;;
-			-*)
-				_arg="-${_arg}"
-				;;
-		esac
-
-		# now try to process the '--[no]help' option
+		# try to process the '--[no]help' option
 		case "${_arg}" in
 			--*=*)
 				;;
-			--*)
-				optGetOption ${_arg:2}
+			--noh*|--h*)
+				#echo "optReadHelp: optGetOption" >&2
+				optGetOption ${_arg:2} "no"
 				typeset -i _idx=$?
-				if [ ${_idx} -gt 0 ]; then
+				#echo "optReadHelp: arg=$_arg, got idx=$_idx" >&2
+				if [ ${_idx} -eq 0 ]; then
+					let _ret+=1
+				else
 					let _idx-=1
 					typeset _optarg="${ttp_optargs_key[${_idx}]}"
+					#echo "optReadHelp: optarg=$_optarg" >&2
 					if [ "${_optarg}" = "help" ]; then
 						opt_help_set="yes"
 						typeset _prefix="${_arg:2:2}"
+						#echo "optReadHelp: prefix=$_prefix" >&2
 						if [ "${_prefix}" = "no" ]; then
 							opt_help="no"
 						else
 							opt_help="yes"
 						fi
+						break 2
 					fi
 				fi
 				;;
@@ -78,11 +78,15 @@ function optReadHelp
 		let _ia+=1
 	done
 
-	opt_help="${opt_help:-"${opt_help_def}"}"
-
-	if [ "${opt_help}" = "yes" ]; then
-		[ $# -gt 1 ] && msgout "'--help' option detected, other arguments are ignored"
-		scriptUsage
-		exit
+	if [ ${_ret} -eq 0 ]; then
+		opt_help="${opt_help:-"${opt_help_def}"}"
+	
+		if [ "${opt_help}" = "yes" ]; then
+			[ $# -gt 1 ] && msgout "'--help' option detected, other arguments are ignored"
+			scriptUsage
+			exit
+		fi
 	fi
+
+	return ${_ret}
 }

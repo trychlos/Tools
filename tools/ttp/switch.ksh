@@ -1,11 +1,11 @@
 # @(#) setup the execution node environment
 #
-# @(@) This command has two unique particularities:
-# @(@) - it must be executed 'in-process'
-# @(@)   i.e. with the dot notation: ". ttp.sh switch --node <name>"
-# @(@) - it is only needed on a site which uses the 'logical machine'
-# @(@)   paradigm; this means that a 'logicals.re' file must also exist,
-# @(@)   and that the TTP_SHDIR environment variable must be defined.
+# @(@) This command is needed because The Tools Project supports the
+# @(@)  'logical machine' paradigm.
+# @(@) It has the unique particularity of having to be executed 'in-process'
+# @(@)  i.e. with the dot notation: ". ttp.sh switch --node <name>"
+# @(@) It should be run from the user profile as:
+# @(@)  ". ttp.sh switch --default"
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
@@ -26,14 +26,8 @@
 #
 # Synopsis:
 #
-#   When the user logs in, the first available logical machine is setup.
-#   This verb let the user select another logical machine in the same
-#   host.
-#
-#   This verb executes in the main user's environment.
-#   So:
-#     $0: main
-#     $*: --node <host>
+#   When the user logs in, the first available execution node is setup.
+#   This verb let the user select another node in the same host.
 #
 # pwi 1998-10-21 new production architecture definition - creation
 # pwi 1999- 2-17 set LD_LIBRARY_PATH is GEDAA is set
@@ -55,8 +49,9 @@
 
 function verb_arg_define_opt {
 	echo "
-help					display this online help and gracefully exit
-node=<name>|DEFAULT		target execution node
+help			display this online help and gracefully exit
+node=<name>		target execution node
+default			setup an initial default node on the host 
 "
 }
 
@@ -72,7 +67,7 @@ node=<name>|DEFAULT		target execution node
 
 # ---------------------------------------------------------------------
 # initialize specific default values
-#
+
 #function verb_arg_set_defaults {
 #}
 
@@ -84,9 +79,12 @@ node=<name>|DEFAULT		target execution node
 function verb_arg_check {
 	typeset -i _ret=0
 
-	# the target execution node is mandatory
-	if [ -z "${opt_node}" ]; then
-		msgerr "target execution node is mandatory, has not been found"
+	# either 'default' or a target execution node must be specified
+	typeset -i _action=0
+	[ "${opt_default}" = "yes" ] && let _action+=1
+	[ -z "${opt_node}" ] || let _action+=1
+	if [ ${_action} -ne 1 ]; then
+		msgerr "one of '--default' or '--node=<name>' option must be specified"
 		let _ret+=1
 	fi
 
@@ -101,12 +99,13 @@ function verb_main {
 
 	# make sure the required target node exists here
 	typeset _node=""
-	if [ "${opt_node}" = "DEFAULT" ]; then
+	if [ "${opt_default}" = "yes" ]; then
 		_node="$(bspNodeFindCandidate)"
 		if [ -z "${_node}" ]; then
 			msgerr "no available execution node on this host"
 			return 1
 		fi
+
 	else
 		_node="$(bspNodeEnum | grep -w "${opt_node}" 2>/dev/null)"
 		if [ -z "${_node}" ]; then
@@ -115,7 +114,7 @@ function verb_main {
 		fi
 	fi
 
-	bspSwitch "${_node}"
+	bspSwitch "${_node}" "${ttp_verb}"
 	let _ret=$?
 
 	return ${_ret}

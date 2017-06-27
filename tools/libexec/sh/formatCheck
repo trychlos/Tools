@@ -31,24 +31,22 @@ function formatCheck
 {
 	typeset _opt_format="${1}"
 	typeset _ret=0
-	typeset _fmt
+	typeset _fmt="$(echo "${_opt_format}" | strUpper)"
 
-	for _fmt in $(echo "${_opt_format}" | strUpper); do
-		case "${_fmt}" in
-			C|CS|CSV)
-				echo "CSV"
-				;;
-			R|RA|RAW)
-				echo "RAW"
-				;;
-			T|TA|TAB|TABU|TABUL|TABULA|TABULAR)
-				echo "TABULAR"
-				;;
-			*)
-				msgerr "'--format' option value must be 'CSV', 'RAW' or 'TABULAR', '${_opt_format}' found"
-				let _ret+=1
-		esac
-	done
+	case "${_fmt}" in
+		C|CS|CSV)
+			echo "CSV"
+			;;
+		R|RA|RAW)
+			echo "RAW"
+			;;
+		T|TA|TAB|TABU|TABUL|TABULA|TABULAR)
+			echo "TABULAR"
+			;;
+		*)
+			msgerr "'--format' option value must be 'CSV', 'RAW' or 'TABULAR', '${_opt_format}' found"
+			let _ret+=1
+	esac
 
 	return ${_ret}
 }

@@ -1,0 +1,85 @@
+# @(#) Format the output of a SQL command as a CSV
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+#   Converts the standard SQL output (in tabular form) to a CSV
+#   with the service prepended on each line.
+#
+#   Does not change the case of columns names.
+#
+# (I). 1. service identifier
+#      2. whether the headers line should be re-displayed on output;
+#         defaults to 'yes'
+#      3. whether to output a rows counter;
+#         defaults to 'yes'
+#
+# (O). stdout: the associated password
+#
+# pwi 2013- 6- 3 creation
+# pwi 2013- 7-10 improve comments
+# pwi 2017- 6-21 publish the release at last 
+
+function dbmsToCsv
+{
+	typeset _service="${1}"
+	typeset _headers="${2}"
+	typeset _counter="${3}"
+
+	perl -se '{
+		sub funny_cap( $ ){
+			my $instr = shift;
+			my $len = length( $instr );
+			my $outstr = "";
+			if( $len > 0 ){
+				$outstr = uc( substr( $instr, 0, 1 ));
+				if( $len > 1 ){
+					$outstr .= lc( substr( $instr, 1 ));
+				}
+			}
+		}
+		$nr = 0;
+		while( <STDIN> ){
+			next if m/^\+/;
+			if( $nr > 0 || $with_headers eq "yes" ){
+				# add the first service column
+				print $nr == 0 ? "Service" : $service;
+				# parse the line
+				chomp;
+				s/^\|\s*//;
+				s/\s*\|$//;
+				@columns = split /\s*\|\s*/;
+				foreach $col ( @columns ){
+					print ${csvsep};
+					#print funny_cap( $col ) if $nr == 0 && $with_headers eq "yes";
+					print $col;
+				}
+				print "\n";
+			}
+			$nr += 1;
+		}
+	} END {
+		printf( "%s%d displayed row(s)\n", $msg, $nr-1 ) if $with_counter eq "yes";
+	}' -- \
+		-service="${_service}" \
+		-with_headers="${_headers}" \
+		-with_counter="${_counter}" \
+		-csvsep="${ttp_csvsep:-;}" \
+		-msg="$(msgoutPrefix)"
+}

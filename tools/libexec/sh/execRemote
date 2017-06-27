@@ -57,6 +57,7 @@
 
 function execRemote
 {
+	#set -x
 	typeset _host="${1}"
 	typeset _command="${2}"
 	typeset -i _ret=0
@@ -90,13 +91,13 @@ function execRemote
 	fi
 
 	# if we have to exec_remote to a DMZ, then search for a bouncing host
-	#  (maybe depending of the environment ?)
+	#  (which may depend of the environment ?)
 
 	# not on the right host, or not with the right account
 	# we so have to ask for a remote execution
 	# if 'NOCODE' was specified, do not create the temp file which would
 	# host the return code
-	[ ${_nomsg} -eq 0 ] && msgout "execRemote ssh '${_command}' on ${_host} ${_usermsg}"
+	[ ${_nomsg} -eq 0 ] && msgout "execRemote ${_user}@${_host}: ${_command}"
 	#execRemote_ssh "${_host}" "$_input" "${_user}" "${_command}"
 	typeset _profile="$(userGetProfile ${_user})"
 	ssh ${_host} -q ${_input} -l ${_user} "{ . ./${_profile}; . ttp.sh switch -node ${_host}; }; eval ${_command}"

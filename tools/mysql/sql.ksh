@@ -21,6 +21,8 @@
 # gmi 2005- 6-13 creation
 # pwi 2017- 6-21 publish the release at last 
 
+disp_format=""
+
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
 #  first word is the name of the option
@@ -39,7 +41,11 @@ command=<command>			command to be executed
 script=</path>				script SQL to be executed
 interactive					open an interactive connection
 user=<user>					connection account
-timeout=<sec>				timeout 
+timeout=<sec>				timeout
+test						test that the service is up and running before executing
+format={CSV|RAW|TABULAR}	output format (case insensitive)
+headers						whether to display headers (in CSV and TABULAR formats)
+counter						whether to display rows counter
 "
 }
 
@@ -57,8 +63,12 @@ timeout=<sec>				timeout
 # initialize specific default values
 
 function verb_arg_set_defaults {
-	opt_timeout=0
-	opt_user=root
+	opt_timeout_def=0
+	opt_user_def="root"
+	opt_test_def="yes"
+	opt_format_def="RAW"
+	opt_headers_def="yes"
+	opt_counter_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -71,7 +81,7 @@ function verb_arg_check {
 	typeset -i _ret=0
 
 	# the service mnemonic is mandatory
-	if [ -s "${opt_service}" ]; then
+	if [ -z "${opt_service}" ]; then
 		msgerr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
@@ -92,13 +102,35 @@ function verb_arg_check {
 
 	# if a script is specified, check that it exists
 	if [ "${opt_script_set}" = "yes" ]; then
-		if [ ! -t "${opt_script}" ]; then
+		if [ ! -r "${opt_script}" ]; then
 			msgerr "${opt_script}: script not found or not readable"
 			let _ret+=1
 		fi
 	fi
 
+	# check output format
+	disp_format="$(formatCheck "${opt_format}")"
+	let _ret+=$?
+
 	return ${_ret}
+}
+
+# ---------------------------------------------------------------------
+# format the output
+
+function f_output {
+	#set -x
+
+	if [ "${disp_format}" = "CSV" ]; then
+		dbmsToCsv "${opt_service}" "${opt_headers}" "${opt_counter}"
+
+	elif [ "${disp_format}" = "RAW" ]; then
+		cat -
+
+	elif [ "${disp_format}" = "TABULAR" ]; then
+		dbmsToCsv "${opt_service}" "yes" "no" \
+			| csvToTabular "${opt_headers}" "${opt_counter}"
+	fi
 }
 
 # ---------------------------------------------------------------------
@@ -136,33 +168,44 @@ function verb_main {
 
 		else
 			# check that the instance is running
-			mysql.sh test -service "${opt_service}" -nostatus
-			if [ $? -ne 0 ]; then
-				msgerr "${opt_service}: DBMS instance is not running"
-				let _ret+=1
-
-			else
+			if [ "${opt_test}" = "yes" ]; then
+				mysql.sh test -service "${opt_service}" -nostatus
+				if [ $? -ne 0 ]; then
+					msgerr "${opt_service}: DBMS instance is not running"
+					let _ret+=1
+				fi
+			fi
+			if [ ${_ret} -eq 0 ]; then
 				mySetenv "${opt_service}"
+				typeset _ftemp
 
 				# interactive connection to mysql client
 				# -n, --unbuffered: Flush the buffer after each query.
 				if [ "${opt_interactive}" = "yes" ]; then
 					mysql -n \
 						-u${opt_user} \
-						-p$(dbmsGetPassword ${opt_service} ${ttp_node_environment} ${opt_user})
+						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}")
 					let _ret+=$?
 
+				# execute a command passed as an argument
 				elif [ "${opt_command_set}" = "yes" ]; then
+					_ftemp="$(pathGetTempFile command)"
 					mysql \
 						-u${opt_user} \
-						-p$(dbmsGetPassword ${opt_service} ${ttp_node_environment} ${opt_user}) \
-						-e "'${opt_command}'"
+						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}") \
+						-e "${opt_command}" \
+						--table >"${_ftemp}"
+					let _ret+=$?
+					[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_output
 					let _ret+=$?
 
+				# execute a SQL script
 				elif [ "${opt_script_set}" = "yes" ]; then
 					cat "${opt_script}" | mysql -n \
 						-u${opt_user} \
-						-p$(dbmsGetPassword ${opt_service} ${ttp_node_environment} ${opt_user})
+						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}") >"${_ftemp}"
+					let _ret+=$?
+					[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_output
 					let _ret+=$?
 
 				else

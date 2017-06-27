@@ -35,6 +35,9 @@
 #   Cf. comments in cftCatalogFullToCsv
 #
 # (I): 1. service mnemonic
+#      2. with headers (yes|no)
+#      3. with rows counter (yes|no)
+#
 #      stdin: output of cftCatalogFullDatetime
 #
 # (O): stdout: one row per transfer in a SQL-like table
@@ -47,12 +50,14 @@
 function cftCatalogFullRow
 {
 	typeset _service="${1}"
+	typeset _headers="${2}"
+	typeset _counter="${3}"
 
 	perl -se '{
 		sub funny_cap( $ ){
 			my $instr = shift;
 			my $len = length( $instr );
-			my $outstr = ""
+			my $outstr = "";
 			if( $len > 0 ){
 				$outstr = uc( substr( $instr, 0, 1 ));
 				if( $len > 1 ){
@@ -71,17 +76,6 @@ function cftCatalogFullRow
 			}
 			print "\n";
 		}
-		# add a row to the output table
-		#  simultaneously computing the largest width of each column
-		sub addrow( $ ){
-			my $row = shift;
-			foreach $key ( keys %$row ){
-				$value = $row->{$key}[1];
-				#$table{$key}->{"max"} = length( $key ) if ! exists $table{$key};
-				#$table{$key}->{"max"} = length( $value ) if length( $value ) > $table{$key}->{"max"};
-				$table{$key}->{"rows"}->[$nr] = $value;
-			}
-		}
 		$nr = 0;
 		@columns = ();
 		%row = ();
@@ -91,7 +85,7 @@ function cftCatalogFullRow
 			push( @columns, $key ) if !$nr;
 			$row{$key} = $value;
 			if( $label eq "Network message size" ){
-				output_headers( \@columns ) if !$nr;
+				output_headers( \@columns ) if !$nr && $with_headers eq "yes";
 				print $service;
 				foreach $key ( @columns ){
 					print ${csvsep};
@@ -103,7 +97,11 @@ function cftCatalogFullRow
 			} 
 		}
 	} END {
-		# this string is parsed in cft.sh list
-		printf( "%s%d displayed row(s)\n", $msg, $nr );
-	}' -- -service="${_service}" -csvsep="${ttp_csvsep:-;}" -msg="$(msgoutPrefix)"
+		printf( "%s%d displayed row(s)\n", $msg, $nr ) if $with_counter eq "yes";
+	}' -- \
+		-service="${_service}" \
+		-with_headers="${_headers}" \
+		-with_counter="${_counter}" \
+		-csvsep="${ttp_csvsep:-;}" \
+		-msg="$(msgoutPrefix)"
 }

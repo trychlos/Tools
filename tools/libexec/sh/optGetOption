@@ -19,13 +19,22 @@
 #
 # Synopsis:
 #
+#   Check if the provided argument (taken from the command-line) is a
+#   valid option, maybe abbreviated, and returns its index counted from
+#   1 in the ttp_optargs_key array.
+#
 #   This only returns an option if the argument let us choose a unique
-#   option. Else we just return empty
+#   option. Else we just return empty.
+#
+#   Note that we have to deal with a situation where an option may be
+#   the same that the abbreviation of another.
+#   E.g. --node <name> is same than -node[fault]
+#   So we consider first the full equality before abbreviations.
 #
 # (I): 1. the command-line argument to be checked
 #         (without the hyphens)
 #      2. (opt) whether to print error messages (yes|no)
-#               default to 'no'
+#               default to 'yes'
 #
 # (O): Return code: index of the found option counted from 1,
 #                   or zero if not found or not unique
@@ -37,46 +46,69 @@ function optGetOption
 {
 	#set -x
 	typeset _opt="${1}"
-	typeset _with_error="${2:-no}"
-	typeset -i _found=-1
+	typeset _with_error="${2:-yes}"
+	typeset -i _countfull=0
+	typeset -i _foundfull=-1
+	typeset -i _countbrev=0
+	typeset -i _foundbrev=-1
 
 	if [ ! -z "${_opt}" ]; then
 		typeset -i _i=0
-		typeset -i _count=0
+		typeset _prefix="${_opt:0:2}"
+		typeset _sufix="${_opt:2}"
 
 		while [ ${_i} -lt ${ttp_optargs_count} ]; do
 			typeset _arg="${ttp_optargs_key[${_i}]}"
 			typeset _abbrev="${_arg:0:${#_opt}}"
+			#echo "opt=$_opt, arg=$_arg, abbrev=$_abbrev" >&2
 
-			if [ "${_abbrev}" = "${_opt}" ]; then
-				let _count+=1
-				_found=${_i}
+			if [ "${_arg}" = "${_opt}" ]; then
+				let _countfull+=1
+				_foundfull=${_i}
 
-			elif [ -z "${ttp_optargs_dsc[${_i}]}" ]; then
-				typeset _prefix="${_opt:0:2}"
-				typeset _sufix="${_opt:2}"
-				if [ "${_prefix}" = "no" ]; then
+			elif [ "${_abbrev}" = "${_opt}" ]; then
+				let _countbrev+=1
+				_foundbrev=${_i}
+				#echo "$_opt: found valid abbreviation for $_arg" >&2
+
+			elif [ "${_prefix}" = "no" -a -z "${ttp_optargs_dsc[${_i}]}" ]; then
+				if [ "${_sufix}" = "${_arg}" ]; then
+					let _countfull+=1
+					_foundfull=${_i}
+				else
 					_abbrev="${_arg:0:${#_sufix}}"
 					if [ "${_abbrev}" = "${_sufix}" ]; then
-						let _count+=1
-						_found=${_i}
+						let _countbrev+=1
+						_foundbrev=${_i}
 					fi
 				fi
 			fi
 			let _i+=1
 		done
 
-		if [ "${_with_error}" = "yes" ]; then
-			if [ ${_count} -eq 0 ]; then
+		if [ ${_countfull} -ne 1 -a "${_with_error}" = "yes" ]; then
+			if [ ${_countfull} -eq 0 -a ${_countbrev} -eq 0 ]; then
 				msgerr "'${_opt}': unrecognized option"
 
-			elif [ ${_count} -gt 1 ]; then
+			elif [ ${_countfull} -gt 1 ]; then
+				msgerr "'${_opt}': non unique option"
+				let _found=-1
+
+			elif [ ${_countfull} -eq 0 -a ${_countbrev} -gt 1 ]; then
 				msgerr "'${_opt}': non unique option"
 				let _found=-1
 			fi
 		fi
 	fi
 
-	typeset -i _ret=${_found}+1
+	typeset -i _ret=0
+	if [ ${_countfull} -eq 1 ]; then
+		let _ret=${_foundfull}+1
+
+	elif [ ${_countbrev} -eq 1 ]; then
+		let _ret=${_foundbrev}+1
+	fi
+
+	#echo "optGetOption: opt=$_opt, ret=$_ret" >&2
 	return ${_ret}
 }

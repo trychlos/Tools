@@ -19,15 +19,23 @@
 #
 # Synopsis:
 #
-# (I). 1. (opt.) whether a headers line is displayed
+#   Convert the CSV input stream to a TABULAR format ("à la SQL").
+#
+#   The input stream is expected to have one header line with column
+#   names.
+#
+# (I). 1. (opt.) whether the headers line is to be re-displayed on output
 #                yes|no
 #                defaults to "yes"
-#      2. (opt.) input csv separaror
+#      2. (opt.) whether to add a rows counter at the end
+#                yes|no
+#                defaults to "yes"
+#      3. (opt.) input csv separaror
 #                defaults to ';'
-#      3. (opt.) output tabular separaror
+#      4. (opt.) output tabular separaror
 #                defaults to '|'
 #
-# (O). -
+# (O). stdout
 #
 # pwi 2013- 7-25 creation
 # pwi 2017- 6-21 publish the release at last
@@ -35,26 +43,29 @@
 function csvToTabular
 {
 	typeset _headers="${1:-yes}"
-	typeset _csvsep="${2:-${ttp_csvsep:-;}}"
-	typeset _tabsep="${3:-${ttp_tabularsep:-|}}"
+	typeset _counter="${2:-yes}"
+	typeset _csvsep="${3:-${ttp_csvsep:-;}}"
+	typeset _tabsep="${4:-${ttp_tabularsep:-|}}"
 
 	perl -se '{
-		sub display_line {
+		use utf8;
+		sub output_dashes {
+			print "+";
+			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
+				$len = 2+$column[$j];
+				print "-" x $len;
+				print "+";
+			}
+			print "\n";
+		}
+		sub output_line {
 			$il = shift;
+			output_dashes() if $il <= 1;
 			print ${outsep};
 			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
 				printf( " %-*s %s", $column[$j], $lines[$il][$j], $outsep );
 			}
 			print "\n";
-			if( $il == 0 && $headers eq "yes" ){
-				print "+";
-				for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
-					$len = 2+$column[$j];
-					print "-" x $len;
-					print "+";
-				}
-				print "\n";
-			}
 		}
 		$nl = 0;
 		@column = ();
@@ -65,14 +76,26 @@ function csvToTabular
 			$lines[$nl] = [split /${insep}/];
 			$icol = 0;
 			foreach $col ( @{$lines[$nl]} ){
+				$col =~ s/^\s*//;
+				$col =~ s/\s*$//;
 				$len = length( $col );
+				# does not handle rightly extended chars, whether utf8 pragma or not
+				#printf STDERR "col='".${col}."', len=$len\n";
 				$column[$icol] = $len if !defined( $column[$icol] ) || $len > $column[$icol];
 				$icol += 1;
 			}
 			$nl += 1;
 		}
+	} END {
 		for( $i=0 ; $i<$nl ; ++$i ){
-			display_line( $i );
+			output_line( $i ) if $i > 0 || $with_headers eq "yes";
 		}
-	}' -- -headers="${_headers}" -insep="${_csvsep}" -outsep="${_tabsep}"
+		output_dashes();
+		printf( "%s%d displayed row(s)\n", $msg, $nl-1 ) if $with_counter eq "yes";
+	}' -- \
+		-with_headers="${_headers}" \
+		-with_counter="${_counter}" \
+		-insep="${_csvsep}" \
+		-outsep="${_tabsep}" \
+		-msg="$(msgoutPrefix)"
 }

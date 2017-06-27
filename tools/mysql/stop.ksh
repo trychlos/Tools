@@ -1,4 +1,4 @@
-# @(#) test the service
+# @(#) stop the service
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
@@ -33,12 +33,10 @@
 
 function verb_arg_define_opt {
 	echo "
-help					display this online help and gracefully exit
-verbose					verbose execution
-service=<identifier>	service identifier
-status					also check the intern DBMS status
-showtest				show the output of 'test' service lines
-showstatus				show the output of the intern DBMS status check
+help						display this online help and gracefully exit
+dummy						dummy execution
+verbose						verbose execution
+service=<identifier>		service identifier
 "
 }
 
@@ -54,10 +52,9 @@ showstatus				show the output of the intern DBMS status check
 
 # ---------------------------------------------------------------------
 # initialize specific default values
-
-function verb_arg_set_defaults {
-	opt_status_def="yes"
-}
+#
+#function verb_arg_set_defaults {
+#}
 
 # ---------------------------------------------------------------------
 # check arguments
@@ -104,7 +101,7 @@ function verb_main {
 
 		else
 			# does this command requires a specific account ?
-			typeset _user="$(confGetKey ttp_node_keys ${opt_service} 0=test 1)"
+			typeset _user="$(confGetKey ttp_node_keys ${opt_service} 0=stop 1)"
 			if [ ! -z "${_user}" -a "${_user}" != "${ttp_user}" ]; then
 				typeset _parms="$@"
 				execRemote "${TTP_NODE}" "${ttp_command} ${ttp_verb} ${_parms}" "${_user}"
@@ -114,34 +111,27 @@ function verb_main {
 				# we are on the right node with the right account
 				# setup the environment
 				mySetenv "${opt_service}"
-
-				# execute the test commands list
-				typeset _cmd
-				typeset _line
-				typeset _ftmptest="$(pathGetTempFile test)"
-				confGetKey ttp_node_keys ${opt_service} 0=test 2 | while read _cmd; do
-					msgVerbose "command: ${_cmd}"
-					eval "${_cmd}" 1>>"${_ftmptest}"
-					let _ret+=$?
-				done
-				if [ "${opt_showtest}" = "yes" ]; then
-					cat "${_ftmptest}" | while read _line; do echo " test: "${_line}""; done
-				fi
-
-				# if all is ok, also tries to connect to the dbms itself
-				if [ ${_ret} -eq 0 -a "${opt_status}" = "yes" ]; then
-					typeset _ftmpstatus="$(pathGetTempFile status)"
-					mysql.sh sql -service ${opt_service} -interactive 1>>"${_ftmpstatus}" <<!
-use mysql;
-show status;
-!
-					let _ret+=$?
-				fi
-				if [ "${opt_showstatus}" = "yes" ]; then
-					cat "${_ftmpstatus}" | while read _line; do echo " status: "${_line}""; done
-				fi
-				if [ ${_ret} -eq 0 ]; then
-					msgout "${opt_service}: service is up and running"
+	
+				# check that the instance is running
+				mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
+				if [ $? -ne 0 ]; then
+					msgout "${opt_service}: service is already stopped"
+	
+				# stop the instance, and re-check
+				else
+					typeset _cmd
+					confGetKey ttp_node_keys ${opt_service} 0=stop 2 | while read _cmd; do
+						msgVerbose "command: "${_cmd}""
+						execDummy "eval "${_cmd}" 1>/dev/null"
+						let _ret+=$?
+					done
+					mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
+					if [ $? -ne 0 ]; then
+						msgout "${opt_service}: service is successfully stopped"
+					else
+						msgerr "${opt_service}: unable to stop the service"
+						let _ret+=1
+					fi
 				fi
 			fi
 		fi

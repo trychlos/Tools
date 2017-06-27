@@ -50,9 +50,13 @@
 #   Cf. also cft.sh check when upgrading the CFT version
 #
 # (I): 1. service identifier
+#      2. whether to output a headers line (yes|no)
+#      3. whether to output a rows counter (yes|no)
+#    
 #      stdin: the output of CFTUTIl command
 #
 # (O): stdout: csv format
+#              defaults to add a rows counter (not counting the header line)
 #
 ##   pwieser@LEFP01ODYR05 ~$ . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
 ##   pwieser@LEFP01ODYR05 ~$ CFTUTIL listcat content=full
@@ -246,8 +250,10 @@
 function cftCatalogFullToCsv
 {
 	typeset _service="${1}"
+	typeset _headers="${2}"
+	typeset _counter="${3}"
 
 	cftCatalogFullParse | \
 		cftCatalogFullDatetime | \
-		cftCatalogFullRow "${_service}"
+		cftCatalogFullRow "${_service}" "${_headers}" "${_counter}"
 }

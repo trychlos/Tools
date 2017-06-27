@@ -1,4 +1,4 @@
-# @(#) test the service
+# @(#) list elements
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
@@ -33,12 +33,14 @@
 
 function verb_arg_define_opt {
 	echo "
-help					display this online help and gracefully exit
-verbose					verbose execution
-service=<identifier>	service identifier
-status					also check the intern DBMS status
-showtest				show the output of 'test' service lines
-showstatus				show the output of the intern DBMS status check
+help						display this online help and gracefully exit
+verbose						verbose execution
+service=<identifier>		service identifier
+database[=<name>]			list databases or tables
+system						also show system databases
+format={CSV|RAW|TABULAR}	output format (case insensitive)
+headers						whether to display headers
+counter						whether to display rows counter
 "
 }
 
@@ -56,7 +58,10 @@ showstatus				show the output of the intern DBMS status check
 # initialize specific default values
 
 function verb_arg_set_defaults {
-	opt_status_def="yes"
+	opt_system_def="yes"
+	opt_format_def="RAW"
+	opt_headers_def="yes"
+	opt_counter_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -74,7 +79,41 @@ function verb_arg_check {
 		let _ret+=1
 	fi
 
+	# the '--database' option should be specified, either an argument or not
+	if [ "${opt_database_set}" = "no" ]; then
+		msgerr "'--database[=<name>]' option is expected, has not been found"
+		let _ret+=1
+	fi
+
+	# the '--system' is only relevant when listing the databases
+	if [ "${opt_database_set}" = "yes" -a ! -z "${opt_database}" -a "${opt_system_set}" = "yes" ]; then
+		msgerr "'--[no]system' is only relevant when listing databases, ignored"
+	fi
+
+	# check output format
+	disp_format="$(formatCheck "${opt_format}")"
+	let _ret+=$?
+
 	return ${_ret}
+}
+
+# ---------------------------------------------------------------------
+# filter system databases if asked for
+
+function f_filter_systemdb {
+	if [ "${opt_system}" = "yes" ]; then
+		cat -
+	else
+		#grep -vwE 'information_schema|[^\[]mysql|performance_schema|test[^]]'
+		# shouldn't filter "[mysql.sh test] " prefix,
+		#  nor "mysql.sh test " command
+		awk -v headers=${opt_headers} -v prefix="$(msgoutPrefix)" '
+			BEGIN { count=0 }
+			/[[:digit:]] displayed row/ { next }
+			/^\[|^+/ { print; next }
+			!/information_schema|mysql|performance_schema|test/ { print; count+=1; next }
+			END { printf( "%s%d displayed row(s)\n", prefix, match( headers, "yes" ) ? count-1 : count ) }'
+	fi
 }
 
 # ---------------------------------------------------------------------
@@ -103,46 +142,28 @@ function verb_main {
 			let _ret+=1
 
 		else
-			# does this command requires a specific account ?
-			typeset _user="$(confGetKey ttp_node_keys ${opt_service} 0=test 1)"
-			if [ ! -z "${_user}" -a "${_user}" != "${ttp_user}" ]; then
-				typeset _parms="$@"
-				execRemote "${TTP_NODE}" "${ttp_command} ${ttp_verb} ${_parms}" "${_user}"
-				let _ret+=$?
+			typeset _headers="--headers"
+			[ "${opt_headers}" = "no" ] && _headers="--noheaders"
+			typeset _counter="--counter"
+			[ "${opt_counter}" = "no" ] && _counter="--nocounter"
 
+			# if no value is provided to the --database option,
+			#  then list databases
+			if [ -z "${opt_database}" ]; then
+				mysql.sh sql \
+					-service ${opt_service} \
+					-command "show databases" \
+					-format ${opt_format} \
+					${_headers} ${_counter} | f_filter_systemdb
+	
+			# if a database is specified, then list tables
 			else
-				# we are on the right node with the right account
-				# setup the environment
-				mySetenv "${opt_service}"
-
-				# execute the test commands list
-				typeset _cmd
-				typeset _line
-				typeset _ftmptest="$(pathGetTempFile test)"
-				confGetKey ttp_node_keys ${opt_service} 0=test 2 | while read _cmd; do
-					msgVerbose "command: ${_cmd}"
-					eval "${_cmd}" 1>>"${_ftmptest}"
-					let _ret+=$?
-				done
-				if [ "${opt_showtest}" = "yes" ]; then
-					cat "${_ftmptest}" | while read _line; do echo " test: "${_line}""; done
-				fi
-
-				# if all is ok, also tries to connect to the dbms itself
-				if [ ${_ret} -eq 0 -a "${opt_status}" = "yes" ]; then
-					typeset _ftmpstatus="$(pathGetTempFile status)"
-					mysql.sh sql -service ${opt_service} -interactive 1>>"${_ftmpstatus}" <<!
-use mysql;
-show status;
-!
-					let _ret+=$?
-				fi
-				if [ "${opt_showstatus}" = "yes" ]; then
-					cat "${_ftmpstatus}" | while read _line; do echo " status: "${_line}""; done
-				fi
-				if [ ${_ret} -eq 0 ]; then
-					msgout "${opt_service}: service is up and running"
-				fi
+				mysql.sh sql \
+					-service ${opt_service} \
+					-command "use ${opt_database}; show tables" \
+					-notest \
+					-format ${opt_format} \
+					${_headers} ${_counter}
 			fi
 		fi
 	fi

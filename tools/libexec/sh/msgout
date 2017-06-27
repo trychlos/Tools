@@ -35,6 +35,7 @@
 
 function msgout
 {
+	#set -x
 	typeset _msg="${1}"
 	typeset _prefix="${2}"
 	typeset _sufix="${3}"

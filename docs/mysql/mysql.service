@@ -14,6 +14,7 @@
      setenv
      rootdir
    Specific macros
+   Passwords file
 
 -----------------------------------------------------------------------
  Concepts
@@ -61,12 +62,14 @@
    service.
    If an account is specified in the third field, then the command-list
    must be executed under this <account> credentials.
+   Several 'start' lines may be defined, and will be executed in sequence.
 
    stop
    ----
    'stop' defines a command-list to be executed to stop the service.
    If an account is specified in the third field, then the command-list
    must be executed under this <account> credentials.
+   Several 'stop' lines may be defined, and will be executed in sequence.
 
    test
    ----
@@ -74,12 +77,13 @@
    service is correctly running.
    If an account is specified in the third field, then the command-list
    must be executed under this <account> credentials.
+   Several 'test' lines may be defined, and will be executed in sequence.
 
    setenv
    ------
    'setenv' defines a command to be executed in the current environment
    of each mysql.sh verb.
-   Several 'setenv' lines may be defined.
+   Several 'setenv' lines may be defined, and will be executed in sequence.
 
    rootdir
    -------
@@ -95,6 +99,18 @@
  ===============
 
  none
+
+-----------------------------------------------------------------------
+ Passwords file
+ ==============
+
+ A password file may be needed (e.g. for sql.sh verb).
+ It must be stored in TTPROOT/etc/private/<service>.ini.
+ There is one passwords file per service, with following format:
+
+   <environment> : <account> : <password>
+
+ This file should be readable by all users of The Tools Project.
 
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th

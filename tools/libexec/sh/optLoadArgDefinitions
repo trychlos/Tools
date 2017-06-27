@@ -138,14 +138,9 @@ function optLoadArgDefinitions
 				if [ "${_isbool}" = "yes" ]; then
 					ttp_optargs_key[${_copt}]="${_arg}"
 				else
-					# this syntax is ok for Linux, but not for Aix
-					#typeset _key="$(echo "${_arg}" | sed -e 's#^\([^=[]\+\)\(.*$\)#\1#')"
-					#typeset _desc="$(echo "${_arg}" | sed -e 's#^\([^=[]\+\)\(.*$\)#\2#')"
-					typeset _key="$(echo "${_arg}" | sed -e 's#^\([^=[]*\)\(.*$\)#\1#')"
-					typeset _desc="$(echo "${_arg}" | sed -e 's#^\([^=[]*\)\(.*$\)#\2#')"
-					#echo "_arg='${_arg}'"
-					#echo "_key='${_key}'"
-					#echo "_desc='${_desc}'"
+					typeset _key="$(echo "${_arg}" | sed -e 's#[=[].*$##')"
+					typeset _desc="$(echo "${_arg}" | sed -e 's#^[^=[]*\(.*\)$#\1#')"
+					#echo "optLoadArgDefinitions: arg='${_arg}', key='${_key}', desc='${_desc}'" >&2
 					ttp_optargs_key[${_copt}]="${_key}"
 					if [ "${_desc:0:1}" = "[" -a "${_desc:${#_desc}-1}" = "]" ]; then
 						ttp_optargs_dsc[${_copt}]="${_desc:1:${#_desc}-2}"

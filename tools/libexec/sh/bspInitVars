@@ -52,6 +52,9 @@ function bspInitVars
 	# top subdirectory of the auxiliary functions
 	ttp_execsubdir="libexec"
 
+	# etc-subdirectory which contains the passwords
+	ttp_privsubdir="${ttp_etcsubdir}/private"
+
 	# top subdirectory of the tools logs
 	ttp_toolslogsubdir="tools"
 

@@ -33,10 +33,10 @@
 
 function verb_arg_define_opt {
 	echo "
-help							display this online help and gracefully exit
-dummy							dummy execution
-verbose							verbose execution
-service=<mnemo>					service identifier
+help						display this online help and gracefully exit
+dummy						dummy execution
+verbose						verbose execution
+service=<identifier>		service identifier
 "
 }
 
@@ -65,25 +65,11 @@ function verb_arg_check {
 	#set -x
 	typeset -i _ret=0
 
-	# the service mnemonic is mandatory
-	if [ -s "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, was not found"
+	# the service identifier is mandatory
+	if [ -z "${opt_service}" ]; then
+		msgerr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# start the instance
-
-function f_start_instance {
-	#set -x
-	typeset -i _ret=0
-
-	typeset _label="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
-	msgout "starting ${_label}..." "" " \b"
-	msgout "" " "
 
 	return ${_ret}
 }
@@ -127,14 +113,25 @@ function verb_main {
 				mySetenv "${opt_service}"
 	
 				# check that the instance is not running
-				mysql.sh test -service "${opt_service}" -instance 1>/dev/null 2>&1
+				mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
 				if [ $? -eq 0 ]; then
-					msgout "${opt_service}: DBMS instance is already running"
+					msgout "${opt_service}: service is already up and running"
 	
-				# starting the instance with the required mode
+				# start the instance, and re-check
 				else
-					f_start_instance
-					let _ret+=$?
+					typeset _cmd
+					confGetKey ttp_node_keys ${opt_service} 0=start 2 | while read _cmd; do
+						msgVerbose "command: ${_cmd}"
+						execDummy "eval "${_cmd}" 1>/dev/null"
+						let _ret+=$?
+					done
+					mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
+					if [ $? -eq 0 ]; then
+						msgout "${opt_service}: service is successfully started"
+					else
+						msgerr "${opt_service}: unable to start the service"
+						let _ret+=1
+					fi
 				fi
 			fi
 		fi

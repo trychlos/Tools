@@ -24,10 +24,10 @@
 
  The service is defined as:
 
-   CFT	: service	: cft	: CFT Monitor
-   CFT	: setenv	: . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
-   CFT	: setenv	: export CFTDOC=/home/pierre/eclipse/Tools/v2/doc/cft/cft-2.7
-   CFT	: listcatf	: cat ${CFTDOC}/cftutil_listcat_full
+   CFT	: service		: cft	: CFT Monitor
+   CFT	: setenv		: . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
+   CFT	: setenv		: export CFTDOC=/home/pierre/eclipse/Tools/v2/doc/cft/cft-2.7
+   CFT	: listcatfull	: cat ${CFTDOC}/cftutil_listcat_full
 
  This service must be started locally on the server, with the right
  'cft' account.
@@ -56,16 +56,17 @@
    of each cft.sh verb.
    Several 'setenv' lines may be defined.
 
-   listcatf
-   --------
-   'listcatf' is used in the development environment where we do not
-   have a real running CFT monitor; it substitutes itself to the
-   standard 'CFTUTIL LISTCAT CONTENT=FULL' command.
-   This command may be used in conjonction with 'setenv' line in order
-   to address the CFTDOC path.
-   If this line is not found (which should be the case in a 'real'
-   environment, then the standard 'CFTUTIL LISTCAT CONTENT=FULL'
-   command is run instead.
+   listcatfull
+   -----------
+   Replacement for the "CFTUTIL listcat content=full" command.
+   To be used in development environments where we do no have a running
+   CT monitor.
+
+   listcatbrief
+   ------------
+   Replacement for the "CFTUTIL listcat content=brief" command.
+   To be used in development environments where we do no have a running
+   CT monitor.
 
 -----------------------------------------------------------------------
  Specific macros

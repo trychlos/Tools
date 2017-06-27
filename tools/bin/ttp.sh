@@ -47,7 +47,13 @@
 #   - we have to pre-load the function in a sub-environment.
 
 #set -x
+#echo "ttp.sh: 0=$0 #=$# *=$*" >&2
 
-[ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] \
-	&& . ${TTP_SHDIR%/*}/bootstrap/sh_switch "$(which ttp.sh 2>/dev/null)" "${@}" \
-	|| ttpf_main "${0}" "${@}"
+# the only allowed in-process invocation is the ". ttp.sh switch" command
+# other in-process invocations may fall in error if FPATH is not honored
+#  (in bash for example)
+if [ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ]; then
+	[ "${1}" = "switch" ] && { . ${TTP_SHDIR%/*}/bootstrap/sh_switch "$(which ttp.sh 2>/dev/null)" "${@}"; return; }
+fi
+
+ttpf_main "${0}" "${@}"

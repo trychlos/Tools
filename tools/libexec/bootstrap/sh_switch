@@ -19,19 +19,30 @@
 #
 # Synopsis:
 #
+#   This function executes the ". ttp.sh switch" command in a korn
+#   sub-shell. It get its result from the output of the script, output
+#   itself provided by the bspSwitch function.
+#
+#   The bspSwitch function:
+#
 #   This function relies on TTP_SHDIR environment variable.
 #
 # pwi 2013- 6-11 creation
 # pwi 2015- 7- 2 update to trychlos.pwi
 # pwi 2017- 6-21 publish the release at last 
 
-#_node="$(for _f in ${TTP_SHDIR}/*; do . "${_f}"; done; ttpf_main "$@" | awk '/^found:/ { print $2 }')"
-_node="$(NOTTP=1 ksh $* | awk '/sucessfully/ { print $NF }')"
+#set -x
+_ret=0
+_node="$(NOTTP=1 ksh $* | awk '/^success: / { print $NF }')"
 
-if [ ! -z "${_node}" ]; then
+if [ -z "${_node}" ]; then
+	_ret=1
+else
 	. "${TTP_SHDIR}/bspSwitch"
-	bspSwitch "${_node}"
+	bspSwitch "${_node}" "sh"
+	_ret=$?
 	unset bspSwitch
 fi
 
 unset _node
+return ${_ret}

@@ -53,6 +53,8 @@ logs						display log files definitions
 account						display accounting files definitions
 catalog[=BRIEF|FULL]		display catalog content (case insensitive)
 format={CSV|RAW|TABULAR}	output format (case insensitive)
+headers						whether to display headers
+counter						whether to display rows counter
 "
 }
 
@@ -71,7 +73,9 @@ format={CSV|RAW|TABULAR}	output format (case insensitive)
 
 function verb_arg_set_defaults {
 	opt_catalog_def="BRIEF"
-	opt_format_def="TABULAR"
+	opt_format_def="RAW"
+	opt_headers_def="yes"
+	opt_counter_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -114,22 +118,20 @@ function verb_arg_check {
 		fi
 	fi
 
-	typeset _cont
-	for _cont in $(echo "${opt_catalog}" | strUpper); do
-		case "${_cont}" in
-			B|BR|BRI|BRIE|BRIEF)
-				disp_catalog="BRIEF"
-				;;
-			F|FU|FUL|FULL)
-				disp_catalog="FULL"
-				;;
-			*)
-				msgerr "'--catalog' option value must be 'BRIEF' or 'FULL', '${opt_catalog}' found"
-				let _ret+=1
-		esac
-	done
+	typeset _cont="$(echo "${opt_catalog}" | strUpper)"
+	case "${_cont}" in
+		B|BR|BRI|BRIE|BRIEF)
+			disp_catalog="BRIEF"
+			;;
+		F|FU|FUL|FULL)
+			disp_catalog="FULL"
+			;;
+		*)
+			msgerr "'--catalog' option value must be 'BRIEF' or 'FULL', '${opt_catalog}' found"
+			let _ret+=1
+	esac
 
-	# set output format
+	# check output format
 	disp_format="$(formatCheck "${opt_format}")"
 	let _ret+=$?
 
@@ -141,33 +143,57 @@ function verb_arg_check {
 #  without any formatting
 
 function f_listcat {
-	typeset _cmd="$(confGetKey ttp_node_keys "${opt_service}" 0=listcatf 1)"
-	[ -z "${_cmd}" ] && _cmd="CFTUTIL LISTCAT CONTENT=${disp_catalog}"
+	#set -x
+	typeset _cmd=""
+	typeset _ret=0
+	
+	which CFTUTIL 1>/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		_cmd="CFTUTIL LISTCAT CONTENT=${disp_catalog}"
 
-	eval "${_cmd}"
+	elif [ "${disp_catalog}" = "BRIEF" ]; then
+		_cmd="$(confGetKey ttp_node_keys "${opt_service}" 0=listcatbrief 1)"
+		[ -z "${_cmd}" ] \
+			&& { msgerr "CFTUTIL: command not found, and no 'listcatbrief' fallback"; let _ret=1; }
+
+	elif [ "${disp_catalog}" = "FULL" ]; then
+		_cmd="$(confGetKey ttp_node_keys "${opt_service}" 0=listcatfull 1)"
+		[ -z "${_cmd}" ] \
+			&& { msgerr "CFTUTIL: command not found, and no 'listcatfull' fallback"; let _ret=1; }
+
+	else
+		msgerr "${disp_catalog}: unknown display catalog option"
+		let _ret+=1
+	fi
+
+	[ ${_ret} -eq 0 ] && { eval "${_cmd}"; let _ret=$?; }
+	#[ ${_ret} -eq 0 ] && { eval "${_cmd}"; }
+
+	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
 # modify the display format
 
-function f_listcat_output
-{
+function f_listcat_output {
+	#set -x
+
 	if [ "${disp_format}" = "CSV" ]; then
-		cftCatalogFullToCsv "${opt_service}"
+		cftCatalogFullToCsv "${opt_service}" "${opt_headers}" "${opt_counter}"
 
 	elif [ "${disp_format}" = "RAW" ]; then
 		cat -
 
 	elif [ "${disp_format}" = "TABULAR" ]; then
-		typeset _fcount="$(pathGetTempFile count)"
-		cftCatalogFullToCsv "${opt_service}" | tee ${_fcount} | grep -avE '^\[cft.*displayed rows$' | csvToTabular
-		grep -axE '^\[cft.*displayed rows$' ${_fcount}
+		cftCatalogFullToCsv "${opt_service}" "yes" "no" \
+			| csvToTabular "${opt_headers}" "${opt_counter}"
 	fi
 }
 
 # ---------------------------------------------------------------------
 
 function verb_main {
+	#set -x
 	typeset -i _ret=0
 
 	# check which node hosts the required service
@@ -219,20 +245,14 @@ function verb_main {
 		fi
 
 		# default for listing catalog is raw (unformatted) output
-		# '--sql' option outputs as a SQL-like table
-		# '--metrics' option outputs as a semi-comma ';' separated list
+		# '--csv' option outputs a a semi-comma ';' separated list
+		# '--tabular' option outputs a tabular (SQL-like) display
+		#set -o pipefail
 		if [ "${opt_catalog_set}" = "yes" ]; then
-			f_listcat | f_listcat_output
-			#f_listcat | formatOutput "${disp_format}" "${opt_headers}"
-			#if [ "${opt_catalog}" = "full" ]; then
-			#	if [ "${opt_format}" = "raw" ]; then
-			#		f_listcat
-			#	else
-			#		f_listcat | cftCatalogFullTabular "${opt_service}"
-			#	fi
-			#else
-			#	f_listcat
-			#fi
+			typeset _ftemp="$(pathGetTempFile catalog)"
+			f_listcat >"${_ftemp}"
+			let _ret+=$?
+			[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_listcat_output
 			let _ret+=$?
 		fi
 	fi
