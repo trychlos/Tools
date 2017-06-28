@@ -17,3 +17,26 @@
 #
 # Authors:
 #   Pierre Wieser <pwieser@trychlos.org>
+
+toolsdir = $(exec_prefix)/tools
+
+# despite the '-type f', we also get the subdirectories
+FILES = $(patsubst $(srcdir)/%,%,$(shell find $(srcdir) -type f -name 'Makefile.*' -prune -o -print))
+
+install-data-hook:
+	@let -i _count=0; \
+	for f in $(FILES); do \
+		if test -d $(srcdir)/$$f; then continue; fi; \
+		d=$${f%/*}; \
+		if test "$$d" = "$$f"; then d=""; fi; \
+		b=$${f##*/}; \
+		if test "$$b" = "tools"; then continue; fi; \
+		if ! test -d $(DESTDIR)$(toolsdir)/$$d; then $(MKDIR_P) -m 0775 -v $(DESTDIR)$(toolsdir)/$$d; fi; \
+		$(INSTALL) -m 0664 $(srcdir)/$$f $(DESTDIR)$(toolsdir)/$$d/$$b; \
+		let _count+=1; \
+	done; \
+	chmod 0775 $(DESTDIR)$(toolsdir)/bin/*; \
+	echo "[Tools/tools] $$_count installed files"
+
+uninstall-local:
+	rm -fr $(DESTDIR)$(toolsdir)

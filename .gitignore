@@ -1,3 +1,6 @@
 .project
+_build/
+_install/
 aclocal.m4
 autom4te.cache/
+run-configure.sh

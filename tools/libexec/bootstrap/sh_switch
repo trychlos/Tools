@@ -39,7 +39,7 @@ if [ -z "${_node}" ]; then
 	_ret=1
 else
 	. "${TTP_SHDIR}/bspSwitch"
-	bspSwitch "${_node}" "sh"
+	bspSwitch "${_node}"
 	_ret=$?
 	unset bspSwitch
 fi

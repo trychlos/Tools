@@ -92,13 +92,14 @@ function verb_arg_check {
 }
 
 # ---------------------------------------------------------------------
+# This verb is executed from bootstrap/sh_switch script
+#  which expects the node to be printed on stdout
 
 function verb_main {
 	#set -x
 	typeset -i _ret=0
-
-	# make sure the required target node exists here
 	typeset _node=""
+
 	if [ "${opt_default}" = "yes" ]; then
 		_node="$(bspNodeFindCandidate)"
 		if [ -z "${_node}" ]; then
@@ -114,8 +115,7 @@ function verb_main {
 		fi
 	fi
 
-	bspSwitch "${_node}" "${ttp_verb}"
-	let _ret=$?
+	echo "success: ${_node}"
 
 	return ${_ret}
 }

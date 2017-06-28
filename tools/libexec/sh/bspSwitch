@@ -20,8 +20,6 @@
 # Synopsis:
 #
 # (I): 1. the node to be set
-#      2. whether we are run from 'switch' verb (switch)
-#                         or from 'sh_switch' function (something_other)
 #
 # (O): -
 #
@@ -32,15 +30,11 @@
 function bspSwitch
 {
 	typeset _node="${1}"
-	typeset _from="${2}"
 
 	[ -z "${_node}" ] \
 		&& { echo "[ttp.sh switch] target execution node is unset" >&2; return 1; }
 
-	if [ "${_from}" = "switch" ]; then
-		echo "success: ${_node}"
-
-	elif [ "${_node}" = "${TTP_NODE}" ]; then
+	if [ "${_node}" = "${TTP_NODE}" ]; then
 			echo "[ttp.sh switch] execution node was already set to ${_node}, unchanged"
 	else
 		export TTP_NODE="${_node}"
