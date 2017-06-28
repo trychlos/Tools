@@ -42,9 +42,9 @@ function scriptUsage
 {
 	#set -x
 
-	typeset -i _increm=1
-	scriptDetail ${ttp_command_path} &&
-	scriptDetail ${ttp_verb_path} ${_increm} "no" "yes"
+	typeset -i _increm=3
+	scriptDetail ${ttp_command_path} 0 &&
+	scriptDetail ${ttp_verb_path} 2 "no" "yes"
 	[ $? -gt 0 ] && return 1
 
 	# first loop over all optional/positional arguments to compute the
@@ -160,7 +160,7 @@ function scriptUsage
 	fi
 
 	# if any, display a post-help message (marked as '# @(@)'
-	let _increm+=1
+	let _increm-=2
 	scriptDetailEnd "${ttp_verb_path}" "${_increm}"
 
 	return $?

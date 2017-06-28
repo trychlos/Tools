@@ -102,6 +102,8 @@ function verb_arg_check {
 	# '--system' is only relevant when dumping all databases
 	if [ "${opt_system_set}" = "yes" -a "${opt_database}" != "ALL" ]; then
 		msgwarn "'--[no]system' option is not relevant when dumping a specified database, ignored"
+		unset opt_system
+		opt_system_set="no"
 	fi
 
 	# the output file is mandatory

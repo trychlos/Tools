@@ -22,8 +22,8 @@
 #   The current running environment is not expected to be guessed, but
 #   should be read from the node configuration file.
 #
-# (I): 1. (opt.) pathname of a node's configuration file
-#
+# (I): 1. (opt.) absolute pathname of a node's configuration file
+#                or node name
 #                Defaults is to search for in the ttp_node_keys
 #                array which holds the configuration for the current
 #                node.
@@ -40,16 +40,28 @@ function nodeGetEnvironment
 	typeset _conf="${1}"
 
 	# if a configuration file is specified, then search for the
-	# environment in it
+	#  environment in it
 	if [ ! -z "${_conf}" ]; then
-		cat "${_conf}" 2>/dev/null | tabExtract "" "2=environment" 3
-		return
-	fi
+		if [ "${_conf:0:1}" = "/" ]; then
+			cat "${_conf}" 2>/dev/null | tabExtract "" "2=environment" 3
+
+		# if this is not an absolute path, then we consider that this is a
+		#  node name
+		else
+			typeset _file="$(bspFind "${ttp_nodesubdir}/${_conf}.ini")"
+			if [ -r "${_file}" ]; then
+				nodeGetEnvironment "${_file}"
+			else
+				msgerr "${_node}: node configuration file not found"
+				let _ret+=1
+			fi
+		fi
 
 	# else we are searching for the current environment
-	if [ -z "${ttp_node_environment}" ]; then
+	elif [ -z "${ttp_node_environment}" ]; then
 		#confDumpKeys "ttp_node_keys" 1>&2
 		confGetKey "ttp_node_keys" "${TTP_NODE}" "0=environment" 1
+
 	else
 		echo "${ttp_node_environment}"
 	fi

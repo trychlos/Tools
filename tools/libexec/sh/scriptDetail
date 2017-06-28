@@ -19,12 +19,18 @@
 #
 # Synopsis:
 #
+#   Display either the first help line or the full help text of a script,
+#   either a command or a verb.
+#
 # (I): 1. script full pathname
-#      2. (opt) increment count (defaults to zero)
-#      3. (opt) whether to display the extension
-#               (yes/no, defaults to yes)
-#      4. (opt) whether to display other lines but first
-#               (yes/no, defaults to no)
+#      2. (opt) leading spaces count;
+#               defaults to zero
+#      3. (opt) whether to display the extension;
+#               yes/no;
+#               defaults to yes
+#      4. (opt) whether to display other lines but first;
+#               yes/no;
+#               defaults to no
 #
 # (O): -
 #
@@ -55,8 +61,8 @@ function scriptDetail
 	cat "${_script}" | perl -se '{
 		sub print_title( $ ) {
 			my $sufix = shift;
-			$decalage = $increment + ( $count ? 1 : 0 );
-			print "  " x $decalage;
+			#$decalage = $increment + ( $count ? 1 : 0 );
+			print " " x $increment;
 			if( $count ){
 				print " " x ( length( $title ) );
 			} else {

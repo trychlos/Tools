@@ -135,9 +135,13 @@ function verb_arg_check {
 	#  format is not 'RAW'
 	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
 		msgwarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		unset opt_headers
+		opt_headers_set="no"
 	fi
 	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
 		msgwarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		unset opt_counter
+		opt_counter_set="no"
 	fi
 
 	# check output format

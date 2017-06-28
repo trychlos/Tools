@@ -19,10 +19,13 @@
 #
 # Synopsis:
 #
+#   Display the list of verbs associated to a command.
+#
 # (I): 1. command full pathname
-#      2. (opt.) increment count (defaults to zero)
+#      2. (opt.) command leading spaces count;
+#                defaults to zero
 #      3. (opt.) the name of a variable which will hold the verbs count
-#      4. (opt.) whether to consider 'no verb' error
+#      4. (opt.) whether to consider 'no verb' error;
 #                defaults to 'yes'
 #
 # (O): -
@@ -40,17 +43,17 @@
 function scriptListVerbs
 {
 	#set -x
-	typeset _script="${1}"
+	typeset _command="${1}"
 	typeset -i _increment="${2:-0}"
 	typeset _name="${3}"
 	typeset _has_error="${4:-yes}"
 
 	typeset _dir
 	typeset _verbs=""
-	let _increment+=1
+	let _increment+=2
 	typeset -i _count=0
 
-	for _dir in $(scriptEnumDirs "${_script}"); do
+	for _dir in $(scriptEnumDirs "${_command}"); do
 		typeset _file
 		for _file in $(LANG=C \ls -1 "${_dir}"); do
 			case ":${_verbs}:" in
@@ -69,7 +72,7 @@ function scriptListVerbs
 	varSet ${_name} ${_count}
 
 	if [ ${_count} -eq 0 -a "${_has_error}" = "yes" ]; then
-		typeset _bname="${_script##*/}"
+		typeset _bname="${_command##*/}"
 		msgerr "no verb found for '${_bname}' command"
 		return 1
 	fi

@@ -42,10 +42,7 @@
 
 function tabExtract
 {
-	#set -x
-	#echo "$0" 1>&2
-	typeset _sep="${1}"
-	[ -z "${_sep}" ] && _sep=":"
+	typeset _sep="${1:-${ttp_sep}}"
 	typeset _searched="${2}"
 	typeset _desired="${3}"
 

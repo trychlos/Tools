@@ -39,9 +39,8 @@
 
 function tabSubstitute
 {
-	typeset _sep="${1}"
-	[ -z "${_sep}" ] && _sep=":"
+	typeset _sep="${1:-${ttp_sep}}"
 
-	tabSubstituteMacro "${_sep}" "@N" ""  "${TTP_NODE}" | \
+	tabSubstituteMacro "${_sep}" "@N" ""  "${ttp_node:-${TTP_NODE}}" | \
 	tabSubstituteMacro "${_sep}" "@S" "1" ""
 }

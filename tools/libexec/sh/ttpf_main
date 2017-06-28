@@ -70,6 +70,10 @@
 #   ttp_main_log          basename of the main log file;
 #                         defaults to 'main.log'
 #
+#   ttp_node              temporary node name during the code execution
+#                         is taken preferentially to TTP_NODE
+#                         (e.g. in tabSubstituteMacro)
+#
 #   ttp_node_conf         .ini configuration full pathname (mandatory);
 #                         e.g. 'TTPROOT/etc/nodes/mstintin.ini'
 #

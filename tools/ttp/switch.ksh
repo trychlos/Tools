@@ -3,9 +3,9 @@
 # @(@) This command is needed because The Tools Project supports the
 # @(@)  'logical machine' paradigm.
 # @(@) It has the unique particularity of having to be executed 'in-process'
-# @(@)  i.e. with the dot notation: ". ttp.sh switch --node <name>"
+# @(@)  i.e. with the dot notation: ". ttp.sh switch --node <name>".
 # @(@) It should be run from the user profile as:
-# @(@)  ". ttp.sh switch --default"
+# @(@)  ". ttp.sh switch --default".
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)

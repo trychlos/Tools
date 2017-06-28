@@ -1,6 +1,6 @@
 # @(#) test different sort of optional and positional arguments
 #
-# @(@) last, display a post-help block message
+# @(@) Last, display a post-help block message.
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)

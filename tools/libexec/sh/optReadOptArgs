@@ -74,6 +74,7 @@ function optReadOptArgs
 						#echo "optReadOptArgs: optGetOption" >&2
 						optGetOption ${_arg:2} "yes"
 						typeset -i _idx=$?
+						#echo "optReadOptArgs: arg=$_arg, idx=$_idx" >&2
 						if [ ${_idx} -eq 0 ]; then
 							let _ret+=1
 						else
@@ -82,13 +83,15 @@ function optReadOptArgs
 							eval $(echo "opt_"${_name}"_set=yes")
 							msgVerbose "setting opt_${_name}_set to 'yes'"
 							typeset _desc="${ttp_optargs_dsc[${_idx}]}"
+							#echo "optReadOptArgs: arg=$_arg name=$_name desc=$_desc" >&2
 
 							# this is a boolean option, so set its value to yes or no
 							if [ -z "${_desc}" ]; then
 								typeset _prefix="${_arg:2:2}"
-								[ "${_prefix}" = "no" ] && _val="no" || _val="yes"
+								[ "${_prefix}" = "no" -a "${_arg:4}" = "${_name:0:${#_arg}-4}" ] && _val="no" || _val="yes"
 								eval $(echo "opt_${_name}=\"${_val}\"")
 								msgVerbose "setting opt_${_name} to '${_val}'"
+								#echo "eval $(echo "opt_${_name}=\"${_val}\"")" >&2
 
 							# the option accepts/wants an argument
 							#  which is optional if enclosed between square brackets []
@@ -97,7 +100,6 @@ function optReadOptArgs
 							# - and there is no next argument on the command-line
 							#    or the next argument is an option (begins with '--')
 							else
-								#echo "optReadOptArgs: arg=$_arg name=$_name desc=$_desc" >&2
 								#let _ia=$(optReadOptArgValue ${_ia} ${_idx} "${_val}")
 								typeset -i _valset=0
 								if [ -z "${_val}" ]; then
