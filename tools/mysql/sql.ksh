@@ -189,7 +189,7 @@ function verb_main {
 				fi
 			fi
 			if [ ${_ret} -eq 0 ]; then
-				mySetenv "${opt_service}"
+				serviceSetenv "${opt_service}"
 				typeset _ftemp
 
 				# interactive connection to mysql client

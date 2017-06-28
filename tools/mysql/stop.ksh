@@ -110,7 +110,7 @@ function verb_main {
 			else
 				# we are on the right node with the right account
 				# setup the environment
-				mySetenv "${opt_service}"
+				serviceSetenv "${opt_service}"
 	
 				# check that the instance is running
 				mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1

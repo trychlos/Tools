@@ -113,7 +113,7 @@ function verb_main {
 			else
 				# we are on the right node with the right account
 				# setup the environment
-				mySetenv "${opt_service}"
+				serviceSetenv "${opt_service}"
 
 				# execute the test commands list
 				typeset _cmd
