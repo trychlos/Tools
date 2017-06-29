@@ -84,7 +84,7 @@ function execRemote
 
 	# if both target host and user are ok, then just execute the command
 	if [ "x${_host}" = "x${TTP_NODE}" -a "x${_user}" = "x${LOGNAME}" ];	then
-		msgout "execRemote '${2}' on ${TTP_NODE} (local execution)"
+		msgout "execRemote (local execution) ${_user}@${_host}: ${_command}"
 		eval ${_command}
 		_ret=$?
 		return ${_ret}
@@ -95,12 +95,9 @@ function execRemote
 
 	# not on the right host, or not with the right account
 	# we so have to ask for a remote execution
-	# if 'NOCODE' was specified, do not create the temp file which would
-	# host the return code
 	[ ${_nomsg} -eq 0 ] && msgout "execRemote ${_user}@${_host}: ${_command}"
 	#execRemote_ssh "${_host}" "$_input" "${_user}" "${_command}"
-	typeset _profile="$(userGetProfile ${_user})"
-	ssh ${_host} -q ${_input} -l ${_user} "{ . ./${_profile}; . ttp.sh switch -node ${_host}; }; eval ${_command}"
+	ssh ${_host} -q ${_input} -l ${_user} "{ . ./.ttp_remote ${_host}; }; eval ${_command}"
 	_ret=$?
 
 	return ${_ret}

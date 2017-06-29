@@ -38,8 +38,9 @@
 
 function msglog
 {
-	typeset _file="${ttp_main_log}"
-	[ -z "${2}" ] || _file="${2##*/}"
+	#set -x
+	typeset _file="${2##*/}"
+	[ -z "${_file}" ] && _file="${ttp_main_log:-main.log}"
 
 	[ -z "${ttp_logsroot}" ] && ttp_logsroot="$(pathGetLogsRoot)"
 

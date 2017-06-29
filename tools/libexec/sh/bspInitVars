@@ -19,7 +19,7 @@
 #
 # Synopsis:
 #
-#   Initialize some common internal variables 
+#   Initialize common internal variables. 
 #
 # BootstrappingProcess:
 #
@@ -51,6 +51,9 @@ function bspInitVars
 
 	# top subdirectory of the auxiliary functions
 	ttp_execsubdir="libexec"
+
+	# main log file of The Tools Project execution track
+	ttp_main_log="main.log"
 
 	# etc-subdirectory which contains the passwords
 	ttp_privsubdir="${ttp_etcsubdir}/private"

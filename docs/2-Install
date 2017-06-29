@@ -144,15 +144,27 @@
 
    Remote execution
    ----------------
-   When a command targets a service which is available on another node,
-   The Tools Project automatically ssh to the target node and
-   re-executes itself.
+   a) Ssh key
 
-   You have to install the required ssh public keys in all possible
-   target accounts/hosts in order these ssh's may be password-less.
+     When a command targets a service which is available on another
+     node, The Tools Project automatically ssh to the target node and
+     re-executes itself.
 
-   We suggest defining a single ssh key, shared among all users/hosts,
-   dedicated to this usage.
+     You have to install the required ssh public keys in all possible
+     target accounts/hosts in order these ssh's may be password-less.
+
+     We suggest defining a single ssh key, shared among all users/hosts,
+     dedicated to this usage.
+
+   b) Bootstrapping
+
+     While The Tools Project relies on an initialized user's environment,
+     ssh does not open a login shell when it executes a remote command
+     (i.e. does not initialize the user's environment).
+
+     The Tools Project provides a TTPROOT/libexec/bootstrap/sh_remote
+     script, which has to be adapted to the user's shell, and installed
+     in the user home directory with the '.ttp_remote' name.
 
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th

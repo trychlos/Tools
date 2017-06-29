@@ -162,21 +162,17 @@ function ttpf_main
 	[ -z "${NOTTP}" -a -z "${TTP_NODE}" ] \
 		&& { echo "[TTP] no current execution node, aborting" >&2; let ttp_errs+=1; return; }
 
-	# setup some global constants which are used in the Tools
-	ttp_main_log="main.log"
-	#ttp_passwords="${ttp_etcdir}/private/passwords"
+	# setup global constants which are used in the Tools
 	bspInitVars
 
 	# compute the ordered list of candidate TTPROOT trees from FPATH
 	ttp_roots="$(bspRootCompute)"
-	#echo "ttp_roots='${ttp_roots}'"
-	#ttp_roots='/home/pierre/data/eclipse/Tools/v2/tools'
+	#echo "ttp_roots='${ttp_roots}'" >&2
 
 	# loads the site-wide default configuration file into an array
 	typeset _req="${ttp_ttpsubdir}/defaults.ini"
 	typeset _file="$(bspFind "${_req}")"
-	[ -z "${_file}" ] \
-		|| confLoadKeys "ttp_default_keys" "${_file}"
+	[ -z "${_file}" ] || confLoadKeys "ttp_default_keys" "${_file}"
 
 	# load the machine configuration file into an in-memory array
 	#typeset -A ttp_node_keys
