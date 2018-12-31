@@ -225,16 +225,10 @@ function f_commands_csv {
 
 function f_nodes_all {
 	typeset -i _count=0
-	typeset _dir
-	typeset _ini
 	typeset _node
 	typeset _env
 	
-	bspRootEnum | while read _dir; do
-		find ${_dir}/${ttp_nodesubdir} -type f -name '*.ini' | while read _ini; do
-			echo ${_ini##*/} | sed -e 's|\.ini$||'
-		done
-	done | sort -u -k1,1 | while read _node; do
+	nodeEnum | while read _node; do
 		_env="$(nodeGetEnvironment "${_node}")"
 		echo "${_node}" "${_env}"
 		let _count+=1;
