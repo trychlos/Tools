@@ -117,7 +117,7 @@
 #
 # First argument is supposed to be the pathname of the calling script
 # (the command). If the calling script is addressed via the PATH
-# variable, the pathanme is a full pathname:
+# variable, the pathname is a full pathname:
 #  - Linux ksh 2008 (CentOS 5): ok
 #  - Linux ksh 2012 (Fedora 18): ok
 #  - Aix 6.1 ksh-88: ok
@@ -135,7 +135,8 @@
 # pwi 2013- 6-27 logicals .ini file are found in ttp_nodesdir
 # pwi 2013- 7- 5 configuration file is loaded in an in-memory array
 # pwi 2013- 7-29 review errors count and exit code management
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 5-21 fix typo
 
 function ttpf_main
 {
