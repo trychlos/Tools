@@ -160,7 +160,20 @@
 
   60 2013- 8- 3 review check of host and user based on oracle.sh start
 
-  61
+  61 2019- 5-24 /opt/trychlos.pwi/TTP/tools/bin/ttp.sh[59]: ttpf_main[257]: msglog[952]: /var/log/TTP/@N/201905//main.log: cannot create [Permission denied]
+                when connecting ansible@admin
+
+  62 2019- 8- 3 manage [ansible]srv-bind/srv_bind_update script
+                (and correlative purge)
+
+  63 2019- 8- 4 should have a ttp account (eg ttpa) and a ttp group (eg ttpg)
+     2021- 5-21 yes, but better should be ttp/ttp
+
+  64 2021- 5-21 @N macro is not expanded when creating log directories
+
+  65 2021- 5-23 get rid of TTP_SHDIR variable
+
+  66
 
 -----------------------------------------------------------------------
  DONE

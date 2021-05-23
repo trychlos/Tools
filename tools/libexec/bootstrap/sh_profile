@@ -19,14 +19,14 @@
 #
 # Synopsis:
 #
-#   This script is supposed to be sourced from inside a bash- or a
-#   korn-derived login shell profile:
+#   This shell function is expected to be sourced from inside a bash- or
+#   a korn-derived login shell profile:
 #
 #     # Initialize The Tools Project
 #     TTP=/opt/trychlos.pwi/Tools; . ${TTP}/libexec/bootstrap/sh_profile
 #
-#   Initializing PATH and FPATH variables requires an in-process
-#   execution. The needed functions have to be explicitely preloaded.
+#   Setting up PATH and FPATH variables requires an in-process execution.
+#   The required functions have to be explicitely preloaded.
 #   They have been grouped together in a single file to make this
 #   preload easyer.
 #

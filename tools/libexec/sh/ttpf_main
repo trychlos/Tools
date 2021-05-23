@@ -157,8 +157,8 @@ function ttpf_main
 		&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; let ttp_errs+=1; return; }
 
 	# when setting the initial execution node, there is not yet any TTP_NODE
-	#  in the user environment; the first command to be executed must be
-	#  ". ttp.sh switch -m DEFAULT"
+	#  in the user environment; the first command to be executed must be one of
+	#  ". ttp.sh switch --default" or ". ttp.sh switch --node <nodename>"
 	#  usually from the user profile
 	[ -z "${NOTTP}" -a -z "${TTP_NODE}" ] \
 		&& { echo "[TTP] no current execution node, aborting" >&2; let ttp_errs+=1; return; }

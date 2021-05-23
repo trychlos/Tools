@@ -80,8 +80,8 @@
    be chosen to not be in 'bin', 'etc' or 'libexec': one could not
    create the corresponding verb directory.
 
- Obviously, all users of The Tools Project must have read and execute
- permissions of all of each TTP trees.
+ Obviously, all users of The Tools Project must have read permissions of
+ all of each TTP trees, plus execute permission on bin/ subdirectories.
 
  It would may be a good idea to define a group and an account which
  would be the owner of each TTP trees, and to make sure all users of
@@ -94,44 +94,57 @@
    User environment
    ----------------
    In order to use The Tools Project, each user must initialize his/her
-   user environment.
- 
-   1. Mandatory: address the shell functions
+   own user environment.
 
-      The Tools Project is not self-addressable. You have to preset at
-      least the FPATH variable in the execution environment of your
-      running shell:
+   1. Mandatory: address each TTP tree you are using
 
-        FPATH=$FPATH:TTPROOT/libexec/sh
+      Rationale:
+         You are most probably at least making use of the standard Tools
+         Project tree.
+         But, because the standard TTP tree does not contain any valuable
+         configuration data, you may make use of a site-wide TTP configuration
+         tree.
+         Also, if you are a developer, you may find useful to address your
+         own TTP development tree.
 
-      If you are working with several versions of TTP, then each one
-      must be adressed in a consistant manner, the formers being
-      precedence on the laters.
+      Each TTP tree must be individually addressed.
+      Set a 'TTP' variable to point to the root of the TTP tree, and
+      source the '${TTP}/libexec/bootstrap/sh_profile' shell function.
 
-   2. Optional: address the commands
+      Ex:
+         TTP=/opt/trychlos.pwi/tools; . ${TTP}/libexec/bootstrap/sh_profile; unset TTP
 
-      Though this is not strictly required in order the TTP be
-      runnable, and it would be perfectly acceptable to address the
-      commands by their full filename, we strongly suggest to update
-      your PATH:
+      Note 1:
+         The 'TTP/libexec' path must be available.
+         If you don't have usage for it in your tree, you may safely symlink it
+         from the TTP standard tree.
 
-        PATH=PATH:TTPROOT/bin
+      Note 2:
+         Ordering is important here as The Tools Project applies 'first wins'
+         paradigm: when a named function or configuration file exists in two
+         differents TTP trees, the former takes precedence over the later.
 
-   3. Mandatory: define TTP_SHDIR variable
+   2. Mandatory: define TTP_SHDIR variable
 
       Because The Tools Project supports the 'logical machine' paradigm,
       there is some situations where it cannot rely on the FPATH
       variable.
-      A TTP_SHDIR must be defined to address (one of) the main shell
-      functions directory.
+      A TTP_SHDIR must be defined to address (one of) the main shell functions
+      directory.
 
-   4. Mandatory: define the initial execution node
+      Note 1:
+         The 'TTP_SHDIR' variable must address only one directory.
+         You probably want address the standard Tools Project tree here.
 
-      This is done by calling the ". ttp.sh switch --node <name>"
-      command.
+      Ex:
+         export TTP_SHDIR=/opt/TTP/libexec/sh
+
+   3. Mandatory: define the initial execution node
+
+      This is done by calling the '. ttp.sh switch --default' command.
 
    As a convenience, The Tools Project provides in the
-   libexec/bootstrap/ subdirectory some scripts which may be called
+   'libexec/bootstrap/' subdirectory some scripts which may be called
    from a user profile to make this initialization easyer:
 
      TTP=<dir>; . ${TTP}/libexec/bootstrap/sh_profile
@@ -144,7 +157,7 @@
 
    Remote execution
    ----------------
-   a) Ssh key
+   a) SSH key
 
      When a command targets a service which is available on another
      node, The Tools Project automatically ssh to the target node and
@@ -168,4 +181,4 @@
 
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th
-             Last updated on 2017, jun. 21st
+             Last updated on 2021, may 23rd
