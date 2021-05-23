@@ -18,6 +18,11 @@
 # along with The Tools Project; see the file COPYING. If not,
 # see <http://www.gnu.org/licenses/>.
 #
+# svn.sh specifics.
+#    Node configuration file
+#       The node configuration file manages the followins macros:
+#       - @R stands for the repository name.
+#
 # pwi 2012- 7-12 creation
 # pwi 2017- 6-21 publish the release at last 
 
