@@ -31,6 +31,7 @@
 #   has to be managed.
 #
 # pwi 2017- 6-22 creation
+# pwi 2021- 5-24 get rid of ttp_toolslogsubdir
 
 function bspInitVars
 {
@@ -57,9 +58,6 @@ function bspInitVars
 
 	# etc-subdirectory which contains the passwords
 	ttp_privsubdir="${ttp_etcsubdir}/private"
-
-	# top subdirectory of the tools logs
-	ttp_toolslogsubdir="tools"
 
 	# etc-subdirectory which contains nodes configuration files
 	ttp_nodesubdir="${ttp_etcsubdir}/nodes"

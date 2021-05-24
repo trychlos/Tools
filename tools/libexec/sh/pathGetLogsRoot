@@ -40,7 +40,8 @@
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
 # pwi 2013- 7- 5 search values in in-memory arrays
 # pwi 2013- 7-29 fix #50 logsdir should be eval-ed
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 5-24 get rid of ttp_toolslogsubdir
 
 function pathGetLogsRoot
 {
@@ -49,11 +50,11 @@ function pathGetLogsRoot
 
 	if [ -z "${ttp_logsroot}" ]; then
 
-		# search for a logsroot keyword in logical keys
+		# search for a logsroot keyword in node configuration keys
 		_logsroot="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=logsroot" 1)"
 
 		# if not found, then search in default keys
-		[ -z "${_logsroot}" ] && _logsroot="$(confGetKey ttp_default_keys logsroot "" 0)"
+		[ -z "${_logsroot}" ] && _logsroot="$(confGetKey "ttp_default_keys" "logsroot" "" 0)"
 
 		# fallback to hardcoded /tmp
 		[ -z "${_logsroot}" ] && _logsroot="/tmp"
@@ -74,6 +75,6 @@ function pathGetLogsRoot
 		fi
 	fi
 
-	mkdir -p "${_logsroot}/${ttp_toolslogsubdir}"
+	mkdir -p -m 0755 "${_logsroot}"
 	echo "${_logsroot}"
 }
