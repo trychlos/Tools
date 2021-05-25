@@ -25,48 +25,12 @@
                  the first ttpf_main argument is a full path
                  test for "ps -e -o cmd"
 
-   7 2013- 6-17 multi-lines help
-
-   8 2013- 6-24 v2/tools/libexec/cft/cftCatalogMetrics is obsolete and
-                to be deleted
-                $ find v2/tools/ -type f -exec grep cftCatalogMetrics {} \; -print
-                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
-                function cftCatalogMetrics
-                v2/tools/libexec/cft/cftCatalogMetrics
-                $
-
-   9 2013- 6-24 v2/tools/libexec/sh/strMetrics is to be obsoleted
-                (only used by sqloutMetrics which is also to be obsoleted)
-                $ find v2/tools/ -type f -exec grep strMetrics {} \; -print
-                			strMetrics | \
-                v2/tools/libexec/sh/sqloutMetrics
-                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
-                function strMetrics
-                v2/tools/libexec/sh/strMetrics
-                $
-
-  10 2013- 6-24 v2/tools/libexec/sh/sqloutMetrics is to be obsoleted
-                (only used by cft.sh list -catalog=full and this is bad)
-                $ find v2/tools/ -type f -exec grep sqloutMetrics {} \; -print
-                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
-                function sqloutMetrics
-                v2/tools/libexec/sh/sqloutMetrics
-                            sqloutMetrics cftCatalogFullSQL "full content of CFT catalog:"
-                v2/tools/cft/list.ksh
-                $
-
   12 2013- 6-24 filter cft.sh list --catalog=full to provide the same
                 output that old cftCatalogMetrics (currently in use at
                 LDE)
 
-  13 2013- 6-27 tabGetMachine should search only in the same environment
-                (unless another parameter is provided)
-
   18 2013- 6-27 Improve oracle.sh to start/stop/test the Enterprise
                 Manager
-
-  19 2013- 6-29 linux_scripts/svn-dump-repo.sh is obsoleted by
-                svn.sh dump <repo>
 
   20 2013- 6-29 oracle.sh sqlldr: '--show' option display error log
                 twice (but once if execution is ok)
@@ -76,13 +40,6 @@
                 progressively (on a rolling basis)
 
   22 2013- 6-29 oracle.sh sqlldr returns zero even if errors occur 
-
-  23 2013- 7- 1 check which environment variable(s) holds the username
-                Fedora-Gnome: LOGNAME, USER, USERNAME
-                CentOS 5:
-                CentOS 6:
-                Cygwin:
-                Aix 6:
 
   24 2013- 7- 1 analyze whether it would be more pertinent to have
                 a hierarchy like dbpuits/oracle11/ddl rather than
@@ -96,18 +53,17 @@
                 (ttp_pos_xxx and ttp_opt_xxx)
                 -> this is ok on linux ksh-93 20120801
 
-  29 2013- 7-10 verbClearTempFiles: have a function which allocates a
-                temp file name according to the same standard
-
   32 2013- 7-10 ttpf_main: have 'ttp_logical_keys' in a variable
+     2021- 5-24 ttp_logical_keys is still used in libexec/oracle/ functions
+                but its role has to be documented
 
   33 2013- 7-10 ttpf_main: have 'ttp_default_keys' in a variable
+     2021- 5-24 ttp_default_keys is still used in libexec/sh/ functions
+                but its role has to be documented
 
   35 2013- 7-15 have --with|without-option_s
      2013- 7-30 find a use case where the standard boolean option
                 doesn't fit well enough
-
-  37 2013- 7-25 move trychlos.org/ code to v2/tools
 
   38 2013- 7-25 ttp.sh option should also display the status of internal
                 array variables
@@ -130,10 +86,6 @@
                 and:
                 [ttp.sh list] -verbs -commands
                 though the first version seams better
-
-  52 2013- 7-30 ttp.sh list -verbs should it really requires -command ?
-
-  53 2013- 7-30 review catTo comment
 
   54 2013- 8- 1 oracle.sh: rename sqlldr verb to load
 
@@ -166,9 +118,6 @@
   62 2019- 8- 3 manage [ansible]srv-bind/srv_bind_update script
                 (and correlative purge)
 
-  63 2019- 8- 4 should have a ttp account (eg ttpa) and a ttp group (eg ttpg)
-     2021- 5-21 yes, but better should be ttp/ttp
-
   64 2021- 5-21 @N macro is not expanded when creating log directories
 
   65 2021- 5-23 get rid of TTP_SHDIR variable
@@ -193,8 +142,43 @@
                 column headings are not funny capitalized
      2013- 6-24 [rev. 3121] done
 
+   7 2013- 6-17 multi-lines help
+     2021- 5-24 done
+
+   8 2013- 6-24 v2/tools/libexec/cft/cftCatalogMetrics is obsolete and
+                to be deleted
+                $ find v2/tools/ -type f -exec grep cftCatalogMetrics {} \; -print
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function cftCatalogMetrics
+                v2/tools/libexec/cft/cftCatalogMetrics
+     2021- 5-24 obsolete - cancelled
+
+   9 2013- 6-24 v2/tools/libexec/sh/strMetrics is to be obsoleted
+                (only used by sqloutMetrics which is also to be obsoleted)
+                $ find v2/tools/ -type f -exec grep strMetrics {} \; -print
+                			strMetrics | \
+                v2/tools/libexec/sh/sqloutMetrics
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function strMetrics
+                v2/tools/libexec/sh/strMetrics
+     2021- 5-24 obsolete - cancelled
+
+  10 2013- 6-24 v2/tools/libexec/sh/sqloutMetrics is to be obsoleted
+                (only used by cft.sh list -catalog=full and this is bad)
+                $ find v2/tools/ -type f -exec grep sqloutMetrics {} \; -print
+                # $Id: TODO 3304 2013-10-31 22:16:01Z  $
+                function sqloutMetrics
+                v2/tools/libexec/sh/sqloutMetrics
+                            sqloutMetrics cftCatalogFullSQL "full content of CFT catalog:"
+                v2/tools/cft/list.ksh
+     2021- 5-24 obsolete - cancelled
+
   11 2013- 6-24 ttp.sh list --commands no more works
      2013- 6-25 [rev. 3124] done (removing IFS stuff)
+
+  13 2013- 6-27 tabGetMachine should search only in the same environment
+                (unless another parameter is provided)
+     2021- 5-24 done
 
   14 2013- 6-27 Improve svn.sh list to new standard tabular output format
                 updating svn.sh dump accordingly
@@ -212,6 +196,19 @@
   17 2013- 6-27 Improve svn.sh list to display the URL
      2013- 7-25 [rev. 3272] done
 
+  19 2013- 6-29 linux_scripts/svn-dump-repo.sh is obsoleted by
+                svn.sh dump <repo>
+     2021- 5-24 todo moved to ansible
+
+  23 2013- 7- 1 check which environment variable(s) holds the username
+                Fedora-Gnome: LOGNAME, USER, USERNAME
+                CentOS 5:
+                CentOS 6:
+                Cygwin:
+                Aix 6:
+     2021- 5-24 cancelled because this is a permanent todo for each managed
+                system
+
   27 2013- 7-10 ttpf_trap_int: add a flag whether to display the message
                 on keyboard interrupt
      2013- 7-30 [rev. 3292] won't fix
@@ -219,6 +216,10 @@
   28 2013- 7-10 ttpf_trap_exit: add a flag whether to display the message
                 if ttp_code non zero
      2013- 7-30 [rev. 3292] won't fix
+
+  29 2013- 7-10 verbClearTempFiles: have a function which allocates a
+                temp file name according to the same standard
+     2021- 5-24 obsolete - cancelled
 
   30 2013- 7-10 make use of msgVerbose
      2013- 7-10 [rev. 3254] done
@@ -240,6 +241,9 @@
      2013- 7-29 ttp_code: the exit code, should be 1 if error(s)
                 ttp_errs: error(s) count
      2013- 7-29 [rev. 3289] done
+
+  37 2013- 7-25 move trychlos.org/ code to v2/tools
+     2021- 5-24 obsolete - cancelled
 
   39 2013- 7-25 option with mandatory argument: no error message if the
                 argument is empty
@@ -284,6 +288,16 @@
   50 2013- 7-29 logsdir should be eval-ed
      2013- 7-29 [rev. 3286] done
 
+  52 2013- 7-30 ttp.sh list -verbs should it really requires -command ?
+     2021- 5-24 obsolete - cancelled
+
+  53 2013- 7-30 review catTo comment
+     2021- 5-24 obsolete - cancelled
+
+  63 2019- 8- 4 should have a ttp account (eg ttpa) and a ttp group (eg ttpg)
+     2021- 5-21 yes, but better should be ttp/ttp
+     2021- 5-24 moved to ansible
+
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th
-             Last updated on 2017, jun. 21st
+             Last updated on 2021, may. 24th

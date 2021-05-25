@@ -107,7 +107,25 @@
          Also, if you are a developer, you may find useful to address your
          own TTP development tree.
 
-      Each TTP tree must be individually addressed.
+      Each TTP tree must be individually addressed. The Tools Project itself
+      takes care of helping you in this task:
+
+      - drop in /etc/ttp.d (machine-wide) or in HOME/.ttp.d (user-wide)
+        a configuration file '*.conf' for each TTP tree to be addressed
+
+           Each configuration file should address one TTP tree though TTP itself
+           treats each non-comment-non-blank line as an individual path to a
+           TTP tree
+
+           TTP reads first machine-wide configuration, and last user-wide one,
+           appending each tree after the previous 
+
+           As an exception to the previous rule, the tree is prepended to the
+           previous if the specified path begins with a dash '-'
+
+      - at bootstrap time, source once any of the TTP/libexec/bootstrap/sh_bootstrap
+        shell function (resp. a csh_bootstrap depending of your login shell)   
+
       Set a 'TTP' variable to point to the root of the TTP tree, and
       source the '${TTP}/libexec/bootstrap/sh_profile' shell function.
 

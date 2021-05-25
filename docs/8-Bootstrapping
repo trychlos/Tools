@@ -1,0 +1,63 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/8-Bootstrapping
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Whats does it involve
+   When
+   How
+
+-----------------------------------------------------------------------
+ Whats does it involve
+ =====================
+
+ Bootstrapping The Tools Project is the mechanism which let the user make
+ use of the full capacity of the commands.
+
+ This mainly required to be able to address these commands and all
+ configuration files.
+
+ As detailed in the installation document, each TTP tree must be individually
+ addressed, in the required order. This is usually accomplished via the
+ libexec/bootstrap/sh_profile shell function.
+
+-----------------------------------------------------------------------
+ When
+ ====
+
+ Bootstrapping TTP is required in exactly three situations:
+
+ 1. when login to a machine (running a login shell)
+ 2. when switching the current execution node inside of the current login
+    shell
+ 3. when remotely executing a TTP command in another machine.
+
+ In all cases, the points to be addressed are:
+ - address the available and/or the needed TTP tree(s)
+ - activate as soon as possible the logging mechanisms as auditability is
+   one of the major strength and added value of The Tools Project
+
+-----------------------------------------------------------------------
+ How
+ ===
+
+ Login shell case
+
+    One can rely here on the usual login mechanisms, including the sourcing
+    of /etc/profile{,.d/*} and ~/.[bash_]profile
+
+ Execution node switch case
+
+    As logn as the login shell stays the same current, this is a no-case.
+
+ Remote execution case
+
+    Remote execution in TTP is ssh-driven. It so defaults to not source any
+    of the profile initialization files. This implies that the required
+    initialization has to be explicit if this case.
+
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2021, may 24th
