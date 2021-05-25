@@ -395,18 +395,17 @@ function f_services_all {
 
 	bspRootEnum | while read _dir; do
 		find ${_dir}/${ttp_nodesubdir} -type f -name '*.ini' | while read _ini; do
-			ttp_node="$(echo ${_ini##*/} | sed -e 's|\.ini$||')"
+			_node="$(echo ${_ini##*/} | sed -e 's|\.ini$||')"
 			cat "${_ini}" \
 				| bspTabStripComments "${ttp_sep}" \
 				| tabSubstitute "${ttp_sep}" \
 				| awk -F "${ttp_sep}" '{ print $1 }' \
 				| sort -u \
-				| grep -v "${ttp_node}" \
+				| grep -v "${_node}" \
 				| while read _service; do	
-					echo "${ttp_node} ${_service}"
+					echo "${_node} ${_service}"
 					let _count+=1
 				done
-			unset ttp_node
 		done
 	done | sort
 

@@ -24,7 +24,7 @@
 #         subdirectory levels;
 #         e.g. mynode.ini, or etc/ttp/logicals.re
 #
-# (O): stdout: full pathname of the best readable candidate
+# (O): stdout: full pathname of the first readable candidate
 #              (note that returned candidate may be empty after
 #               comments removing)
 #
@@ -38,7 +38,7 @@
 #   has to be managed.
 #
 # pwi 2013- 2-16 creation
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
 
 function bspFind
 {

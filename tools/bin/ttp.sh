@@ -19,11 +19,14 @@
 # see <http://www.gnu.org/licenses/>.
 #
 # pwi 2012- 7-12 creation
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 5-25 get rid of TTP_SHDIR variable
 
-# In order to be able to honor the 'logical machine' paradigm, we have
-#  to manage the in-process command ". ttp.sh switch --node <name>".
-#  The run of this command depends of the TTP_SHDIR variable.
+# In order to be able to honor the 'logical machine' paradigm (which
+# let the administrator have several execution nodes in the same machine),
+# we have to manage the in-process command ". ttp.sh switch --node <name>".
+# The run of this command depends of the FPATH variable having been
+# previously set.
 #
 # When run in-process, the '$0' first argument is not the 'ttp.sh'
 # command, but the running shell which is something like: '[-]<shell>'.
@@ -49,11 +52,12 @@
 #set -x
 #echo "ttp.sh: 0=$0 #=$# *=$*" >&2
 
-# the only allowed in-process invocation is the ". ttp.sh switch" command
-# other in-process invocations may fall in error if FPATH is not honored
-#  (in bash for example)
+# The only allowed in-process invocation is the ". ttp.sh switch" command.
+# Other in-process invocations may fall in error if FPATH is not honored
+# (ksh being the only known shell to be able to autoload its functions,
+#  typical sh-like shells, e.g. bash, would else fail) 
 if [ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ]; then
-	[ "${1}" = "switch" ] && { . ${TTP_SHDIR%/*}/bootstrap/sh_switch "$(which ttp.sh 2>/dev/null)" "${@}"; return; }
+	[ "${1}" = "switch" ] && { . $(echo "${FPATH}" | awk -F: '{ print $1 }')/../bootstrap/sh_switch "$(which ttp.sh 2>/dev/null)" "${@}"; return $?; }
 fi
 
 ttpf_main "${0}" "${@}"

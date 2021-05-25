@@ -104,11 +104,7 @@
   57 2013- 8- 1 review usage of tabxxx functions in order to obsolete
                 those which are no more needed
 
-  58 2013- 8- 3 ttp.sh fn confDumpKeys ttp_logical_keys doesn't display
-                anything
-
-  59 2013- 8- 3 ttp.sh fn confGetKey ttp_logical_keys doesn't display
-                anything
+  59 2013- 8- 3 ttp.sh fn confGetKey ttp_logical_keys doesn't display anything
 
   60 2013- 8- 3 review check of host and user based on oracle.sh start
 
@@ -118,11 +114,7 @@
   62 2019- 8- 3 manage [ansible]srv-bind/srv_bind_update script
                 (and correlative purge)
 
-  64 2021- 5-21 @N macro is not expanded when creating log directories
-
-  65 2021- 5-23 get rid of TTP_SHDIR variable
-
-  66
+  67
 
 -----------------------------------------------------------------------
  DONE
@@ -294,9 +286,24 @@
   53 2013- 7-30 review catTo comment
      2021- 5-24 obsolete - cancelled
 
+  58 2013- 8- 3 ttp.sh fn confDumpKeys ttp_logical_keys doesn't display anything
+     2021- 5-25 obsolete - cancelled
+
   63 2019- 8- 4 should have a ttp account (eg ttpa) and a ttp group (eg ttpg)
      2021- 5-21 yes, but better should be ttp/ttp
      2021- 5-24 moved to ansible
+
+  64 2021- 5-21 @N macro is not expanded when creating log directories
+     2021- 5-25 fixed
+
+  65 2021- 5-23 get rid of TTP_SHDIR variable
+     2021- 5-25 done
+
+  66 2021- 5-25 document usage of NOTTP variable
+     2021- 5-25 NOTTP is set during the initial node setup and let TTP 'know'
+                that we are currently searching for an initial execution node,
+                and run without having any current execution node.
+                This force the very first command to be ". ttp.sh switch ...".
 
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th

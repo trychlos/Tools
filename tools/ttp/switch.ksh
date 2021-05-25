@@ -37,7 +37,7 @@
 # gma 2004- 4-30 use bspNodeEnum function
 # fsl 2005- 3-11 fix bug when determining if a logical exists
 # pwi 2006-10-27 the tools become The Tools Project, released under GPL
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -116,6 +116,8 @@ function verb_main {
 	fi
 
 	echo "success: ${_node}"
+	TTP_NODE="${_node}"
+	msglog "${ttp_cmdline}"
 
 	return ${_ret}
 }

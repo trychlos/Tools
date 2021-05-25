@@ -51,10 +51,10 @@ function pathGetLogsRoot
 	if [ -z "${ttp_logsroot}" ]; then
 
 		# search for a logsroot keyword in node configuration keys
-		_logsroot="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=logsroot" 1)"
+		_logsroot="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=logsroot" 1 | tabSubstitute)"
 
 		# if not found, then search in default keys
-		[ -z "${_logsroot}" ] && _logsroot="$(confGetKey "ttp_default_keys" "logsroot" "" 0)"
+		[ -z "${_logsroot}" ] && _logsroot="$(confGetKey "ttp_default_keys" "logsroot" "" 0 | tabSubstitute)"
 
 		# fallback to hardcoded /tmp
 		[ -z "${_logsroot}" ] && _logsroot="/tmp"

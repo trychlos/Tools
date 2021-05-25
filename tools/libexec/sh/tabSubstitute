@@ -35,12 +35,13 @@
 # pwi 2001-12- 6 add field separator argument
 # pwi 2002- 6-22 remove shebang line
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 5-25 get rid of ttp_node
 
 function tabSubstitute
 {
 	typeset _sep="${1:-${ttp_sep}}"
 
-	tabSubstituteMacro "${_sep}" "@N" ""  "${ttp_node:-${TTP_NODE}}" | \
+	tabSubstituteMacro "${_sep}" "@N" ""  "${TTP_NODE}" | \
 	tabSubstituteMacro "${_sep}" "@S" "1" ""
 }

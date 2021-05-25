@@ -23,6 +23,8 @@
 #   Set the following variables, available in all other functions
 #   and verbs:
 #
+#   See also the output of 'ttp.sh list --variables'
+#
 #   ttp_arga              a copy of original command-line arguments as
 #                         an array where options have their double dash;
 #                         e.g. [--mnemo, TRYSMA, --command, show parameters, un file.csv]
@@ -48,6 +50,12 @@
 #   ttp_command_path      command full pathname
 #                         e.g. '/net/tools/bin/tools.sh'
 #
+#   ttp_csvsep            the separator character when outputing a CSV file
+#                         defaults to semi-comma ';'
+#
+#   ttp_default_keys      the keys which are loaded from the site-wide configuration
+#                         file
+#
 #   ttp_errs              errors count
 #
 #   ttp_etcsubdir         TTPROOT subdirectory where configuration files
@@ -58,10 +66,12 @@
 #                         are stored; 
 #                         defaults to 'libexec'
 #
+#   ttp_logical_keys
+#
 #   ttp_logicals_re       the end of the pathname to the configuration file
 #                         which defines the regular expression which identifies
 #                         the logical machines;
-#                         defaults to 'etc/ttp/logicals.re'
+#                         defaults to '<ttp_ttpsubdir>/logicals.re'
 #
 #   ttp_logsroot          the absolute path of the root of the TTP logs
 #                         directory;
@@ -70,39 +80,40 @@
 #   ttp_main_log          basename of the main log file;
 #                         defaults to 'main.log'
 #
-#   ttp_node              temporary node name during the code execution
-#                         is taken preferentially to TTP_NODE
-#                         (e.g. in tabSubstituteMacro)
-#
 #   ttp_node_conf         .ini configuration full pathname (mandatory);
 #                         e.g. 'TTPROOT/etc/nodes/mstintin.ini'
 #
 #   ttp_node_environment  environment string of the current execution node
 #                         read from node configuration file
 #
+#   ttp_node_keys         the keys which are loaded from the node configuration
+#                         file
+#
 #   ttp_nodesubdir        TTPROOT subdirectory where nodes configuration
 #                         files are expected to be found;
-#                         defaults to '<ttp_etcdir>/nodes'
+#                         defaults to '<ttp_etcsubdir>/nodes'
 #
 #   ttp_privsubdir        TTPROOT subdirectory which contains the passwords;
-#                         defaults to '<ttp_etcdir>/private'
+#                         defaults to '<ttp_etcsubdir>/private'
 #
 #   ttp_roots             colon-separated list of TTPROOT trees in a
 #                         decreasing order of precedence
 #                         e.g. '<HOME>/TTPDev:<TTPROOT_PROD>'
+#
+#   ttp_sep               the separator character in configuration files
+#                         defaults to semi-colon ':'
 #
 #   ttp_stamp             count of seconds since 1970-01-01 (epoch time)
 #                         at start of the execution;
 #                         used e.g. in pathGetTempFile to ensure the unicity
 #                         of the 'verb-pid-stamp-mnemo' sequence
 #
-#   ttp_toolslogsubdir    TTPROOT subdirectory where commands logs are to
-#                         be written;
-#                         defaults to 'tools'
+#   ttp_tabularsep        the separator character when outputing a tabular display
+#                         defaults to pipe '|'
 #
 #   ttp_ttpsubdir         TTPROOT subdirectory where global configuration
 #                         files are expected to be found;
-#                         defaults to '<ttp_etcdir>/ttp'
+#                         defaults to '<ttp_etcsubdir>/ttp'
 #
 #   ttp_usedargs          an array which let us mark the interpreted
 #                         command-line arguments
@@ -137,6 +148,7 @@
 # pwi 2013- 7-29 review errors count and exit code management
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 5-21 fix typo
+# pwi 2021- 5-25 get rid of ttp_node
 
 function ttpf_main
 {
@@ -152,16 +164,16 @@ function ttpf_main
 
 	# check for in-process invocation
 	#  this should never happen because even the ". ttp.sh switch" command
-	#  is run as a standard ksh command from the bootstrap/sh_switch
+	#  is run as a standard ksh command from the bootstrap/sh_switch script
 	[ "${0:0:1}" = "-" -o "${0}" = "${SHELL##*/}" ] \
-		&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; let ttp_errs+=1; return; }
+		&& { echo "[TTP] in-process invocation only allowed in '. ttp.sh switch' command" >&2; let ttp_errs+=1; let ttp_code+=1; return ${ttp_code}; }
 
 	# when setting the initial execution node, there is not yet any TTP_NODE
 	#  in the user environment; the first command to be executed must be one of
 	#  ". ttp.sh switch --default" or ". ttp.sh switch --node <nodename>"
 	#  usually from the user profile
 	[ -z "${NOTTP}" -a -z "${TTP_NODE}" ] \
-		&& { echo "[TTP] no current execution node, aborting" >&2; let ttp_errs+=1; return; }
+		&& { echo "[TTP] no current execution node, aborting" >&2; let ttp_errs+=1; let ttp_code+=1; return ${ttp_code}; }
 
 	# setup global constants which are used in the Tools
 	bspInitVars
@@ -185,6 +197,11 @@ function ttpf_main
 			|| { ttp_node_conf="${_file}"; confLoadKeys "ttp_node_keys" "${ttp_node_conf}"; }
 
 		ttp_node_environment="$(confGetKey "ttp_node_keys" "${TTP_NODE}" "0=environment" 1)"
+
+		# trace here this call
+		# this always work, unless no node is currently set
+		# which only happens ate first connection, before end of bootstrap/sh_switch
+		msglog "$*"
 	fi
 
 	#
@@ -193,13 +210,12 @@ function ttpf_main
 	# beginning with the command
 	#
 
+	ttp_cmdline="$*"
 	ttp_user="${USER:-${LOGNAME}}"	
-	ttp_logsroot="$(pathGetLogsRoot)"
 	ttp_stamp="$(date '+%s')"
-	msglog "$*"
-
 	ttp_command_path="$(commandGetPath "${1}")"
 	ttp_command="${ttp_command_path##*/}"
+
 	shift
 	#echo "ttp_command='${ttp_command}'"
 	#ttp_command='tools.sh'

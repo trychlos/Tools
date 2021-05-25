@@ -24,23 +24,24 @@
 #
 # (O): -
 #
-# pwi 2017- 6-28 creation 
+# pwi 2017- 6-28 creation
+# pwi 2021- 5-25 get rid of ttp_node
 
 function serviceGetLabel
 {
 	#set -x
 	typeset _node="${1}"
 	[ -z "${_node}" ] && { msgerr "(serviceGetLabel) empty node name"; return 250; }
+
 	typeset _service="${2}"
 	[ -z "${_service}" ] && { msgerr "(serviceGetLabel) empty service identifier"; return 250; }
+
 	typeset -i _ret=0
 
 	typeset _conf="$(bspFind "${ttp_nodesubdir}/${_node}.ini")"
 	[ -z "${_conf}" ] && { msgerr "(serviceGetLabel) ${_node}: unable to find a node configuration file"; return 250; }
 
-	ttp_node="${_node}"
 	cat "${_conf}" | tabExtract "" "1=${_service},2=service" 4
-	unset ttp_node
 
 	return ${_ret}
 }
