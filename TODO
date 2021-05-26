@@ -41,17 +41,8 @@
 
   22 2013- 6-29 oracle.sh sqlldr returns zero even if errors occur 
 
-  24 2013- 7- 1 analyze whether it would be more pertinent to have
-                a hierarchy like dbpuits/oracle11/ddl rather than
-                dbpuits/ddl/oracle11 ?
-
   25 2013- 7- 1 do not embed Oracle SQL*Loader control files into ddl
                 directory (but rather isolate them)
-
-  26 2013- 7- 4 check with ttp.sh list -vars that it is not required to
-                declare indexed arrays with typeset -A in ttpf_main
-                (ttp_pos_xxx and ttp_opt_xxx)
-                -> this is ok on linux ksh-93 20120801
 
   35 2013- 7-15 have --with|without-option_s
      2013- 7-30 find a use case where the standard boolean option
@@ -170,6 +161,17 @@
                 Aix 6:
      2021- 5-24 cancelled because this is a permanent todo for each managed
                 system
+
+  24 2013- 7- 1 analyze whether it would be more pertinent to have
+                a hierarchy like dbpuits/oracle11/ddl rather than
+                dbpuits/ddl/oracle11 ?
+     2021- 5-26 obsolete - cancelled
+
+  26 2013- 7- 4 check with ttp.sh list -vars that it is not required to
+                declare indexed arrays with typeset -A in ttpf_main
+                (ttp_pos_xxx and ttp_opt_xxx)
+                -> this is ok on linux ksh-93 20120801
+     2021- 5-26 obsolete - cancelled
 
   27 2013- 7-10 ttpf_trap_int: add a flag whether to display the message
                 on keyboard interrupt
