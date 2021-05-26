@@ -69,7 +69,7 @@
 #                         are stored; 
 #                         defaults to 'libexec'
 #
-#   ttp_logical_keys
+#   ttp_node_keys
 #
 #   ttp_logicals_re       the end of the pathname to the configuration file
 #                         which defines the regular expression which identifies

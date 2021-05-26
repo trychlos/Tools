@@ -28,7 +28,7 @@
 
 function oraGetOraTab
 {
-	typeset _oratab="$(confGetKey "ttp_logical_keys" "${ttp_logical}" "0=oracle,1=oratab" 2)"
+	typeset _oratab="$(confGetKey "ttp_node_keys" "${ttp_logical}" "0=oracle,1=oratab" 2)"
 	[ -z "${_oratab}" ] && _oratab="/etc/oratab"
 	echo "${_oratab}"
 }

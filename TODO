@@ -53,39 +53,12 @@
                 (ttp_pos_xxx and ttp_opt_xxx)
                 -> this is ok on linux ksh-93 20120801
 
-  32 2013- 7-10 ttpf_main: have 'ttp_logical_keys' in a variable
-     2021- 5-24 ttp_logical_keys is still used in libexec/oracle/ functions
-                but its role has to be documented
-
-  33 2013- 7-10 ttpf_main: have 'ttp_default_keys' in a variable
-     2021- 5-24 ttp_default_keys is still used in libexec/sh/ functions
-                but its role has to be documented
-
   35 2013- 7-15 have --with|without-option_s
      2013- 7-30 find a use case where the standard boolean option
                 doesn't fit well enough
 
   38 2013- 7-25 ttp.sh option should also display the status of internal
                 array variables
-
-  43 2013- 7-25 ttp.sh filter: is not finished so should be moved to a
-                development tree, and removed from v2/tools
-
-  44 2013- 7-25 the 'logsdir' key (along with the pathGetDailyLogsDir
-                function) should only address the root log directory;
-                another function should manage the subtree inside it;
-                review all the process starting from msglog
-
-  45 2013- 7-25 cache the result of tabGetMachine
-
-  51 2013- 7-30 an entered command appears in the log file as:
-                [ttp.sh] list -verbs -commands
-                but there is no reason to treat differently the command
-                and the verb, so choose between:
-                [] ttp.sh list -verbs -commands
-                and:
-                [ttp.sh list] -verbs -commands
-                though the first version seams better
 
   54 2013- 8- 1 oracle.sh: rename sqlldr verb to load
 
@@ -105,9 +78,6 @@
   56 2013- 8- 1 confGetKey/confHasKey: do not distinguish between the
                 keyword at pos #0 and the other keywords (so just remove
                 the parameter 'keyword of the line') + count from 1
-
-  57 2013- 8- 1 review usage of tabxxx functions in order to obsolete
-                those which are no more needed
 
   60 2013- 8- 3 review check of host and user based on oracle.sh start
 
@@ -219,6 +189,14 @@
   31 2013- 7-10 rename osEnumFSMountPoints to osEnumMountPoints
      2013- 7-30 [rev. 3293] done
 
+  32 2013- 7-10 ttpf_main: have 'ttp_logical_keys' in a variable
+     2021- 5-26 ttp_logical_keys is still used in libexec/oracle/ functions
+                is now replaced with ttp_node_keys
+
+  33 2013- 7-10 ttpf_main: have 'ttp_default_keys' in a variable
+     2021- 5-24 ttp_default_keys is still used in libexec/sh/ functions
+                this is the content of default configuration file in ttp_ttpsubdir/
+
   34 2013- 7-15 review options dynamic computing, calling opt_ the
                 optional arguments, and pos_ the positional ones
      2013- 7-18 done: functions, svn.sh, cft.sh mysql.sh, ttp.sh
@@ -256,6 +234,19 @@
                 exhibiting a non-nul exit code (maybe related with #36)
      2013- 7-29 [rev. 3289] done
 
+  43 2013- 7-25 ttp.sh filter: is not finished so should be moved to a
+                development tree, and removed from v2/tools
+     2021- 5-26 obsolete - cancelled
+
+  44 2013- 7-25 the 'logsdir' key (along with the pathGetDailyLogsDir
+                function) should only address the root log directory;
+                another function should manage the subtree inside it;
+                review all the process starting from msglog
+     2021- 5-26 obsolete - cancelled
+
+  45 2013- 7-25 cache the result of tabGetMachine
+     2021- 5-26 obsolete - cancelled
+
   46 2013- 7-26 svn.sh list: add with/out headers option
      2013- 7-26 [rev. 3281] done
 
@@ -280,11 +271,25 @@
   50 2013- 7-29 logsdir should be eval-ed
      2013- 7-29 [rev. 3286] done
 
+  51 2013- 7-30 an entered command appears in the log file as:
+                [ttp.sh] list -verbs -commands
+                but there is no reason to treat differently the command
+                and the verb, so choose between:
+                [] ttp.sh list -verbs -commands
+                and:
+                [ttp.sh list] -verbs -commands
+                though the first version seams better
+     2021- 5-26 cancelled (for now)
+
   52 2013- 7-30 ttp.sh list -verbs should it really requires -command ?
      2021- 5-24 obsolete - cancelled
 
   53 2013- 7-30 review catTo comment
      2021- 5-24 obsolete - cancelled
+
+  57 2013- 8- 1 review usage of tabxxx functions in order to obsolete
+                those which are no more needed
+     2021- 5-26 done
 
   58 2013- 8- 3 ttp.sh fn confDumpKeys ttp_logical_keys doesn't display anything
      2021- 5-25 obsolete - cancelled

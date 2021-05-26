@@ -35,7 +35,7 @@ function oraGetListener
 
 	typeset -i _ret=0
 
-	typeset _name="$(confGetKey "ttp_logical_keys" "${_service}" "0=listener" 1)"
+	typeset _name="$(confGetKey "ttp_node_keys" "${_service}" "0=listener" 1)"
 	[ -z "${_name}" ] && _name="LISTENER"
 
 	echo "${_name}"

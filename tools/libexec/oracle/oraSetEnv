@@ -48,7 +48,7 @@ function oraSetEnv
 
 	if [ "${_type}" = "instance" ]; then
 
-		typeset _sid="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=sid" 1)"
+		typeset _sid="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=sid" 1)"
 		if [ -z "${_sid}" ]; then
 			msgerr "${_mnemo}: SID not found in '${ttp_logical_conf}'"
 			return 1
@@ -69,18 +69,18 @@ function oraSetEnv
 
 	if [ "${_type}" = "listener" ]; then
 
-		typeset _listener="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=listener" 0)"
+		typeset _listener="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=listener" 0)"
 		if [ "${_listener}" != "listener" ]; then
 			msgerr "${_mnemo} is not identified as an Oracle listener service"
 			return 1
 		fi
 
 		# if a home key exists, then get it
-		typeset _home="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=home" 1)"
+		typeset _home="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=home" 1)"
 
 		# else search for a sid and get the home from the sid
 		if [ -z "${_home}" ]; then
-			typeset _sid="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=sid" 1)"
+			typeset _sid="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=sid" 1)"
 			if [ ! -z "${_sid}" ]; then
 				_home="$(oraSidToHome "${_mnemo}" "${_sid}" "${_oratab}")"
 			fi

@@ -34,7 +34,7 @@ function oraGetOwner
 	typeset _service="${1}"
 	typeset -i _ret=0
 
-	confGetKey "ttp_logical_keys" "${_service}" "0=owner" 1
+	confGetKey "ttp_node_keys" "${_service}" "0=owner" 1
 
 	return ${_ret}
 }

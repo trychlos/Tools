@@ -40,7 +40,7 @@ function oraSidToHome
 	typeset _sid="${2}"
 	typeset _oratab="${3}"
 
-	typeset _home="$(confGetKey "ttp_logical_keys" "${_mnemo}" "0=home" 1)"
+	typeset _home="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=home" 1)"
 	if [ -z "${_home}" ]; then
 		_home="$(cat "${_oratab}" | tabExtract "" "1=${_sid}" 2)"
 		if [ -z "${_home}" -o ! -d "${_home}" ]; then
