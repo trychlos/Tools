@@ -397,7 +397,7 @@ function f_services_all {
 		find ${_dir}/${ttp_nodesubdir} -type f -name '*.ini' | while read _ini; do
 			_node="$(echo ${_ini##*/} | sed -e 's|\.ini$||')"
 			cat "${_ini}" \
-				| bspTabStripComments "${ttp_sep}" \
+				| tabStripComments "${ttp_sep}" \
 				| tabSubstitute "${ttp_sep}" \
 				| awk -F "${ttp_sep}" '{ print $1 }' \
 				| sort -u \

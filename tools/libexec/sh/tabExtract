@@ -46,7 +46,7 @@ function tabExtract
 	typeset _searched="${2}"
 	typeset _desired="${3}"
 
-	bspTabStripComments "${_sep}" | \
+	tabStripComments "${_sep}" | \
 		tabSubstitute "${_sep}" | \
 		tabExtractLine "${_sep}" "${_searched}" | \
 		tabOneLine | \

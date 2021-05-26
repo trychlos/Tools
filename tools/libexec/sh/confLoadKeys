@@ -73,7 +73,7 @@ function confLoadKeys
 	typeset _line
 
 	cat "${_conf}" | \
-		bspTabStripComments "${_sep}" | \
+		tabStripComments "${_sep}" | \
 		tabSubstitute "${_sep}" | \
 		while read _line; do
 			typeset _key="$(echo "${_line}" | cut -d"${_sep}" -f1)"

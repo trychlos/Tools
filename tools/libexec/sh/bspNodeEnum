@@ -52,7 +52,7 @@ function bspNodeEnum
 	# manage the 'logical machine' paradigm
 	typeset _logre="$(bspFind "${ttp_logicals_re}")"
 	typeset _expreg=""
-	[ -z "${_logre}" ] || _expreg="$(cat "${_logre}" | bspTabStripComments)"
+	[ -z "${_logre}" ] || _expreg="$(cat "${_logre}" | tabStripComments)"
 	[ -z "${_expreg}" ] || bspOSEnumMountPoints | grep -w "${_expreg}"
 	
 	# host name at last
