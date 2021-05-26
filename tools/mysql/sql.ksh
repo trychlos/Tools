@@ -2,7 +2,7 @@
 # @(#) execute a SQL command
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
-# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
 #
 # The Tools Project is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as

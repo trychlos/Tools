@@ -1,7 +1,7 @@
 # @(#) Appends a line to specified log file (defaults to main.log)
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
-# Copyright (©) 2003-2017 Pierre Wieser (see AUTHORS)
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
 #
 # The Tools Project is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
