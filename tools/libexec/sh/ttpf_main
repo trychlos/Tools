@@ -44,6 +44,9 @@
 #                         defaults to count of functions which have
 #                         detected an error
 #
+#   ttp_cmdline           command line (command path being expanded)
+#                         e.g. '/opt/trychlos.pwi/TTP/tools/bin/ttp.sh list -var'
+#
 #   ttp_command           command name
 #                         e.g. 'tools.sh'
 #

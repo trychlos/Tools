@@ -96,6 +96,11 @@
                  libexec/sh/pathGetTempFile
                  libexec/sh/pathGetLogsdir
                  svn/dump.ksh
+     2021- 5-26 turn on the setgid bit for the directory to force the group credentials
+                of any directory entry to match the group credentials of that directory:
+                # /bin/chmod g+s [/path/to/SAMBA/share]
+                # /bin/ls -ld [/path/to/SAMBA/share]
+                drwxrws--- 1 [user] [group] 0 Mar 19 09:07 [/path/to/SAMBA/share]
 
   56 2013- 8- 1 confGetKey/confHasKey: do not distinguish between the
                 keyword at pos #0 and the other keywords (so just remove
@@ -104,12 +109,7 @@
   57 2013- 8- 1 review usage of tabxxx functions in order to obsolete
                 those which are no more needed
 
-  59 2013- 8- 3 ttp.sh fn confGetKey ttp_logical_keys doesn't display anything
-
   60 2013- 8- 3 review check of host and user based on oracle.sh start
-
-  61 2019- 5-24 /opt/trychlos.pwi/TTP/tools/bin/ttp.sh[59]: ttpf_main[257]: msglog[952]: /var/log/TTP/@N/201905//main.log: cannot create [Permission denied]
-                when connecting ansible@admin
 
   62 2019- 8- 3 manage [ansible]srv-bind/srv_bind_update script
                 (and correlative purge)
@@ -288,6 +288,14 @@
 
   58 2013- 8- 3 ttp.sh fn confDumpKeys ttp_logical_keys doesn't display anything
      2021- 5-25 obsolete - cancelled
+
+  59 2013- 8- 3 ttp.sh fn confGetKey ttp_logical_keys doesn't display anything
+     2021- 5-26 because this variable has been replaced by ttp_node_keys
+                which is rightly shown
+
+  61 2019- 5-24 /opt/trychlos.pwi/TTP/tools/bin/ttp.sh[59]: ttpf_main[257]: msglog[952]: /var/log/TTP/@N/201905//main.log: cannot create [Permission denied]
+                when connecting ansible@admin
+     2021- 5-26 macro substitution is fixed - permission is handled by #55
 
   63 2019- 8- 4 should have a ttp account (eg ttpa) and a ttp group (eg ttpg)
      2021- 5-21 yes, but better should be ttp/ttp
