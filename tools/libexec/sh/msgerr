@@ -34,5 +34,5 @@ function msgerr
 	typeset _msg="error: ${1}"
 
 	msgout "${_msg}" 1>&2
-	msglog "${_msg}"
+	msgLog "${_msg}"
 }

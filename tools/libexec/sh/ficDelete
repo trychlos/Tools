@@ -20,7 +20,7 @@
 # Synopsis:
 #
 #   This function not only deletes a file (rm does this also)
-#   but also logs the deletion via msglog,
+#   but also logs the deletion via msgLog,
 #   plus honors opt_verbose to advertise the user 
 #
 # (I): 1. filename
@@ -37,7 +37,7 @@ function ficDelete
 	if [ -f "${_tmpf}" ]; then
 		typeset _msg="deleting ${_tmpf}"
 		msgVerbose "${_msg}"
-		msglog "${_msg}"
+		msgLog "${_msg}"
 		rm -f "${_tmpf}"
 	fi
 }

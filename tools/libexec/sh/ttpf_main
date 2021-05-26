@@ -204,7 +204,7 @@ function ttpf_main
 		# trace here this call
 		# this always work, unless no node is currently set
 		# which only happens ate first connection, before end of bootstrap/sh_switch
-		msglog "$*"
+		msgLog "$*"
 	fi
 
 	#

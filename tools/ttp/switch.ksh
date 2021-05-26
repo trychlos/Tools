@@ -117,7 +117,7 @@ function verb_main {
 
 	echo "success: ${_node}"
 	TTP_NODE="${_node}"
-	msglog "${ttp_cmdline}"
+	msgLog "${ttp_cmdline}"
 
 	return ${_ret}
 }

@@ -34,5 +34,5 @@ function msgwarn
 	typeset _msg="warning: ${1}"
 
 	msgout "${_msg}" 1>&2
-	msglog "${_msg}"
+	msgLog "${_msg}"
 }
