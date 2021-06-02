@@ -49,7 +49,7 @@
 function f_bootstrap_enumerate_path
 {
 	for _dir in /etc/ttp.d ${HOME}/.ttp.d; do
-		LANG=C /bin/ls -1 "${_dir}"/*.conf | while read _conf; do
+		LANG=C /bin/ls -1 "${_dir}"/*.conf 2>/dev/null | while read _conf; do
 			[ "${VERBOSE}" = "1" ] && echo "[sh_bootstrap] found ${_conf}" 1>&2
 			grep -vE '^\s*#' "${_conf}"
 		done
@@ -123,5 +123,5 @@ typeset -i _ret=$?
 [ "${VERBOSE}" = "1" ] && echo "[sh_bootstrap] PATH='${PATH}'" 1>&2
 [ "${VERBOSE}" = "1" ] && echo "[sh_bootstrap] FPATH='${FPATH}'" 1>&2
 
-unset $(set | grep -E '^f_|^bspPath')
+unset $(set | grep -E '^f_|^bspPath') 1>/dev/null 2>&1
 return ${_ret}
