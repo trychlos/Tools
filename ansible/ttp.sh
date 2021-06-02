@@ -13,6 +13,6 @@
 # $Id: etc_profile.d_ttp.sh 5376 2017-07-17 11:02:38Z  $
 
 # Address the installed (standard) version of The Tools Project
-/opt/trychlos.pwi/TTP/tools/libexec/bootstrap/sh_bootstrap
+. /opt/trychlos.pwi/TTP/tools/libexec/bootstrap/sh_bootstrap
 
 # vim:ts=4:sw=4
