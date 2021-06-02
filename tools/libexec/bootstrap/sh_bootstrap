@@ -117,7 +117,9 @@ function f_bootstrap
 	[ "${_loaded}" = "done" ] && return 0 || return 1
 }
 
-f_bootstrap && . ttp.sh switch -default
+# Ansible interprets anything it find on stderr as a fatal error, and
+#  refuses to connect to the machine
+f_bootstrap && . ttp.sh switch -default 2>&1
 typeset -i _ret=$?
 
 [ "${VERBOSE}" = "1" ] && echo "[sh_bootstrap] PATH='${PATH}'" 1>&2
