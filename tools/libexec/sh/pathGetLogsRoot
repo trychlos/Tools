@@ -42,6 +42,7 @@
 # pwi 2013- 7-29 fix #50 logsdir should be eval-ed
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 5-24 get rid of ttp_toolslogsubdir
+# pwi 2021- 9- 4 set gid bit on all created directories
 
 function pathGetLogsRoot
 {
@@ -75,6 +76,7 @@ function pathGetLogsRoot
 		fi
 	fi
 
-	mkdir -p -m 0755 "${_logsroot}"
+	mkdir -p -m 0775 "${_logsroot}"
+	chmod g+s "${_logsroot}"
 	echo "${_logsroot}"
 }

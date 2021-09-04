@@ -31,7 +31,8 @@
 # pwi 2013- 6-25 update to new automatic command-line interpretation
 # pwi 2013- 7-18 review options dynamic computing
 # pwi 2013- 7-27 fix #14 using csv output of svn.sh list
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 9- 4 make sure the group is able to access the output file
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -147,7 +148,7 @@ function verb_main {
 				[ -z "${_destdir}" ] &&
 					_destdir="$(confGetKey "ttp_node_keys" "${opt_service}" "0=dumpdir" 1 | \
 						tabSubstituteMacro "" "@R" "" "${pos_repo}")"
-				execDummy "mkdir -p '${_destdir}'"
+				execDummy "mkdir -p -m 0775 '${_destdir}'"
 		
 				# get last revision previously saved
 				typeset -i _last=0

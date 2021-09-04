@@ -32,7 +32,8 @@
 # pwi 2002- 6- 4 set variables as local
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
 # pwi 2013- 6-15 use pathGetTempFilebyDir
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 9- 4 set gid bit on all created directories
 
 function pathGetTempFile
 {
@@ -43,7 +44,8 @@ function pathGetTempFile
 	#  directory exists
 	typeset _logsdir="${ttp_logsroot:-/tmp}"
 	_logsdir="${_logsdir}/${ttp_command%.*}"
-	mkdir -p "${_logsdir}"
+	mkdir -p -m 0775 "${_logsdir}"
+	chmod g+s "${_logsdir}"
 
 	#typeset _tmpf="$(pathGetTempFileByDir "${_mnemo}" "${_logsdir}" "${_tmpf}")"
 	typeset _tmpf="${_logsdir}/${ttp_verb}-$$-${ttp_stamp}"

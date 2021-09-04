@@ -26,7 +26,8 @@
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
 # pwi 2013- 6-28 port to Tools v2
 # pwi 2013- 7-18 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021- 9- 4 make sure the group is able to access the output file
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -153,7 +154,7 @@ function f_compress {
 	typeset _foutput="${opt_dumpto}/${_bname}-$(date '+%Y%m%d%H%M%S').dump"
 	typeset -i _ret=0
 
-	execDummy mkdir -p "${opt_dumpto}"
+	execDummy "mkdir -p -m 0775 '${opt_dumpto}'"
 	let _ret=$?
 
 	if [ ${_ret} -eq 0 ]; then
