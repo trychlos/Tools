@@ -77,6 +77,6 @@ function pathGetLogsRoot
 	fi
 
 	mkdir -p -m 0775 "${_logsroot}"
-	chmod g+s "${_logsroot}"
+	chmod g+s "${_logsroot}" 2>/dev/null
 	echo "${_logsroot}"
 }

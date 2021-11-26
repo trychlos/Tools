@@ -19,7 +19,7 @@
 
 AC_PREREQ(2.59)
 
-AC_INIT([Tools],[2.4.2-2021],[pwieser@trychlos.org],ttp,[])
+AC_INIT([Tools],[2.4.3-2021],[pwieser@trychlos.org],ttp,[])
 
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_CANONICAL_TARGET
