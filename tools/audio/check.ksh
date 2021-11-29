@@ -96,7 +96,7 @@ function verb_arg_check {
 
 function f_check {
 	typeset _fname="${1}"
-	typeset _data="$(f_ffmpeg "${_fname}")"
+	typeset _data="$(audioFileInfo "${_fname}")"
 	varInc count
 	#echo "${_data}"
 	#set -x
@@ -241,47 +241,6 @@ function f_error {
 }
 
 # ---------------------------------------------------------------------
-# ffmpeg informations
-#
-# ffmpeg displays its output on stderr
-# relevant data starts at the line 'input #0', and may contain
-# - metadata for the file (first and second indentation levels)
-# - duration
-# - list of streams (audio / video)
-# - metadata for each stream
-#
-# (O): this function echoes the relevant data on stdout as a string's list
-
-function f_ffmpeg {
-	typeset _fname="${1}"
-	typeset _line
-	typeset -i _relevant=0
-	typeset _output=""
-	typeset _ifs="${IFS}"
-	IFS=''
-
-	ffmpeg -i "${_fname}" 2>&1 | while read _line; do
-		#echo "${_line}"
-		if [ "${_line:0:8}" == "Input #0" ]; then
-			let _relevant=1
-		fi
-		if [ ${_relevant} -eq 1 ]; then
-			# last informational message outputed by ffmpeg, removed from there
-			if [ "${_line}" != "At least one output file must be specified" ]; then
-				if [ ! -z "${_output}" ]; then
-					_output="${_output}
-"
-				fi
-				_output="${_output}${_line}"
-			fi
-		fi
-	done
-
-	IFS="${_ifs}"
-	echo "${_output}"
-}
-
-# ---------------------------------------------------------------------
 # check if ffmpeg has detected an image
 # we read the Video informations if any
 # (O): outputs 1 (true) or 0
@@ -324,7 +283,7 @@ function verb_main {
 	varSet notok 0
 	varSet total 0
 
-	find "${opt_path}" -type f | grep -vE 'jpeg|jpg|png' 2>/dev/null | while read _fname; do
+	audioPathScan "${opt_path}" | while read _fname; do
 		f_check "${_fname}"
 		if [ ${opt_maxcount} -gt 0 -a $(varGet count) -ge ${opt_maxcount} ]; then
 			msgOut "stopping the check after ${opt_maxcount} files"

@@ -1,0 +1,31 @@
+# @(#) Scan an on-disk library for audio files
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# (I): 1: path to be scanned
+#
+# (O): the list of found audio files is displayed on stdout
+#
+# pwi 2021-11-29
+
+function audioPathScan
+{
+	typeset _path="${1:-/}"
+
+	find "${_path}" -type f | grep -vE 'jpeg|jpg|png' 2>/dev/null
+}

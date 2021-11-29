@@ -1,0 +1,66 @@
+# @(#) Outputs on stdout the meta-informations found in an audio/video file
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# ffmpeg informations
+#
+# ffmpeg displays its output on stderr
+# relevant data starts at the line 'input #0', and may contain
+# - metadata for the file (first and second indentation levels)
+# - duration
+# - list of streams (audio / video)
+# - metadata for each stream
+#
+# (I): 1: the filename to be requested
+#
+# (O): found metadatas are displayed on stdout
+#
+# pwi 2021-11-29
+
+function audioFileInfo
+{
+	typeset _fname="${1}"
+
+	if [ ! -z "${_fname}" ]; then
+		typeset _line
+		typeset -i _relevant=0
+		typeset _output=""
+		typeset _ifs="${IFS}"
+		IFS=''
+	
+		ffmpeg -i "${_fname}" 2>&1 | while read _line; do
+			#echo "${_line}"
+			if [ "${_line:0:8}" == "Input #0" ]; then
+				let _relevant=1
+			fi
+			if [ ${_relevant} -eq 1 ]; then
+				# last informational message outputed by ffmpeg, removed from there
+				if [ "${_line}" != "At least one output file must be specified" ]; then
+					if [ ! -z "${_output}" ]; then
+						_output="${_output}
+"
+					fi
+					_output="${_output}${_line}"
+				fi
+			fi
+		done
+	
+		IFS="${_ifs}"
+		echo "${_output}"
+	fi
+}
