@@ -88,7 +88,7 @@ function verb_arg_check {
 
 	# the service identifier is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
@@ -101,7 +101,7 @@ function verb_arg_check {
 			"${opt_logs}" = "no" -a \
 			"${opt_account}" = "no" -a \
 			"${opt_catalog_set}" = "no" ]; then
-				msgerr "no option found, at least one is mandatory"
+				msgErr "no option found, at least one is mandatory"
 				let _ret+=1
 
 	# if '--all' option is specified, then it must be the only boolean
@@ -113,7 +113,7 @@ function verb_arg_check {
 				"${opt_receive}" = "yes" -o \
 				"${opt_logs}" = "yes" -o \
 				"${opt_account}" = "yes" ]; then
-					msgerr "'--all' option found, no other boolean can be specified"
+					msgErr "'--all' option found, no other boolean can be specified"
 					let _ret+=1
 		fi
 	fi
@@ -127,19 +127,19 @@ function verb_arg_check {
 			disp_catalog="FULL"
 			;;
 		*)
-			msgerr "'--catalog' option value must be 'BRIEF' or 'FULL', '${opt_catalog}' found"
+			msgErr "'--catalog' option value must be 'BRIEF' or 'FULL', '${opt_catalog}' found"
 			let _ret+=1
 	esac
 
 	# '--[no]headers' and '--[no]counter' are only relevant when the
 	#  format is not 'RAW'
 	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_headers
 		opt_headers_set="no"
 	fi
 	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_counter
 		opt_counter_set="no"
 	fi
@@ -167,15 +167,15 @@ function f_listcat {
 	elif [ "${disp_catalog}" = "BRIEF" ]; then
 		_cmd="$(confGetKey ttp_node_keys "${opt_service}" 0=listcatbrief 1)"
 		[ -z "${_cmd}" ] \
-			&& { msgerr "CFTUTIL: command not found, and no 'listcatbrief' fallback"; let _ret=1; }
+			&& { msgErr "CFTUTIL: command not found, and no 'listcatbrief' fallback"; let _ret=1; }
 
 	elif [ "${disp_catalog}" = "FULL" ]; then
 		_cmd="$(confGetKey ttp_node_keys "${opt_service}" 0=listcatfull 1)"
 		[ -z "${_cmd}" ] \
-			&& { msgerr "CFTUTIL: command not found, and no 'listcatfull' fallback"; let _ret=1; }
+			&& { msgErr "CFTUTIL: command not found, and no 'listcatfull' fallback"; let _ret=1; }
 
 	else
-		msgerr "${disp_catalog}: unknown display catalog option"
+		msgErr "${disp_catalog}: unknown display catalog option"
 		let _ret+=1
 	fi
 
@@ -212,7 +212,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 	
 	elif [ "${_node}" != "${TTP_NODE}" ]; then

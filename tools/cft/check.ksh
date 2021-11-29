@@ -104,7 +104,7 @@ function verb_arg_check {
 
 	# at least one option must be specified
 	if [ "${opt_fullcat}" = "no" ]; then
-		msgerr "no option found, at least one is mandatory"
+		msgErr "no option found, at least one is mandatory"
 		let _ret+=1
 	fi
 
@@ -118,7 +118,7 @@ function f_check_full_listcat {
 
 	# the output of CFTUTIL LISTCAT CONTENT=FULL for *one* transfer
 	#  is isolated in its own temp file
-	msgout "extracting *one* transfer from input stream..." "" " \b"
+	msgOut "extracting *one* transfer from input stream..." "" " \b"
 	typeset _ftmpunit="$(pathGetTempFile unit)"
 	perl -ne '{
 		chomp;
@@ -130,27 +130,27 @@ function f_check_full_listcat {
 		printf( "%s\n", $_ );
 		$last_seen = 1 if m/Network message size\s+RUSIZE\s+=\s+\d+/;
 	}' > "${_ftmpunit}"
-	msgout "OK, $(wc -l "${_ftmpunit}" | awk '{ print $1 }') lines" " "
+	msgOut "OK, $(wc -l "${_ftmpunit}" | awk '{ print $1 }') lines" " "
 
 	# count individual data as marked by equal '=' sign
 	typeset -i _expect=101
-	msgout "checking for count of individual data [${_expect}]..." "" " \b"
+	msgOut "checking for count of individual data [${_expect}]..." "" " \b"
 	typeset _ftmpequal="$(pathGetTempFile equal)"
 	sed -e 's?\(= \S*\)?\1\
 ?' "${_ftmpunit}" | grep '=' > "${_ftmpequal}"
 	typeset -i _cdata=$(wc -l "${_ftmpequal}" | awk '{ print $1 }')
 
 	if [ ${_cdata} -eq ${_expect} ]; then
-		msgout "OK" " "
+		msgOut "OK" " "
 	else
-		msgout "NOT OK" " "
-		msgerr "${_cdata} individual data found instead of ${_expect}"
+		msgOut "NOT OK" " "
+		msgErr "${_cdata} individual data found instead of ${_expect}"
 		let _ret+=1
 	fi
 
 	# as long as we are able to identify dates and times, count
 	#  count them as we are going to concatenate them later
-	msgout "checking for as many dates and times..." "" " \b"
+	msgOut "checking for as many dates and times..." "" " \b"
 	typeset _DATE="DATE|NEXTDAT"
 	typeset _ftmpdate="$(pathGetTempFile date)"
 	grep -E "${_DATE}" "${_ftmpequal}" > "${_ftmpdate}"
@@ -163,33 +163,33 @@ function f_check_full_listcat {
 	typeset -i _ctime=$(wc -l "${_ftmptime}" | awk '{ print $1 }')
 
 	if [ ${_cdate} -eq ${_ctime} ]; then
-		msgout "OK, ${_cdate} found" " "
+		msgOut "OK, ${_cdate} found" " "
 	else
-		msgout "NOT OK" " "
-		msgerr "${_cdate} dates vs. ${_ctime} times"
+		msgOut "NOT OK" " "
+		msgErr "${_cdate} dates vs. ${_ctime} times"
 		cat "${_ftmpdate}" "${_ftmptime}"
 		let _ret+=1
 	fi
 
 	# eventually count final parameters
 	_expect=94
-	msgout "checking for final count of parameters [${_expect}]..." "" " \b"
+	msgOut "checking for final count of parameters [${_expect}]..." "" " \b"
 	typeset _ftmpparms="$(pathGetTempFile parms)"
 	grep -vE "${_DATE}|${_TIME}" < "${_ftmpequal}" > "${_ftmpparms}"
 	typeset -i _cparms=$(wc -l "${_ftmpparms}" | awk '{ print $1 }')
 	typeset -i _call=${_cparms}+${_cdate}
 
 	if [ ${_call} -eq ${_expect} ]; then
-		msgout "OK" " "
+		msgOut "OK" " "
 	else
-		msgout "NOT OK" " "
-		msgerr "${_call} parameters found instead of ${_expect}"
+		msgOut "NOT OK" " "
+		msgErr "${_call} parameters found instead of ${_expect}"
 		let _ret+=1
 	fi
 
 	# check for uppercase keywords : how many duplicates
 	_expect=1
-	msgout "checking for duplicate keywords [${_expect}]..." "" " \b"
+	msgOut "checking for duplicate keywords [${_expect}]..." "" " \b"
 	typeset _ftmpkey="$(pathGetTempFile key)"
 	cat "${_ftmpequal}" | perl -ne '{
 		chomp;
@@ -203,15 +203,15 @@ function f_check_full_listcat {
 	typeset -i _diff=${_ckey}-${_csorted}
 
 	if [ ${_diff} -eq ${_expect} ]; then
-		msgout "OK" " "
+		msgOut "OK" " "
 	else
-		msgout "NOT OK" " "
-		msgerr "${_diff} duplicates found instead of ${_expect}"
+		msgOut "NOT OK" " "
+		msgErr "${_diff} duplicates found instead of ${_expect}"
 		let _ret+=1
 	fi
 
 	# visually inspect the double-equal lines
-	msgout "visually check yourself for double-equal signs: must have a single-word data value..."
+	msgOut "visually check yourself for double-equal signs: must have a single-word data value..."
 	grep -e '=.\+=' "${_ftmpunit}"
 
 	return ${_ret}

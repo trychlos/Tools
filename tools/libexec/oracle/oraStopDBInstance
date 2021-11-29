@@ -64,7 +64,7 @@ function oraStopDBInstance
 
 	while [ "${_stopped}" != "yes" -a ${_idx} -lt ${#_modes[@]} ]; do
 		typeset _curmode="${_modes[${_idx}]}"
-		msgout "stopping ${ORACLE_SID} instance in $(echo ${_curmode} | strLower) mode." "" " \b"
+		msgOut "stopping ${ORACLE_SID} instance in $(echo ${_curmode} | strLower) mode." "" " \b"
 		ttpf_timeout ${_timeout} 2 "${_fnstop}" "${_modes[${_idx}]}"
 		_ret=$?
 
@@ -77,10 +77,10 @@ function oraStopDBInstance
 
 		# last try to display a nice message
 		if [ ${_ret} -eq 0 ]; then
-			msgout "OK" " "
+			msgOut "OK" " "
 			_stopped="yes"
 		else
-			msgout "NOT OK" " "
+			msgOut "NOT OK" " "
 			let _idx+=1
 		fi
 	done

@@ -44,15 +44,15 @@ function oraTestDBProcess
 
 	typeset -i _ret=0
 
-	msgout "verifying '${_msg}' process..." "" " "
+	msgOut "verifying '${_msg}' process..." "" " "
 	typeset -i _count=$(grep -c "${_process}" "${_ftmp}")
 	if [ ${_count} -ge ${_mini} -a ${_count} -le ${_maxi} ]; then
-		msgout "(${_count} found): OK" " \b"
+		msgOut "(${_count} found): OK" " \b"
 	elif [ ${_count} -eq 0 ]; then
-		msgout "(no found process): NOT OK" " \b"
+		msgOut "(no found process): NOT OK" " \b"
 		let _ret=1
 	else
-		msgout "${_count} found process(es)): NOT OK"
+		msgOut "${_count} found process(es)): NOT OK"
 		let _ret=1
 	fi
 

@@ -70,18 +70,18 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
 	# at least a schema value must be specified
 	if [ "${opt_schema_set}" = "no" ]; then
-		msgerr "'--schema' option must be specified"
+		msgErr "'--schema' option must be specified"
 		let _ret+=1
 	else
 		if [ "${opt_schema}" != "ALL" -a \
 				"${opt_table_set}" = "no" ]; then
-					msgerr "don't know what to do which just a shema; did you mean '--table' ?"
+					msgErr "don't know what to do which just a shema; did you mean '--table' ?"
 					let _ret+=1
 		fi
 	fi
@@ -90,14 +90,14 @@ function verb_arg_check {
 	if [ "${opt_table_set}" = "yes" -a \
 			"${opt_table}" = "ALL" -a \
 			"${opt_schema}" = "ALL" ]; then
-				msgerr "listing tables only applies to one specified schema"
+				msgErr "listing tables only applies to one specified schema"
 				let _ret+=1
 	fi
 
 	# '--body' option is only relevant when displaying list of packages
 	#if [ "${opt_body}" = "yes" -a \
 	#		"${opt_packages}" = "no" ]; then
-	#			msgerr "'--body' option is only relevant when listing packages"
+	#			msgErr "'--body' option is only relevant when listing packages"
 	#			let _ret+=1
 	#fi
 
@@ -114,7 +114,7 @@ function verb_main {
 	typeset _host="$(tabGetMachine "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 
 	# TODO: it should not be required to get informations to be on the

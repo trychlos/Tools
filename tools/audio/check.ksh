@@ -75,7 +75,7 @@ function verb_arg_check {
 
 	# path is mandatory
 	if [ -z "${opt_path}" ]; then
-		msgerr "path is mandatory, has not been specified"
+		msgErr "path is mandatory, has not been specified"
 		let _ret+=1
 	fi
 
@@ -84,7 +84,7 @@ function verb_arg_check {
 		 -a "${opt_display}" != "checked"\
 		 -a "${opt_display}" != "erroneous"\
 		 -a "${opt_display}" != "allerrs" ]; then
-		msgerr "'display' argument must be specified as none|checked|erroneous|all, '${opt_display}' found"
+		msgErr "'display' argument must be specified as none|checked|erroneous|all, '${opt_display}' found"
 		let _ret+=1
 	fi
 
@@ -124,16 +124,16 @@ function f_check {
 		
 	# display internal variables if asked for
 	if [ "${opt_debug}" == "yes" ]; then
-		msgout "[debug] title='${_title}'"
-		msgout "[debug] artist='${_artist}'"
-		msgout "[debug] album_artist='${_album_artist}'"
-		msgout "[debug] album='${_album}'"
-		msgout "[debug] year='${_year}'"
-		msgout "[debug] trackno=${_trackno}"
-		msgout "[debug] trackcount=${_trackcount}"
-		msgout "[debug] encoder='${_encoder}'"
-		msgout "[debug] discno=${_discno}"
-		msgout "[debug] has_image=${_has_image}"
+		msgOut "[debug] title='${_title}'"
+		msgOut "[debug] artist='${_artist}'"
+		msgOut "[debug] album_artist='${_album_artist}'"
+		msgOut "[debug] album='${_album}'"
+		msgOut "[debug] year='${_year}'"
+		msgOut "[debug] trackno=${_trackno}"
+		msgOut "[debug] trackcount=${_trackcount}"
+		msgOut "[debug] encoder='${_encoder}'"
+		msgOut "[debug] discno=${_discno}"
+		msgOut "[debug] has_image=${_has_image}"
 	fi
 	
 	# check informations
@@ -218,10 +218,10 @@ function f_check {
 	msgLog "count=$(varGet count) ok=$(varGet ok) notok=$(varGet notok)"
 	
 	if [ "${opt_display}" == "checked" ]; then
-		msgout "${_fname}: errors count = ${_errors}"
+		msgOut "${_fname}: errors count = ${_errors}"
 	fi
 	if [ "${opt_display}" == "erroneous" -a ${_errors} -gt 0 ]; then
-		msgout "${_fname}: errors count = ${_errors}"
+		msgOut "${_fname}: errors count = ${_errors}"
 	fi
 }
 
@@ -234,7 +234,7 @@ function f_error {
 	echo "${_msg}" >> $(pathGetTempFile errors)
 	
 	if [ "${opt_display}" == "allerrs" ]; then
-		msgerr "${_fname}: ${_msg}"
+		msgErr "${_fname}: ${_msg}"
 	else
 		msgLog "${_fname}: ${_msg}"
 	fi
@@ -316,7 +316,7 @@ function verb_main {
 	typeset -i _ret=0
 	typeset _fname
 
-	msgout "a summary of found errors will be available in '$(pathGetTempFile errors)' file"
+	msgOut "a summary of found errors will be available in '$(pathGetTempFile errors)' file"
 	touch $(pathGetTempFile errors)
 	
 	varSet count 0
@@ -327,17 +327,17 @@ function verb_main {
 	find "${opt_path}" -type f | grep -vE 'jpeg|jpg|png' 2>/dev/null | while read _fname; do
 		f_check "${_fname}"
 		if [ ${opt_maxcount} -gt 0 -a $(varGet count) -ge ${opt_maxcount} ]; then
-			msgout "stopping the check after ${opt_maxcount} files"
+			msgOut "stopping the check after ${opt_maxcount} files"
 			break
 		fi
 	done
 
-	msgout "$(varGet count) files checked"
-	msgout "  $(varGet ok) are fully ok"
-	msgout "  $(varGet notok) exhibit at least one error"
-	msgout "    $(varGet total) total error(s)"
+	msgOut "$(varGet count) files checked"
+	msgOut "  $(varGet ok) are fully ok"
+	msgOut "  $(varGet notok) exhibit at least one error"
+	msgOut "    $(varGet total) total error(s)"
 
-	msgout "a summary of found errors is available in '$(pathGetTempFile errors)' file" 
+	msgOut "a summary of found errors is available in '$(pathGetTempFile errors)' file" 
 	
 	return ${_ret}
 }

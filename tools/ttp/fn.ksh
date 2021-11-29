@@ -72,7 +72,7 @@ function verb_arg_check {
 
 	# check that a function name is provided
 	if [ -z "${pos_fn}" ]; then
-		msgerr "a function name must be provided"
+		msgErr "a function name must be provided"
 		let _ret+=1
 	fi
 

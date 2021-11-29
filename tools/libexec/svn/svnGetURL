@@ -41,7 +41,7 @@ function svnGetURL
 			echo "http://${_root}"
 			;;
 		*)
-			msgerr "unknown running mode '${_mode}'"
+			msgErr "unknown running mode '${_mode}'"
 			let _ret=1
 			;;
 	esac

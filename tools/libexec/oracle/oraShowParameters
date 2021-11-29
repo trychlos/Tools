@@ -93,7 +93,7 @@ function oraShowParameters
 			}
 			print_prev_line();
 			printf( "%s%d displayed rows\n", $msg, $nl-2 );
-		}' -- -msg="$(msgoutPrefix)" -service="${_service}"
+		}' -- -msg="$(msgOutPrefix)" -service="${_service}"
 
 	set linesize 32767
 	set pagesize 50000

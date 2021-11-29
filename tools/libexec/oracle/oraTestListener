@@ -55,18 +55,18 @@ function oraTestListener
 	# do we have at least one 'tnslsnr' process ?
 	#typeset -i _count=$(ps -ef | grep tnslsnr | grep -v grep | wc -l)
 	#if [ ${_count} -eq 0 ]; then
-	#	msgerr "there is no running listener on the machine"
+	#	msgErr "there is no running listener on the machine"
 	#	return 1
 	#fi
 
 	# check that this instance correctly address a listener
 	typeset _name="$(oraGetListener "${_service}")"
-	#msgout "found that this instance is served by ${_name} listener"
+	#msgOut "found that this instance is served by ${_name} listener"
 
 	# this 'tnslsnr' process is it running ?
 	typeset -i _count=$(ps -ef | grep tnslsnr | grep ${_name} | grep -v grep | wc -l)
 	if [ ${_count} -eq 0 ]; then
-		msgerr "${_name} listener it not running"
+		msgErr "${_name} listener it not running"
 		return 1
 	fi
 
@@ -75,28 +75,28 @@ function oraTestListener
 
 	# check listener status
 	typeset _fstatus="$(pathGetTempFile status)"
-	msgout "requesting ${_name} listener for its status..." "" " "
+	msgOut "requesting ${_name} listener for its status..." "" " "
 	lsnrctl status "${_name}" 1>"${_fstatus}" 2>&1
 	typeset _start="$(grep -e '^Start Date' "${_fstatus}")"
 	if [ -z "${_start}" ]; then
-		msgout "NOT OK" " \b"
+		msgOut "NOT OK" " \b"
 		cat "${_fstatus}"
 		return 1
 	fi
 	_start="$(echo "${_start}" | sed -e 's/^Start Date\s*//')"
-	msgout "OK, started on ${_start}" " \b"
+	msgOut "OK, started on ${_start}" " \b"
 
 	# check with tnsping that the listener is actually listening
 	typeset _fping="$(pathGetTempFile ping)"
 	typeset _address="$(awk '/^Connecting to/ { A=$0; sub( "Connecting to ","",A); print A }' "${_fstatus}")"
-	msgout "tnspinging ${_name} listener..." "" " "
+	msgOut "tnspinging ${_name} listener..." "" " "
 	tnsping "${_address}" 1>"${_fping}" 2>&1
 	typeset _ok="$(grep -e '^OK' "${_fping}")"
 	if [ -z "${_ok}" ]; then
-		msgout "NOT OK" " \b"
+		msgOut "NOT OK" " \b"
 		cat "${_ok}"
 		return 1
 	fi
-	msgout "OK at ${_address}" " \b"
+	msgOut "OK at ${_address}" " \b"
 	return 0
 }

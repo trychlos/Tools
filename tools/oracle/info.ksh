@@ -81,7 +81,7 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
@@ -95,7 +95,7 @@ function verb_arg_check {
 			"${opt_tablescan}" = "no" -a \
 			"${opt_tablespaces}" = "no" -a \
 			"${opt_version}" = "no" ]; then
-				msgerr "no option found, at least one is mandatory"
+				msgErr "no option found, at least one is mandatory"
 				let _ret+=1
 	fi
 
@@ -107,7 +107,7 @@ function verb_arg_check {
 				opt_segments="${_value}"
 				;;
 			*)
-				msgerr "'${opt_segments}': invalid value for '--segments' option"
+				msgErr "'${opt_segments}': invalid value for '--segments' option"
 				let _ret+=1
 				;;
 		esac
@@ -126,7 +126,7 @@ function verb_arg_check {
 				"${opt_tablescan}" != "yes" -a \
 				"${opt_tablespaces}" != "yes" -a \
 				"${opt_version}" != "yes" ]; then
-					msgerr "'--metrics' option not supported for required information"
+					msgErr "'--metrics' option not supported for required information"
 					let _ret+=1
 		fi
 	fi
@@ -143,7 +143,7 @@ function verb_main {
 	typeset _host="$(tabGetMachine "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 
 	# TODO: it should not be required to get informations to be on the

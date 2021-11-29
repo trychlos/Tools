@@ -82,7 +82,7 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
@@ -90,7 +90,7 @@ function verb_arg_check {
 	if [ "${opt_script_set}" = "no" -a \
 			"${opt_command_set}" = "no" -a \
 			"${opt_interactive}" = "no" ]; then
-				msgerr "one of '--script', '--command' or '--interactive' option must be chosen"
+				msgErr "one of '--script', '--command' or '--interactive' option must be chosen"
 				let _ret+=1
 	else
 		typeset -i _count=0
@@ -98,7 +98,7 @@ function verb_arg_check {
 		if [ "${opt_script_set}" = "yes" ]; then
 			let _count+=1
 			if [ -z "${opt_script}" -o ! -r "${opt_script}" ]; then
-				msgerr "'${opt_script}': sql script not found or not available"
+				msgErr "'${opt_script}': sql script not found or not available"
 				let _ret+=1
 			fi
 		fi
@@ -106,7 +106,7 @@ function verb_arg_check {
 		if [ "${opt_command_set}" = "yes" ]; then
 			let _count+=1
 			if [ -z "${opt_command}" ]; then
-				msgerr "'${opt_command}': sql command not found"
+				msgErr "'${opt_command}': sql command not found"
 				let _ret+=1
 			fi
 		fi
@@ -116,7 +116,7 @@ function verb_arg_check {
 		fi
 		# at last, we must choose one in these three options
 		if [ ${_count} -ne 1 ]; then
-			msgerr "only one of '--script', '--command' or '--interactive' option must be chosen"
+			msgErr "only one of '--script', '--command' or '--interactive' option must be chosen"
 			let _ret+=1
 		fi
 	fi
@@ -136,7 +136,7 @@ function verb_main {
 	typeset _host="$(tabGetMachine "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 
 	elif [ "${_host}" != "${ttp_logical}" ]; then

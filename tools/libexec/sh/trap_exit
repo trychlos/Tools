@@ -33,10 +33,10 @@
 trap_exit()
 {
 	#set -x
-	#msgout "caught EXIT signal"
+	#msgOut "caught EXIT signal"
 
 	[ ${ttp_errs} -gt 0 -a ${ttp_code} -eq 0 ] && ttp_code=1
-	[ "${opt_verbose}" = "yes" -o ${ttp_code} -gt 0 ] && msgout "exiting with code ${ttp_code}"
+	[ "${opt_verbose}" = "yes" -o ${ttp_code} -gt 0 ] && msgOut "exiting with code ${ttp_code}"
 
 	exit ${ttp_code}
 }

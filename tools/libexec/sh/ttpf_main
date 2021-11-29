@@ -237,8 +237,8 @@ function ttpf_main
 	shift
 	ttp_verb_path="$(scriptFindVerb "${ttp_verb}")"
 	if [ -z "${ttp_verb_path}" ]; then
-		msgerr "no '${ttp_verb}' verb found for '${ttp_command}' command" &&
-		msgout "try '${ttp_command}' command to get the list of available verbs"
+		msgErr "no '${ttp_verb}' verb found for '${ttp_command}' command" &&
+		msgOut "try '${ttp_command}' command to get the list of available verbs"
 		verbExitOnErr 1 "no"
 	fi
 

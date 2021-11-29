@@ -44,19 +44,19 @@ function oraStartListener
 	# get the listener name for the instance
 	typeset _name="$(oraGetListener "${_service}")"
 	if [ -z "${_name}" ]; then
-		msgerr "misconfigured ${_service} service: unable to retrieve listener name"
+		msgErr "misconfigured ${_service} service: unable to retrieve listener name"
 		return 1
 	fi
 
-	msgout "starting ${_name} listener..." "" " "
+	msgOut "starting ${_name} listener..." "" " "
 	typeset _flsnr="$(pathGetTempFile listener)"
 	lsnrctl start "${_name}" 1>"${_flsnr}" 2>&1
 	_ret=$?
 	if [ ${_ret} -eq 0 ]; then
-		msgout "OK" " \b"
+		msgOut "OK" " \b"
 	else
-		msgout "NOT OK" " \b"
-		msgerr "unable to start ${_name} listener"
+		msgOut "NOT OK" " \b"
+		msgErr "unable to start ${_name} listener"
 	fi
 
 	return ${_ret}

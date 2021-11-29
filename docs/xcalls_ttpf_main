@@ -1,10 +1,10 @@
 ttpf_main
 
 	ttpf_trap_int
-		msgout
-			msgoutPrefix						use if set opt_stamp, ttp_command, ttp_verb
+		msgOut
+			msgOutPrefix						use if set opt_stamp, ttp_command, ttp_verb
 	ttpf_trap_exit
-		msgout
+		msgOut
 
 	commandGetPath								set ttp_command, ttp_command_path
 
@@ -13,13 +13,13 @@ ttpf_main
 
 	nodeGetName									try to set a suitable ttp_node
 		osEnumMountPoints
-			msgerr
-				msgout
-					msgoutPrefix
+			msgErr
+				msgOut
+					msgOutPrefix
 				msglog
 					pathGetLogsdir
 						pathGetDailyLogsdir
-					msglogPrefix
+					msgLogPrefix
 		tabListCurrents
 			confFindFile
 				ttpEnumRoots
@@ -27,7 +27,7 @@ ttpf_main
 			tabOneLine
 		nodeFromHost
 			strLower
-	msgerr
+	msgErr
 	verbIncrCode
 	confFindFile
 	confLoadKeys
@@ -43,7 +43,7 @@ ttpf_main
 	scriptListVerbs
 		scriptEnumDirs
 	scriptFindVerb
-	msgout
+	msgOut
 	commandMunge
 		pathMunge
 	optLoadArgDefinitions

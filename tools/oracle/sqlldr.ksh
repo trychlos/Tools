@@ -99,7 +99,7 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
@@ -107,12 +107,12 @@ function verb_arg_check {
 	#  else will be read from stdin
 	if [ "${opt_data}" != "-" -a "${opt_data}" != "\*" ]; then
 		if [ ! -r "${opt_data}" ]; then
-			msgerr "${opt_data}: data file not found or not available"
+			msgErr "${opt_data}: data file not found or not available"
 			let _ret+=1
 		else
 			typeset _sufix="${opt_data##*.}"
 			if [ "${_sufix}" != "dat" ]; then
-				msgerr "${opt_data}: data file must have a '.dat'-suffix"
+				msgErr "${opt_data}: data file must have a '.dat'-suffix"
 				let _ret+=1
 			fi
 		fi
@@ -121,15 +121,15 @@ function verb_arg_check {
 	# control data file is mandatory
 	#  and must be exists
 	if [ -z "${opt_control}"  ]; then
-		msgerr "'--control' control format file is mandatory"
+		msgErr "'--control' control format file is mandatory"
 		let _ret+=1
 	elif [ ! -r "${opt_control}" ]; then
-		msgerr "${opt_control}: control file not found or not available"
+		msgErr "${opt_control}: control file not found or not available"
 		let _ret+=1
 	else
 		typeset _sufix="${opt_control##*.}"
 		if [ "${_sufix}" != "ctl" ]; then
-			msgerr "${opt_control}: data file must have a '.ctl'-suffix"
+			msgErr "${opt_control}: data file must have a '.ctl'-suffix"
 			let _ret+=1
 		fi
 	fi
@@ -168,7 +168,7 @@ function f_output {
 	typeset _value="$(echo $(eval echo '${opt_'${_opt}'}'))"
 	if [ -z "${_value}" -o "${_value}" = "auto" ]; then
 		eval $(echo 'opt_'${_opt}="$(pathGetTempFile "${_def}")")
-		msgout "output '${_opt}' file goes to $(echo $(eval echo '${opt_'${_opt}'}'))"
+		msgOut "output '${_opt}' file goes to $(echo $(eval echo '${opt_'${_opt}'}'))"
 	fi
 }
 
@@ -201,7 +201,7 @@ function verb_main {
 		else
 			typeset _host="$(tabGetMachine "${opt_service}")"
 			if [ -z "${_host}" ]; then
-				msgerr "'${opt_service}': unknown service mnemonic"
+				msgErr "'${opt_service}': unknown service mnemonic"
 				return 1
 			fi
 
@@ -268,7 +268,7 @@ function verb_main {
 	fi
 	typeset -i _retldr=$?
 	[ ${_retldr} -gt 0 ] && let _ret=1
-	msgout "sqlldr returns with code ${_retldr}"
+	msgOut "sqlldr returns with code ${_retldr}"
 
 	typeset -i _nberrs=0
 	[ -s ${opt_bad} ] && _nberrs+=$(wc -l ${opt_bad} | awk '{ print $1 }')
@@ -283,8 +283,8 @@ function verb_main {
 			print "log> $_\n";
 		}' "${opt_logs}"
 	fi
-	msgout "${_nbrows} rows successfully loaded"
-	msgout "${_nberrs} bad or discarded input records"
+	msgOut "${_nbrows} rows successfully loaded"
+	msgOut "${_nberrs} bad or discarded input records"
 	[ ${_nberrs} -gt ${opt_maxerrors} ] && let _ret+=1
 
 	return ${_ret}

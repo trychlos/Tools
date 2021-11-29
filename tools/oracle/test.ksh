@@ -87,14 +87,14 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
 	# at least one option must be specified
 	if [ "${opt_listener}" = "no" -a \
 			"${opt_instance}" = "no" ]; then
-				msgerr "no valid option found, at least one is mandatory"
+				msgErr "no valid option found, at least one is mandatory"
 				let _ret+=1
 	fi
 
@@ -115,7 +115,7 @@ function verb_main {
 	typeset _host="$(tabGetMachine "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 
 	# we require to be locally logged in on the Oracle server
@@ -148,15 +148,15 @@ function verb_main {
 
 			# try to connect to database
 			if [ ${_ret} -eq 0 -a "${opt_connect}" = "yes" ]; then
-				msgout "connecting to the database..." "" " "
+				msgOut "connecting to the database..." "" " "
 				typeset _version="$(oracle.sh info -service "${opt_service}" -version -metrics | \
 									grep 'Oracle Database' | \
 									sed -e 's/^.*;\(.*\);\(.*\);.*$/\1 version \2/')"
 				if [ -z "${_version}" ]; then
-					msgout "NOT OK" " \b"
+					msgOut "NOT OK" " \b"
 					let _ret=1
 				else
-					msgout "OK: ${_version}" " \b"
+					msgOut "OK: ${_version}" " \b"
 				fi
 			fi
 		fi

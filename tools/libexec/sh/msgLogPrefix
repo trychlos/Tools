@@ -28,7 +28,7 @@
 # pwi 2006-10-27 the tools become The Tools Project, released under GPL
 # pwi 2017- 6-21 publish the release at last 
 
-function msglogPrefix
+function msgLogPrefix
 {
 	printf "$(date '+%Y%m%d %H%M%S') $(whoami) $$ ${TTP_NODE}"
 }

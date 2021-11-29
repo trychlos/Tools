@@ -30,10 +30,10 @@
 function svnGetRepoHead
 {
 	typeset _service="${1}"
-	[ -z "${_service}" ] && { msgerr "(svnGetHeadRevision) empty service arg."; return 1; } 
+	[ -z "${_service}" ] && { msgErr "(svnGetHeadRevision) empty service arg."; return 1; } 
 
 	typeset _repo="${2}"
-	[ -z "${_repo}" ] && { msgerr "(svnGetHeadRevision) empty repository arg."; return 1; } 
+	[ -z "${_repo}" ] && { msgErr "(svnGetHeadRevision) empty repository arg."; return 1; } 
 
 	typeset -i _ret=0
 

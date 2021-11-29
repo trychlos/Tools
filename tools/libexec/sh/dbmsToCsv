@@ -81,5 +81,5 @@ function dbmsToCsv
 		-with_headers="${_headers}" \
 		-with_counter="${_counter}" \
 		-csvsep="${ttp_csvsep:-;}" \
-		-msg="$(msgoutPrefix)"
+		-msg="$(msgOutPrefix)"
 }

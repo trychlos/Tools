@@ -78,7 +78,7 @@ function verb_arg_check {
 
 	# columns must be specified
 	if [ -z "${opt_columns}" ]; then
-		msgerr "output columns list is mandatory"
+		msgErr "output columns list is mandatory"
 		let _ret+=1
 	fi
 

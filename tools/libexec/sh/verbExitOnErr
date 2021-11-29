@@ -47,11 +47,11 @@ function verbExitOnErr
 		#  non existant verb
 		if [ "${_display}" = "yes" ]; then
 			if [ ${ttp_errs} -eq 1 ]; then
-				msgout "an error has been detected"
+				msgOut "an error has been detected"
 			else
-				msgout "${ttp_errs} errors have been detected"
+				msgOut "${ttp_errs} errors have been detected"
 			fi
-			msgout "try '${ttp_command} ${ttp_verb} --help' for usage"
+			msgOut "try '${ttp_command} ${ttp_verb} --help' for usage"
 		fi
 
 		# exiting...

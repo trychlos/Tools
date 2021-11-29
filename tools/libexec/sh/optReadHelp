@@ -81,7 +81,7 @@ function optReadHelp
 		opt_help="${opt_help:-"${opt_help_def}"}"
 	
 		if [ "${opt_help}" = "yes" ]; then
-			[ $# -gt 1 ] && msgout "'--help' option detected, other arguments are ignored"
+			[ $# -gt 1 ] && msgOut "'--help' option detected, other arguments are ignored"
 			scriptUsage
 			exit
 		fi

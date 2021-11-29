@@ -77,19 +77,19 @@ function verb_arg_check {
 
 	# the service identifier is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# the '--database' option should be specified, either an argument or not
 	if [ "${opt_database_set}" = "no" ]; then
-		msgerr "'--database[=<name>]' option is expected, has not been found"
+		msgErr "'--database[=<name>]' option is expected, has not been found"
 		let _ret+=1
 	fi
 
 	# the '--system' is only relevant when listing the databases
 	if [ "${opt_database_set}" = "yes" -a ! -z "${opt_database}" -a "${opt_system_set}" = "yes" ]; then
-		msgwarn "'--[no]system' option is only relevant when listing databases, ignored"
+		msgWarn "'--[no]system' option is only relevant when listing databases, ignored"
 		unset opt_system
 		opt_system_set="no"
 	fi
@@ -97,12 +97,12 @@ function verb_arg_check {
 	# '--[no]headers' and '--[no]counter' are only relevant when the
 	#  format is not 'RAW'
 	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_headers
 		opt_headers_set="no"
 	fi
 	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_counter
 		opt_counter_set="no"
 	fi
@@ -127,7 +127,7 @@ function f_db_filter_system {
 		typeset _counter="${opt_counter}"
 		[ "${opt_format}" = "RAW" ] && _counter="no"
 		awk -v headers=${opt_headers} \
-			-v prefix="$(msgoutPrefix)" \
+			-v prefix="$(msgOutPrefix)" \
 			-v counter=${_counter} '
 			BEGIN {
 				count=0
@@ -196,7 +196,7 @@ function f_tab_prepend_db_to_csv {
 			printf( "%s%d displayed row(s)\n", $prefix, $row-1 ) if $with_counter eq "yes";
 		}' -- \
 			-database="${opt_database}" \
-			-prefix="$(msgoutPrefix)" \
+			-prefix="$(msgOutPrefix)" \
 			-csvsep="${ttp_csvsep:-;}" \
 			-with_headers="${_headers}" \
 			-with_counter="${_counter}"

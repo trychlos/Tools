@@ -50,7 +50,7 @@ case "${_bname}" in
 	ksh)
 		_profile=".profile";;
 	*)
-		msgerr "(sh_remote) account=${_user} unmanaged shell=${_shell}";;
+		msgErr "(sh_remote) account=${_user} unmanaged shell=${_shell}";;
 esac
 [ -r "${_profile}" ] && . "${_profile}"
 unset _profile

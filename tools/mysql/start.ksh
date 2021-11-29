@@ -67,7 +67,7 @@ function verb_arg_check {
 
 	# the service identifier is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
@@ -83,7 +83,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 
 	elif [ "${_node}" != "${TTP_NODE}" ]; then
@@ -96,7 +96,7 @@ function verb_main {
 		# check the service type
 		typeset _type="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
 		if [ "${_type}" != "mysql" ]; then
-			msgerr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
+			msgErr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
 			let _ret+=1
 
 		else
@@ -115,7 +115,7 @@ function verb_main {
 				# check that the instance is not running
 				mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
 				if [ $? -eq 0 ]; then
-					msgout "${opt_service}: service is already up and running"
+					msgOut "${opt_service}: service is already up and running"
 	
 				# start the instance, and re-check
 				else
@@ -127,9 +127,9 @@ function verb_main {
 					done
 					mysql.sh test -service "${opt_service}" -nostatus 1>/dev/null 2>&1
 					if [ $? -eq 0 ]; then
-						msgout "${opt_service}: service is successfully started"
+						msgOut "${opt_service}: service is successfully started"
 					else
-						msgerr "${opt_service}: unable to start the service"
+						msgErr "${opt_service}: unable to start the service"
 						let _ret+=1
 					fi
 				fi

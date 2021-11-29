@@ -27,12 +27,13 @@
 # pwi 1999- 3-11 all error messages are logged
 # pwi 2002- 6-26 use local variables, remove shebang line
 # pwi 2006-10-27 the tools become The Tools Project, released under GPL
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-11-29 renamed as msgWarn (todo #67)
 
-function msgwarn
+function msgWarn
 {
 	typeset _msg="warning: ${1}"
 
-	msgout "${_msg}" 1>&2
+	msgOut "${_msg}" 1>&2
 	msgLog "${_msg}"
 }

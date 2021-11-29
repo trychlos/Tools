@@ -84,7 +84,7 @@ function verb_arg_check {
 	[ "${opt_default}" = "yes" ] && let _action+=1
 	[ -z "${opt_node}" ] || let _action+=1
 	if [ ${_action} -ne 1 ]; then
-		msgerr "one of '--default' or '--node=<name>' option must be specified"
+		msgErr "one of '--default' or '--node=<name>' option must be specified"
 		let _ret+=1
 	fi
 
@@ -103,14 +103,14 @@ function verb_main {
 	if [ "${opt_default}" = "yes" ]; then
 		_node="$(bspNodeFindCandidate)"
 		if [ -z "${_node}" ]; then
-			msgerr "no available execution node on this host"
+			msgErr "no available execution node on this host"
 			return 1
 		fi
 
 	else
 		_node="$(bspNodeEnum | grep -w "${opt_node}" 2>/dev/null)"
 		if [ -z "${_node}" ]; then
-			msgerr "'${opt_node}': execution node not found or not available on this host"
+			msgErr "'${opt_node}': execution node not found or not available on this host"
 			return 1
 		fi
 	fi

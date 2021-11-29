@@ -47,7 +47,7 @@ function formatOutput
 		csvToTabular "${_headers}"
 
 	else
-		msgerr "${_format}: unmanaged display format"
+		msgErr "${_format}: unmanaged display format"
 	fi
 
 	return ${_ret}

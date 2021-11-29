@@ -90,7 +90,7 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
@@ -98,7 +98,7 @@ function verb_arg_check {
 	if [ "${opt_listener}" = "no" -a \
 			"${opt_instance}" = "no" -a \
 			"${opt_manager}" = "no" ]; then
-				msgerr "no valid option found, at least one is mandatory"
+				msgErr "no valid option found, at least one is mandatory"
 				let _ret+=1
 	fi
 
@@ -106,10 +106,10 @@ function verb_arg_check {
 	#  database instance
 	if [ "${opt_pfile_set}" = "yes" -o "${opt_spfile_set}" = "yes" ]; then
 		if [ "${opt_instance}" = "no" ]; then
-			msgerr "'--pfile' or '--spfile' can only be used when starting the instance"
+			msgErr "'--pfile' or '--spfile' can only be used when starting the instance"
 			let _ret+=1
 		elif [ "${opt_pfile_set}" = "yes" -a "${opt_spfile_set}" = "yes" ]; then
-			msgerr "'--pfile' and '--spfile' options are mutually exclusive"
+			msgErr "'--pfile' and '--spfile' options are mutually exclusive"
 			let _ret+=1
 		fi
 	fi
@@ -117,20 +117,20 @@ function verb_arg_check {
 	# pfile/spfile files must exist
 	if [ "${opt_pfile_set}" = "yes" ]; then
 		if [ ! -s "${opt_pfile}" ]; then
-			msgerr "'${opt_pfile}': parameter file not found or not available"
+			msgErr "'${opt_pfile}': parameter file not found or not available"
 			let _ret+=1
 		fi
 	fi
 	if [ "${opt_spfile_set}" = "yes" ]; then
 		if [ ! -s "${opt_spfile}" ]; then
-			msgerr "'${opt_spfile}': server parameter file not found or not available"
+			msgErr "'${opt_spfile}': server parameter file not found or not available"
 			let _ret+=1
 		fi
 	fi
 
 	# mount mode is only allowed when starting a database instance
 	if [ "${opt_mode_set}" = "yes" -a "${opt_instance}" = "no" ]; then
-		msgerr "'--mode' option is only allowed when starting a database instance"
+		msgErr "'--mode' option is only allowed when starting a database instance"
 		let _ret+=1
 	fi
 
@@ -143,7 +143,7 @@ function verb_arg_check {
 				"${opt_mode_upper}" != "RESTRICT" -a \
 				"${opt_mode_upper}" != "FORCE" -a \
 				"${opt_mode_upper}" != "RECOVER" ]; then
-					msgerr "${_opt_mode}: invalid startup mode"
+					msgErr "${_opt_mode}: invalid startup mode"
 					let _ret+=1
 		fi
 	fi
@@ -166,11 +166,11 @@ function verb_main {
 	typeset _user="$(oraGetOwner "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 	fi
 	if [ -z "${_user}" ]; then
-		msgerr "'${opt_service}': unable to find owner account"
+		msgErr "'${opt_service}': unable to find owner account"
 		let _ret+=1
 	fi
 	verbExitOnErr ${_ret}
@@ -191,7 +191,7 @@ function verb_main {
 		# check that the listener is not already running
 		oracle.sh test -service "${opt_service}" -listener 1>/dev/null 2>&1
 		if [ $? -eq 0 ]; then
-			msgout "listener for ${opt_service} is already running"
+			msgOut "listener for ${opt_service} is already running"
 		else
 			oraStartListener "${opt_service}"
 			let _ret+=$?
@@ -201,7 +201,7 @@ function verb_main {
 				oracle.sh test -service "${opt_service}" -listener 1>/dev/null 2>&1
 				let _ret=$?
 				if [ ${_ret} -ne 0 ]; then
-					msgerr "${opt_service} listener has not been started"
+					msgErr "${opt_service} listener has not been started"
 					fi
 				fi
 			fi
@@ -213,7 +213,7 @@ function verb_main {
 			# check that the instance is not running
 		oracle.sh test -service "${opt_service}" -instance 1>/dev/null 2>&1
 		if [ $? -eq 0 ]; then
-			msgout "${opt_service} database instance is already running"
+			msgOut "${opt_service} database instance is already running"
 
 			# starting the instance with the required mode
 		else
@@ -243,7 +243,7 @@ function verb_main {
 				oracle.sh test -service "${opt_service}" -instance ${_tests[${opt_mode_upper}]} 1>/dev/null 2>&1
 				_ret=$?
 				if [ ${_ret} -ne 0 ]; then
-					msgerr "${opt_service} database instance has not been started"
+					msgErr "${opt_service} database instance has not been started"
 					
 			fi
 		fi

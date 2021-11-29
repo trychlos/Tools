@@ -82,20 +82,20 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# a repository name must be specified
 	if [ -z "${opt_repository}" ]; then
-		msgerr "repository name is mandatory, has not been found"
+		msgErr "repository name is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# if specified, the first revision to be dumped must be > 1
 	if [ ! -z "${opt_since}" ]; then
 		if [ ${opt_since} -lt 1 ]; then
-			msgerr "first revision to be dumped must be greater than 0, found ${opt_since}"
+			msgErr "first revision to be dumped must be greater than 0, found ${opt_since}"
 			let _ret+=1
 		fi
 	fi
@@ -116,7 +116,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 
 	elif [ "${_node}" != "${TTP_NODE}" ]; then
@@ -130,13 +130,13 @@ function verb_main {
 		# has permissions to execute the svnadmin binary
 		svnadmin --version 1>/dev/null 2>&1
 		if [ $? -ne 0 ]; then
-			msgerr "'svnadmin': not found or not available"
+			msgErr "'svnadmin': not found or not available"
 			let _ret+=1
 
 		else
 			typeset _repodir="$(svnGetRepoPath "${opt_service}" "${opt_repository}")"
 			if [ -z "${_repodir}" ]; then
-				msgerr "'${opt_repository}': unknown repository name"
+				msgErr "'${opt_repository}': unknown repository name"
 				let _ret+=1
 
 			else
@@ -171,10 +171,10 @@ function verb_main {
 				#  do not save if there is no new revision
 				if [ ${_first} -le ${_head} ]; then
 					typeset _destfile="${_destdir}/svn-${_first}-${_head}.tar.gz"
-					msgout "dumping new revisions into ${_destfile}"
+					msgOut "dumping new revisions into ${_destfile}"
 					execDummy "svnadmin dump --revision ${_first}:${_head} --incremental ${_repodir} | gzip > '${_destfile}'"
 				else
-					msgout "${pos_repo}: last saved was ${_last}, head is ${_head}: nothing to dump"
+					msgOut "${pos_repo}: last saved was ${_last}, head is ${_head}: nothing to dump"
 				fi
 			fi
 		fi

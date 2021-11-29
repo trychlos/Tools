@@ -80,21 +80,21 @@ function verb_arg_check {
 
 	# the service identifier is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, was not found"
+		msgErr "service identifier is mandatory, was not found"
 		let _ret+=1
 	fi
 
 	# columns, headers or format have only sense when listing repositories
 	#if [ "${opt_columns_set}" = "yes" -a "${opt_repository}" = "no" ]; then
-	#	msgerr "--columns option has only sense when listing repositories"
+	#	msgErr "--columns option has only sense when listing repositories"
 	#	let _ret+=1
 	#fi
 	#if [ "${opt_headers_set}" = "yes" -a "${opt_repository}" = "no" ]; then
-	#	msgerr "--headers option has only sense when listing repositories"
+	#	msgErr "--headers option has only sense when listing repositories"
 	#	let _ret+=1
 	#fi
 	#if [ "${opt_format_set}" = "yes" -a "${opt_repository}" = "no" ]; then
-	#	msgerr "--format option has only sense when listing repositories"
+	#	msgErr "--format option has only sense when listing repositories"
 	#	let _ret+=1
 	#fi
 
@@ -118,7 +118,7 @@ function verb_arg_check {
 				disp_columns="${disp_columns} URL"
 				;;
 			*)
-				msgerr "'--columns' option value must be 'ALL', 'NAME', 'PATH', 'SERVICE' or 'URL', '${opt_columns}' found"
+				msgErr "'--columns' option value must be 'ALL', 'NAME', 'PATH', 'SERVICE' or 'URL', '${opt_columns}' found"
 				let _ret+=1
 		esac
 	done
@@ -218,7 +218,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 	
 	elif [ "${_node}" != "${TTP_NODE}" ]; then
@@ -231,7 +231,7 @@ function verb_main {
 		# check the service type
 		typeset _type="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
 		if [ "${_type}" != "svn" ]; then
-			msgerr "${opt_service}: service is of '${_type}' type, while 'svn' was expected"
+			msgErr "${opt_service}: service is of '${_type}' type, while 'svn' was expected"
 			let _ret+=1
 
 		# List the available repositories
@@ -253,11 +253,11 @@ function verb_main {
 						done;
 					} | formatOutput "${disp_format}" "${opt_headers}"
 					typeset -i _count=$(varGet count)
-					msgout "${_count} displayed row(s)"
+					msgOut "${_count} displayed row(s)"
 					;;
 
 				*)
-					msgerr "'${_mode}': unknown running mode"
+					msgErr "'${_mode}': unknown running mode"
 					let _ret+=1
 			esac
 		fi

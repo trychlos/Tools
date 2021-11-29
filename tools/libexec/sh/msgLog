@@ -46,9 +46,9 @@ function msgLog
 	[ -z "${ttp_logsroot}" ] && ttp_logsroot="$(pathGetLogsRoot)"
 
 	if [ ! -z "${ttp_logsroot}" ]; then
-		typeset _msgout="$(msgout "${1}")"
-		typeset _msgpfx="$(msglogPrefix)"
-		echo "${_msgpfx} ${_msgout}" >> "${ttp_logsroot}/${_file}"
+		typeset _msgOut="$(msgOut "${1}")"
+		typeset _msgpfx="$(msgLogPrefix)"
+		echo "${_msgpfx} ${_msgOut}" >> "${ttp_logsroot}/${_file}"
 	fi
 
 	return 0

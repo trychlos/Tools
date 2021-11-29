@@ -65,15 +65,15 @@ SPFILE = ${_spfile}
 	oraSetEnv "${_service}"
 	[ $? -gt 0 ] && return 1
 
-	msgout "starting ${ORACLE_SID} instance." "" " \b"
+	msgOut "starting ${ORACLE_SID} instance." "" " \b"
 	ttpf_timeout ${_timeout} 2 "${_fnstart}" "${_clause}"
 	_ret=$?
 	if [ ${_ret} -eq 0 ]; then
-		msgout "OK" " "
+		msgOut "OK" " "
 	else
 		let _ret=1
-		msgout "NOT OK" " "
-		msgerr "$0: unable to start ${ORACLE_SID} instance in $(echo ${_mode} | strLower) mode"
+		msgOut "NOT OK" " "
+		msgErr "$0: unable to start ${ORACLE_SID} instance in $(echo ${_mode} | strLower) mode"
 	fi
 
 	# display the output of the startup command

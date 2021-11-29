@@ -52,7 +52,7 @@ function nodeGetEnvironment
 			if [ -r "${_file}" ]; then
 				nodeGetEnvironment "${_file}"
 			else
-				msgerr "${_node}: node configuration file not found"
+				msgErr "${_node}: node configuration file not found"
 				let _ret+=1
 			fi
 		fi

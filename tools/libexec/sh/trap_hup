@@ -31,5 +31,5 @@
 
 trap_hup()
 {
-	msgout "caught HUP signal"
+	msgOut "caught HUP signal"
 }

@@ -68,17 +68,17 @@ function verb_arg_check {
 
 	# a directory must be specified, and exist
 	if [ -z "${opt_dir}" ]; then
-		msgerr "'--dir' option is mandatory, has not been found"
+		msgErr "'--dir' option is mandatory, has not been found"
 		let _ret+=1
 	elif [ ! -d "${opt_dir}" ]; then
-		msgerr "${opt_dir}: directory not found or not readable"
+		msgErr "${opt_dir}: directory not found or not readable"
 		let _ret+=1
 	fi
 
 	# a prefix should have been specified, unless *all* files of this
 	#  same directory be managed
 	if [ -z "${opt_prefix}" ]; then
-		msgwarn "'--prefix' option should be specified unless all files of the directory are managed"
+		msgWarn "'--prefix' option should be specified unless all files of the directory are managed"
 	fi 
 
 	# one of --generations or --days must be specified
@@ -86,18 +86,18 @@ function verb_arg_check {
 	[ "${opt_generations_set}" = "yes" ] && let _action+=1
 	[ "${opt_update_set}" = "yes" ] && let _action+=1
 	if [ ${_action} -ne 1 ]; then
-		msgerr "one of '--generations' or '--update' option must be specified"
+		msgErr "one of '--generations' or '--update' option must be specified"
 		let _ret+=1
 
 	elif [ "${opt_generations_set}" = "yes" ]; then
 		if [ ${opt_generations} -lt 1 ]; then
-			msgerr "at least one generation of files should be kept, '${opt_generations}' found"
+			msgErr "at least one generation of files should be kept, '${opt_generations}' found"
 			let _ret+=1
 		fi
 
 	elif [ "${opt_update_set}" = "yes" ]; then
 		if [ ${opt_update} -lt 1 ]; then
-			msgerr "at least one update old of files should be kept, '${opt_update}' found"
+			msgErr "at least one update old of files should be kept, '${opt_update}' found"
 			let _ret+=1
 		fi
 	fi

@@ -84,32 +84,32 @@ function verb_arg_check {
 
 	# the service identifier is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# at least an empty --database option must be specified
 	if [ "${opt_database_set}" != "yes" ]; then
-		msgerr "at least an empty '--database' option must be specified"
+		msgErr "at least an empty '--database' option must be specified"
 		let _ret+=1
 	fi
 
 	# if a table is named, then a database must be chosen
 	if [ "${opt_table}" != "ALL" -a "${opt_database}" = "ALL" ]; then
-		msgerr "'--table=<name>' option can only be specified if a '--database=<name>' has been selected"
+		msgErr "'--table=<name>' option can only be specified if a '--database=<name>' has been selected"
 		let _ret+=1
 	fi
 
 	# '--system' is only relevant when dumping all databases
 	if [ "${opt_system_set}" = "yes" -a "${opt_database}" != "ALL" ]; then
-		msgwarn "'--[no]system' option is not relevant when dumping a specified database, ignored"
+		msgWarn "'--[no]system' option is not relevant when dumping a specified database, ignored"
 		unset opt_system
 		opt_system_set="no"
 	fi
 
 	# the output file is mandatory
 	if [ -z "${opt_dumpto}" ]; then
-		msgerr "output dump file is mandatory, has not been found"
+		msgErr "output dump file is mandatory, has not been found"
 		let _ret+=1
 	fi
 
@@ -159,12 +159,12 @@ function f_compress {
 
 	if [ ${_ret} -eq 0 ]; then
 		if [ "${opt_gz}" = "yes" ]; then
-			msgout "dumping ${_bname} to ${_foutput}.gz"
+			msgOut "dumping ${_bname} to ${_foutput}.gz"
 			execDummy gzip > "${_foutput}.gz"
 			let _ret=$?
 		
 		else
-			msgout "dumping ${_bname} to ${_foutput}"
+			msgOut "dumping ${_bname} to ${_foutput}"
 			cat - > "${_foutput}"
 			let _ret=$?
 		fi
@@ -182,7 +182,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 
 	elif [ "${_node}" != "${TTP_NODE}" ]; then
@@ -195,7 +195,7 @@ function verb_main {
 		# check the service type
 		typeset _type="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
 		if [ "${_type}" != "mysql" ]; then
-			msgerr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
+			msgErr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
 			let _ret+=1
 
 		else
@@ -203,7 +203,7 @@ function verb_main {
 			which mysqldump 1>/dev/null 2>&1
 			let _ret=$?
 			if [ ${_ret} -ne 0 ]; then
-				msgerr "${opt_service}: 'mysqldump' required, not found or not available"
+				msgErr "${opt_service}: 'mysqldump' required, not found or not available"
 				let _ret+=1
 	
 			# save all databases (

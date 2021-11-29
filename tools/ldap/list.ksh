@@ -68,13 +68,13 @@ function verb_arg_check {
 
 	# host is mandatory
 	if [ -z "${opt_host}" ]; then
-		msgerr "LDAP host is mandatory, has not been found"
+		msgErr "LDAP host is mandatory, has not been found"
 		let _ret+=1
 	fi
 
 	# root is mandatory
 	if [ -z "${opt_root}" ]; then
-		msgerr "LDAP root DN is mandatory, has not been found"
+		msgErr "LDAP root DN is mandatory, has not been found"
 		let _ret+=1
 	fi
 

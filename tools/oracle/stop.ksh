@@ -77,14 +77,14 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service mnemonic is mandatory, was not found"
+		msgErr "service mnemonic is mandatory, was not found"
 		let _ret+=1
 	fi
 
 	# at least one option must be specified
 	if [ "${opt_listener}" = "no" -a \
 			"${opt_instance}" = "no" ]; then
-				msgerr "no valid option found, at least one is mandatory"
+				msgErr "no valid option found, at least one is mandatory"
 				let _ret+=1
 	fi
 
@@ -95,7 +95,7 @@ function verb_arg_check {
 				"${opt_mode_upper}" != "IMMEDIATE" -a \
 				"${opt_mode_upper}" != "TRANSACTIONAL" -a \
 				"${opt_mode_upper}" != "ABORT" ]; then
-					msgerr "${opt_mode}: invalid shutdown mode"
+					msgErr "${opt_mode}: invalid shutdown mode"
 					let _ret+=1
 		fi
 	fi
@@ -103,7 +103,7 @@ function verb_arg_check {
 	# shutdown mode only applies when stopping a database instance
 	if [ "${opt_mode_set}" = "yes" -a \
 			"${opt_instance}" = "no" ]; then
-				msgerr "shutdown mode only applies when stopping the instance"
+				msgErr "shutdown mode only applies when stopping the instance"
 				let _ret+=1
 	fi
 
@@ -121,11 +121,11 @@ function verb_main {
 	typeset _user="$(oraGetOwner "${opt_service}")"
 
 	if [ -z "${_host}" ]; then
-		msgerr "'${opt_service}': unknown service mnemonic"
+		msgErr "'${opt_service}': unknown service mnemonic"
 		let _ret+=1
 
 	elif [ -z "${_user}" ]; then
-		msgerr "'${opt_service}': unable to find owner account"
+		msgErr "'${opt_service}': unable to find owner account"
 		let _ret+=1
 
 	elif [ "${_host}" != "${ttp_logical}" -o "${_user}" != "${USER}" ]; then
@@ -144,7 +144,7 @@ function verb_main {
 			typeset _name="$(oraGetListener "${opt_service}")"
 			typeset -i _count=$(ps -e -o cmd | grep tnslsnr | grep "${_name}" | wc -l)
 			if [ ${_count} -eq 0 ]; then
-				msgout "listener for ${opt_service} is not running"
+				msgOut "listener for ${opt_service} is not running"
 			else
 				oraStopListener "${opt_service}" "${_name}"
 				let _ret+=$?
@@ -158,7 +158,7 @@ function verb_main {
 			#  if not running, this is fine for this verb
 			typeset -i _count=$(ps -e -o cmd | grep -e "^ora_.\+_${ORACLE_SID}" | wc -l)
 			if [ ${_count} -eq 0 ]; then
-				msgout "${opt_service} database is not running"
+				msgOut "${opt_service} database is not running"
 
 			# only then, try to stop the instance
 			else

@@ -44,7 +44,7 @@ function formatCheck
 			echo "TABULAR"
 			;;
 		*)
-			msgerr "'--format' option value must be 'CSV', 'RAW' or 'TABULAR', '${_opt_format}' found"
+			msgErr "'--format' option value must be 'CSV', 'RAW' or 'TABULAR', '${_opt_format}' found"
 			let _ret+=1
 	esac
 

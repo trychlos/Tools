@@ -44,7 +44,7 @@ function oraSidToHome
 	if [ -z "${_home}" ]; then
 		_home="$(cat "${_oratab}" | tabExtract "" "1=${_sid}" 2)"
 		if [ -z "${_home}" -o ! -d "${_home}" ]; then
-			msgerr "${_home}: Oracle software home directory empty or not found"
+			msgErr "${_home}: Oracle software home directory empty or not found"
 			return 1
 		fi
 	fi

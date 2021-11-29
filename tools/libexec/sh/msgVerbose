@@ -31,5 +31,5 @@
 
 function msgVerbose
 {
-	[ "${opt_verbose}" = "yes" ] && msgout "$@"
+	[ "${opt_verbose}" = "yes" ] && msgOut "$@"
 }

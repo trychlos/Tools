@@ -29,7 +29,7 @@
 function serviceSetenv
 {
 	typeset _service="${1}"
-	[ -z "${_service}" ] && { msgerr "(serviceSetenv) empty service"; return 1; }
+	[ -z "${_service}" ] && { msgErr "(serviceSetenv) empty service"; return 1; }
 
 	typeset -i _ret=0
 

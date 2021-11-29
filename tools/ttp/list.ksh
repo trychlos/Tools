@@ -94,34 +94,34 @@ function verb_arg_check {
 	[ "${opt_services}" = "yes" ] && let _action+=1
 	[ "${opt_nodes}" = "yes" ] && let _action+=1
 	if [ ${_action} -eq 0 ]; then
-		msgerr "at least one of '--commands', '--nodes', '--services' or '--vars' option must be specified"
+		msgErr "at least one of '--commands', '--nodes', '--services' or '--vars' option must be specified"
 		let _ret+=1
 	fi
 
 	# a node is only relevant when asking for services
 	if [ ! -z "${opt_node}" -a "${opt_services}" = "no" ]; then
-		msgwarn "'--node=<name>' option is only relevant when asking for list of services, ignored"
+		msgWarn "'--node=<name>' option is only relevant when asking for list of services, ignored"
 		unset opt_node
 		opt_node_set="no"
 	fi
 
 	# a service is only relevant when asking for nodes
 	if [ ! -z "${opt_service}" -a "${opt_nodes}" = "no" ]; then
-		msgwarn "'--service=<identifier>' option is only relevant when asking for list of nodes, ignored"
+		msgWarn "'--service=<identifier>' option is only relevant when asking for list of nodes, ignored"
 		unset opt_service
 		opt_service_set="no"
 	fi
 
 	# label is only relevant when asking for services
 	if [ "${opt_label_set}" = "yes" -a "${opt_services}" = "no" ]; then
-		msgwarn "'--[no]label' option is only relevant when asking for list of services, ignored"
+		msgWarn "'--[no]label' option is only relevant when asking for list of services, ignored"
 		unset opt_label
 		opt_label_set="no"
 	fi
 
 	# no both -environment and -service
 	if [ ! -z "${opt_environment}" -a ! -z "${opt_service}" ]; then
-		msgerr "'--environment=<identifier>' and '--service=<identifier>' options are mutually exclusives"
+		msgErr "'--environment=<identifier>' and '--service=<identifier>' options are mutually exclusives"
 		let _ret+=1
 	fi
 
@@ -129,19 +129,19 @@ function verb_arg_check {
 	if [ ! -z "${opt_environment}" \
 			-a "${opt_services}" = "no" \
 			-a "${opt_nodes}" = "no" ]; then
-		msgerr "specifying an environment is only allowed when listing nodes or services"
+		msgErr "specifying an environment is only allowed when listing nodes or services"
 		let _ret+=1
 	fi
 
 	# '--[no]headers' and '--[no]counter' are only relevant when the
 	#  format is not 'RAW'
 	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_headers
 		opt_headers_set="no"
 	fi
 	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_counter
 		opt_counter_set="no"
 	fi
@@ -180,12 +180,12 @@ function f_commands_list {
 	typeset -i _count=0
 	typeset _line
 
-	msgout "displaying available commands..."
+	msgOut "displaying available commands..."
 	f_commands_all | while read _line; do
 		echo " ${_line}"
 		let _count+=1
 	done
-	msgout "${_count} displayed command(s)"
+	msgOut "${_count} displayed command(s)"
 
 	return 0
 }
@@ -247,9 +247,9 @@ function f_nodes_byenv_list {
 	typeset _env
 
 	if [ -z "${opt_environment}" ]; then
-		msgout "displaying registered execution nodes..."
+		msgOut "displaying registered execution nodes..."
 	else
-		msgout "displaying nodes which participate to '${opt_environment}' environment..."
+		msgOut "displaying nodes which participate to '${opt_environment}' environment..."
 	fi
 
 	f_nodes_all | while read _node _env; do
@@ -260,7 +260,7 @@ function f_nodes_byenv_list {
 		fi
 	done
 
-	msgout "${_count} displayed node(s)"
+	msgOut "${_count} displayed node(s)"
 
 	return ${_ret}
 }
@@ -312,7 +312,7 @@ function f_nodes_byserv_list {
 	typeset _node
 	typeset _service
 
-	msgout "displaying nodes which host '${opt_service}' service..."
+	msgOut "displaying nodes which host '${opt_service}' service..."
 	f_services_all | while read _node _service; do
 		if [ "${_service}" = "${opt_service}" ]; then
 			echo -n " ${_node}: ${_service}"
@@ -321,7 +321,7 @@ function f_nodes_byserv_list {
 		fi
 	done
 
-	msgout "${_count} displayed node(s)"
+	msgOut "${_count} displayed node(s)"
 
 	return ${_ret}
 }
@@ -420,7 +420,7 @@ function f_services_bynode_list {
 	typeset -i _count=0
 
 	if [ -z "${opt_node}" ]; then
-		msgout "displaying available services for current node..."
+		msgOut "displaying available services for current node..."
 		typeset -n _vname="ttp_node_keys"
 		typeset _value
 		for _value in "${_vname[@]}"; do
@@ -432,7 +432,7 @@ function f_services_bynode_list {
 		done
 
 	else
-		msgout "displaying available services for '${opt_node}' node..."
+		msgOut "displaying available services for '${opt_node}' node..."
 		typeset _node
 		typeset _service
 		f_services_all | while read _node _service; do
@@ -444,7 +444,7 @@ function f_services_bynode_list {
 		done
 	fi
 
-	msgout "${_count} displayed service(s)"
+	msgOut "${_count} displayed service(s)"
 
 	return ${_ret}
 }
@@ -495,7 +495,7 @@ function f_services_byenv_list {
 	typeset _env
 	typeset _label
 
-	msgout "displaying available services in '${opt_environment}' environment..."
+	msgOut "displaying available services in '${opt_environment}' environment..."
 	f_services_all | while read _node _service; do
 		_env="$(nodeGetEnvironment "${_node}")"
 		if [ "${_env}" = "${opt_environment}" ]; then
@@ -504,7 +504,7 @@ function f_services_byenv_list {
 			let _count+=1
 		fi
 	done
-	msgout "${_count} displayed service(s)"
+	msgOut "${_count} displayed service(s)"
 
 	return ${_ret}
 }
@@ -569,11 +569,11 @@ function f_variables_list {
 	typeset -i _ret=0
 
 	typeset -i _count=0
-	msgout "displaying global TTP variables..."
+	msgOut "displaying global TTP variables..."
 	set | grep -e '^TTP_' | while read l; do echo " $l"; let _count+=1; done
-	msgout "displaying internal TTP variables..."
+	msgOut "displaying internal TTP variables..."
 	set | grep -e '^ttp_' | while read l; do echo " $l"; let _count+=1; done
-	msgout "${_count} displayed variable(s)"
+	msgOut "${_count} displayed variable(s)"
 
 	return ${_ret}
 }
@@ -595,7 +595,7 @@ function f_output {
 			| csvToTabular "${opt_headers}" "${opt_counter}"
 
 	else
-		msgerr "${disp_format}: unknown output format"
+		msgErr "${disp_format}: unknown output format"
 		let _ret+=1
 	fi
 

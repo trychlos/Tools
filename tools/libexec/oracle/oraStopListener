@@ -43,19 +43,19 @@ function oraStopListener
 	oraSetEnv "${_service}" "listener"
 	[ $? -gt 0 ] && return 1
 
-	msgout "stopping ${_name} listener..." "" " "
+	msgOut "stopping ${_name} listener..." "" " "
 	typeset _flsnr="$(pathGetTempFile listener)"
 	lsnrctl stop "${_name}" 1>"${_flsnr}" 2>&1
 	_ret=$?
 
 	if [ ${_ret} -ne 0 ]; then
-		msgout "NOT OK" " \b"
-		msgerr "unable to start ${_name} listener"
+		msgOut "NOT OK" " \b"
+		msgErr "unable to start ${_name} listener"
 
 	elif [ $(grep -c "completed successfully" ${_flsnr}) -eq 1 ]; then
-		msgout "OK" " \b"
+		msgOut "OK" " \b"
 	else
-		msgout "NOT OK" " \b"
+		msgOut "NOT OK" " \b"
 		cat "${_flsnr}"
 		_ret=1
 	fi

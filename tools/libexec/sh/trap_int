@@ -32,7 +32,7 @@
 
 trap_int()
 {
-	msgout "exiting on keyboard interrupt"
+	msgOut "exiting on keyboard interrupt"
 	[ ${ttp_code} -eq 0 ] && ttp_code=1
 	exit
 }

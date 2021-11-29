@@ -82,7 +82,7 @@ function verb_arg_check {
 
 	# the service mnemonic is mandatory
 	if [ -z "${opt_service}" ]; then
-		msgerr "service identifier is mandatory, has not been found"
+		msgErr "service identifier is mandatory, has not been found"
 		let _ret+=1
 	fi
 
@@ -93,17 +93,17 @@ function verb_arg_check {
 
 	# command, script or interactive
 	if [ ${_action} -eq 0 ]; then
-		msgerr "one of '--command', '--script' or '--interactive' options must be specified"
+		msgErr "one of '--command', '--script' or '--interactive' options must be specified"
 		let _ret+=1
 	elif [ ${_action} -gt 1 ]; then
-		msgerr "only one of '--command', '--script' or '--interactive' options must be specified"
+		msgErr "only one of '--command', '--script' or '--interactive' options must be specified"
 		let _ret+=1
 	fi
 
 	# if a script is specified, check that it exists
 	if [ "${opt_script_set}" = "yes" ]; then
 		if [ ! -r "${opt_script}" ]; then
-			msgerr "${opt_script}: script not found or not readable"
+			msgErr "${opt_script}: script not found or not readable"
 			let _ret+=1
 		fi
 	fi
@@ -111,12 +111,12 @@ function verb_arg_check {
 	# '--[no]headers' and '--[no]counter' are only relevant when the
 	#  format is not 'RAW'
 	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_headers
 		opt_headers_set="no"
 	fi
 	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgwarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
+		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
 		unset opt_counter
 		opt_counter_set="no"
 	fi
@@ -155,7 +155,7 @@ function verb_main {
 	# check which node hosts the required service
 	typeset _node="$(tabGetNode "${opt_service}")"
 	if [ -z "${_node}" ]; then
-		msgerr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
+		msgErr "'${opt_service}': no hosting node found (environment='${ttp_node_environment}')"
 		let _ret+=1
 
 	elif [ "${_node}" != "${TTP_NODE}" ]; then
@@ -176,7 +176,7 @@ function verb_main {
 		# check the service type
 		typeset _type="$(confGetKey ttp_node_keys ${opt_service} 0=service 1)"
 		if [ "${_type}" != "mysql" ]; then
-			msgerr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
+			msgErr "${opt_service}: service is of '${_type}' type, while 'mysql' was expected"
 			let _ret+=1
 
 		else
@@ -184,7 +184,7 @@ function verb_main {
 			if [ "${opt_test}" = "yes" ]; then
 				mysql.sh test -service "${opt_service}" -nostatus
 				if [ $? -ne 0 ]; then
-					msgerr "${opt_service}: DBMS instance is not running"
+					msgErr "${opt_service}: DBMS instance is not running"
 					let _ret+=1
 				fi
 			fi
@@ -223,7 +223,7 @@ function verb_main {
 					let _ret+=$?
 
 				else
-					msgerr "no managed action"
+					msgErr "no managed action"
 					let _ret+=1
 				fi
 			fi

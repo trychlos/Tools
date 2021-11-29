@@ -120,7 +120,7 @@ function optReadOptArgs
 									let _valset=1
 								fi
 								if [ "${ttp_optargs_mdt[${_idx}]}" = "yes" -a ${_valset} -eq 0 ]; then
-									msgerr "'--${_name}' option expects a mandatory argument, which has not been found"
+									msgErr "'--${_name}' option expects a mandatory argument, which has not been found"
 									let _ret+=1
 								fi
 							fi

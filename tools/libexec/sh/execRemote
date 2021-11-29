@@ -64,7 +64,7 @@ function execRemote
 
 	# verify that the target host is known by The Tools Project
 	typeset _conf="$(bspFind "${ttp_nodesubdir}/${_host}.ini")"
-	[ -z "${_conf}" ] && { msgerr "${_host}: target host is unknowned or undefined"; return 246; }
+	[ -z "${_conf}" ] && { msgErr "${_host}: target host is unknowned or undefined"; return 246; }
 
 	typeset _usermsg=""
 	typeset _user="${ttp_user}"
@@ -72,19 +72,19 @@ function execRemote
 
 	typeset _input="-n"
 	if [ $# -ge 4 -a "x${4}" != "x" ]; then
-		[ "x${4}" = "xINPUT" ] || { msgerr "(execRemote) '$4' found where 'INPUT' (or nothing) was expected."; return 247; }
+		[ "x${4}" = "xINPUT" ] || { msgErr "(execRemote) '$4' found where 'INPUT' (or nothing) was expected."; return 247; }
 		_input="-t"
 	fi
 
 	typeset -i _nomsg=0
 	if [ $# -ge 5 -a "x${5}" != "x" ]; then
-		[ "x${5}" = "xNOMSG" ] || { msgerr "(execRemote) '$5' found where 'NOMSG' (or nothing) was expected"; return 247; }
+		[ "x${5}" = "xNOMSG" ] || { msgErr "(execRemote) '$5' found where 'NOMSG' (or nothing) was expected"; return 247; }
 		[ "${opt_verbose}" = "no" ] && _nomsg=1
 	fi
 
 	# if both target host and user are ok, then just execute the command
 	if [ "x${_host}" = "x${TTP_NODE}" -a "x${_user}" = "x${LOGNAME}" ];	then
-		msgout "execRemote (local execution) ${_user}@${_host}: ${_command}"
+		msgOut "execRemote (local execution) ${_user}@${_host}: ${_command}"
 		eval ${_command}
 		_ret=$?
 		return ${_ret}
@@ -95,7 +95,7 @@ function execRemote
 
 	# not on the right host, or not with the right account
 	# we so have to ask for a remote execution
-	[ ${_nomsg} -eq 0 ] && msgout "execRemote ${_user}@${_host}: ${_command}"
+	[ ${_nomsg} -eq 0 ] && msgOut "execRemote ${_user}@${_host}: ${_command}"
 	#execRemote_ssh "${_host}" "$_input" "${_user}" "${_command}"
 	ssh ${_host} -q ${_input} -l ${_user} "{ . ./.ttp_remote ${_host}; }; eval ${_command}"
 	_ret=$?

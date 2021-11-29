@@ -88,14 +88,14 @@ function optGetOption
 
 		if [ ${_countfull} -ne 1 -a "${_with_error}" = "yes" ]; then
 			if [ ${_countfull} -eq 0 -a ${_countbrev} -eq 0 ]; then
-				msgerr "'--${_opt}': unrecognized option"
+				msgErr "'--${_opt}': unrecognized option"
 
 			elif [ ${_countfull} -gt 1 ]; then
-				msgerr "'--${_opt}': non unique option"
+				msgErr "'--${_opt}': non unique option"
 				let _found=-1
 
 			elif [ ${_countfull} -eq 0 -a ${_countbrev} -gt 1 ]; then
-				msgerr "'--${_opt}': non unique option, several abbreviations match"
+				msgErr "'--${_opt}': non unique option, several abbreviations match"
 				let _found=-1
 			fi
 		fi

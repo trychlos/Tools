@@ -48,7 +48,7 @@ function optReadPosArgs
 				# get and try to interpret the next argument
 				let _pos+=1
 				if [ ${_pos} -gt ${ttp_posargs_count} ]; then
-					msgerr "'${_val}': unexpected positional argument at #${_pos}"
+					msgErr "'${_val}': unexpected positional argument at #${_pos}"
 					let _ret+=1
 				# opt_output=${_val}
 				else

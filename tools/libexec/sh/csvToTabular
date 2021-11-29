@@ -101,5 +101,5 @@ function csvToTabular
 		-with_counter="${_counter}" \
 		-insep="${_csvsep}" \
 		-outsep="${_tabsep}" \
-		-msg="$(msgoutPrefix)"
+		-msg="$(msgOutPrefix)"
 }

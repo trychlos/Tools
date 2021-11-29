@@ -31,5 +31,5 @@
 
 trap_quit()
 {
-	msgout "caught QUIT signal"
+	msgOut "caught QUIT signal"
 }

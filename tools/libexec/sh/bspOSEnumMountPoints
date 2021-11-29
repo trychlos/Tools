@@ -64,7 +64,7 @@ function bspOSEnumMountPoints
 			;;
 
 		*)
-			msgerr "${_os}: unmanaged operating system"
+			msgErr "${_os}: unmanaged operating system"
 			let _ret=1
 			;;
 	esac

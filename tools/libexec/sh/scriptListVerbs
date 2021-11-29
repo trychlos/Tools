@@ -73,7 +73,7 @@ function scriptListVerbs
 
 	if [ ${_count} -eq 0 -a "${_has_error}" = "yes" ]; then
 		typeset _bname="${_command##*/}"
-		msgerr "no verb found for '${_bname}' command"
+		msgErr "no verb found for '${_bname}' command"
 		return 1
 	fi
 

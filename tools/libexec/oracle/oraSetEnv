@@ -50,7 +50,7 @@ function oraSetEnv
 
 		typeset _sid="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=sid" 1)"
 		if [ -z "${_sid}" ]; then
-			msgerr "${_mnemo}: SID not found in '${ttp_logical_conf}'"
+			msgErr "${_mnemo}: SID not found in '${ttp_logical_conf}'"
 			return 1
 		fi
 
@@ -71,7 +71,7 @@ function oraSetEnv
 
 		typeset _listener="$(confGetKey "ttp_node_keys" "${_mnemo}" "0=listener" 0)"
 		if [ "${_listener}" != "listener" ]; then
-			msgerr "${_mnemo} is not identified as an Oracle listener service"
+			msgErr "${_mnemo} is not identified as an Oracle listener service"
 			return 1
 		fi
 
@@ -102,7 +102,7 @@ function oraSetEnv
 		fi
 
 		if [ -z "${_home}" -o ! -d "${_home}" ]; then
-			msgerr "${_home}: listener software home directory empty or not found"
+			msgErr "${_home}: listener software home directory empty or not found"
 			return 1
 		fi
 	

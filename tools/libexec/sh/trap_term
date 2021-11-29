@@ -31,6 +31,6 @@
 
 trap_term()
 {
-	[ "${opt_verbose}" = "yes" ] && msgout "quitting on TERM signal"
+	[ "${opt_verbose}" = "yes" ] && msgOut "quitting on TERM signal"
 	exit
 }

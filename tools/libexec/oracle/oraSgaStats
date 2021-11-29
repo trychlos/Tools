@@ -72,7 +72,7 @@ function oraSgaStats
 				$nl += 1;
 			}
 			printf( "%s%d displayed rows\n", $msg, $nl-2 );
-		}' -- -msg="$(msgoutPrefix)"
+		}' -- -msg="$(msgOutPrefix)"
 
 	set linesize 32767
 	set pagesize 50000
