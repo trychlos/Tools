@@ -22,7 +22,7 @@
 #   Defines a unique temporary file in a per-command log directory.
 #
 #   The allocated temporary files are kept in a command-dedicated
-#   directory, to be later used as an audit track.
+#   directory, to be later useable as an audit track.
 #
 # (I): 1. (opt.) temporary file mnemonic (should be unique for the verb)
 #
@@ -34,18 +34,19 @@
 # pwi 2013- 6-15 use pathGetTempFilebyDir
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 9- 4 set gid bit on all created directories
+# pwi 2021-11-27 do not display potential chmod error message
 
 function pathGetTempFile
 {
 	#set -x
 	typeset _mnemo="${1}"
 
-	# if a ttp_logsroot exists, then make sure a command-dedicated
-	#  directory exists
+	# make sure that ttp_logsroot and a command-dedicated directories
+	#  both exist
 	typeset _logsdir="${ttp_logsroot:-/tmp}"
 	_logsdir="${_logsdir}/${ttp_command%.*}"
 	mkdir -p -m 0775 "${_logsdir}"
-	chmod g+s "${_logsdir}"
+	chmod g+s "${_logsdir}" 2>/dev/null
 
 	#typeset _tmpf="$(pathGetTempFileByDir "${_mnemo}" "${_logsdir}" "${_tmpf}")"
 	typeset _tmpf="${_logsdir}/${ttp_verb}-$$-${ttp_stamp}"

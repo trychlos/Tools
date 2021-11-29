@@ -75,7 +75,12 @@
   62 2019- 8- 3 manage [ansible]srv-bind/srv_bind_update script
                 (and correlative purge)
 
-  67
+  67 2021-11-24 rename msgxxx functions to be consistant with standard spelling
+                e.g. msgOut, msgLog, etc.
+
+  68 2021-11-24 rename log files created by varXxx functions to var_xxx
+
+  69
 
 -----------------------------------------------------------------------
  DONE
