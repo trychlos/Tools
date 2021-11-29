@@ -78,8 +78,6 @@
   67 2021-11-24 rename msgxxx functions to be consistant with standard spelling
                 e.g. msgOut, msgLog, etc.
 
-  68 2021-11-24 rename log files created by varXxx functions to var_xxx
-
   69
 
 -----------------------------------------------------------------------
@@ -324,6 +322,9 @@
                 that we are currently searching for an initial execution node,
                 and run without having any current execution node.
                 This force the very first command to be ". ttp.sh switch ...".
+
+  68 2021-11-24 rename log files created by varXxx functions to var_xxx
+     2021-11-29 done
 
 -----------------------------------------------------------------------
  P. Wieser - Created on 2013, jan. 9th
