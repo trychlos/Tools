@@ -27,5 +27,5 @@ function audioInfo2Album
 {
 	typeset _data="${1}"
 
-	echo "${_data}" | grep -w ALBUM | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}' 2>/dev/null
+	echo "${_data}" | grep -wE '^    ALBUM\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}' 2>/dev/null
 }
