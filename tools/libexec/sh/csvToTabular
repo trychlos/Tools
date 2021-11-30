@@ -24,21 +24,32 @@
 #   The input stream is expected to have one header line with column
 #   names.
 #
+# Column width computation:
+#
+#   The maximal width of the screen is specified as an argument of the Perl code.
+#   A maximal suggested width is computed as the maximal width divided by the
+#   count of columns. If a column is smaller than this suggested width, then
+#   the suggested width of others columns is recomputed (increased). 
+#
 # (I). 1. (opt.) whether the headers line is to be re-displayed on output
 #                yes|no
-#                defaults to "yes"
+#                defaults to "yes": headers line is displayed on output
 #      2. (opt.) whether to add a rows counter at the end
 #                yes|no
-#                defaults to "yes"
+#                defaults to "yes": a rows counter is added at the end
 #      3. (opt.) input csv separaror
 #                defaults to ';'
 #      4. (opt.) output tabular separaror
 #                defaults to '|'
+#      5. (opt.) whether each outputed line should be prefixed, or only the counter one
+#                yes|no
+#                defaults to "no": only the counter line is prefixed
 #
 # (O). stdout
 #
 # pwi 2013- 7-25 creation
 # pwi 2017- 6-21 publish the release at last
+# pwi 2021-11-29 fix Unicode issue with -CS argument + add fifth optional argument
 
 function csvToTabular
 {
@@ -46,13 +57,21 @@ function csvToTabular
 	typeset _counter="${2:-yes}"
 	typeset _csvsep="${3:-${ttp_csvsep:-;}}"
 	typeset _tabsep="${4:-${ttp_tabularsep:-|}}"
-
-	perl -se '{
-		use utf8;
+	typeset _prefix="${5:-no}"
+	
+	perl -CS -sE '{
+		#use utf8;
+		sub min {
+			$a = shift;
+			$b = shift;
+			return $a < $b ? $a : $b;
+		}
 		sub output_dashes {
+			print $msg if $with_prefix;
 			print "+";
 			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
-				$len = 2+$column[$j];
+				$len = min( $column[$j], $suggested );
+				$len += 2;
 				print "-" x $len;
 				print "+";
 			}
@@ -61,21 +80,33 @@ function csvToTabular
 		sub output_line {
 			$il = shift;
 			output_dashes() if $il <= 1;
+			print $msg if $with_prefix;
 			print ${outsep};
 			for( $j=0 ; $j<scalar( @{$lines[0]} ) ; ++$j ){
-				printf( " %-*s %s", $column[$j], $lines[$il][$j], $outsep );
+				$s = $lines[$il][$j];
+				$len = length( $s );
+				if( $len > $suggested ){
+					$s = substr( $lines[$il][$j], 0, $suggested-3 )."...";
+				}
+				printf( " %-*s %s", min( $column[$j], $suggested ), $s, $outsep );
 			}
 			print "\n";
 		}
 		$nl = 0;
 		@column = ();
 		@lines = ();
+
+		#printf STDERR "with_headers='%s'\n", $with_headers;
+		#printf STDERR "with_counter='%s'\n", ${with_counter};
+		#printf STDERR "insep='%s'\n", ${insep};
+		#printf STDERR "outsep='%s'\n", ${outsep};
+		#printf STDERR "msg='%s'\n", $msg;
+
 		while( <STDIN> ){
 			if( m/^\[/ ){
 				print;
 				next;
 			}
-			#printf STDERR;
 			chomp;
 			$lines[$nl] = [split /${insep}/];
 			$icol = 0;
@@ -91,6 +122,19 @@ function csvToTabular
 			$nl += 1;
 		}
 	} END {
+		$nbcol = scalar( @column );
+		$candidates = $nbcol;
+		$suggested = $nbcol ? (( ${max_width} - 2 ) / $nbcol ) - 3 : ${max_width} - 2;
+		$reused = 0;
+		#printf STDERR "END: nbcol='%u'\ncandidates='%u'\nsuggested='%u'\nreused='%u'\n", $nbcol, $candidates, $suggested, $reused;
+		for( $i=0 ; $i<$nbcol ; ++$i ){
+			if( $column[$i] < $suggested ){
+				$candidates -= 1;
+				$reused += $suggested - $column[$i];
+			}
+		}
+		$suggested += $reused / $candidates if $candidates;
+		#printf STDERR "END: nbcol='%u'\ncandidates='%u'\nsuggested='%u'\nreused='%u'\n", $nbcol, $candidates, $suggested, $reused;
 		for( $i=0 ; $i<$nl ; ++$i ){
 			output_line( $i ) if $i > 0 || $with_headers eq "yes";
 		}
@@ -101,5 +145,7 @@ function csvToTabular
 		-with_counter="${_counter}" \
 		-insep="${_csvsep}" \
 		-outsep="${_tabsep}" \
-		-msg="$(msgOutPrefix)"
+		-msg="$(msgOutPrefix)" \
+		-with_prefix="${_prefix}" \
+		-max_width="$(tput cols)"
 }

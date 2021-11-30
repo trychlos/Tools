@@ -57,8 +57,8 @@ maxcount=<n>								stop the execution after having checked <n> files
 # initialize specific default values
 
 function verb_arg_set_defaults {
+	opt_help_def="no"
 	opt_verbose_def="no"
-	opt_host_def="ALL"
 	opt_debug_def="no"
 	opt_display_def="checked"
 	opt_maxcount_def=-1
@@ -106,9 +106,9 @@ function f_check {
 	typeset _artist="$(echo "${_data}" | grep -w ARTIST | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset _album_artist="$(audioInfo2AlbumArtist "${_data}")"
 	typeset _album="$(audioInfo2Album "${_data}")"
-	typeset _year="$(echo "${_data}" | grep -w DATE | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
+	typeset _year="$(audioInfo2Date "${_data}")"
 	typeset -i _trackno="$(echo "${_data}" | grep -w track | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset -i _trackcount="$(echo "${_data}" | grep -w TRACKTOTAL | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
+	typeset -i _trackcount="$(audioInfo2TrackCount "${_data}")"
 	typeset _encoder="$(echo "${_data}" | grep -w ENCODED-BY | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset -i _discno="$(echo "${_data}" | grep -w disc | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset -i _has_image=$(f_has_image "${_data}")
@@ -286,7 +286,7 @@ function verb_main {
 	audioPathScan "${opt_path}" | while read _fname; do
 		f_check "${_fname}"
 		if [ ${opt_maxcount} -gt 0 -a $(varGet count) -ge ${opt_maxcount} ]; then
-			msgOut "stopping the check after ${opt_maxcount} files"
+			msgOut "stopping the scan after ${opt_maxcount} files"
 			break
 		fi
 	done

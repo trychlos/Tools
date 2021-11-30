@@ -1,7 +1,10 @@
 # @(#) list artists, albums, tracks from our audio library
 #
-# @(#) Scans the specified path as an on-file audio library, and
-# @(#) tries to list tracks, albums and/or artists.
+# @(#) Scans the specified path as an on-file audio library, and tries to list albums.
+# @(#) The output may be as raw strings or in tabular form (à la SQL), and can be accompanied
+# @(#) by a CSV file.
+# @(#) Please note that albums are identified based on the meta-informations found in the
+# @(#) scanned files.
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
@@ -35,7 +38,11 @@ function verb_arg_define_opt {
 help							display this online help and gracefully exit
 verbose							verbose execution
 path=<path>						the path to be (recursively) scanned
-album							whether to display the list of found albums
+maxcount=<n>					stop the execution after having checked <n> files
+albums							whether to display the list of found albums
+display=standard|tabular|none	selection of the output format
+csv=<path> 						whether to output the list into a CSV file
+wdate							warn if 'Date' information is not set
 "
 }
 
@@ -53,9 +60,13 @@ album							whether to display the list of found albums
 # initialize specific default values
 
 function verb_arg_set_defaults {
+	opt_help_def="no"
 	opt_verbose_def="no"
-	opt_host_def="ALL"
-	opt_album_def="no"
+	opt_maxcount_def=-1
+	opt_albums_def="no"
+	opt_display_def="standard"
+	opt_csv_def=""
+	opt_wdate_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -73,45 +84,93 @@ function verb_arg_check {
 		let _ret+=1
 	fi
 
+	# display must be standard|tabular|none
+	if [ "${opt_display}" != "standard" -a "${opt_display}" != "tabular" -a "${opt_display}" != "none" ]; then
+		msgErr "invalid 'display' option, '${opt_display}' found, 'standard', 'tabular' or 'none' expected"
+		let _ret+=1
+	fi
+
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
-# get the album out of the file
-# writes it out to the allocated temp file
+# display the list of found albums
 
-function f_getAlbum {
+function f_displayAlbums {
+	typeset _flist="${1}"
+	typeset _sep="${2}"
+
+	typeset _sorted="$(pathGetTempFile albums-sorted)"
+	typeset _title="$(pathGetTempFile albums-title)"
+
+	# sort the list by album name
+	# note that 'LC_ALL=C' doesn't fix the issue where 'État d'urgence' is sorted at the very last
+	LC_ALL=C sort --ignore-case --ignore-leading-blanks --field-separator=${_sep} --key 1,1 --key 3,3 --unique "${_flist}" > "${_sorted}"
+	typeset -i _count_albums=$(wc -l "${_sorted}" | awk '{ print $1 }')
+
+	if [ "${opt_display}" == "standard" ]; then
+		typeset _line
+		cat "${_sorted}" | while read _line; do
+			typeset _album="$(echo "${_line}" | cut -d${_sep} -f1)"
+			typeset _date="$(echo "${_line}" | cut -d${_sep} -f2)"
+			typeset _artist="$(echo "${_line}" | cut -d${_sep} -f3)"
+			typeset _tracks="$(echo "${_line}" | cut -d${_sep} -f4)"
+			msgOut "found album '${_album}' [${_date}] by '${_artist}' (tracks=${_tracks})"
+		done
+		msgOut "found ${_count_albums} distinct albums"
+	
+	elif [ "${opt_display}" == "tabular" ]; then
+		echo "Album${_sep}Date${_sep}Artist${_sep}Tracks" > "${_title}"
+		cat "${_title}" "${_sorted}" | csvToTabular yes yes "" "" yes
+	fi
+
+	if [ ! -z "${opt_csv}" ]; then
+		echo "Album${_sep}Date${_sep}Artist${_sep}Tracks" > "${_title}"
+		cat "${_title}" "${_sorted}" > "${opt_csv}"
+		msgOut "${_count_albums} lines written in ${opt_csv}"
+	fi
+}
+
+# ---------------------------------------------------------------------
+# read meta informations from each scanned file
+# because this operation is costly, it is mutualized between all command
+# options
+
+function f_readMetaInformations {
 	typeset _fname="${1}"
+	typeset _sep="${2}"
+
 	typeset _data="$(audioFileInfo "${_fname}")"
 	varInc count
 
 	# extract relevant informations
 	typeset _album="$(audioInfo2Album "${_data}")"
+	typeset _date="$(audioInfo2Date "${_data}")"
 	typeset _album_artist="$(audioInfo2AlbumArtist "${_data}")"
-	
+	typeset _tracks="$(audioInfo2TrackCount "${_data}")"
+
+	# only album is really needed when displaying the list of albums
+	# other informations may be unavailable 
 	if [ -z "${_album}" ]; then
 		msgErr "${_fname}: 'Album' information is not set"
 		varInc errors_album
-	elif [ -z "${_album_artist}" ]; then
+	fi
+	if [ -z "${_album_artist}" ]; then
 		msgErr "${_fname}: 'AlbumArtist' information is not set"
 		varInc errors_albumartist
-	else
-		echo "${_album}${_sep}${_album_artist}" >> "$(pathGetTempFile albums)"
 	fi
-}
-
-# ---------------------------------------------------------------------
-# display an error message, and write it in a temp file
-
-function f_error {
-	typeset _msg="${1}"
-	
-	echo "${_msg}" >> $(pathGetTempFile errors)
-	
-	if [ "${opt_display}" == "allerrs" ]; then
-		msgErr "${_fname}: ${_msg}"
-	else
-		msgLog "${_fname}: ${_msg}"
+	if [ -z "${_date}" ]; then
+		if [ "${opt_wdate}" == "yes" ]; then
+			msgErr "${_fname}: 'Date' information is not set"
+		fi
+		varInc errors_date
+	fi
+	if [ -z "${_tracks}" ]; then
+		msgErr "${_fname}: 'TrackCount' information is not set"
+		varInc errors_tracks
+	fi
+	if [ "${opt_albums}" == "yes" -a ! -z "${_album}" ]; then
+		echo "${_album}${_sep}${_date}${_sep}${_album_artist}${_sep}${_tracks}" >> "$(pathGetTempFile albums)"
 	fi
 }
 
@@ -120,37 +179,31 @@ function f_error {
 function verb_main {
 	#set -x
 	typeset -i _ret=0
-	typeset _fname
-	typeset _sep="|"
+	typeset _sep=";"
 
 	varSet count 0
-	varSet errors_album 0
-	varSet errors_albumartist 0
+	varSet errors_album 0			# album not set
+	varSet errors_albumartist 0		# album artist not set
+	varSet errors_date 0			# date not set
+	varSet errors_tracks 0			# tracks not set
 
-	typeset _falbums="$(pathGetTempFile albums)"
-	typeset _sorted="$(pathGetTempFile albums-sorted)"
-
+	typeset _fname
 	audioPathScan "${opt_path}" | while read _fname; do
-		f_getAlbum "${_fname}"
+		f_readMetaInformations "${_fname}" "${_sep}"
+		if [ ${opt_maxcount} -gt 0 -a $(varGet count) -ge ${opt_maxcount} ]; then
+			msgOut "stopping the scan after ${opt_maxcount} files"
+			break
+		fi
 	done
 
 	msgOut "$(varGet count) files checked"
-	msgOut "  $(varGet errors_album) files have been found without any 'Album' field set"
-	msgOut "  $(varGet errors_albumartist) files have been found without any 'AlbumArtist' field set"
+	msgOut "  $(varGet errors_album) files have been found without 'Album' field set"
+	msgOut "  $(varGet errors_albumartist) files have been found without 'AlbumArtist' field set"
+	msgOut "  $(varGet errors_date) files have been found without 'Date' field set"
+	msgOut "  $(varGet errors_tracks) files have been found without 'TrackCount' field set"
 
-	if [ "${opt_album}" == "yes" ]; then
-		sort --ignore-case --ignore-leading-blanks --field-separator=${_sep} --keydef 1,1 --unique "${_falbums}" > "${_sorted}"
-		typeset -i count_albums=$(wc -l "${_sorted}" | awk '{ print $1 }')
-
-		typeset _line
-		typeset _album
-		typeset _artist
-		cat "${_sorted}" | while read _line; do
-			_album="$(echo "${_line}" | awk -F${_sep} '{ print $1 }')"
-			_artist="$(echo "${_line}" | awk -F${_sep} '{ print $2 }')"
-			msgOut "found: ${_album}\t${_artist}"
-		done
-		msgOut "  ${count_albums} found distinct albums"
+	if [ "${opt_albums}" == "yes" ]; then
+		f_displayAlbums "$(pathGetTempFile albums)" "${_sep}"
 	fi 
 		
 	return ${_ret}
