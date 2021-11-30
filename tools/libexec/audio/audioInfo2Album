@@ -1,4 +1,4 @@
-# @(#) Scan an on-disk library for audio files
+# @(#) Outputs on stdout the 'Album' extracted from meta-informations
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
@@ -17,15 +17,15 @@
 # along with The Tools Project; see the file COPYING. If not,
 # see <http://www.gnu.org/licenses/>.
 #
-# (I): 1: path to be scanned
+# (I): 1: the meta-informations as provided by audioFileInfo() function
 #
-# (O): the list of found audio files is displayed on stdout
+# (O): the 'Album' found in the meta-informations is displayed on stdout
 #
 # pwi 2021-11-29
 
-function audioPathScan
+function audioInfo2Album
 {
-	typeset _path="${1:-/}"
+	typeset _data="${1}"
 
-	find "${_path}" -type f | grep -vE '\.jpeg$|\.jpg$|\.png$|\.txt$|\.text$' 2>/dev/null
+	echo "${_data}" | grep -w ALBUM | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}' 2>/dev/null
 }

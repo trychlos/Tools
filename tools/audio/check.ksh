@@ -104,8 +104,8 @@ function f_check {
 	# extract relevant informations from the output of ffmpeg
 	typeset _title="$(echo "${_data}" | grep -w TITLE | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset _artist="$(echo "${_data}" | grep -w ARTIST | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset _album_artist="$(echo "${_data}" | grep -w album_artist | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset _album="$(echo "${_data}" | grep -w ALBUM | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
+	typeset _album_artist="$(audioInfo2AlbumArtist "${_data}")"
+	typeset _album="$(audioInfo2Album "${_data}")"
 	typeset _year="$(echo "${_data}" | grep -w DATE | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset -i _trackno="$(echo "${_data}" | grep -w track | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
 	typeset -i _trackcount="$(echo "${_data}" | grep -w TRACKTOTAL | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
