@@ -1,0 +1,45 @@
+# @(#) Outputs on stdout the requested tag extracted from meta-informations
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# (I): 1: the requested tag name
+#      2: the meta-informations as provided by audioFileInfo() function
+#      3: (opt) whether the tag name should be consider case sensitive
+#               accepted: 'yes|no'
+#               default: 'no'
+#
+# (O): the value of requested tag found in the meta-informations is displayed on stdout
+#
+# pwi 2021-12- 3 creation
+
+function audioInfo2Tag
+{
+	typeset _tagname="${1}"
+	typeset _data="${2}"
+	typeset _respect_case="${3:-no}"
+
+	# whether the research sould be case insensitive ?
+	typeset _opt=""
+	[ "${_respect_case}" == "no" ] && _opt="-i"
+
+	# mp3 tags are at pos. 4 while opus tags are at pos. 6
+	typeset _value="$(echo "${_data}" | grep -wE ${_opt} "^    ${_tagname}\s+:")"
+	[ -z "${_value}" ] && _value="$(echo "${_data}" | grep -wE ${_opt} "^      ${_tagname}\s+:")"
+	
+	echo "${_value}" | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}' 2>/dev/null
+}

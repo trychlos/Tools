@@ -23,6 +23,7 @@
 # see <http://www.gnu.org/licenses/>.
 #
 # pwi 2021-11-26 creation
+# pwi 2021-12- 3 fix mp3 vs opus tags vs EasyTag vs MusicBrainzPicard
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -104,15 +105,16 @@ function f_check {
 	#set -x
 
 	# extract relevant informations from the output of ffmpeg
-	typeset _title="$(echo "${_data}" | grep -wE '^    TITLE\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset _artist="$(echo "${_data}" | grep -wE '^    ARTIST\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset _album_artist="$(audioInfo2AlbumArtist "${_data}")"
-	typeset _album="$(audioInfo2Album "${_data}")"
-	typeset -i _discno="$(echo "${_data}" | grep -wE '^    disc\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset _year="$(audioInfo2Date "${_data}")"
-	typeset -i _trackno="$(echo "${_data}" | grep -wE '^    track\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
-	typeset -i _trackcount="$(audioInfo2TrackCount "${_data}")"
-	typeset _encoder="$(echo "${_data}" | grep -wE '^    ENCODED-BY\s+:' | awk '{ for( i=3; i<=NF; ++i ) printf( "%s%s", i>3?" ":"", $i )}')"
+	typeset _title="$(audioInfo2Tag TITLE "${_data}")"
+	typeset _artist="$(audioInfo2Tag ARTIST "${_data}")"
+	typeset _album_artist="$(audioInfo2Tag album_artist "${_data}")"
+	typeset _album="$(audioInfo2Tag ALBUM "${_data}")"
+	typeset _genre="$(audioInfo2Tag genre "${_data}")"
+	typeset -i _discno="$(audioInfo2Tag disc "${_data}")"
+	typeset _year="$(audioInfo2Tag DATE "${_data}")"
+	typeset -i _trackno="$(audioInfo2Tag track "${_data}")"
+	typeset -i _trackcount="$(audioInfo2Tag TRACKTOTAL "${_data}")"
+	typeset _encoder="$(audioInfo2EncodedBy "${_data}")"
 	typeset -i _has_image=$(f_has_image "${_data}")
 
 	# extract relevant informations from the filename
@@ -123,6 +125,7 @@ function f_check {
 	typeset _bdir1="${_dir1##*/}"	# may be the album or the artist
 	typeset _dir2="${_dir1%/*}"
 	typeset _bdir2="${_dir2##*/}"	# may be the artist or the root
+	typeset _ext="${_fname##*.}"
 		
 	# display internal variables if asked for
 	if [ "${opt_debug}" == "yes" ]; then
@@ -130,6 +133,7 @@ function f_check {
 		msgOut "[debug] artist='${_artist}'"
 		msgOut "[debug] album_artist='${_album_artist}'"
 		msgOut "[debug] album='${_album}'"
+		msgOut "[debug] genre='${_genre}'"
 		msgOut "[debug] year='${_year}'"
 		msgOut "[debug] trackno=${_trackno}"
 		msgOut "[debug] trackcount=${_trackcount}"
@@ -165,6 +169,12 @@ function f_check {
 		f_error "${_fname}: 'Album' is not set"
 	fi
 
+	# genre should be set
+	if [ -z "${_genre}" ]; then
+		let _errors+=1
+		f_error "${_fname}: 'Genre' is not set"
+	fi
+
 	# year should be set and be 4 digits
 	if [ -z "${_year}" ]; then
 		let _errors+=1
@@ -189,10 +199,16 @@ function f_check {
 		f_error "${_fname}: 'Track count' is not set"
 	fi
 
-	# encoder should be set
+	# encoded-by should be set unless mp3/m4a file
+	# Encoded-By is expected to be set to:
+	# 'flac' for .flac files ripped from a CD
+	# 'opus' for .webm files downloaded from YouTube
+	# Other files (typically .mp3) are not candidates to this check
 	if [ -z "${_encoder}" ]; then
-		let _errors+=1
-		f_error "${_fname}: 'Encoder' is not set"
+		if [ "${_ext}" != "m4a" -a "${_ext}" != "mp3" ]; then
+			let _errors+=1
+			f_error "${_fname}: 'Encoded by' is not set"
+		fi
 	fi
 
 	# disc number should only be set when there are several discs in the album
