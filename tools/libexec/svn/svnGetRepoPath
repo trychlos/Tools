@@ -25,15 +25,16 @@
 # (O): stdout: the HEAD revision number
 #
 # pwi 2013- 6- 8 creation
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-16 fix error messages
 
 function svnGetRepoPath
 {
 	typeset _service="${1}"
-	[ -z "${_service}" ] && { msgErr "(svnGetHeadRevision) empty service arg."; return 1; } 
+	[ -z "${_service}" ] && { msgErr "(svnGetRepoPath) empty service arg."; return 1; } 
 
 	typeset _repo="${2}"
-	[ -z "${_repo}" ] && { msgErr "(svnGetHeadRevision) empty repository arg."; return 1; } 
+	[ -z "${_repo}" ] && { msgErr "(svnGetRepoPath) empty repository arg."; return 1; } 
 
 	typeset -i _ret=0
 	typeset _name
