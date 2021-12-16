@@ -33,6 +33,7 @@
 # pwi 2013- 7-27 fix #14 using csv output of svn.sh list
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 9- 4 make sure the group is able to access the output file
+# pwi 2021-12-16 fix repository name
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -147,7 +148,7 @@ function verb_main {
 				typeset _destdir="${opt_dumpdir}"
 				[ -z "${_destdir}" ] &&
 					_destdir="$(confGetKey "ttp_node_keys" "${opt_service}" "0=dumpdir" 1 | \
-						tabSubstituteMacro "" "@R" "" "${pos_repo}")"
+						tabSubstituteMacro "" "@R" "" "${opt_repository}")"
 				execDummy "mkdir -p -m 0775 '${_destdir}'"
 		
 				# get last revision previously saved
@@ -174,7 +175,7 @@ function verb_main {
 					msgOut "dumping new revisions into ${_destfile}"
 					execDummy "svnadmin dump --revision ${_first}:${_head} --incremental ${_repodir} | gzip > '${_destfile}'"
 				else
-					msgOut "${pos_repo}: last saved was ${_last}, head is ${_head}: nothing to dump"
+					msgOut "${opt_repository}: last saved was ${_last}, head is ${_head}: nothing to dump"
 				fi
 			fi
 		fi
