@@ -21,7 +21,8 @@
 # pwi 2013- 6-25 update to new automatic command-line interpretation
 # pwi 2013- 7-18 review options dynamic computing
 # pwi 2013- 7-25 review option arguments list
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-16 always display header here, output being filtered in ad-hoc functions
 
 # ---------------------------------------------------------------------
 # global variables
@@ -131,38 +132,36 @@ function verb_arg_check {
 }
 
 # ---------------------------------------------------------------------
-# Display output header if asked for
+# Always display output header
 # Default format here is 'csv'
 
 function f_display_header {
 	typeset -i _count=0
 	typeset _col
 
-	if [ "${opt_headers}" = "yes" ]; then
-		for _col in $(echo ${disp_columns}); do
-			if [ "${_col}" = "NAME" ]; then
-				[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
-				printf "Name"
-				let _count+=1
-			fi
-			if [ "${_col}" = "PATH" ]; then
-				[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
-				printf "Path"
-				let _count+=1
-			fi
-			if [ "${_col}" = "SERVICE" ]; then
-				[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
-				printf "Service"
-				let _count+=1
-			fi
-			if [ "${_col}" = "URL" ]; then
-				[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
-				printf "Url"
-				let _count+=1
-			fi
-		done
-		printf "\n"
-	fi
+	for _col in $(echo ${disp_columns}); do
+		if [ "${_col}" = "NAME" ]; then
+			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			printf "Name"
+			let _count+=1
+		fi
+		if [ "${_col}" = "PATH" ]; then
+			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			printf "Path"
+			let _count+=1
+		fi
+		if [ "${_col}" = "SERVICE" ]; then
+			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			printf "Service"
+			let _count+=1
+		fi
+		if [ "${_col}" = "URL" ]; then
+			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			printf "Url"
+			let _count+=1
+		fi
+	done
+	printf "\n"
 }
 
 # ---------------------------------------------------------------------
