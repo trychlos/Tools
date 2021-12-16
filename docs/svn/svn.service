@@ -84,7 +84,7 @@
    Used by svn.sh dump verb, this addresses the default dump directory.
    The svn.sh dump verb defaults to dump commits occured since last
    dump, and found them by scanning the dump directory.
-   Specifying another dump directory may be lead the verb do dump more
+   Specifying another dump directory may lead the verb do dump more
    (and maybe a lot more) revisions that actually needed.
    The user should be conscious of this behavior and takes care of it. 
 
