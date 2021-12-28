@@ -28,7 +28,8 @@
 #
 # pwi 2013- 6- 3 creation
 # pwi 2013- 7-15 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 improve verbose execution
 
 function optReadPosArgs
 {
@@ -55,9 +56,9 @@ function optReadPosArgs
 					typeset -i _idx=${_pos}-1
 					typeset _name="${ttp_posargs_key[${_idx}]}"
 					eval $(echo "pos_"${_name}"_set=yes")
-					msgVerbose "setting pos_${_name}_set to 'yes'"
+					[ "${opt_verbose}" == "yes" ] && msgVerbose "setting pos_${_name}_set to 'yes'"
 					eval $(echo "pos_"${_name}"='"${_val}"'")
-					msgVerbose "setting pos_${_name} to '${_val}'"
+					[ "${opt_verbose}" == "yes" ] && msgVerbose "setting pos_${_name} to '${_val}'"
 				fi
 			fi
 			let _ia+=1

@@ -21,7 +21,8 @@
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
 # pwi 2013- 6-28 port to Tools v2
 # pwi 2013- 7-18 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 improve verbose execution
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -121,7 +122,7 @@ function verb_main {
 				else
 					typeset _cmd
 					confGetKey ttp_node_keys ${opt_service} 0=stop 2 | while read _cmd; do
-						msgVerbose "command: "${_cmd}""
+						[ "${opt_verbose}" == "yes" ] && msgVerbose "command: "${_cmd}""
 						execDummy "eval "${_cmd}" 1>/dev/null"
 						let _ret+=$?
 					done

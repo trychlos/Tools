@@ -28,6 +28,7 @@
 # pwi 2013- 7-18 review options dynamic computing
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 9- 4 make sure the group is able to access the output file
+# pwi 2021-12-28 improve verbose execution
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -223,7 +224,7 @@ function verb_main {
 				let _ret=$?
 				if [ ${_ret} -eq 0 ]; then
 					cat "${_flist}" | f_all_filter | while read _dbname; do
-						msgVerbose "about to dump '${_dbname}' database"
+						[ "${opt_verbose}" == "yes" ] && msgVerbose "about to dump '${_dbname}' database"
 						f_db_dump "${_dbname}" > "${_ftemp}" 
 						let _ret=$?
 						[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_compress "${_dbname}"
@@ -234,7 +235,7 @@ function verb_main {
 			# save one database, all tables
 			elif [ "${opt_table}" = "ALL" ]; then
 				typeset _ftemp="$(pathGetTempFile dbone)"
-				msgVerbose "about to dump '${opt_database}' database"
+				[ "${opt_verbose}" == "yes" ] && msgVerbose "about to dump '${opt_database}' database"
 				f_db_dump "${opt_database}" > "${_ftemp}"
 				let _ret=$?
 				[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_compress "${opt_database}"
@@ -244,7 +245,7 @@ function verb_main {
 			else
 				typeset _ftemp="$(pathGetTempFile tab)"
 				typeset _tables="$(echo "${opt_table}" | sed -e 's/,/ /g')"
-				msgVerbose "about to dump '${opt_database}' database, '${_tables}' table(s)"
+				[ "${opt_verbose}" == "yes" ] && msgVerbose "about to dump '${opt_database}' database, '${_tables}' table(s)"
 				f_db_dump "${opt_database}" "${_tables}" > "${_ftemp}"
 				let _ret=$?
 				[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_compress "${opt_database}"

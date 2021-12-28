@@ -27,9 +27,10 @@
 #
 # pwi 2013- 6-11 creation
 # pwi 2013- 7-15 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 verbose messages are decided before calling this function
 
 function msgVerbose
 {
-	[ "${opt_verbose}" = "yes" ] && msgOut "$@"
+	msgOut "[verbose] $@"
 }

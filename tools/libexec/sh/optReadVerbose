@@ -25,9 +25,8 @@
 #
 # pwi 2013- 2-18 creation
 # pwi 2013- 6- 3 use the dynamic command-line interpretation
-# pwi 2017- 6-21 publish the release at last 
-#
-# $Id: optReadVerbose 3264 2013-07-23 20:25:30Z  $
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 improve verbose execution
 
 function optReadVerbose
 {
@@ -63,7 +62,7 @@ function optReadVerbose
 							opt_verbose="yes"
 						fi
 						ttp_usedargs[${_ia}]="yes"
-						msgVerbose "setting opt_verbose_set to 'yes'"
+						[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_verbose_set to 'yes'"
 						break 2
 					fi
 				fi
@@ -74,7 +73,7 @@ function optReadVerbose
 
 	if [ ${_ret} -eq 0 ]; then
 		opt_verbose="${opt_verbose:-"${opt_verbose_def}"}"
-		msgVerbose "setting opt_verbose to '${opt_verbose}'"
+		[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_verbose to '${opt_verbose}'"
 	fi
 
 	return ${_ret}

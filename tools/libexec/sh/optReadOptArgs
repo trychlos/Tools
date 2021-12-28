@@ -31,7 +31,8 @@
 # pwi 2013- 6- 3 creation
 # pwi 2013- 6-25 fix arguments quoting
 # pwi 2013- 7-15 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 improve verbose execution
 
 function optReadOptArgs
 {
@@ -81,7 +82,7 @@ function optReadOptArgs
 							let _idx-=1
 							typeset _name="${ttp_optargs_key[${_idx}]}"
 							eval $(echo "opt_"${_name}"_set=yes")
-							msgVerbose "setting opt_${_name}_set to 'yes'"
+							[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_${_name}_set to 'yes'"
 							typeset _desc="${ttp_optargs_dsc[${_idx}]}"
 							#echo "optReadOptArgs: arg=$_arg name=$_name desc=$_desc" >&2
 
@@ -90,7 +91,7 @@ function optReadOptArgs
 								typeset _prefix="${_arg:2:2}"
 								[ "${_prefix}" = "no" -a "${_arg:4}" = "${_name:0:${#_arg}-4}" ] && _val="no" || _val="yes"
 								eval $(echo "opt_${_name}=\"${_val}\"")
-								msgVerbose "setting opt_${_name} to '${_val}'"
+								[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_${_name} to '${_val}'"
 								#echo "eval $(echo "opt_${_name}=\"${_val}\"")" >&2
 
 							# the option accepts/wants an argument
@@ -108,7 +109,7 @@ function optReadOptArgs
 										typeset _barg="${ttp_arga[${_ib}]}"
 										if [ "${_barg:0:2}" != "--" ]; then
 											eval $(echo "opt_${_name}=\"${_barg}\"")
-											msgVerbose "setting opt_${_name} to '${_barg}'"
+											[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_${_name} to '${_barg}'"
 											ttp_usedargs[${_ib}]="yes"
 											let _ia=${_ib}
 											let _valset=1
@@ -116,7 +117,7 @@ function optReadOptArgs
 									fi
 								else
 									eval $(echo "opt_${_name}=\"${_val}\"")
-									msgVerbose "setting opt_${_name} to '${_val}'"
+									[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_${_name} to '${_val}'"
 									let _valset=1
 								fi
 								if [ "${ttp_optargs_mdt[${_idx}]}" = "yes" -a ${_valset} -eq 0 ]; then

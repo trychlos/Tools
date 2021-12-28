@@ -30,7 +30,8 @@
 # pwi 2013- 2-18 creation
 # pwi 2013- 6- 3 use the dynamic command-line interpretation
 # pwi 2013- 7-15 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 improve verbose execution
 
 function optReadHelp
 {
@@ -69,6 +70,8 @@ function optReadHelp
 						else
 							opt_help="yes"
 						fi
+						[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_help_set to 'yes'"
+						[ "${opt_verbose}" == "yes" ] && msgVerbose "setting opt_help to '${opt_help}'"
 						break 2
 					fi
 				fi
