@@ -1,0 +1,55 @@
+# @(#) Check the output format
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I). 1. the name of the verb option
+#      2. the value to be checked
+#
+# (O). stdout: the canonical format value to be considered
+#      stderr: an optional error message (and stdout is empty)
+#
+# pwi 2013- 7-25 creation
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-27 obsolete RAW format, introduce JSON
+
+function filterCheckFormat
+{
+	typeset _option="${1}"
+	typeset _value="${2}"
+	typeset _ret=0
+	typeset _fmt="$(echo "${_value}" | strUpper)"
+
+	case "${_fmt}" in
+		C|CS|CSV)
+			echo "CSV"
+			;;
+		J|JS|JSO|JSON)
+			echo "JSON"
+			;;
+		T|TA|TAB|TABU|TABUL|TABULA|TABULAR)
+			echo "TABULAR"
+			;;
+		*)
+			msgErr "'--${_option}' option value must be 'CSV', 'JSON' or 'TABULAR', '${_value}' found"
+			let _ret+=1
+	esac
+
+	return ${_ret}
+}

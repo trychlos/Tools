@@ -1,0 +1,303 @@
+# @(#) filter and reformat the columns from input stream to stdout
+#
+# @(#) This function expects its input to be in a CSV-like format.
+# @(#) Results are otherwise unpredictable.
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I). 1. whether execute verbosely
+#         default: 'no'
+#      2. whether first input row contains headers
+#         default: 'yes'
+#      3. input field separator
+#         default: ';'
+#      4. comma-separated list of outputed columns numbered from 1
+#         default: 'ALL'
+#      5. canonical form of output format
+#         default: 'CSV'
+#      6. whether to reproduce headers in output
+#         default: 'yes'
+#      7. comma-separated list of name of output columns
+#         default: <empty> (use default names)
+#      8. output field separator
+#         default: ';'
+#      9. whether to keep tabular output in screen width
+#         default: 'yes'
+#     10. whether to prefix each output line
+#         default: 'no'
+#     11. add a data rows counter at the end
+#         default: 'no'
+#     12. maximum data rows to be displayed on outout
+#         default: -1 (illimited)
+#
+# Please note that, for consistency sake, defaults defined here should be the same
+# than those of the 'ttp.sh filter' verb.
+#
+# (O). the reformatted input stream
+#
+# pwi 2021-12-27 creation
+
+function filterOutput
+{
+	typeset _verbose="${1:-no}"
+	typeset _inheaders="${2:-yes}"
+	typeset _insep="${3:-;}"
+	typeset _outcols="${4:-ALL}"
+	typeset _outfmt="${5:-CSV}"
+	typeset _outheaders="${6:-yes}"
+	typeset _outnames="${7}"
+	typeset _outsep="${8:-;}"
+	typeset _screenwidth="${9:-yes}"
+	typeset _prefixed="${10:-no}"
+	typeset _counter="${11:-no}"
+	typeset -i _maxcount=${12:--1}
+
+	perl -sE '{
+		#use utf8;
+		use Data::Dumper;
+
+		$inrows = 0;				# count of input rows
+		$incols = 0;				# count of input columns
+		@incolwidth = ();			# input column max width
+		@inlines = ();				# table of input columns per line
+		$outcolcount = 0;			# count of output rows
+		@outcolidx = ();			# index (regarding the input columns) of output columns
+		@outcolnames = ();			# name of output columns (if a header must be outputed)
+
+		$maxinrows = $maxcount;		# maximum input data rows to be read
+		$maxinrows += 1 if $inheaders eq "yes";
+		$maxinrows = -1 if $maxcount == -1;
+
+		# compute two things:
+		# - the index of outputed columns referencing the input ones
+		# - the name of these outputed columns
+		# then update the width of output columns
+		sub computeOutputColumns {
+			if( $outcols eq "ALL" ){
+				for( $i=0 ; $i<$incols ; ++$i ){
+					$outcolidx[$i] = $i;
+				}
+			} else {
+				@outcolidx = split( /,/, $outcols );
+			}
+			$outcolcount = scalar( @outcolidx );
+			#print Dumper( \@outcolidx );
+			#print STDERR "inheaders=$inheaders outcols=$outcols outcolcount=$outcolcount\n";
+			if( $outnames ){
+				@outcolnames = split( /,/, $outnames );
+			} elsif( $inheaders eq "yes" ){
+				for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+					$outcolnames[$ic] = ${$inlines[0]}[$ic];
+				}
+			} else {
+				for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+					if( $outcols eq "ALL" ){
+						$outcolnames[$ic] = "column".($ic+1);
+					} else {
+						$outcolnames[$ic] = "column".$outcolidx[$ic];
+					}
+				}
+			}
+			#print Dumper( \@outcolnames );
+			for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+				$len = length( $outcolnames[$ic] );
+				$incolwidth[$outcolidx[$ic]] = $len if !defined( $incolwidth[$outcolidx[$ic]] ) || $len > $incolwidth[$outcolidx[$ic]];
+			}
+		}
+
+		# display data rows counter (because has been asked for)
+		# the '$inrows' holds the input lines, maybe with an input header
+		sub displayCounter {
+			$counter = $inrows;
+			$counter -= 1 if $inheaders eq "yes";
+			printf( "%s%d displayed row(s)\n", $prefix, $counter );
+		}
+
+		sub min {
+			$a = shift;
+			$b = shift;
+			return $a < $b ? $a : $b;
+		}
+
+		# output data on stdout, maybe with headers
+		sub outputCsv {
+			if( $outheaders eq "yes" ){
+				print $prefix if $with_prefix eq "yes";
+				for( $i=0 ; $i<$outcolcount ; ++$i ){
+					print $outsep if $i;
+					print $outcolnames[$i];
+				}
+				print "\n";
+			}
+			$start = 0;
+			$start += 1 if $inheaders eq "yes";
+			for( $ir=$start ; $ir<$inrows ; ++$ir ){
+				print $prefix if $with_prefix eq "yes";
+				for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+					print $outsep if $ic;
+					print ${$inlines[$ir]}[$ic];
+				}
+				print "\n";
+			}
+		}
+
+		sub outputJson {
+			print $prefix if $with_prefix eq "yes";
+			print "[\n";
+			$start = 0;
+			$start += 1 if $inheaders eq "yes";
+			$first = 1;
+			for( $ir=$start ; $ir<$inrows ; ++$ir ){
+				print ",\n" if !$first;
+				print $prefix if $with_prefix eq "yes";
+				print "\t{\n";
+				for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+					print ",\n" if $ic;
+					print $prefix if $with_prefix eq "yes";
+					print "\t\t\"".$outcolnames[$ic]."\": \"".${$inlines[$ir]}[$ic]."\"";
+				}
+				print "\n";
+				print $prefix if $with_prefix eq "yes";
+				print "\t}";
+				$first = 0;
+			}
+			print "\n" if !$first;
+			print $prefix if $with_prefix eq "yes";
+			print "]\n";
+		}
+
+		# the tabular output tries to display a whole line in a single screen row
+		# we have so to accept that some too long lines are cut at their end 
+		sub outputTabular {
+			# compute the width reusable from small columns, allocatable to wider ones
+			$suggested_width = $max_width;
+			if( $screenwidth eq "yes" ){
+				$max_width -= ( 1+length( $prefix )) if $with_prefix eq "yes";
+				$candidates = $outcolcount;
+				$suggested_width = $outcolcount ? (( $max_width - 1 ) / $outcolcount ) - 3 : $max_width - 1;
+				$reused_width = 0;
+				for( $i=0 ; $i<$outcolcount ; ++$i ){
+					if( $incolwidth[$outcolidx[$i]] < $suggested_width ){
+						$candidates -= 1;
+						$reused_width += $suggested_width - $incolwidth[$outcolidx[$i]];
+					}
+				}
+				$suggested_width += $reused_width / $candidates if $candidates;
+			}
+			outputTabularDashes();
+			if( $outheaders eq "yes" ){
+				outputTabularHeaders();
+				outputTabularDashes();
+			}
+			$start = 0;
+			$start += 1 if $inheaders eq "yes";
+			for( $i=$start ; $i<$inrows ; ++$i ){
+				outputTabularDatarow( $i );
+			}
+			outputTabularDashes();
+		}
+
+		sub outputTabularDashes {
+			print $prefix if $with_prefix eq "yes";
+			print "+";
+			for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+				$len = min( $incolwidth[$outcolidx[$ic]], $suggested_width );
+				$len += 2;
+				print "-" x $len;
+				print "+";
+			}
+			print "\n";
+		}
+
+		sub outputTabularDatarow {
+			$ir = shift;
+			outputTabularLine( \@{$inlines[$ir]} );
+		}
+
+		sub outputTabularHeaders {
+			outputTabularLine( \@outcolnames );
+		}
+
+		# display the data array passed in, whether it is the headers of a data row
+		sub outputTabularLine {
+			$data = shift;
+			print $prefix if $with_prefix eq "yes";
+			print "|";
+			for( $ic=0 ; $ic<$outcolcount ; ++$ic ){
+				$str = $data->[$ic];
+				$len = length( $str );
+				if( $len > $suggested_width ){
+					$str = substr( $data->[$ic], 0, $suggested_width-3 )."...";
+				}
+				printf( " %-*s |", min( $incolwidth[$outcolidx[$ic]], $suggested_width ), $str );
+			}
+			print "\n";
+		}
+
+		while( <STDIN> ){
+			#print STDERR "input: inrows=$inrows incols=$incols $_";
+			chomp;
+			$inlines[$inrows] = [split /\s*${insep}\s*/];
+			# compute in '@incolwidth' the max width of each input column
+			# this is needed on tabular output to keep the table inside screen width
+			$ic = 0;
+			foreach $col ( @{$inlines[$inrows]} ){
+				$col =~ s/^\s*//;
+				$col =~ s/\s*$//;
+				$len = length( $col );
+				$incolwidth[$ic] = $len if !defined( $incolwidth[$ic] ) || $len > $incolwidth[$ic];
+				$ic += 1;
+			}
+			$inrows += 1;
+			# check that we always have the same count of columns which is determined by the the first row
+			if( $incols ){
+				printf STDERR "found %d columns instead of %d expected at line %d\n", $ic, $incols, $inrows if $ic != $incols;
+			} else {
+				$incols = $ic;
+			}
+			# end when reaching maxcount (if set)
+			if( $inrows >= $maxinrows && $maxinrows > 0 ){
+				print $prefix."stopping from reading the input stream after maxcount=".$maxcount."\n";
+				last;
+			}
+		}
+	} END {
+		computeOutputColumns();
+		outputCsv() if $outfmt eq "CSV";
+		outputJson() if $outfmt eq "JSON";
+		outputTabular() if $outfmt eq "TABULAR";
+		#print STDERR "with_counter=$with_counter\n";
+		displayCounter() if $with_counter eq "yes";
+	}' -- \
+		-verbose="${_verbose}" \
+		-inheaders="${_inheaders}" \
+		-insep="${_insep}" \
+		-outcols="${_outcols}" \
+		-outfmt="${_outfmt}" \
+		-outheaders="${_outheaders}" \
+		-outnames="${outnames}" \
+		-outsep="${_outsep}" \
+		-with_prefix="${_prefixed}" \
+		-prefix="$(msgOutPrefix)" \
+		-with_counter="${_counter}" \
+		-maxcount=${_maxcount} \
+		-screenwidth="${_screenwidth}" \
+		-max_width="$(tput cols)"
+}
