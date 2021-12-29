@@ -27,6 +27,7 @@
 #   - @S: service mnemonic read from field #1 of the input line
 #
 # (I): 1. (opt) character used as field separator (':')
+#      2. (opt) value to be used as current execution node (TTP_NODE)
 #
 # (O): stdout: piped stdin stream, macros being replaced
 #
@@ -37,11 +38,13 @@
 # pwi 2006-10-27 tools become The Tools Project, released under GPL
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021- 5-25 get rid of ttp_node
+# pwi 2021-12-29 have substitution node argument
 
 function tabSubstitute
 {
 	typeset _sep="${1:-${ttp_sep}}"
+	typeset _node="${2:-${TTP_NODE}}"
 
-	tabSubstituteMacro "${_sep}" "@N" ""  "${TTP_NODE}" | \
+	tabSubstituteMacro "${_sep}" "@N" ""  "${_node}" | \
 	tabSubstituteMacro "${_sep}" "@S" "1" ""
 }
