@@ -1,15 +1,18 @@
 # @(#) list various informations about The Tools Project
 #
-# @(@) Apart from listing available commands, and an example of TTP used variables,
-# @(@) this verb is also able to list:
-# @(@) - the services available on a node, maybe with their label:
-# @(@)     --services [--node=<name>] [--label]
-# @(@) - the services defined in an environment:
-# @(@)     --services -environment=<identifier> [--label]
-# @(@) - the registered execution nodes, may be with their respective environment
-# @(@)     --nodes [--environment]
-# @(@) - the nodes which host a service:
-# @(@)     --nodes -service=<identifier> [--environment]
+# Please note that the '# @(#)' prefix display the help before the options
+# while the '# @(@)' prefix display the help after the options. This later
+# is 'post-help' message and is displayed by scriptDetailEnd() function. 
+#
+# @(#) This verb lists:
+# @(#) - the available commands,
+# @(#) - the registered execution nodes, maybe for a specified environment
+# @(#)     --nodes [--environment=<identifier>]
+# @(#) - the services available on a node, maybe with their label:
+# @(#)     --services [--node=<name>] [--label]
+# @(#) - the services defined in an environment:
+# @(#)     --services -environment=<identifier> [--label]
+# @(#) - the TTP defined variables,
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
@@ -29,9 +32,8 @@
 # see <http://www.gnu.org/licenses/>.
 #
 # pwi 2013- 2-19 creation
-# pwi 2017- 6-21 publish the release at last 
-
-disp_format=""
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 only output CSV format, leaving json and tabular to ttp.sh filter
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -45,17 +47,15 @@ function verb_arg_define_opt {
 	echo "
 help							display this online help and gracefully exit
 verbose							verbose execution
-commands						display list of commands
-variables						display TTP variables
-services						display services available on the node
-label							display the service label
-node=<name>						the execution node to display the services from
-service=<identifier>			display the nodes which host this service
+commands						display the list of available commands
 nodes							display the registered nodes
-environment[=<identifier>]		display the environment associated to a node/service
-format={CSV|RAW|TABULAR}		output format (case insensitive)
-headers							whether to display headers (in CSV and TABULAR formats)
-counter							whether to display rows counter (in CSV and TABULAR formats)
+environment=<identifier>		display nodes for this specific environment
+services						display defined services
+variables						display TTP defined variables
+counter							whether to display a data rows counter
+csv								display output in CSV format
+separator						(CSV output) separator
+headers							(CSV output) whether to display headers
 "
 }
 
@@ -73,9 +73,10 @@ counter							whether to display rows counter (in CSV and TABULAR formats)
 # initialize specific default values
 
 function verb_arg_set_defaults {
-	opt_format_def="RAW"
-	opt_headers_def="yes"
 	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
+	opt_headers_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -94,7 +95,7 @@ function verb_arg_check {
 	[ "${opt_services}" = "yes" ] && let _action+=1
 	[ "${opt_nodes}" = "yes" ] && let _action+=1
 	if [ ${_action} -eq 0 ]; then
-		msgErr "at least one of '--commands', '--nodes', '--services' or '--vars' option must be specified"
+		msgErr "at least one of '--commands', '--nodes', '--services' or '--variables' option must be specified"
 		let _ret+=1
 	fi
 
@@ -133,28 +134,12 @@ function verb_arg_check {
 		let _ret+=1
 	fi
 
-	# '--[no]headers' and '--[no]counter' are only relevant when the
-	#  format is not 'RAW'
-	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_headers
-		opt_headers_set="no"
-	fi
-	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_counter
-		opt_counter_set="no"
-	fi
-
-	# check output format
-	disp_format="$(formatCheck "${opt_format}")"
-	let _ret+=$?
-
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
 # list the available unique commands, in alpha order
+# this function might also be a scriptListCommands() external one
 
 function f_commands_all {
 	#set -x
@@ -168,83 +153,109 @@ function f_commands_all {
 			[ -x "${_cmdpath}" ] && echo "${_file}" "${_cmdpath}"
 		done
 	done | sort -u -k1,1 | while read _file _cmdpath; do
-		scriptDetail "${_cmdpath}" 1
+		scriptDetail "${_cmdpath}"
 	done
 
 	return 0
 }
 
 # ---------------------------------------------------------------------
+# standard output:
+#   [ttp.sh list] displaying available commands...
+#    cft.sh: Cross File Transfer (CFT) management
+#    mysql.sh: MySQL management
+#   [ttp.sh list] 2 displayed command(s)
+# csv:
+#   [ttp.sh list] displaying available commands...
+#   command;label
+#   cft.sh;Cross File Transfer (CFT) management
+#   mysql.sh;MySQL management
+#   [ttp.sh list] 2 displayed command(s)
 
 function f_commands_list {
 	typeset -i _count=0
 	typeset _line
 
+	typeset _prefix=" "
+	typeset _separator=": "
+	[ "${opt_csv}" == "yes" ] && { _prefix=""; _separator="${opt_separator}"; }
+	[ "${opt_csv}" == "yes" -a "${opt_headers}" == "yes" ] && { echo "command${_separator}label"; }
+
 	msgOut "displaying available commands..."
+
 	f_commands_all | while read _line; do
-		echo " ${_line}"
+		printf '%b' "${_prefix}"
+		printf '%s' "$(echo "${_line}" | cut -d: -f1)"
+		printf '%b' "${_separator}"
+		printf '%s' "$(echo "${_line}" | cut -d: -f2 | sed -e 's|^\s*||' -e 's|\s*$||')"
+		printf '\n'
 		let _count+=1
 	done
-	msgOut "${_count} displayed command(s)"
+
+	[ "${opt_counter}" == "yes" ] && { msgOut "${_count} displayed command(s)"; }
 
 	return 0
 }
 
 # ---------------------------------------------------------------------
-# raw output is:
-#   [ttp.sh list] displaying available commands...
-#    cft.sh: Cross File Transfer (CFT) management
-#    mysql.sh: MySQL management
-#   [ttp.sh list] 2 displayed command(s)
-
-function f_commands_csv {
-	#set -x
-	typeset _headers="${1}"
-	typeset _counter="${2}"
-	typeset -i _count=0
-	typeset _cmd
-	typeset _comment
-
-	cat - | while read _cmd _comment; do
-		if [ "${_cmd:0:1}" = "[" ]; then
-			[ "$(echo "${_comment}" | grep ' displayed command')" = "" -o "${_counter}" = "yes" ] \
-				&& echo "${_cmd} ${_comment}"
-		else
-			[ ${_count} -eq 0 -a "${_headers}" = "yes" ] && echo "Command;Label"
-			echo "${_cmd:0:${#_cmd}-1};${_comment}"
-			let _count+=1
-		fi
-	done
-
-	return 0
-}
-
-# ---------------------------------------------------------------------
-# stdout: all nodes with their environment, in node alpha order
-# return: count of all unique registered nodes
+# list on stdout all nodes with their environment, in node alpha order,
+# as a 'ttp_sep'-separated list node:environment:ini_path
+# returns the count of nodes
 
 function f_nodes_all {
 	typeset -i _count=0
-	typeset _node
-	typeset _env
-	
-	nodeEnum | while read _node; do
-		_env="$(nodeGetEnvironment "${_node}")"
-		echo "${_node}" "${_env}"
-		let _count+=1;
+	typeset _dir
+	typeset _ini
+	typeset _line
+
+	bspRootEnum | while read _dir; do
+		find ${_dir}/${ttp_nodesubdir} -type f -name '*.ini' | while read _ini; do
+			typeset _node="$(echo ${_ini##*/} | sed -e 's|\.ini$||')"
+			typeset _env="$(nodeGetEnvironment "${_node}")"
+			echo "${_node}${ttp_sep}${_env}${ttp_sep}${_ini}"
+		done
+	done | sort -t ${ttp_sep} -k 1,1 -u | while read _line; do
+		let _count+=1
+		echo "${_line}"
 	done
 
 	return ${_count}
 }
 
 # ---------------------------------------------------------------------
-# --nodes [--environment [=<identifier] ]
 
-function f_nodes_byenv_list {
+function f_nodes_display {
+	typeset _line="${1}"
+	typeset _prefix="${2}"
+	typeset _separator="${3}"
+
+	typeset _node="$(echo "${_line}" | cut -d${ttp_sep} -f1)"
+	typeset _env="$(echo "${_line}" | cut -d${ttp_sep} -f2)"
+	typeset _ini="$(echo "${_line}" | cut -d${ttp_sep} -f3)"
+
+	printf '%b' "${_prefix}"
+	printf '%s' "${_node}"
+	printf '%b' "${_separator}"
+	printf '%s' "${_env}"
+	printf '%b' "${_separator}"
+	printf '%s' "${_ini}"
+	printf '\n'
+
+	return 0
+}
+
+# ---------------------------------------------------------------------
+# list nodes
+#	default output is node environment inipath
+#	population may be restricted for a particular environment
+# Please note that a node may be defined without any service; so trying to
+#	list services per node is a bit more complex
+
+function f_nodes_list {
 	typeset -i _ret=0
 	typeset -i _count=0
-	typeset _node
-	typeset _env
+	typeset -i _total=0
+	typeset _line
 
 	if [ -z "${opt_environment}" ]; then
 		msgOut "displaying registered execution nodes..."
@@ -252,313 +263,98 @@ function f_nodes_byenv_list {
 		msgOut "displaying nodes which participate to '${opt_environment}' environment..."
 	fi
 
-	f_nodes_all | while read _node _env; do
-		if [ -z "${opt_environment}" -o "${_env}" = "${opt_environment}" ]; then
-			echo -n " ${_node}"
-			[ "${opt_environment_set}" = "yes" ] && echo ": ${_env}" || echo
-			let _count+=1;
-		fi
-	done
+	typeset _prefix=" "
+	typeset _separator=":\t"
+	[ "${opt_csv}" == "yes" ] && { _prefix=""; _separator="${opt_separator}"; }
+	[ "${opt_csv}" == "yes" -a "${opt_headers}" == "yes" ] && { echo "node${_separator}environment${_separator}pathname"; }
 
-	msgOut "${_count} displayed node(s)"
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# raw output is:
-#   [ttp.sh list] displaying registered execution nodes...
-#    svn
-#    xps13
-#   [ttp.sh list] 2 displayed node(s)
-# or:
-#   [ttp.sh list] displaying registered execution nodes...
-#    svn: X@trychlos.pwi
-#    xps13: X@trychlos.pwi
-#   [ttp.sh list] 2 displayed node(s)
-
-function f_nodes_byenv_csv {
-	typeset _headers="${1}"
-	typeset _counter="${2}"
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _env
-
-	typeset _headline="Node"
-	[ "${opt_environment_set}" = "yes" ] && _headline="${_headline};Environment"
-
-	cat - | while read _node _env; do
-		if [ "${_node:0:1}" = "[" ]; then
-			[ "$(echo "${_env}" | grep ' displayed node')" = "" -o "${_counter}" = "yes" ] \
-				&& echo "${_node} ${_env}"
+	f_nodes_all | while read _line; do
+		if [ -z "${opt_environment}" ]; then
+			f_nodes_display "${_line}" "${_prefix}" "${_separator}"
+			let _count+=1
 		else
-			[ ${_count} -eq 0 -a "${_headers}" = "yes" ] && echo "${_headline}"
-			[ "${_node:${#_node}-1:1}" = ":" ] && echo -n "${_node:0:${#_node}-1}" || echo -n "${_node}"
-			[ -z "${_env}" ] && echo || echo ";${_env}"
-			let _count+=1
+			typeset _env="$(echo "${_line}" | cut -d${ttp_sep} -f2)"
+			if [ "${_env}" == "${opt_environment}" ]; then
+				f_nodes_display "${_line}" "${_prefix}" "${_separator}"
+				let _count+=1
+			fi
 		fi
+		let _total+=1
 	done
 
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# --nodes --service=<identifier [--environment]
-
-function f_nodes_byserv_list {
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _service
-
-	msgOut "displaying nodes which host '${opt_service}' service..."
-	f_services_all | while read _node _service; do
-		if [ "${_service}" = "${opt_service}" ]; then
-			echo -n " ${_node}: ${_service}"
-			[ "${opt_environment_set}" = "yes" ] && echo " $(nodeGetEnvironment "${_node}")" || echo
-			let _count+=1
-		fi
-	done
-
-	msgOut "${_count} displayed node(s)"
+	[ "${opt_counter}" == "yes" -a -z "${opt_environment}" ] && { msgOut "${_count} displayed node(s)"; }
+	[ "${opt_counter}" == "yes" -a ! -z "${opt_environment}" ] && { msgOut "${_count} displayed node(s) on ${_total} total registered"; }
 
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
-# raw output is:
-#   [ttp.sh list] displaying nodes which host 'CFTT' service...
-#    xps13: CFTT
-#   [ttp.sh list] 1 displayed node(s)
-# or:
-#   [ttp.sh list] displaying nodes which host 'CFTT' service...
-#    xps13: CFTT X@trychlos.pwi
-#   [ttp.sh list] 1 displayed node(s)
-
-function f_nodes_byserv_csv {
-	typeset _headers="${1}"
-	typeset _counter="${2}"
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _serv
-	typeset _env
-
-	typeset _headline="Node;Service"
-	[ "${opt_environment_set}" = "yes" ] && _headline="${_headline};Environment"
-
-	cat - | while read _node _serv _env; do
-		if [ "${_node:0:1}" = "[" ]; then
-			[ "$(echo "${_env}" | grep ' displayed node')" = "" -o "${_counter}" = "yes" ] \
-				&& echo "${_node} ${_serv} ${_env}"
-		else
-			[ ${_count} -eq 0 -a "${_headers}" = "yes" ] && echo "${_headline}"
-			echo -n "${_node:0:${#_node}-1}"
-			echo -n ";${_serv}"
-			[ -z "${_env}" ] && echo || echo ";${_env}"
-			let _count+=1
-		fi
-	done
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# --nodes [--environment [=<identifier] ]
-# --nodes --service=<identifier [--environment]
-
-function f_nodes_list {
-	typeset -i _ret=0
-
-	if [ -z "${opt_service}" ]; then
-		# list all nodes, maybe with their environment, maybe for an
-		#  environment
-		f_nodes_byenv_list | f_output "f_nodes_byenv_csv"
-	else
-		# list nodes for a service
-		f_nodes_byserv_list | f_output "f_nodes_byserv_csv"
-	fi
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# stdout: all services with their node, in "node service" alpha order
-# return: count of all unique defined services
+# display a 'ttp_sep'-separated list:
+#	<service_id> : <service_type> : <node> : <node_environment> : <service_label>
+# sorted by service/node
 
 function f_services_all {
-	typeset -i _count=0
-	typeset _dir
-	typeset _ini
-	typeset _service
-
-	bspRootEnum | while read _dir; do
-		find ${_dir}/${ttp_nodesubdir} -type f -name '*.ini' | while read _ini; do
-			_node="$(echo ${_ini##*/} | sed -e 's|\.ini$||')"
-			cat "${_ini}" \
-				| tabStripComments "${ttp_sep}" \
-				| tabSubstitute "${ttp_sep}" \
-				| awk -F "${ttp_sep}" '{ print $1 }' \
-				| sort -u \
-				| grep -v "${_node}" \
-				| while read _service; do	
-					echo "${_node} ${_service}"
-					let _count+=1
-				done
-		done
-	done | sort
-
-	return ${_count}
-}
-
-# ---------------------------------------------------------------------
-#  --services [--node=<name>] [--label]
-
-function f_services_bynode_list {
 	typeset -i _ret=0
-	typeset -i _count=0
+	typeset _line
+	typeset _sub
 
-	if [ -z "${opt_node}" ]; then
-		msgOut "displaying available services for current node..."
-		typeset -n _vname="ttp_node_keys"
-		typeset _value
-		for _value in "${_vname[@]}"; do
-			if [ "${_value}" != "${TTP_NODE}" ]; then
-				echo -n " ${TTP_NODE}: ${_value}"
-				[ "${opt_label}" = "yes" ] && echo " $(confGetKey "ttp_node_keys" "${_value}" "0=service" "2")" || echo
-				let _count+=1
-			fi
-		done
-
-	else
-		msgOut "displaying available services for '${opt_node}' node..."
-		typeset _node
-		typeset _service
-		f_services_all | while read _node _service; do
-			if [ "${_node}" = "${opt_node}" ]; then
-				echo -n " ${_node}: ${_service}"
-				[ "${opt_label}" = "yes" ] && echo " $(serviceGetLabel "${_node}" "${_service}")" || echo
-				let _count+=1
-			fi
-		done
-	fi
-
-	msgOut "${_count} displayed service(s)"
+	f_nodes_all | while read _line; do
+		typeset _node="$(echo "${_line}" | cut -d${ttp_sep} -f1)"
+		typeset _env="$(echo "${_line}" | cut -d${ttp_sep} -f2)"
+		typeset _ini="$(echo "${_line}" | cut -d${ttp_sep} -f3)"
+		cat "${_ini}" \
+			| tabStripComments "${ttp_sep}" \
+			| tabSubstitute "${ttp_sep}" "${_node}" \
+			| sed -e "s|\s*${ttp_sep}\s*|${ttp_sep}|g" \
+			| grep -e "${ttp_sep}service${ttp_sep}" \
+			| while read _sub; do
+				typeset _service="$(echo "${_sub}" | cut -d${ttp_sep} -f1)"
+				typeset _type="$(echo "${_sub}" | cut -d${ttp_sep} -f3)"
+				typeset _label="$(echo "${_sub}" | cut -d${ttp_sep} -f4)"
+				echo "${_service}${ttp_sep}${_type}${ttp_sep}${_node}${ttp_sep}${_env}${ttp_sep}${_label}"
+			done
+	done | sort -t${ttp_sep} -k1,1 -k3,3
 
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
-# raw output is:
-#   [ttp.sh list] displaying available services for current node...
-#    xps13: MYS
-#    xps13: CFTT
-#   [ttp.sh list] 2 displayed service(s)
-
-function f_services_bynode_csv {
-	typeset _headers="${1}"
-	typeset _counter="${2}"
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _serv
-	typeset _label
-
-	typeset _headline="Node;Service"
-	[ "${opt_label}" = "yes" ] && _headline="${_headline};Label"
-
-	cat - | while read _node _serv _label; do
-		if [ "${_node:0:1}" = "[" ]; then
-			[ "$(echo "${_label}" | grep ' displayed service')" = "" -o "${_counter}" = "yes" ] \
-				&& echo "${_node} ${_serv} ${_label}"
-		else
-			[ ${_count} -eq 0 -a "${_headers}" = "yes" ] && echo "${_headline}"
-			echo -n "${_node:0:${#_node}-1}"
-			echo -n ";${_serv}"
-			[ "${opt_label}" = "yes" ] && echo ";${_label}" || echo
-			let _count+=1
-		fi
-	done
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-#  --services --environment=<identifier> [--label]
-
-function f_services_byenv_list {
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _service
-	typeset _env
-	typeset _label
-
-	msgOut "displaying available services in '${opt_environment}' environment..."
-	f_services_all | while read _node _service; do
-		_env="$(nodeGetEnvironment "${_node}")"
-		if [ "${_env}" = "${opt_environment}" ]; then
-			echo -n " ${_node}: ${_service}"
-			[ "${opt_label}" = "yes" ] && echo " $(serviceGetLabel "${_node}" "${_service}")" || echo
-			let _count+=1
-		fi
-	done
-	msgOut "${_count} displayed service(s)"
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-# raw output is:
-#   [ttp.sh list] displaying available services in 'X@trychlos.pwi' environment...
-#    svn: SVN
-#    xps13: CFTT
-#    xps13: MYS
-#   [ttp.sh list] 3 displayed service(s)
-
-function f_services_byenv_csv {
-	typeset _headers="${1}"
-	typeset _counter="${2}"
-	typeset -i _ret=0
-	typeset -i _count=0
-	typeset _node
-	typeset _serv
-	typeset _label
-
-	typeset _headline="Node;Service"
-	[ "${opt_label}" = "yes" ] && _headline="${_headline};Label"
-
-	cat - | while read _node _serv _label; do
-		if [ "${_node:0:1}" = "[" ]; then
-			[ "$(echo "${_label}" | grep ' displayed service')" = "" -o "${_counter}" = "yes" ] \
-				&& echo "${_node} ${_serv} ${_label}"
-		else
-			[ ${_count} -eq 0 -a "${_headers}" = "yes" ] && echo "${_headline}"
-			echo -n "${_node:0:${#_node}-1}"
-			echo -n ";${_serv}"
-			[ "${opt_label}" = "yes" ] && echo ";${_label}" || echo
-			let _count+=1
-		fi
-	done
-
-	return ${_ret}
-}
-
-# ---------------------------------------------------------------------
-#  --services [--label]
-#  --services --node=<name> [--label]
-#  --services --environment=<identifier> [--label]
+# list services, with their nodes and their environment
 
 function f_services_list {
 	typeset -i _ret=0
 	typeset -i _count=0
+	typeset _line
 
-	if [ -z "${opt_environment}" ]; then
-		f_services_bynode_list | f_output "f_services_bynode_csv"
-	else
-		f_services_byenv_list | f_output "f_services_byenv_csv"
-	fi
+	typeset _prefix=" "
+	typeset _separator=":\t"
+	[ "${opt_csv}" == "yes" ] && { _prefix=""; _separator="${opt_separator}"; }
+	[ "${opt_csv}" == "yes" -a "${opt_headers}" == "yes" ] && { echo "service${_separator}type${_separator}node${_separator}environment${_separator}label"; }
+
+	msgOut "displaying defined services and their node..."
+
+	f_services_all | while read _line; do
+		typeset _service="$(echo "${_line}" | cut -d${ttp_sep} -f1)"
+		typeset _type="$(echo "${_line}" | cut -d${ttp_sep} -f2)"
+		typeset _node="$(echo "${_line}" | cut -d${ttp_sep} -f3)"
+		typeset _env="$(echo "${_line}" | cut -d${ttp_sep} -f4)"
+		typeset _label="$(echo "${_line}" | cut -d${ttp_sep} -f5)"
+		printf '%b' "${_prefix}"
+		printf '%s' "${_service}"
+		printf '%b' "${_separator}"
+		printf '%s' "${_type}"
+		printf '%b' "${_separator}"
+		printf '%s' "${_node}"
+		printf '%b' "${_separator}"
+		printf '%s' "${_env}"
+		printf '%b' "${_separator}"
+		printf '%s' "${_label}"
+		printf '\n'
+		let _count+=1
+	done
+
+
+	[ "${opt_counter}" == "yes" ] && { msgOut "${_count} defined service(s)"; }
 
 	return ${_ret}
 }
@@ -568,38 +364,47 @@ function f_services_list {
 function f_variables_list {
 	typeset -i _ret=0
 
+	typeset _prefix=" "
+	typeset _separator="="
+	[ "${opt_csv}" == "yes" ] && { _prefix=""; _separator="${opt_separator}"; }
+	[ "${opt_csv}" == "yes" -a "${opt_headers}" == "yes" ] && { echo "variable${_separator}content"; }
+
 	typeset -i _count=0
-	msgOut "displaying global TTP variables..."
-	set | grep -e '^TTP_' | while read l; do echo " $l"; let _count+=1; done
-	msgOut "displaying internal TTP variables..."
-	set | grep -e '^ttp_' | while read l; do echo " $l"; let _count+=1; done
-	msgOut "${_count} displayed variable(s)"
+	f_variables_regexp 'TTP_' "global TTP variables" "${_prefix}" "${_separator}"
+	let _count+=$?
+	f_variables_regexp 'ttp_' "internal TTP variables" "${_prefix}" "${_separator}"
+	let _count+=$?
+	f_variables_regexp 'opt_' "myn own internal opt_ variables" "${_prefix}" "${_separator}"
+	let _count+=$?
+
+	[ "${opt_counter}" == "yes" ] && { msgOut "${_count} displayed variable(s)"; }
 
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
+# return the count of displayed variables
 
-function f_output {
-	typeset _csvfn="${1}"
-	typeset -i _ret=0
+function f_variables_regexp {
+	typeset _regexp="${1}"
+	typeset _label="${2}"
+	typeset _prefix="${3}"
+	typeset _separator="${4}"
 
-	if [ "${disp_format}" = "CSV" ]; then
-		${_csvfn} "${opt_headers}" "${opt_counter}"
+	typeset _line
+	typeset -i _count=0
+	msgOut "displaying ${_label}..."
 
-	elif [ "${disp_format}" = "RAW" ]; then
-		cat -
+	set | grep -e "^${_regexp}" | while read _line; do
+		printf '%b' "${_prefix}"
+		printf '%s' "$( echo "${_line}" | cut -d= -f1)"
+		printf '%b' "${_separator}"
+		printf '%s' "$( echo "${_line}" | cut -d= -f2-)"
+		printf '\n'
+		let _count+=1
+	done
 
-	elif [ "${disp_format}" = "TABULAR" ]; then
-		${_csvfn} "yes" "no" \
-			| csvToTabular "${opt_headers}" "${opt_counter}"
-
-	else
-		msgErr "${disp_format}: unknown output format"
-		let _ret+=1
-	fi
-
-	return ${_ret}
+	return ${_count}
 }
 
 # ---------------------------------------------------------------------
@@ -608,28 +413,26 @@ function verb_main {
 	#set -x
 	typeset -i _ret=0
 
-	# listing available commands
+	# list available commands
 	if [ "${opt_commands}" = "yes" ]; then
-		f_commands_list | f_output "f_commands_csv"
+		f_commands_list
 		let _ret+=$?
 	fi
 
-	# listing registered nodes
-	#  maybe with their associated environment
+	# list registered nodes
+	#  maybe for a specified environment
 	if [ "${opt_nodes}" = "yes" ]; then
 		f_nodes_list
 		let _ret+=$?
 	fi
 
-	# listing available services
-	# may be listed for the current node, for a specific node, or for
-	#  an environment
+	# list defined services
 	if [ "${opt_services}" = "yes" ]; then
 		f_services_list
 		let _ret+=$?
 	fi
 
-	# listing internal TTP variables
+	# list TTP variables
 	if [ "${opt_variables}" = "yes" ]; then
 		f_variables_list
 		let _ret+=$?
