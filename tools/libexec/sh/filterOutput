@@ -127,7 +127,7 @@ function filterOutput
 		sub displayCounter {
 			$counter = $inrows;
 			$counter -= 1 if $inheaders eq "yes";
-			printf( "%s%d displayed row(s)\n", $prefix, $counter );
+			printf( "%s%d displayed data row(s)\n", $prefix, $counter );
 		}
 
 		sub min {
@@ -300,4 +300,6 @@ function filterOutput
 		-maxcount=${_maxcount} \
 		-screenwidth="${_screenwidth}" \
 		-max_width="$(tput cols)"
+
+	return 0
 }
