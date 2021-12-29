@@ -1,5 +1,8 @@
 # @(#) reorder, filter and reformat columns from stdin stream to stdout
 #
+# Please note that the '# @(#)' prefix display the help before the options
+# while the '# @(@)' prefix display the help after the options.
+#
 # @(#) Accepts any columns-like (aka CSV) input format.
 # @(#) If headers are not defined as the first input row, then columns are numbered (from 1)
 # @(#) instead of being named. The '--outnames' option may be added to add a name to each
