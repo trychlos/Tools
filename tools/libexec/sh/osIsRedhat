@@ -1,5 +1,4 @@
-#!/bin/ksh
-# @(#) Repository management
+# @(#) Test for Redhat-like system
 #
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
@@ -18,6 +17,26 @@
 # along with The Tools Project; see the file COPYING. If not,
 # see <http://www.gnu.org/licenses/>.
 #
-# pwi 2018-12-31 creation
+# (I): -
+#
+# (O): version read from /etc/redhat-release is echoed on stdout
+#
+# (R): 0 (true) if this is a redhat-like system
+#      1 else
+#
+# pwi 2021-12-29 creation
 
-ttpf_main "${0}" "${@}"
+function osIsRedhat
+{
+set -x
+	typeset -i _ret=0
+	typeset _tag="/etc/redhat-release"
+
+	if [ -s "${_tag}" ]; then
+		cat "${_tag}"
+	else
+		let _ret=1
+	fi
+
+	return ${_ret}
+}

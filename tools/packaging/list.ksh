@@ -31,6 +31,10 @@ function verb_arg_define_opt {
 	echo "
 help						display this online help and gracefully exit
 node=<name>					display repositories configured for this specific node
+counter						whether to display a data rows counter
+csv							display output in CSV format
+separator					(CSV output) separator
+headers						(CSV output) whether to display headers
 "
 }
 
@@ -49,6 +53,10 @@ node=<name>					display repositories configured for this specific node
 
 function verb_arg_set_defaults {
 	opt_node_def="ALL"
+	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
+	opt_headers_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -63,51 +71,51 @@ function verb_arg_check {
 }
 
 # ---------------------------------------------------------------------
-# output the list of repositories for yum
-# return the count of found repos
+# output the list of repositories for a redhat-like system
+# return the count of found repositories
 
-function f_yum_repolist {
-	#set -x
-	typeset _count=0
-	
-	which yum 1>/dev/null 2>&1
-	if [ $? -eq 0 ]; then
-		typeset _line
-		typeset _found="no"
-		yum repolist enabled | while read _line; do
-			if [ "${_found}" = "yes" ]; then
-				if [ "${_line:10}" = "repolist: " ]; then
-					break
-				else
-					typeset _name="$(echo "${_line}" | awk '{ print $1 }')"
-					let _count+=1
-					echo "${_name}"
-				fi
-			elif [ "${_line}" = "repo id" ]; then
-				_found="yes"
-			fi
-		done
-	fi
+function f_debian_repolist {
+	typeset -i _count=0
 
 	return ${_count}
 }
 
 # ---------------------------------------------------------------------
-# modify the display format
+# output the list of repositories for a redhat-like system
+# return the count of found repositories
+# From CentOS 6 to Fedora 34, we have
+#	repo id		repo name		status
 
-function f_listcat_output {
-	#set -x
+function f_redhat_repolist {
+	typeset -i _count=0
+	typeset _line
 
-	if [ "${disp_format}" = "CSV" ]; then
-		cftCatalogFullToCsv "${opt_service}" "${opt_headers}" "${opt_counter}"
+	[ "${opt_csv}" == "yes" -a "${opt_headers}" == "yes" ] && {
+		echo "repository id${opt_separator}repository name${opt_separator}status";
+	}
 
-	elif [ "${disp_format}" = "RAW" ]; then
-		cat -
+	typeset -i _title_found=0
+	yum repolist all 2>/dev/null | while read _line; do
+		# do not output anything until title line which starts with 'repo id'
+		# then first word is repo id
+		# last word is status
+		# between we have a truncated label :(
+		if [ ${_title_found} ]; then
+			typeset _repoid="$(echo "${_line}" | awk '{ print $1 }')"
+			typeset _label="$(echo "${_line}" | awk '{ for( i=2; i<NF; ++i ){ if( i>2 ) printf( " " ); printf( "%s", $i )}}')"
+			typeset _status="$(echo "${_line}" | awk '{ print $NF }')"
+			if [ "${opt_csv}" == "yes" ]; then
+				echo "${_repoid}${opt_separator}${_label}${opt_separator}${_status}"
+			else
+				printf " ${_repoid}:\t${_label} (${_status})\n"
+			fi
+			let _count+=1
+		elif [ ! -z "$(echo "${_line}" | grep -e '^repo id')" ]; then
+			let _title_found=1
+		fi
+	done
 
-	elif [ "${disp_format}" = "TABULAR" ]; then
-		cftCatalogFullToCsv "${opt_service}" "yes" "no" \
-			| csvToTabular "${opt_headers}" "${opt_counter}"
-	fi
+	return ${_count}
 }
 
 # ---------------------------------------------------------------------
@@ -121,7 +129,7 @@ function verb_main {
 		typeset _node
 		typeset _parms="$@"
 		nodeEnum | while read _node; do
-			execRemote "${_node}" "${ttp_command} ${ttp_verb} ${_parms}"
+			execRemote "${_node}" "${ttp_command} ${ttp_verb} -node ${_node} ${_parms}"
 			let _ret+=$?
 		done
 
@@ -135,13 +143,9 @@ function verb_main {
 	# then ask it for the repositories it is configured for 
 	else
 		typeset -i _count=0
-		let _count=f_yum_repolist
-		if [ ${_count} -eq 0 ]; then
-			let _count=f_dnf_repolist
-		fi
-		if [ ${_count} -eq 0 ]; then
-			let _count=f_debian_repolist
-		fi
+		osIsDebian 1>/dev/null 2>&1 && { f_debian_repolist; let _count+=$?; }
+		osIsRedhat 1>/dev/null 2>&1 && { f_redhat_repolist; let _count+=$?; }
+		[ "${opt_counter}" == "yes" ] && { msgOut "${_count} displayed repository/ies"; }
 	fi
 
 	return ${_ret}
