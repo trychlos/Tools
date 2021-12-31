@@ -27,6 +27,7 @@
 #
 # pwi 2021-11-29 creation
 # pwi 2021-12- 3 fix mp3 vs opus tags vs EasyTag vs MusicBrainzPicard
+# pwi 2021-12-28 only output CSV format, leaving json and tabular to ttp.sh filter
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -44,10 +45,12 @@ path=<path>						the path to be (recursively) scanned
 maxcount=<n>					stop the execution after having checked <n> files
 albums							whether to display the list of found albums
 genres							whether to display the list of known genres
-display=standard|tabular|none	selection of the output format
-csv=<path> 						whether to output the list into a CSV file
 ckdate							when displaying albums, warn if 'Date' information is not set
 wtracks							when displaying albums, add tracks count
+counter							whether to display a data rows counter
+csv								display output in CSV format
+separator						(CSV output) separator
+headers							(CSV output) whether to display headers
 "
 }
 
@@ -71,9 +74,12 @@ function verb_arg_set_defaults {
 	opt_albums_def="no"
 	opt_genres_def="no"
 	opt_display_def="standard"
-	opt_csv_def=""
 	opt_ckdate_def="yes"
 	opt_wtracks_def="yes"
+	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
+	opt_headers_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -88,12 +94,6 @@ function verb_arg_check {
 	# path is mandatory
 	if [ -z "${opt_path}" ]; then
 		msgErr "path is mandatory, has not been specified"
-		let _ret+=1
-	fi
-
-	# display must be standard|tabular|none
-	if [ "${opt_display}" != "standard" -a "${opt_display}" != "tabular" -a "${opt_display}" != "none" ]; then
-		msgErr "invalid 'display' option, '${opt_display}' found, 'standard', 'tabular' or 'none' expected"
 		let _ret+=1
 	fi
 
@@ -119,7 +119,7 @@ function f_displayAlbums {
 	LC_ALL=C sort --ignore-case --ignore-leading-blanks --field-separator=${_sep} --key 1,1 --key 3,3 --unique "${_flist}" > "${_fsorted}"
 	typeset -i _count_albums=$(wc -l "${_sorted}" | awk '{ print $1 }')
 
-	# prepare the title of CSV output / tabular format
+	# prepare the title of CSV output
 	typeset _title="Album${_sep}Date${_sep}Artist"
 	if [ "${opt_wtracks}" == "yes" ]; then
 		_title="${_title}${_sep}Tracks"
@@ -129,7 +129,9 @@ function f_displayAlbums {
 	fi
 	echo "${_title}" > "${_ftitle}"
 
-	if [ "${opt_display}" == "standard" ]; then
+	if [ "${opt_csv}" == "yes" ]; then
+		cat "${_ftitle}" "${_fsorted}"
+	else
 		cat "${_fsorted}" | while read _line; do
 			typeset _album="$(echo "${_line}" | cut -d${_sep} -f1)"
 			typeset _date="$(echo "${_line}" | cut -d${_sep} -f2)"
@@ -140,16 +142,8 @@ function f_displayAlbums {
 			fi
 			msgOut "found album '${_album}' [${_date}] by '${_artist}'${_msg}"
 		done
-		msgOut "found ${_count_albums} distinct albums"
-	
-	elif [ "${opt_display}" == "tabular" ]; then
-		cat "${_ftitle}" "${_fsorted}" | csvToTabular yes yes "" "" yes
 	fi
-
-	if [ ! -z "${opt_csv}" ]; then
-		cat "${_ftitle}" "${_fsorted}" > "${opt_csv}"
-		msgOut "${_count_albums} lines written in ${opt_csv}"
-	fi
+	[ "${opt_counter}" == "yes" ] && msgOut "found ${_count_albums} distinct albums"
 }
 
 # ---------------------------------------------------------------------
@@ -171,24 +165,17 @@ function f_displayGenres {
 	done
 	typeset -i _count_genres=$(wc -l "${_sorted}" | awk '{ print $1 }')
 
-	if [ "${opt_display}" == "standard" ]; then
+	if [ "${opt_csv}" == "yes" ]; then
+		echo "Genre${_sep}Count" > "${_title}"
+		cat "${_title}" "${_sorted}"
+	else
 		cat "${_sorted}" | while read _line; do
 			typeset _genre="$(echo "${_line}" | cut -d${_sep} -f1)"
 			typeset _count="$(echo "${_line}" | cut -d${_sep} -f2)"
 			msgOut "found genre '${_genre}' (count=${_count})"
 		done
-		msgOut "found ${_count_genres} distinct genres"
-	
-	elif [ "${opt_display}" == "tabular" ]; then
-		echo "Genre${_sep}Count" > "${_title}"
-		cat "${_title}" "${_sorted}" | csvToTabular yes yes "" "" yes
 	fi
-
-	if [ ! -z "${opt_csv}" ]; then
-		echo "Genre${_sep}Count" > "${_title}"
-		cat "${_title}" "${_sorted}" > "${opt_csv}"
-		msgOut "${_count_genres} lines written in ${opt_csv}"
-	fi
+	[ "${opt_counter}" == "yes" ] && msgOut "found ${_count_genres} distinct genres"
 
 	msgOut "a summary of the genre of each music track is available in '$(pathGetTempFile genres)' file"
 }
