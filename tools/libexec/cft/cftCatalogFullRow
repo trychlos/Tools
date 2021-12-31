@@ -37,6 +37,7 @@
 # (I): 1. service mnemonic
 #      2. with headers (yes|no)
 #      3. with rows counter (yes|no)
+#      4. csv separator
 #
 #      stdin: output of cftCatalogFullDatetime
 #
@@ -46,12 +47,14 @@
 # pwi 2013- 6- 6 add partner to output
 # pwi 2013- 6-19 output all 94 columns in a SQL-like output
 # pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-31 pass csv separator from the caller
 
 function cftCatalogFullRow
 {
 	typeset _service="${1}"
 	typeset _headers="${2}"
 	typeset _counter="${3}"
+	typeset _csvsep="${4}"
 
 	perl -se '{
 		sub funny_cap( $ ){
@@ -102,6 +105,6 @@ function cftCatalogFullRow
 		-service="${_service}" \
 		-with_headers="${_headers}" \
 		-with_counter="${_counter}" \
-		-csvsep="${ttp_csvsep:-;}" \
+		-csvsep="${_csvsep}" \
 		-msg="$(msgOutPrefix)"
 }

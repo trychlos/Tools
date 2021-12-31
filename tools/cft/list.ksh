@@ -27,10 +27,10 @@
 # pwi 2013- 6-21 take an optional service mnemonic
 # pwi 2013- 6-24 adopt the standard tabular format (aka SQL-like)
 # pwi 2013- 7-18 review options dynamic computing
-# pwi 2017- 6-21 publish the release at last 
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-28 only output CSV format, leaving json and tabular to ttp.sh filter
 
 disp_catalog=""
-disp_format=""
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -52,9 +52,10 @@ receive						display receive definitions
 logs						display log files definitions
 account						display accounting files definitions
 catalog[=BRIEF|FULL]		display catalog content (case insensitive)
-format={CSV|RAW|TABULAR}	output format (case insensitive)
-headers						whether to display headers (in CSV and TABULAR formats)
-counter						whether to display rows counter (in CSV and TABULAR formats)
+counter						whether to display a data rows counter
+csv							display output in CSV format
+separator					(CSV output) separator
+headers						(CSV output) whether to display headers
 "
 }
 
@@ -73,9 +74,10 @@ counter						whether to display rows counter (in CSV and TABULAR formats)
 
 function verb_arg_set_defaults {
 	opt_catalog_def="BRIEF"
-	opt_format_def="RAW"
-	opt_headers_def="yes"
 	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
+	opt_headers_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -131,23 +133,6 @@ function verb_arg_check {
 			let _ret+=1
 	esac
 
-	# '--[no]headers' and '--[no]counter' are only relevant when the
-	#  format is not 'RAW'
-	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_headers
-		opt_headers_set="no"
-	fi
-	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_counter
-		opt_counter_set="no"
-	fi
-
-	# check output format
-	disp_format="$(formatCheck "${opt_format}")"
-	let _ret+=$?
-
 	return ${_ret}
 }
 
@@ -191,15 +176,10 @@ function f_listcat {
 function f_listcat_output {
 	#set -x
 
-	if [ "${disp_format}" = "CSV" ]; then
-		cftCatalogFullToCsv "${opt_service}" "${opt_headers}" "${opt_counter}"
-
-	elif [ "${disp_format}" = "RAW" ]; then
+	if [ "${opt_csv}" == "yes" ]; then
+		cftCatalogFullToCsv "${opt_service}" "${opt_headers}" "${opt_counter}" "${opt_separator}"
+	else
 		cat -
-
-	elif [ "${disp_format}" = "TABULAR" ]; then
-		cftCatalogFullToCsv "${opt_service}" "yes" "no" \
-			| csvToTabular "${opt_headers}" "${opt_counter}"
 	fi
 }
 
@@ -265,8 +245,7 @@ function verb_main {
 			typeset _ftemp="$(pathGetTempFile catalog)"
 			f_listcat >"${_ftemp}"
 			let _ret+=$?
-			[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_listcat_output
-			let _ret+=$?
+			[ ${_ret} -eq 0 ] && { cat "${_ftemp}" | f_listcat_output; let _ret+=$?; }
 		fi
 	fi
 
