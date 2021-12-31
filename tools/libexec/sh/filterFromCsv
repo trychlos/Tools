@@ -1,4 +1,4 @@
-# @(#) filter and reformat the columns from input stream to stdout
+# @(#) filter and reformat the columns from CSV-like input stream to stdout
 #
 # @(#) This function expects its input to be in a CSV-like format.
 # @(#) Results are otherwise unpredictable.
@@ -54,7 +54,7 @@
 #
 # pwi 2021-12-27 creation
 
-function filterOutput
+function filterFromCsv
 {
 	typeset _verbose="${1:-no}"
 	typeset _inheaders="${2:-yes}"
@@ -77,7 +77,7 @@ function filterOutput
 		$incols = 0;				# count of input columns
 		@incolwidth = ();			# input column max width
 		@inlines = ();				# table of input columns per line
-		$outcolcount = 0;			# count of output rows
+		$outcolcount = 0;			# count of output columns
 		@outcolidx = ();			# index (regarding the input columns) of output columns
 		@outcolnames = ();			# name of output columns (if a header must be outputed)
 

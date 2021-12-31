@@ -19,9 +19,8 @@
 # see <http://www.gnu.org/licenses/>.
 #
 # gmi 2005- 6-13 creation
-# pwi 2017- 6-21 publish the release at last 
-
-disp_format=""
+# pwi 2017- 6-21 publish the release at last
+# pwi 2021-12-30 only add CSV format, leaving json to ttp.sh filter
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -34,7 +33,6 @@ disp_format=""
 function verb_arg_define_opt {
 	echo "
 help						display this online help and gracefully exit
-dummy						dummy execution
 verbose						verbose execution
 service=<identifier>		service identifier
 command=<command>			command to be executed
@@ -43,9 +41,10 @@ interactive					open an interactive connection
 user=<user>					connection account
 timeout=<sec>				timeout
 test						test that the service is up and running before executing
-format={CSV|RAW|TABULAR}	output format (case insensitive)
-headers						whether to display headers (in CSV and TABULAR formats)
-counter						whether to display rows counter (in CSV and TABULAR formats)
+counter						whether to display a data rows counter
+headers						whether to display headers
+csv							display output in CSV format
+separator					(CSV output) separator
 "
 }
 
@@ -66,9 +65,10 @@ function verb_arg_set_defaults {
 	opt_timeout_def=0
 	opt_user_def="root"
 	opt_test_def="yes"
-	opt_format_def="RAW"
-	opt_headers_def="yes"
 	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
+	opt_headers_def="yes"
 }
 
 # ---------------------------------------------------------------------
@@ -108,41 +108,60 @@ function verb_arg_check {
 		fi
 	fi
 
-	# '--[no]headers' and '--[no]counter' are only relevant when the
-	#  format is not 'RAW'
-	if [ "${opt_headers_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]headers' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_headers
-		opt_headers_set="no"
-	fi
-	if [ "${opt_counter_set}" = "yes" -a "${opt_format}" = "RAW" ]; then
-		msgWarn "'--[no]counter' option is only relevant with 'CSV' or 'TABULAR' format, ignored"
-		unset opt_counter
-		opt_counter_set="no"
-	fi
-
-	# check output format
-	disp_format="$(formatCheck "${opt_format}")"
-	let _ret+=$?
-
 	return ${_ret}
 }
 
 # ---------------------------------------------------------------------
+# sql client defauts to not output any data rows counter
+# add it here
+
+function f_add_counter {
+	typeset _ftemp="${1}"
+	typeset -i _count=$(wc -l ${_ftemp} | awk '{ print $1 }')
+	let _count-=4
+	msgOut "${_count} displayed data row(s)" >> "${_ftemp}"
+}
+
+# ---------------------------------------------------------------------
+# sql client defauts to a tabular output with headers
+# remove then here
+
+function f_remove_headers {
+	typeset _ftemp="${1}"
+	typeset _ftail="$(pathGetTempFile tail)"
+	cat "${_ftemp}" | tail -n +3 > "${_ftail}"
+	mv "${_ftail}" "${_ftemp}"
+}
+
+# ---------------------------------------------------------------------
 # format the output
+#	sql client defaults to display its output in tabular form
 
 function f_output {
 	#set -x
 
-	if [ "${disp_format}" = "CSV" ]; then
-		dbmsToCsv "${opt_service}" "${opt_headers}" "${opt_counter}"
+	if [ "${opt_csv}" == "yes" ]; then
 
-	elif [ "${disp_format}" = "RAW" ]; then
+		typeset _inheaders="${opt_headers}"
+		typeset _insep="\|"
+		typeset _outcols="ALL"
+		typeset _outfmt="CSV"
+		typeset _outheaders="${opt_headers}"
+		typeset _outnames=""
+		typeset _outsep="${opt_separator}"
+		typeset _screenwidth="yes"
+		typeset _prefixed="no"
+		typeset _counter="${opt_counter}"
+		typeset -i _maxcount=-1
+
+		filterFromTabular \
+			"${opt_verbose}" \
+			"${_inheaders}" "${_insep}" \
+			"${_outcols}" "${_outfmt}" "${_outheaders}" "${_outnames}" "${_outsep}" \
+			"${_screenwidth}" "${_prefixed}" "${_counter}" "${_maxcount}"
+
+	else
 		cat -
-
-	elif [ "${disp_format}" = "TABULAR" ]; then
-		dbmsToCsv "${opt_service}" "yes" "no" \
-			| csvToTabular "${opt_headers}" "${opt_counter}"
 	fi
 }
 
@@ -209,18 +228,27 @@ function verb_main {
 						-e "${opt_command}" \
 						--table >"${_ftemp}"
 					let _ret+=$?
-					[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_output
-					let _ret+=$?
+					if [ ${_ret} -eq 0 ]; then
+						[ "${opt_counter}" == "yes" ] && f_add_counter "${_ftemp}"
+						[ "${opt_headers}" == "no" ] && f_remove_headers "${_ftemp}"
+						cat "${_ftemp}" | f_output
+						let _ret+=$?
+					fi
 
 				# execute a SQL script
 				elif [ "${opt_script_set}" = "yes" ]; then
+					_ftemp="$(pathGetTempFile command)"
 					cat "${opt_script}" | mysql -n \
 						-u${opt_user} \
 						-p$(dbmsGetPassword "${opt_service}" "${ttp_node_environment}" "${opt_user}") \
 						--table >"${_ftemp}"
 					let _ret+=$?
-					[ ${_ret} -eq 0 ] && cat "${_ftemp}" | f_output
-					let _ret+=$?
+					if [ ${_ret} -eq 0 ]; then
+						[ "${opt_counter}" == "yes" ] && f_add_counter "${_ftemp}"
+						[ "${opt_headers}" == "no" ] && f_remove_headers "${_ftemp}"
+						cat "${_ftemp}" | f_output
+						let _ret+=$?
+					fi
 
 				else
 					msgErr "no managed action"

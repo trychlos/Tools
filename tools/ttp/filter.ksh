@@ -82,7 +82,7 @@ maxcount=<n>					only display n data rows
 # ---------------------------------------------------------------------
 # initialize specific default values
 # note that consistency sake, defaults here should be the same than those
-# of filterOutput() function
+# of filterFromCsv() function
 
 function verb_arg_set_defaults {
 	opt_verbose_def="no"
@@ -135,7 +135,7 @@ function verb_main {
 	#set -x
 	typeset -i _ret=0
 
-	filterOutput \
+	filterFromCsv \
 		"${opt_verbose}" \
 		"${opt_inheaders}" "${opt_insep}" \
 		"${opt_outcols}" "${opt_outfmt}" "${opt_outheaders}" "${opt_outnames}" "${opt_outsep}" \
