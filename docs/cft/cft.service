@@ -24,10 +24,13 @@
 
  The service is defined as:
 
-   CFT	: service		: cft	: CFT Monitor
-   CFT	: setenv		: . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
-   CFT	: setenv		: export CFTDOC=/home/pierre/eclipse/Tools/v2/doc/cft/cft-2.7
-   CFT	: listcatfull	: cat ${CFTDOC}/cftutil_listcat_full
+   <service>	: service		: cft				: <label>
+   <service>	: start			: [<account>]		: <start_command_line>
+   <service>	: stop			: [<account>]		: <stop_command_line>
+   <service>	: test			: [<account>]		: <test_command_line>
+   <service>	: setenv		: . /odyssee/pprd/logiciels/cft/Transfer_CFT/runtime/profile
+   <service>	: setenv		: export CFTDOC=/home/pierre/eclipse/Tools/v2/doc/cft/cft-2.7
+   <service>	: listcatfull	: cat ${CFTDOC}/cftutil_listcat_full
 
  This service must be started locally on the server, with the right
  'cft' account.

@@ -40,10 +40,14 @@
 
  The service is defined as:
 
-   <service>	: service		: svn	: Subversion server
-   <service>	: mode			: <server_mode>
-   <service>	: <mode>_conf	: /path/to/configuration/file
-   <service>	: dumpdir		: /path/to/dump/dir
+   <service>	: service				: svn			: <label>
+   <service>	: start					: [<account>]	: <start_command_line>
+   <service>	: stop					: [<account>]	: <stop_command_line>
+   <service>	: test					: [<account>]	: <test_command_line>
+   <service>	: setenv				: export <name>=<value>
+   <service>	: mode					: <server_mode>
+   <service>	: <server_mode>_conf	: /path/to/configuration/file
+   <service>	: dumpdir				: /path/to/dump/dir
 
  The first keyword defines the service identifier.
 
