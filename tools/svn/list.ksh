@@ -23,13 +23,13 @@
 # pwi 2013- 7-25 review option arguments list
 # pwi 2017- 6-21 publish the release at last
 # pwi 2021-12-16 always display header here, output being filtered in ad-hoc functions
+# pwi 2021-12-28 only output CSV format, leaving json and tabular to ttp.sh filter
 
 # ---------------------------------------------------------------------
 # global variables
 #  will be set in verb_arg_check, used in verb_main
 
 disp_columns=""
-disp_format=""
 
 # ---------------------------------------------------------------------
 # echoes the list of optional arguments
@@ -45,8 +45,10 @@ help								display this online help and gracefully exit
 verbose								verbose execution
 service=<identifier>				service identifier
 columns={SERVICE,NAME,PATH,URL}		comma-separated list of to be displayed columns (case insensitive)
-headers								display headers
-format={CSV|RAW|TABULAR}			output format (case insensitive)
+counter								whether to display a data rows counter
+csv									display output in CSV format
+separator							(CSV output) separator
+headers								(CSV output) whether to display headers
 "
 }
 
@@ -66,8 +68,10 @@ format={CSV|RAW|TABULAR}			output format (case insensitive)
 
 function verb_arg_set_defaults {
 	opt_columns_def="ALL"
+	opt_counter_def="yes"
+	opt_csv_def="no"
+	opt_separator_def="${ttp_csvsep}"
 	opt_headers_def="yes"
-	opt_format_def="TABULAR"
 }
 
 # ---------------------------------------------------------------------
@@ -124,10 +128,6 @@ function verb_arg_check {
 		esac
 	done
 
-	# set output format
-	disp_format="$(formatCheck "${opt_format}")"
-	let _ret+=$?
-
 	return ${_ret}
 }
 
@@ -141,22 +141,22 @@ function f_display_header {
 
 	for _col in $(echo ${disp_columns}); do
 		if [ "${_col}" = "NAME" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "Name"
 			let _count+=1
 		fi
 		if [ "${_col}" = "PATH" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "Path"
 			let _count+=1
 		fi
 		if [ "${_col}" = "SERVICE" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "Service"
 			let _count+=1
 		fi
 		if [ "${_col}" = "URL" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "Url"
 			let _count+=1
 		fi
@@ -184,22 +184,22 @@ function f_display_line {
 
 	for _col in $(echo ${disp_columns}); do
 		if [ "${_col}" = "NAME" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "${_name}"
 			let _count+=1
 		fi
 		if [ "${_col}" = "PATH" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "${_path}"
 			let _count+=1
 		fi
 		if [ "${_col}" = "SERVICE" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "${opt_service}"
 			let _count+=1
 		fi
 		if [ "${_col}" = "URL" ]; then
-			[ ${_count} -gt 0 ] && printf "${ttp_csvsep:-;}"
+			[ ${_count} -gt 0 ] && printf "${opt_separator}"
 			printf "$(svnGetURL "${_mode}" "${_conf}")/${_name}"
 			let _count+=1
 		fi
@@ -245,14 +245,14 @@ function verb_main {
 					typeset _path
 					varReset count
 					{
-						f_display_header;
+						[ "${opt_headers}" == "yes" ] && f_display_header;
 						svnHttpGetLocations "${_conf}" | while read _name _path; do
 							f_display_line "${_mode}" "${_conf}" "${_name}" "${_path}"
 							varInc count
 						done;
-					} | formatOutput "${disp_format}" "${opt_headers}"
+					}
 					typeset -i _count=$(varGet count)
-					msgOut "${_count} displayed row(s)"
+					[ "${opt_counter}" == "yes" ] && msgOut "${_count} displayed data row(s)"
 					;;
 
 				*)
