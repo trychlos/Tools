@@ -1,0 +1,50 @@
+# @(#) Defines the CMDB constantes
+#
+# The Tools Project: a Tools System and Paradigm for IT Production
+# Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
+#
+# The Tools Project is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# The Tools Project is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with The Tools Project; see the file COPYING. If not,
+# see <http://www.gnu.org/licenses/>.
+#
+# Synopsis:
+#
+# (I): none
+#
+# (O): none
+#      Define:
+#      - cmdb_ldaphost  the CMDB LDAP host
+#      - cmdb_ldaproot  the CMDB LDAP root sufix
+#      - cmdb_ldapsite  the CMDB LDAP site
+#      - cmdb_typelist  the list of known types
+#      - cmdb_typelabel the corresponding list of type labels
+#      - cmdb_typehost  the list of types which define an ansible-managed host
+#
+# This function honors the Ansible environment variables:
+# - ANSIBLE_LDAPHOST
+# - ANSIBLE_LDAPROOT
+# - ANSIBLE_LDAPSITE
+#
+# pwi 2021- 5-19 creation
+
+function cmdbConstantes
+{
+	cmdb_ldaphost=""
+	[ -z "${ANSIBLE_LDAPHOST}" ] || cmdb_ldaphost="${ANSIBLE_LDAPHOST}"
+
+	cmdb_ldaproot="dc=ansible,dc=com"
+	[ -z "${ANSIBLE_LDAPROOT}" ] || cmdb_ldaproot="${ANSIBLE_LDAPROOT}"
+
+	cmdb_ldapsite=""
+	[ -z "${ANSIBLE_LDAPSITE}" ] || cmdb_ldapsite="${ANSIBLE_LDAPSITE}"
+}

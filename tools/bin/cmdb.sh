@@ -1,3 +1,6 @@
+#!/bin/ksh
+# @(#) Configuration Management Database
+#
 # The Tools Project: a Tools System and Paradigm for IT Production
 # Copyright (©) 2003-2021 Pierre Wieser (see AUTHORS)
 #
@@ -15,30 +18,15 @@
 # along with The Tools Project; see the file COPYING. If not,
 # see <http://www.gnu.org/licenses/>.
 #
-# use: "autoreconf" to generate configure.
+# cmdb.sh specifics.
+#    This command relies on the CMDBLDAP service.
+#
+# pwi 1998-10-21 creation
+# pwi 2001-10-17 removing GEDTOOL variable
+# pwi 2002- 1-18 port to CITI Exploitation Aix
+# pwi 2006-10-27 tools become The Tools Project, released under GPL
+# pwi 2012- 7-12 migrate to Tools v2
+# pwi 2017- 6-21 publish the release at last 
+# pwi 2021- 5-21 create cmdb.sh 
 
-AC_PREREQ(2.59)
-
-AC_INIT([Tools],[2.5-2021],[pwieser@trychlos.org],ttp,[])
-
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE
-
-# Code coverage
-AX_CODE_COVERAGE()
-
-AC_CONFIG_SRCDIR([tools/bin/ttp.sh])
-AC_CONFIG_MACRO_DIR([m4])
-
-AM_INIT_AUTOMAKE([no-dist-gzip dist-xz])
-
-AC_CONFIG_FILES([
-	Makefile
-	ansible/Makefile
-	docs/Makefile
-	maintainer/Makefile
-	tools/Makefile
-])
-
-AC_OUTPUT
+ttpf_main "${0}" "${@}"
