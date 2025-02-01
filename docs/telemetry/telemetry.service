@@ -1,0 +1,41 @@
+ The Tools Project: a Tools System and Paradigm for IT Production
+ docs/telemetry/telemetry.service
+
+-----------------------------------------------------------------------
+ Summary
+ =======
+
+   Concepts
+   Service configuration
+     service
+     setenv
+     listcatf
+   Specific macros
+
+-----------------------------------------------------------------------
+ Concepts
+ ========
+
+ Define the telemetry parameters needed
+
+-----------------------------------------------------------------------
+ Service configuration
+ =====================
+
+ The service is defined as:
+
+   <service>	: service     : telemetry	: <label>
+   <service>	: pushgateway	: port	    : <port>
+
+ The service must be defined on the machine on which it is running
+
+ The first keyword of the line, for exammple 'PROM', is the service mnemonic.
+
+-----------------------------------------------------------------------
+ Specific macros
+ ===============
+
+ none
+
+-----------------------------------------------------------------------
+ P. Wieser - Created on 2025, Feb. 1st

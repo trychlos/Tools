@@ -69,7 +69,7 @@
    ------------
    Replacement for the "CFTUTIL listcat content=brief" command.
    To be used in development environments where we do no have a running
-   CT monitor.
+   CFT monitor.
 
 -----------------------------------------------------------------------
  Specific macros
